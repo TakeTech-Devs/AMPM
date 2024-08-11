@@ -8,8 +8,8 @@ import SignUp from './pages/SignUp';
 import Index from './pages/Index';
 import ImageInfo from './components/common/ImageInfo/ImageInfo';
 import Products from './pages/Products';
-import ProductDetails from './pages/MoreProducts';
-import ProductDetailsCheck from './components/common/ProductDetailsCheck/ProductDetailsCheck';
+import ProductDetails from './pages/ProductList';
+import ProductDetailsCheck from './pages/ProductDetails';
 function BasicExample() {
   return (
     <>
