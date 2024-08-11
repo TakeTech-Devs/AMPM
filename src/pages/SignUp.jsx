@@ -450,7 +450,7 @@ export default function SignUp() {
                           <Form.Label>Email</Form.Label>
                           <Form.Control
                             required
-                            type="test"
+                            type="email"
                             placeholder="Enter your email"
                             className="custom-outline"
                           />
