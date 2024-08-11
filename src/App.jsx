@@ -12,12 +12,6 @@ function BasicExample() {
   return (
     <>
       <Header />
-      {/* <ImageInfo /> */}
-      
-      <Products />
-      {/* <ProductDetails /> */}
-      {/* <ProductDetailsCheck /> */}
-
        <Router>
         <Routes>
           <Route path="/" element={<Index />} />
