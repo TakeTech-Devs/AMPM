@@ -1,0 +1,27 @@
+@import './Variable.scss';
+
+.login-sec{margin-top: 120px;padding: 29px 54px 14px;}
+.right-wrapper{position: relative;overflow: hidden;z-index: 0;}
+.login-img-wrapper img{filter: brightness(50%);}
+.loginImage-inside-content-wrapper h1{color: $primary;padding: 22px 70px 88px 70px;font-size: 44px;}
+.loginImage-inside-content-wrapper{position: absolute;bottom: 0;right: 0;left: 0; display: flex;justify-content: center;flex-direction: column;align-items: center;}
+
+.login-from{border: 1px solid $black;border-radius: 16px;padding: 20px;}
+.user-login-wrapper .login-from .nav{margin-block: 10px 30px;}
+.user-login-wrapper .login-from .nav h3{padding-right: 8px;}
+.user-login-wrapper .login-from .nav .nav-link{color: $black;font-weight: $bold;font-size: $cardTitle;line-height: 20px;padding: 10px; margin-inline: 0 8px;display: flex;justify-content: center;}
+.user-login-wrapper .login-from .nav .nav-link.active{color: $primary;border-bottom: 2px solid $primary;}
+.user-login-wrapper .login-from .sec-nav{margin-block: 0px 16px;}
+
+.login-from label{font-size: 18px;font-weight: $regular;line-height: 30px;}
+.login-from input{width: 100%;}
+.login-from .login-btn{width: 100%;padding-block: 20px;}
+.login-from .login-btn{font-weight: $bold;font-size: $cardTitle;line-height: 20px;}
+.login-from .need-an-account-wrapper p{display: flex;font-family: $createAccount}
+.login-from .need-an-account-wrapper {margin-top: 10px;display: flex;justify-content: center;} 
+.login-from .need-an-account-wrapper p,.login-from .need-an-account-wrapper span{line-height: 27px;}
+.login-from .need-an-account-wrapper span .nav-link{font-weight: $semibold;color: #367AFF;border-bottom: 2px solid;margin-left: 3px;}
+
+
+.pass-eye-wrapper{position: relative;}
+.eye-wrapper{position: absolute;right: 28px;top: 19px;cursor: pointer;}

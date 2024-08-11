@@ -1,0 +1,33 @@
+@import './Variable.scss';
+
+.sign-sec{margin-top: 120px;padding-block: 50px 82px;}
+.navigation {display: flex;align-items: center;margin-left: 100px;margin-bottom: 50px;}
+.navigation h3{display: flex;align-items: center;color: $black;font-weight: $medium;}
+.navigation span{font-size: 28px;font-weight: $regular;margin-left: 2px;}
+.navigation .signup{padding-inline: 0 8px;}
+.navigation .nav .nav-link{color: $black;}
+.navigation .nav .nav-link:last-child{color: $black;font-weight: $medium;font-size: $cardTitle; line-height: 20px;display: flex;justify-content: center;padding-left: 8px;color: $primary;}
+.navigation .nav .or{color: $primary;font-weight: $medium;}
+
+.login-from{border: 1px solid $black;border-radius: 16px;padding: 20px;}
+.login-from .nav{margin-block: 10px 30px;}
+.login-from .nav h3{padding-right: 8px;}
+.login-from .nav .nav-link{color: $black;font-weight: $bold;font-size: $cardTitle;line-height: 20px;padding: 10px; margin-inline: 0 8px;display: flex;justify-content: center;}
+.login-from .nav .nav-link.active{color: $primary;border-bottom: 2px solid $primary;}
+.login-from .sec-nav{margin-block: 0px 16px;}
+
+.login-from label{font-size: 18px;font-weight: $regular;line-height: 30px;}
+.login-from input{width: 100%;}
+.login-from .login-btn{width: 100%;padding-block: 20px;}
+.login-from .login-btn{font-weight: $bold;font-size: $cardTitle;line-height: 20px;}
+
+// .reseller .form-select{border: none;width: 80%;background-position: right 14.75rem center;}
+.login-from .login-btn:hover,.login-from .login-btn:active{background-color: #95c93dbf;}
+
+// .custom-select:focus{box-shadow: none;}
+// .custom-select{box-shadow: none;padding-inline: 0;}
+
+
+@media (max-width:767px){
+  .navigation {display: flex;align-items: center;margin-left: 20px;}
+}

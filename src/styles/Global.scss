@@ -1,0 +1,30 @@
+@import "./Variable.scss";
+*{box-sizing: border-box;margin: 0;padding: 0;}
+/* Typography */
+body{font-family: $mainFamily;}
+h1{font-weight: $bold;line-height: 68.26px;color: #FFFFFF;font-size: $head;margin: 0;padding: 0;}
+h2{font-size: $subHead;font-weight: $bold;color: $primary;line-height: 46px;margin: 0;padding: 0;}
+h3{font-size: $cardTitle;font-weight: $bold;color: $primary;line-height: 20px;margin: 0;padding: 0;}
+p{font-size: $base;font-weight: $regular;color: $black;line-height: 30px;margin: 0;padding: 0;}
+ul{list-style: none;}
+ul li .nav-link{color: $baseColor;padding: 0;}
+header,footer{width: 100%;}
+
+
+//Input box
+.custom-outline{border: 0.6px solid #282828;border-radius: 6px;width: 423px;height: 59px;padding: 19px 0 19px 27px;}
+.custom-outline::placeholder{font-size: 14px;line-height: 21px;font-weight: 300;font-family:$inputBoxFamily;color: #ABABAB;}
+
+.custom-select-outline{border: 0.6px solid #282828;border-radius: 6px;width: 423px;height: 59px;padding: 16px 0 16px 27px;}
+.custom-select-outline:focus{box-shadow: none;border-color: none;}
+
+
+// button
+.primary{background-color: $primary;border: none;}
+
+//Section gap
+.sec-gap{padding-block: 151px 160.65px;}
+
+.bg-color{background-color: $sectionColor;}
+
+.navbar-nav .nav-link.active{color: $primary;font-weight: $bold;}
