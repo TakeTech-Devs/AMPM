@@ -1,11 +1,11 @@
 import { Col, Container, Row, Nav } from "react-bootstrap";
-import "../../../styles/Products.scss";
-import battery from "../../../assets/Battery.png";
-import "../../../styles/Global.scss";
-import bgImage from "../../../assets/bg-image.jpeg";
-import imageIcon from "../../../assets/mission-image.png";
-import "../../../styles/ImageInfo.scss";
-import "../../../styles/SignUp.scss";
+import "../styles/Products.scss";
+import battery from "../assets/Battery.png";
+import "../styles/Global.scss";
+import bgImage from "../assets/bg-image.jpeg";
+import imageIcon from "../assets/mission-image.png";
+import "../styles/ImageInfo.scss";
+import "../styles/SignUp.scss";
 
 function Products() {
   return (

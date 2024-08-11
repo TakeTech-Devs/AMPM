@@ -1,11 +1,11 @@
 import { Col, Container, Row, Card } from "react-bootstrap";
-import "../../../styles/ImageInfo.scss";
-import bgImage from "../../../assets/bg-image.jpeg";
-import "../../../styles/OurMission.scss";
-import imageIcon from "../../../assets/mission-image.png";
-import "../../../styles/Global.scss";
-import "../../../styles/WhatWeDo.scss";
-import demoImage from "../../../assets/card-image.png";
+import "../styles/ImageInfo.scss";
+import bgImage from "../assets/bg-image.jpeg";
+import "../styles/OurMission.scss";
+import imageIcon from "../assets/mission-image.png";
+import "../styles/Global.scss";
+// import "../styles/WhatWeDo.scss";
+import demoImage from "../assets/card-image.png";
 export default function AboutUs() {
   return (
     <>

@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Container, Row, Nav, Form, Card } from "react-bootstrap";
-import bgImage from "../../../assets/bg-image.jpeg";
-import batteryImages from "../../../assets/Battery.png";
-import "../../../styles/ProductDetails.scss";
+// import bgImage from "../assets/bg-image.jpeg";
+import batteryImages from "../assets/Battery.png";
+import "../styles/ProductDetails.scss";
 function ProductList() {
   return (
     <>
@@ -21,7 +21,7 @@ function ProductList() {
           </Container>
         </div>
         <div className="bg-image-wrapper">
-          <img src={bgImage} alt="Background" />
+          {/* <img src={bgImage} alt="Background" /> */}
         </div>
       </section>
       <section>

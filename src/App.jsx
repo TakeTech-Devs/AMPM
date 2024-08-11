@@ -6,10 +6,8 @@ import Footer from './components/common/footer/Footer';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Index from './pages/Index';
-import ImageInfo from './components/common/ImageInfo/ImageInfo';
 import Products from './pages/Products';
-import ProductDetails from './pages/ProductList';
-import ProductDetailsCheck from './pages/ProductDetails';
+import AboutUs from './pages/AboutUs';
 function BasicExample() {
   return (
     <>
@@ -23,7 +21,7 @@ function BasicExample() {
        <Router>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/about" element={<ImageInfo /> } />
+          <Route path="/about" element={<AboutUs /> } />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
         </Routes>

@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Container, Row, Nav, Form, Card, Button } from "react-bootstrap";
-import bgImage from "../../../assets/bg-image.jpeg";
-import battery from "../../../assets/Battery.png";
-import "../../../styles/ProductDetailsCheck.scss";
+import bgImage from "../assets/bg-image.jpeg";
+import battery from "../assets/Battery.png";
+import "../styles/ProductDetailsCheck.scss";
 function ProductDetails() {
   const count = 1;
   return (
