@@ -1,4 +1,4 @@
-import { Col, Container, Row, Nav } from "react-bootstrap";
+import { Col, Container, Row, Nav, Button } from "react-bootstrap";
 import "../styles/Products.scss";
 import battery from "../assets/Battery.png";
 import "../styles/Global.scss";
@@ -6,6 +6,7 @@ import bgImage from "../assets/bg-image.jpeg";
 import imageIcon from "../assets/mission-image.png";
 import "../styles/ImageInfo.scss";
 import "../styles/SignUp.scss";
+import Slider from "../components/common/slider/Slider";
 
 function Products() {
   return (
@@ -170,6 +171,10 @@ function Products() {
           </div>
         </Container>
       </section>
+      <Slider />
+      <Button href="/productlist" className="submit-btn primary" type="submit">
+        See More
+      </Button>
     </>
   );
 }
