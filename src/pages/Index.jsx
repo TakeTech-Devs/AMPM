@@ -186,7 +186,7 @@ const Index = () => {
       </section>
 
       <section className="sec-gap bg-color">
-        <Container fluid="lg">
+        <Container fluid>
           <Row className="g-sm-0 gy-4">
             <Col md={6}>
               <div className="index-left-part">
