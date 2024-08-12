@@ -9,6 +9,7 @@ import Index from './pages/Index';
 import AboutUs from './pages/AboutUs';
 import Products from './pages/Products';
 import ProductList from './pages/ProductList';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Products />} />
         <Route path="/productlist" element={<ProductList />} />
+        <Route path="/productdetails" element={<ProductDetails />} />
       </Routes>
       <Footer />
     </Router>

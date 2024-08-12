@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Battery from "../../../assets/Battery.png"; // Importing the image correctly
+import "../../../styles/Slider.scss";
 
 const responsive = {
   desktop: {
@@ -45,7 +46,7 @@ const Slider = () => {
         autoPlay={true}
         swipeable={true}
         draggable={true}
-        showDots={true}
+        // showDots={true}
         infinite={true}
         partialVisible={false}
         dotListClass="custom-dot-list-style"
@@ -53,7 +54,8 @@ const Slider = () => {
         {sliderImageUrl.map((imageUrl, index) => {
           return (
             <div className="slider" key={index}>
-              <img src={imageUrl.url} alt="Battery" /> 
+              <img className="slider-img" src={imageUrl.url} alt="Battery" /> 
+              <p>jg</p>
             </div>
           );
         })}

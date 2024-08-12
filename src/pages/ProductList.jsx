@@ -1,8 +1,9 @@
 import React from "react";
 import { Col, Container, Row, Nav, Form, Card } from "react-bootstrap";
-// import bgImage from "../assets/bg-image.jpeg";
+import bgImage from "../assets/bg-image.jpeg";
 import batteryImages from "../assets/Battery.png";
 import "../styles/ProductDetails.scss";
+import ProductDetails from "./ProductDetails";
 function ProductList() {
   return (
     <>
@@ -21,7 +22,7 @@ function ProductList() {
           </Container>
         </div>
         <div className="bg-image-wrapper">
-          {/* <img src={bgImage} alt="Background" /> */}
+          <img src={bgImage} alt="Background" />
         </div>
       </section>
       <section>
@@ -70,6 +71,22 @@ function ProductList() {
           <div className="all-cards">
             <Row className="gy-4">
               <Col>
+                <Card >
+                  <div className="d-flex justify-content-center">
+                    <Card.Img variant="top" src={batteryImages} />
+                  </div>
+
+                  <Card.Body>
+                    <Card.Title>Battery Name</Card.Title>
+                    <p>Battery Version:</p>
+                    <p>Capacity:</p>
+                    <p>Type:</p>
+                    <p>Warranty:</p>
+                    <h3>Price : 1200</h3>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col>
                 <Card>
                   <div className="d-flex justify-content-center">
                     <Card.Img variant="top" src={batteryImages} />
@@ -85,7 +102,7 @@ function ProductList() {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col  >
+              <Col>
                 <Card>
                   <div className="d-flex justify-content-center">
                     <Card.Img variant="top" src={batteryImages} />
@@ -101,7 +118,7 @@ function ProductList() {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col  >
+              <Col>
                 <Card>
                   <div className="d-flex justify-content-center">
                     <Card.Img variant="top" src={batteryImages} />
@@ -117,7 +134,7 @@ function ProductList() {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col >
+              <Col>
                 <Card>
                   <div className="d-flex justify-content-center">
                     <Card.Img variant="top" src={batteryImages} />
@@ -133,23 +150,7 @@ function ProductList() {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col >
-                <Card>
-                  <div className="d-flex justify-content-center">
-                    <Card.Img variant="top" src={batteryImages} />
-                  </div>
-
-                  <Card.Body>
-                    <Card.Title>Battery Name</Card.Title>
-                    <p>Battery Version:</p>
-                    <p>Capacity:</p>
-                    <p>Type:</p>
-                    <p>Warranty:</p>
-                    <h3>Price : 1200</h3>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col >
+              <Col>
                 <Card>
                   <div className="d-flex justify-content-center">
                     <Card.Img variant="top" src={batteryImages} />

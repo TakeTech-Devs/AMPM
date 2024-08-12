@@ -171,10 +171,18 @@ function Products() {
           </div>
         </Container>
       </section>
-      <Slider />
-      <Button href="/productlist" className="submit-btn primary" type="submit">
-        See More
-      </Button>
+      <section>
+        <Container>
+          <Slider />
+          <Button
+            href="/productlist"
+            className="submit-btn primary"
+            type="submit"
+          >
+            See More
+          </Button>
+        </Container>
+      </section>
     </>
   );
 }
