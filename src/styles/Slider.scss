@@ -1,2 +1,21 @@
 @import './Variable.scss';
-.slider-img{width: 50px;}
+.slider-img{width: 100px;}
+.slider-image-wrapper{display: flex;justify-content: center;}
+.slider .slider-card{width:200px;padding-top:15px;height:200px;}
+.slider .slider-card .card-body h3{color: $purple;}
+.react-multiple-carousel__arrow{z-index: 0;}
+
+@media (min-width:1200px){
+  .slider-img{width: 150px;}
+
+  .slider .slider-card{width:300px;padding-top:15px;height: 300px;}
+}
+@media (max-width:991px){
+  .slider .slider-card{width:250px;padding-top:15px;height: 250px;}
+}
+
+@media (max-width:575px){
+  .slider .slider-card{width:100vw;padding-top:15px;;}
+}
+
+

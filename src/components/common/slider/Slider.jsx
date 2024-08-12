@@ -3,39 +3,40 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Battery from "../../../assets/Battery.png"; // Importing the image correctly
 import "../../../styles/Slider.scss";
+import { Card } from "react-bootstrap";
 
 const responsive = {
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 3000, min: 992 },
     items: 4,
-    slidesToSlide: 4 // optional, default to 1.
+    slidesToSlide: 4, // optional, default to 1.
   },
   tablet: {
-    breakpoint: { max: 1024, min: 768 },
+    breakpoint: { max: 991, min: 768 },
     items: 3,
-    slidesToSlide: 3 // optional, default to 1.
+    slidesToSlide: 3, // optional, default to 1.
   },
   mobile: {
-    breakpoint: { max: 767, min: 464 },
-    items: 2,
-    slidesToSlide: 1 // optional, default to 1.
-  }
+    breakpoint: { max: 767, min: 320 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
 };
 
 const sliderImageUrl = [
   // Array of image URLs
   {
-    url: Battery // Directly assign the imported image
+    url: Battery, // Directly assign the imported image
   },
   {
-    url: Battery // Repeat for other images
+    url: Battery, // Repeat for other images
   },
   {
-    url: Battery
+    url: Battery,
   },
   {
-    url: Battery
-  }
+    url: Battery,
+  },
 ];
 
 const Slider = () => {
@@ -54,8 +55,22 @@ const Slider = () => {
         {sliderImageUrl.map((imageUrl, index) => {
           return (
             <div className="slider" key={index}>
-              <img className="slider-img" src={imageUrl.url} alt="Battery" /> 
-              <p>jg</p>
+              <Card className="slider-card" style={{}}>
+                <div className="slider-image-wrapper">
+                  <img
+                    className="slider-img"
+                    src={imageUrl.url}
+                    alt="Battery"
+                  />
+                </div>
+                <Card.Body className="d-flex align-items-center justify-content-center">
+                  <div className="">
+                    <Card.Title>
+                      <h3 className="text-center">Power max</h3>
+                    </Card.Title>
+                  </div>
+                </Card.Body>
+              </Card>
             </div>
           );
         })}

@@ -1,4 +1,4 @@
-import { Col, Container, Row, Nav, Button } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
 import "../styles/Products.scss";
 import battery from "../assets/Battery.png";
 import "../styles/Global.scss";
@@ -7,7 +7,7 @@ import imageIcon from "../assets/mission-image.png";
 import "../styles/ImageInfo.scss";
 import "../styles/SignUp.scss";
 import Slider from "../components/common/slider/Slider";
-
+import "../styles/WhatWeDo.scss"
 function Products() {
   return (
     <>
@@ -171,9 +171,20 @@ function Products() {
           </div>
         </Container>
       </section>
-      <section>
+      <section className="sec-gap bg-color">
         <Container>
+        <div className="d-flex justify-content-center">
+            <div className="whatwedo-heading">
+              <h1>What we do</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
+                voluptatum repellat nesciunt quis placeat doloremque corrupti
+              
+              </p>
+            </div>
+          </div>
           <Slider />
+          <div className="d-flex justify-content-center  slider-btn-wrapper">
           <Button
             href="/productlist"
             className="submit-btn primary"
@@ -181,6 +192,8 @@ function Products() {
           >
             See More
           </Button>
+          </div>
+          
         </Container>
       </section>
     </>

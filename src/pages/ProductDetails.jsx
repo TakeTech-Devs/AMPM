@@ -24,14 +24,18 @@ function ProductDetails() {
       <section>
         <Container>
           <div className="navigation product-nav">
-            <h3>Home</h3>
-            <span>/</span>
+          <Nav.Link className="" href="/">
+              <h3>
+                Home
+                <span className="pe-2">/</span>
+              </h3>
+            </Nav.Link>
             <Nav className="me-auto align-items-center">
-              <Nav.Link className="signup " href="/signup">
+              <Nav.Link className="signup " href="/productlist">
                 Product Listing
               </Nav.Link>
               <span>/</span>
-              <Nav.Link className="signup " href="/signup">
+              <Nav.Link className="signup " href="/productdetails">
                 Product Details
               </Nav.Link>
             </Nav>

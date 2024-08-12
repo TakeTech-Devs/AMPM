@@ -16,6 +16,9 @@
 .check-list-wrapper ul li {position: relative;padding-left: 30px;padding-block: 0 16px;}
 
 .check-list-wrapper ul li::before {content: '';position: absolute;left: 0;width: 20px;height: 20px;background-image: url('../assets/Check.png');background-size: contain;background-repeat: no-repeat;}
+.slider-btn-wrapper .primary{border-radius: 40px;padding: 24px 36px;}
+.slider-btn-wrapper .primary:hover{background-color: #96c93dcc;}
+.slider-btn-wrapper {padding-top: 80px;}
 
 // Responsive
 
