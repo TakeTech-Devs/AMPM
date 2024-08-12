@@ -17,10 +17,17 @@ const responsive = {
     slidesToSlide: 3, // optional, default to 1.
   },
   mobile: {
-    breakpoint: { max: 767, min: 320 },
+    breakpoint: { max: 767, min: 576 },
+    items: 2,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  smallmobile: {
+    breakpoint: { max: 576, min: 319 },
     items: 1,
     slidesToSlide: 1, // optional, default to 1.
   },
+
+
 };
 
 const sliderImageUrl = [
@@ -54,8 +61,26 @@ const Slider = () => {
       >
         {sliderImageUrl.map((imageUrl, index) => {
           return (
+            // <div className="slider" key={index}>
+            //   <Card className="slider-card" style={{}}>
+            //     <div className="slider-image-wrapper">
+            //       <img
+            //         className="slider-img"
+            //         src={imageUrl.url}
+            //         alt="Battery"
+            //       />
+            //     </div>
+            //     <Card.Body className="d-flex align-items-center justify-content-center">
+            //       <div className="">
+            //         <Card.Title>
+            //           <h3 className="text-center">Power max</h3>
+            //         </Card.Title>
+            //       </div>
+            //     </Card.Body>
+            //   </Card>
+            // </div>
             <div className="slider" key={index}>
-              <Card className="slider-card" style={{}}>
+              <Card className="slider-card" style={{width:"100%"}}>
                 <div className="slider-image-wrapper">
                   <img
                     className="slider-img"

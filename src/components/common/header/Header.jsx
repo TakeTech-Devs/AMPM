@@ -10,6 +10,7 @@ function Header() {
   const count = 5;
 
   return (
+
     <header>
       <Navbar expand="lg" className="bg-nav">
         <Container fluid="lg">
@@ -22,6 +23,7 @@ function Header() {
               alt="Company Logo"
             />
           </Navbar.Brand>
+
           <div className="nav-right">
             <Nav className="ml-auto icons">
               <Nav.Link className="shop-link" as={Link} to="/shopcart">
@@ -56,6 +58,7 @@ function Header() {
 
             <Navbar.Toggle aria-controls="navbarScroll" />
           </div>
+
           <Navbar.Collapse id="navbarScroll">
             <Nav className="my-2 my-lg-0 all-navs">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
