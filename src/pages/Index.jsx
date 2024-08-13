@@ -9,7 +9,7 @@ const Index = () => {
   return (
     <>
       <section className="bg-video">
-        <div className="flex-class">
+        <div className="index-flex-class">
           <Container fluid="lg">
             <div className="hero-wrapper">
               <div className="d-flex justify-content-start">

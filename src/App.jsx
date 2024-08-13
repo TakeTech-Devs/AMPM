@@ -10,6 +10,7 @@ import AboutUs from './pages/AboutUs';
 import Products from './pages/Products';
 import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
+import ContactUs from './pages/ContactUs';
 
 function App() {
   return (
@@ -23,7 +24,10 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/productlist" element={<ProductList />} />
         <Route path="/productdetails" element={<ProductDetails />} />
+        <Route path="/contactus" element={<ContactUs />} />
+
       </Routes>
+      
       <Footer />
     </Router>
   );

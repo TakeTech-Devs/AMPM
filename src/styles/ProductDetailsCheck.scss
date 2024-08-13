@@ -3,6 +3,9 @@
 .right-part .heading .sale-info{font-size: 18px;font-weight: $regular;line-height: 30px;}
 .right-part .heading h3{font-size: 24px;line-height: 30px;font-weight: $bold;color: $black;text-decoration: line-through;}
 .right-part .heading p{margin-bottom: 40px;}
+.right-part .addtocart{box-shadow: 2px 3px 7px #0000001A;}
+.right-part .addtocart{box-shadow: 6px 11px 12px #0000001A;}
+.right-part .addtocart:active{background-color: #80b32fc4;}
 
 .right-part .sub-heading p{font-size: 18px;line-height: 18px;font-weight: $bold;font-family: $secondaryFamily;margin-bottom: 24px;}
 .right-part .quantity{display: flex;justify-content: space-between;align-items: center;margin-bottom: 40px;}

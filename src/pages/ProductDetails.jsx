@@ -24,7 +24,7 @@ function ProductDetails() {
       <section>
         <Container>
           <div className="navigation product-nav">
-          <Nav.Link className="" href="/">
+            <Nav.Link className="" href="/">
               <h3>
                 Home
                 <span className="pe-2">/</span>
@@ -94,7 +94,7 @@ function ProductDetails() {
                           />
                         </svg>
                       </Button>
-                       <h2>{count}</h2>
+                      <h2>{count}</h2>
                       <Button>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +128,7 @@ function ProductDetails() {
                       </Button>
                     </div>
                   </div>
-                  <Button>
+                  <Button className="addtocart">
                     Add To Cart
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

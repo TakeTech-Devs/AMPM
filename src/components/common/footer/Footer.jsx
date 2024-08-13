@@ -84,7 +84,7 @@ function Footer() {
                         <Nav.Link href="/about">About</Nav.Link>
                       </li>
                       <li>
-                        <Nav.Link href="#">Contact us</Nav.Link>
+                        <Nav.Link href="/contactus">Contact us</Nav.Link>
                       </li>
                       <li>
                         <Nav.Link href="#">Careers</Nav.Link>
