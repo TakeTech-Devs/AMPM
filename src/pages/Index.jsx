@@ -190,8 +190,9 @@ const Index = () => {
           <Row className="g-sm-0 gy-4">
             <Col md={6}>
               <div className="index-left-part">
+                
                 <div className="heading">
-                  <h2>Contact US</h2>
+                  <h2 className="text-black">Contact US</h2>
                 </div>
                 <div className="sub-heading">
                   <p>
