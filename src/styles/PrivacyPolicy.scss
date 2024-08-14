@@ -1,0 +1,11 @@
+@import './Variable.scss';
+
+.privacy-wrapper{padding-bottom: 112px;}
+.privacy-wrapper h2,.privacy-wrapper p{margin-bottom: 32px;}
+
+@media (max-width:575px){
+  .privacy-wrapper p{font-size: 16px;}
+  .privacy-wrapper h2{font-size: 32px;}
+  .privacy-wrapper{padding-bottom: 0;}
+
+}

@@ -34,15 +34,19 @@ const sliderImageUrl = [
   // Array of image URLs
   {
     url: Battery, // Directly assign the imported image
+    name: "Power max"
   },
   {
     url: Battery, // Repeat for other images
+    name: "Power max"
   },
   {
     url: Battery,
+    name: "Power max"
   },
   {
     url: Battery,
+    name: "Power max"
   },
 ];
 
@@ -91,7 +95,7 @@ const Slider = () => {
                 <Card.Body className="d-flex align-items-center justify-content-center">
                   <div className="">
                     <Card.Title>
-                      <h3 className="text-center">Power max</h3>
+                      <h3 className="text-center">{imageUrl.name}</h3>
                     </Card.Title>
                   </div>
                 </Card.Body>

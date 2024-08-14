@@ -24,9 +24,9 @@
   .all-cards .card {padding: 24px;width: 100%;}
 
 }
-.selection .selects:not(:last-child){border: none;}
+
 @media (max-width:575px){
   .selection .selects h3{font-size: 16px;}
   .selection{display: flex;flex-direction: column; justify-content: end;}
-
+.selection .selects:not(:last-child){border: none;}
 }

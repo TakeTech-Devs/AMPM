@@ -11,12 +11,15 @@ import Products from './pages/Products';
 import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
 import ContactUs from './pages/ContactUs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsCondition from './pages/TermsCondition';
+import BillingShipping from './pages/BillingShipping';
 
 function App() {
   return (
     <Router>
       <Header />
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/signup" element={<SignUp />} />
@@ -26,8 +29,10 @@ function App() {
         <Route path="/productdetails" element={<ProductDetails />} />
         <Route path="/contactus" element={<ContactUs />} />
 
-      </Routes>
-      
+      </Routes> */}
+      {/* <PrivacyPolicy /> */}
+      {/* <TermsCondition /> */}
+      <BillingShipping />
       <Footer />
     </Router>
   );

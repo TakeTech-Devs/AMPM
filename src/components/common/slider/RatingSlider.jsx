@@ -27,15 +27,21 @@ const sliderImageUrl = [
   // Array of image URLs
   {
     url: Battery, // Directly assign the imported image
+    title: '“Lorem ipsum dolor sit amet conse ctetur adipiscing lectus a nunc mauris scelerisque sed egestas pharetraol quis pharetra arcu pharetra blandit.”',
+    name: "John Carter",
+    department: "Web Designer"
   },
   {
     url: Battery, // Repeat for other images
+    title: '“Convallis posuere morbi leo urna molestie at elementum eu facilisis sapien pellentesque habitant morbi tristique senectus et netus et uteu.”',
+    name: "Matt Cannon",
+    department: "Lead Developer"
   },
   {
     url: Battery,
-  },
-  {
-    url: Battery,
+    title: '“Lorem ipsum dolor sit amet conse ctetur adipiscing lectus a nunc mauris scelerisque sed egestas pharetraol quis pharetra arcu pharetra blandit.”',
+    name: "Andy Smith",
+    department: "VP of Marketing"
   },
 ];
 
@@ -156,9 +162,9 @@ const Slider = () => {
                 </div>
                 <Card.Body className="d-flex align-items-center justify-content-center">
                   <Card.Title>
-                    <p>{`''`}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus dolorum consequatur quis incidunt architecto exercitationem eos iste ipsum voluptates recusandae ipsam assumenda numquam atque, aspernatur sint laborum mollitia laudantium distinctio!{`''`}</p>
-                    <h3 >Power max</h3>
-                    <p className="types">Web Designer</p>
+                    <p>{imageUrl.title}</p>
+                    <h3 >{imageUrl.name}</h3>
+                    <p className="types">{imageUrl.department}</p>
                   </Card.Title>
                 </Card.Body>
               </Card>
