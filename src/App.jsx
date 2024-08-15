@@ -19,20 +19,19 @@ function App() {
   return (
     <Router>
       <Header />
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/contactus" element={<ContactUs />} />
         <Route path="/products" element={<Products />} />
         <Route path="/productlist" element={<ProductList />} />
         <Route path="/productdetails" element={<ProductDetails />} />
-        <Route path="/contactus" element={<ContactUs />} />
-
-      </Routes> */}
-      <PrivacyPolicy />
-      <TermsCondition />
-      <BillingShipping />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/termscondition" element={<TermsCondition />} />
+        <Route path="/cart" element={<BillingShipping />} />
+      </Routes>
       <Footer />
     </Router>
   );

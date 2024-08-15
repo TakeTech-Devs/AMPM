@@ -1,6 +1,8 @@
 import { Col, Container, Row, Stack, Form, Button, Nav, Navbar } from "react-bootstrap";
 import companyLogo from "../../../assets/company-logo-light.png";
+import { Link } from "react-router-dom";
 import "../../../styles/Footer.scss";
+
 
 function Footer() {
   return (
@@ -130,8 +132,7 @@ function Footer() {
 
           <div className="copyright-social-media">
             <p>
-              Copyright © 2024 AMPM | All Rights Reserved | Terms & Conditions |
-              Privacy Policy
+              Copyright © 2024 AMPM | All Rights Reserved | <Link to="/termscondition">Terms & Conditions</Link> | <Link to="/privacy">Privacy Policy</Link>
             </p>
             <div className="social-media-wrapper">
               <Nav className="social-media">
