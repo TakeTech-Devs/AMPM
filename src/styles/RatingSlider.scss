@@ -6,11 +6,12 @@
 .rating-slider .slider-card .card-body .types{color: #BADE78;}
 .react-multiple-carousel__arrow{z-index: 0;}
 .rating-slider .slider-card{display: flex;align-items: center;}
-.rating-slider{width:388px}
+.rating-slider{width:388px;height: 100%;}
 
 @media (max-width:1399px){
   .rating-slider .slider-image-wrapper{width:150px;}
-  .rating-slider{width: 350px;}
+  .rating-slider{width: 300px;}
+
   }
 
 @media (max-width:991px){

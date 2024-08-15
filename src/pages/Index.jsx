@@ -170,7 +170,7 @@ const Index = () => {
         </Container>
       </section>
 
-      <section className="sec-gap bg-color">
+      <section className="sec-gap">
         <Container>
           <div className="d-flex justify-content-center">
             <div className="whatwedo-heading">
@@ -185,12 +185,14 @@ const Index = () => {
         </Container>
       </section>
 
-      <section className="sec-gap bg-color">
-        <Container fluid>
+      <section className="sec-gap  position-relative">
+        <div className="after-effect">
+
+        </div>
+        <Container fluid="lg">
           <Row className="g-sm-0 gy-4">
             <Col md={6}>
               <div className="index-left-part">
-                
                 <div className="heading">
                   <h2 className="text-black">Contact US</h2>
                 </div>

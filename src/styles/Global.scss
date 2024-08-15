@@ -33,7 +33,11 @@ textarea{resize: none;}
 .primary-radius{background-color: $primary;border: none;border-radius: 40px;padding: 24px 36px;font-size: 18px;line-height: 18px;font-weight: $bold;font-family: $secondaryFamily;}
 
 //Section gap
-.sec-gap{padding-block: 151px 160.65px;}
+.sec-gap{padding-block: 90px 95px;}
+
+@media (max-width:575px){
+  .sec-gap{padding-block: 70px 75px;}
+}
 
 .bg-color{background-color: $sectionColor;}
 

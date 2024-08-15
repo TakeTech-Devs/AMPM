@@ -30,8 +30,8 @@ function App() {
         <Route path="/contactus" element={<ContactUs />} />
 
       </Routes> */}
-      {/* <PrivacyPolicy /> */}
-      {/* <TermsCondition /> */}
+      <PrivacyPolicy />
+      <TermsCondition />
       <BillingShipping />
       <Footer />
     </Router>

@@ -3,7 +3,7 @@ import { Col, Container, Row, Nav, Form, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import bgImage from "../assets/bg-image.jpeg";
 import batteryImages from "../assets/Battery.png";
-import "../styles/ProductDetails.scss";
+import "../styles/Products.scss";
 
 function ProductList() {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ function ProductList() {
               </h3>
             </Nav.Link>
             <Nav className="me-auto align-items-center">
-              <Nav.Link className="signup " href="/productlist">
+              <Nav.Link className="signup" href="/productlist">
                 Product Listing
               </Nav.Link>
             </Nav>

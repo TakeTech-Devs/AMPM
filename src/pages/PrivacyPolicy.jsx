@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/PrivacyPolicy.scss";
+import "../styles/Legal.scss";
 import bgImage from "../assets/bg-image.jpeg";
 import { Container, Nav } from "react-bootstrap";
 function PrivacyPolicy() {

@@ -61,7 +61,7 @@ const Slider = () => {
         {sliderImageUrl.map((imageUrl, index) => {
           return (
             <div className="rating-slider" key={index}>
-              <Card className="slider-card" style={{ width: "100%" }}>
+              <Card className="slider-card" style={{ width: "100%", height: "100%"}}>
                 <div className="slider-image-wrapper">
                   <div>
                     <span>

@@ -61,7 +61,7 @@ function ContactUs() {
         </Container>
       </section>
 
-      <section className="bg-color contact-sec-gap ">
+      <section className="bg-color sec-gap ">
         <Container>
           <div className="contactus-details-wrapper ">
             <Row>
