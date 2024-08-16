@@ -1,4 +1,13 @@
-import { Col, Container, Row, Stack, Form, Button, Nav, Navbar } from "react-bootstrap";
+import {
+  Col,
+  Container,
+  Row,
+  Stack,
+  Form,
+  Button,
+  Nav,
+  Navbar,
+} from "react-bootstrap";
 import companyLogo from "../../../assets/company-logo-light.png";
 import { Link } from "react-router-dom";
 import "../../../styles/Footer.scss";
@@ -13,14 +22,14 @@ function Footer() {
             <Col xl={4} lg={4} md={12}>
               <Stack>
                 <div className="left-top">
-                <Navbar.Brand href="/">
-                  <img
-                    src={companyLogo}
-                    alt="Company logo"
-                    width="169px"
-                    height="171px"
-                  />
-                   </Navbar.Brand>
+                  <Navbar.Brand href="/">
+                    <img
+                      src={companyLogo}
+                      alt="Company logo"
+                      width="169px"
+                      height="171px"
+                    />
+                  </Navbar.Brand>
                 </div>
                 <div className="left-bottom">
                   <div className="short-info">
@@ -131,8 +140,11 @@ function Footer() {
           </div>
 
           <div className="copyright-social-media">
-            <p>
-              Copyright © 2024 AMPM | All Rights Reserved | <Link to="/termscondition">Terms & Conditions</Link> | <Link to="/privacy">Privacy Policy</Link>
+          
+            <p className="sms">
+              Copyright © 2024 AMPM | All Rights Reserved | <Nav.Link className="px-lg-1 px-0" href="/termscondition">Terms & Conditions |</Nav.Link> 
+              <Nav.Link className="px-lg-1 px-0" href="/privacy">Privacy Policy</Nav.Link>
+
             </p>
             <div className="social-media-wrapper">
               <Nav className="social-media">
