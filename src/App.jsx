@@ -36,7 +36,6 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/ordercomplete" element={<OrderComplete />} />
       </Routes>
-
       <Footer />
     </Router>
   );
