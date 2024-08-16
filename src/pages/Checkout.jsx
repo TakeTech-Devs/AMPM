@@ -6,7 +6,7 @@ import "../styles/PaymentDetails.scss";
 function Checkout() {
   const navigate = useNavigate();
 
-  const count = 5;
+  const count = 2;
   const handleCheckout = () => {
     navigate("/ordercomplete");
   };
@@ -143,6 +143,7 @@ function Checkout() {
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label>First Name</Form.Label>
                           <Form.Control
+                            required
                             type="text"
                             placeholder="Enter Your Name"
                             className="custom-outline"
@@ -157,6 +158,7 @@ function Checkout() {
                         >
                           <Form.Label>Last Name</Form.Label>
                           <Form.Control
+                            required
                             type="text"
                             placeholder="Enter Last Name"
                             className="custom-outline"
@@ -170,6 +172,7 @@ function Checkout() {
                         >
                           <Form.Label>Country / Region </Form.Label>
                           <Form.Select
+                            required
                             className="custom-select-outline"
                             aria-label="Default select example"
                           >
@@ -187,6 +190,7 @@ function Checkout() {
                         >
                           <Form.Label>Country / Region </Form.Label>
                           <Form.Control
+                            required
                             type="Text"
                             placeholder="House number and street name"
                             className="custom-outline"
@@ -212,6 +216,7 @@ function Checkout() {
                         >
                           <Form.Label>Town / City</Form.Label>
                           <Form.Control
+                            required
                             type="text"
                             placeholder="Enter Town / City"
                             className="custom-outline"
@@ -225,6 +230,7 @@ function Checkout() {
                         >
                           <Form.Label>Province</Form.Label>
                           <Form.Control
+                            required
                             type="text"
                             placeholder="Enter Province"
                             className="custom-outline"
@@ -238,6 +244,7 @@ function Checkout() {
                         >
                           <Form.Label>Postcode / ZIP </Form.Label>
                           <Form.Control
+                            required
                             type="number"
                             placeholder="Enter Postcode / ZIP"
                             className="custom-outline"
@@ -266,6 +273,7 @@ function Checkout() {
                         >
                           <Form.Label>Email address </Form.Label>
                           <Form.Control
+                            required
                             type="email"
                             placeholder="johndoe@example.com"
                             className="custom-outline"
@@ -560,4 +568,4 @@ function Checkout() {
   );
 }
 
-export default Checkout;
+export default Checkout;

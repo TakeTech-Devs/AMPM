@@ -16,12 +16,13 @@ import TermsCondition from "./pages/TermsCondition";
 import BillingShipping from "./pages/BillingShipping";
 import Checkout from "./pages/Checkout";
 import OrderComplete from "./pages/OrderComplete";
+import MyProfile from "./pages/MyProfile";
 
 function App() {
   return (
     <Router>
       <Header />
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/signup" element={<SignUp />} />
@@ -35,8 +36,8 @@ function App() {
         <Route path="/cart" element={<BillingShipping />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/ordercomplete" element={<OrderComplete />} />
-      </Routes>
-
+      </Routes> */}
+      <MyProfile />
       <Footer />
     </Router>
   );

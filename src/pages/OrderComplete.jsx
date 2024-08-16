@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/PaymentDetails.scss";
-import { Container, Nav } from "react-bootstrap";
+import { Button, Col, Container, Nav, Row } from "react-bootstrap";
+import p1 from "../assets/p1.png";
+
 function OrderComplete() {
   return (
     <>
@@ -102,7 +104,142 @@ function OrderComplete() {
         </Container>
       </section>
       <section>
-        <Container></Container>
+        <Container>
+          <div className="order-complete-wrapper">
+            <div className="order-show">
+              <h3>Your Order</h3>
+              <div className="paid-or-not">
+                <div className="svg-wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <path
+                      d="M11.9386 6.62855L11.9386 6.6286L11.9445 6.62251C12.3461 6.20706 12.3546 5.54245 11.9386 5.12645C11.5258 4.71369 10.8492 4.71369 10.4364 5.12645L6.935 8.62789L5.56355 7.25645C5.15079 6.84368 4.47421 6.84368 4.06145 7.25645C3.64868 7.66921 3.64868 8.34579 4.06145 8.75855L6.18395 10.8811C6.38164 11.0788 6.65089 11.1925 6.935 11.1925C7.21911 11.1925 7.48836 11.0788 7.68605 10.8811L11.9386 6.62855ZM1 8C1 4.14364 4.14364 1 8 1C11.8564 1 15 4.14364 15 8C15 11.8564 11.8564 15 8 15C4.14364 15 1 11.8564 1 8Z"
+                      fill="#17AF26"
+                      stroke="#17AF26"
+                    />
+                  </svg>
+                </div>
+                <p>Paid</p>
+              </div>
+            </div>
+            <div className="order-items-show">
+              <ul>
+                <li>
+                  <div className="items">
+                    <div className="items-details">
+                      <div className="img-title-wrapper">
+                        <div className="img-div">
+                          <img
+                            src={p1}
+                            alt="product 1"
+                            width="100%"
+                            height="100%"
+                          />
+                        </div>
+                        <div className="items-name">
+                          <p>1x Jungle Diamond</p>
+                          <p>(AA+)</p>
+                        </div>
+                      </div>
+                      <div className="price">
+                        <p className="how-many-items">1x</p>
+                        <p className="total-price">$200.00</p>
+                      </div>
+                      <div className="final-price">
+                        <p>$200.00</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className="items">
+                    <div className="items-details">
+                      <div className="img-title-wrapper">
+                        <div className="img-div">
+                          <img
+                            src={p1}
+                            alt="product 1"
+                            width="100%"
+                            height="100%"
+                          />
+                        </div>
+                        <div className="items-name">
+                          <p>1x Jungle Diamond</p>
+                          <p>(AA+)</p>
+                        </div>
+                      </div>
+                      <div className="price">
+                        <p className="how-many-items">1x</p>
+                        <p className="total-price">$200.00</p>
+                      </div>
+                      <div className="final-price">
+                        <p>$200.00</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <div className="sub-total">
+                  <h3>TOTAL</h3>
+                  <h3 className="amount">$497.00</h3>
+                </div>
+              </ul>
+            </div>
+            <div className="address-wrapper">
+              <Row>
+                <Col>
+                  <div className="left-address">
+                    <div className="address">
+                      <p className="heading">Shipping</p>
+                      <p>New York, US</p>
+                    </div>
+                    <div className="address">
+                      <p className="heading">Shipping Options</p>
+                      <p>Same-Day Dispatching</p>
+                    </div>
+                    <div className="address">
+                      <p className="heading">Email Money Transfer</p>
+                      <p>Interac</p>
+                    </div>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="right-address">
+                    <div className="address">
+                      <p className="heading">Subtotal</p>
+                      <p>$497.00</p>
+                    </div>
+                    <div className="address">
+                      <p className="heading">Discount</p>
+                      <p>$0.0</p>
+                    </div>
+                    <div className="address">
+                      <p className="heading">Shipping Costs</p>
+                      <p>$50.00</p>
+                    </div>
+                    <div className="address">
+                      <p className="heading">Point</p>
+                      <p>- $250</p>
+                    </div>
+                    <div className="total">
+                      <p>TOTAL</p>
+                      <h3 className="amount">$297.00</h3>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+            <div className="new-order-btn-wrapper">
+              <p>New Order, Click button bellow</p>
+              <Button className="primary">Shop Now</Button>
+            </div>
+          </div>
+        </Container>
       </section>
     </>
   );
