@@ -1,10 +1,28 @@
-import React from "react";
-import { Col, Container, Row, Nav, Form, Card, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Col, Container, Row, Nav, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import bgImage from "../assets/bg-image.jpeg";
 import battery from "../assets/Battery.png";
 import "../styles/Products.scss";
+
 function ProductDetails() {
-  const count = 1;
+  const [quantity, setQuantity] = useState(1); 
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    navigate('/cart');
+  };
+
+  const handleIncrease = () => {
+    setQuantity(quantity + 1); 
+  };
+
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1); 
+    }
+  };
+
   return (
     <>
       <section className="bg-image">
@@ -23,7 +41,7 @@ function ProductDetails() {
       </section>
       <section>
         <Container>
-        <div className="navigation product-nav">
+          <div className="navigation product-nav">
             <Nav.Link className="" href="/">
               <h3>
                 Home
@@ -44,7 +62,6 @@ function ProductDetails() {
       </section>
       <section>
         <Container>
-          
           <div className="final-product-details-wrapper">
             <Row>
               <Col md={6}>
@@ -75,7 +92,7 @@ function ProductDetails() {
                   <div className="quantity">
                     <p>Quantity</p>
                     <div className="btn-wrapper">
-                      <Button>
+                      <Button onClick={handleDecrease}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -86,21 +103,21 @@ function ProductDetails() {
                           <path
                             d="M8 12H16"
                             stroke="#80B32F"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                           <path
                             d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
                             stroke="#80B32F"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                         </svg>
                       </Button>
-                      <h2>{count}</h2>
-                      <Button>
+                      <h2>{quantity}</h2>
+                      <Button onClick={handleIncrease}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -111,29 +128,29 @@ function ProductDetails() {
                           <path
                             d="M8 12H16"
                             stroke="#80B32F"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                           <path
                             d="M12 16V8"
                             stroke="#80B32F"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                           <path
                             d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
                             stroke="#80B32F"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                         </svg>
                       </Button>
                     </div>
                   </div>
-                  <Button className="addtocart">
+                  <Button className="addtocart" onClick={handleAddToCart}>
                     Add To Cart
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -145,30 +162,30 @@ function ProductDetails() {
                       <path
                         d="M10.8604 27C11.4126 27 11.8604 26.5523 11.8604 26C11.8604 25.4477 11.4126 25 10.8604 25C10.3081 25 9.86035 25.4477 9.86035 26C9.86035 26.5523 10.3081 27 10.8604 27Z"
                         stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M24.8604 27C25.4126 27 25.8604 26.5523 25.8604 26C25.8604 25.4477 25.4126 25 24.8604 25C24.3081 25 23.8604 25.4477 23.8604 26C23.8604 26.5523 24.3081 27 24.8604 27Z"
                         stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M2.86035 5H6.86035L9.86035 22H25.8604"
                         stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M9.86035 18H25.4503C25.566 18.0001 25.6781 17.9601 25.7675 17.8868C25.857 17.8135 25.9183 17.7115 25.941 17.5981L27.741 8.59813C27.7555 8.52555 27.7537 8.45066 27.7358 8.37886C27.7179 8.30705 27.6842 8.24012 27.6373 8.1829C27.5903 8.12567 27.5313 8.07959 27.4644 8.04796C27.3975 8.01633 27.3244 7.99995 27.2503 8H7.86035"
                         stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </Button>

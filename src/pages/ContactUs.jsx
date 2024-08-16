@@ -22,8 +22,8 @@ function ContactUs() {
       return;
     } else {
       setErrors((prev) => ({ ...prev, invalidPhone: false }));
-      console.log("Form submitted successfully");
-      // Add further logic here
+      window.alert("Form submitted successfully");
+      window.location.reload();
     }
   };
 

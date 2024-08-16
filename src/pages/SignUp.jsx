@@ -1,6 +1,7 @@
 import { Col, Container, Row, Form, Nav, Button } from "react-bootstrap";
 import "../styles/SignUp.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function SignUp() {
   const [activeForm, setActiveForm] = useState("consumer");
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +19,8 @@ export default function SignUp() {
     return phoneRegex.test(phone);
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -32,6 +35,20 @@ export default function SignUp() {
       return;
     } else {
       setErrors((prev) => ({ ...prev, invalidPhone: false }));
+      window.alert("Registered successfully");
+      navigate("/login");
+    }
+  };
+
+  const handleSubmitReseller = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setErrors((prev) => ({ ...prev, passwordMismatch: true }));
+      return;
+    } else {
+      setErrors((prev) => ({ ...prev, passwordMismatch: false }));
+      window.alert("Applied successfully");
+      navigate("/login");
     }
   };
 
@@ -140,9 +157,8 @@ export default function SignUp() {
                           type="tel"
                           placeholder="Enter your Phone"
                           maxLength={10}
-                          className={`custom-outline ${
-                            errors.invalidPhone ? "is-invalid" : ""
-                          }`}
+                          className={`custom-outline ${errors.invalidPhone ? "is-invalid" : ""
+                            }`}
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                         />
@@ -282,9 +298,8 @@ export default function SignUp() {
                             minLength={6}
                             maxLength={12}
                             placeholder="Confirm your Password"
-                            className={`custom-outline ${
-                              errors.passwordMismatch ? "is-invalid" : ""
-                            }`}
+                            className={`custom-outline ${errors.passwordMismatch ? "is-invalid" : ""
+                              }`}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                           />
@@ -330,12 +345,12 @@ export default function SignUp() {
                               </svg>
                             )}
                           </div>
+                          {errors.passwordMismatch && (
+                            <div className="invalid-feedback">
+                              Passwords do not match.
+                            </div>
+                          )}
                         </div>
-                        {errors.passwordMismatch && (
-                          <div className="invalid-feedback">
-                            Passwords do not match.
-                          </div>
-                        )}
                       </Form.Group>
                     </Col>
                   </Row>
@@ -354,7 +369,7 @@ export default function SignUp() {
             <div className="reseller">
               <div className="h-100 w-100 d-flex align-items-center justify-content-center">
                 <div className="login-from">
-                  <Form onSubmit={handleSubmit}>
+                  <Form onSubmit={handleSubmitReseller}>
                     <h2 className="text-black">Welcome !</h2>
 
                     <Nav className="me-auto align-items-center">
@@ -466,7 +481,7 @@ export default function SignUp() {
                           <Form.Label>Website</Form.Label>
                           <Form.Control
                             required
-                            type="url"
+                            type="text"
                             placeholder="Enter your Suburb"
                             className="custom-outline"
                           />
@@ -545,9 +560,8 @@ export default function SignUp() {
                               minLength={6}
                               maxLength={12}
                               placeholder="Confirm your Password"
-                              className={`custom-outline ${
-                                errors.passwordMismatch ? "is-invalid" : ""
-                              }`}
+                              className={`custom-outline ${errors.passwordMismatch ? "is-invalid" : ""
+                                }`}
                               value={confirmPassword}
                               onChange={(e) =>
                                 setConfirmPassword(e.target.value)
@@ -595,12 +609,12 @@ export default function SignUp() {
                                 </svg>
                               )}
                             </div>
+                            {errors.passwordMismatch && (
+                              <div className="invalid-feedback">
+                                Passwords do not match.
+                              </div>
+                            )}
                           </div>
-                          {errors.passwordMismatch && (
-                            <div className="invalid-feedback">
-                              Passwords do not match.
-                            </div>
-                          )}
                         </Form.Group>
                       </Col>
                     </Row>
