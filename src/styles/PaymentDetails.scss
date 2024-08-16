@@ -12,7 +12,7 @@
 .bill-order-lifecycle .order-wrapper{display: flex;align-items: center;justify-content: center;column-gap: 16px;padding-block: 28px;}
 
 .bill-order-lifecycle .first-orders{display: flex;align-items: center;}
-.bill-order-lifecycle .first-orders p{font-size: 16px;font-weight: $semibold;line-height: 24px;}
+.bill-order-lifecycle .first-orders p{font-size: 16px;font-weight: $bold;line-height: 24px;color: $black;}
 .bill-order-lifecycle .line{width: 46px;height: 1px;background-color: #C3D2CC;}
 
 .bill-order-lifecycle .sec-orders .icon-wrapper,.bill-order-lifecycle .third-orders .icon-wrapper{width: 30px;height: 30px;background-color: $white;border-radius: 20px;margin-right: 8px;}
@@ -70,8 +70,10 @@
 // Checkout start
 
 .override-checkout .first-orders .icon-wrapper{background-color: #C3D2CC;}
-.bill-order-lifecycle .first-orders p{font-weight: $medium;font-size: 14px;line-height: 21px;color: #05422C;}
+.override-checkout .first-orders p{font-weight: $bold;font-size: 14px;line-height: 21px;color: #05422C;}
 .override-checkout .sec-orders .icon-wrapper{background-color: $darkGreen;}
+
+.override-checkout .sec-orders p{font-size: 16px;font-weight: $bold;line-height: 24px;color: $black;}
 
 .left-bill .buyer-info .form-label{color: #46494F;font-weight: $semibold;line-height: 24px;font-size: 16px;}
 .left-bill .buyer-info .form-label::after{content: '*';position: absolute;font-weight: $semibold;line-height: 24px;font-size: 16px;color: #46494F;}
@@ -96,9 +98,14 @@
  .right-bill .checkboxes-wrapper .final-sms .form-check-label{font-weight: $semibold;font-size: 16px;line-height: 24px;color: #717378;}
  .right-bill .checkboxes-wrapper .final-sms .form-check-label::after{content: '*';position: absolute;font-weight: $semibold;line-height: 24px;font-size: 16px;color: #46494F;}
 
+// checkout End
 
+// Order complete start
 
-
+.override-orderComplete .sec-orders .icon-wrapper{background-color: #C3D2CC;}
+.override-orderComplete .third-orders .icon-wrapper{background-color: #05422C;}
+.override-orderComplete .sec-orders p{font-weight: $bold;font-size: 14px;line-height: 21px;color: #05422C;}
+.override-orderComplete .third-orders p{font-size: 16px;font-weight: $bold;line-height: 24px;color: $black;}
 
 
 
@@ -115,7 +122,7 @@
   // middle section
   .bill-order-lifecycle .first-orders .icon-wrapper{margin-right: 0px;}
   .bill-order-lifecycle .first-orders{display: flex;align-items: center;flex-direction: column;justify-content: center;}
-.bill-order-lifecycle .first-orders p{font-size: 12px;font-weight: $semibold;line-height: 24px;text-align: center;}
+.bill-order-lifecycle .first-orders p{font-size: 12px;font-weight: $bold;line-height: 24px;text-align: center;}
 .bill-order-lifecycle .line{width: 46px;height: 1px;background-color: #C3D2CC;}
 
 .bill-order-lifecycle .sec-orders .icon-wrapper,.bill-order-lifecycle .third-orders .icon-wrapper{width: 30px;height: 30px;background-color: $white;border-radius: 20px;margin-right: 0px;}

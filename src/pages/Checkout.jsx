@@ -4,7 +4,13 @@ import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
 
 function Checkout() {
+  const navigate = useNavigate();
+
   const count = 5;
+  const handleCheckout = () => {
+    navigate("/ordercomplete");
+  };
+
   return (
     <>
       <section className="billing-mt">
@@ -271,7 +277,7 @@ function Checkout() {
                         <div className="bottom-info">
                           <Form.Group className="mb-3" id="formGridCheckbox">
                             <Form.Check
-                            className="label-effect"
+                              className="label-effect"
                               type="checkbox"
                               label="Ship to a different Address?"
                             />
@@ -317,7 +323,9 @@ function Checkout() {
                       </Col>
                       <Col lg={12}>
                         <div className="bottom-info">
-                          <p className="label-effect">Where did you hear About Us?</p>
+                          <p className="label-effect">
+                            Where did you hear About Us?
+                          </p>
 
                           <div className="input-field">
                             <Form.Group
@@ -430,7 +438,10 @@ function Checkout() {
                   </Form>
                 </div>
                 <div className="checkout-btn">
-                  <Button className="d-flex justify-content-center gap-2">
+                  <Button
+                    className="d-flex justify-content-center gap-2"
+                    onClick={handleCheckout}
+                  >
                     {" "}
                     <span>Place Order</span> <span>|</span> <span>$547.00</span>{" "}
                   </Button>
