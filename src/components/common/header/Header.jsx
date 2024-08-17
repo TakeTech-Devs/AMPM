@@ -25,7 +25,7 @@ function Header() {
 
           <div className="nav-right">
             <Nav className="ml-auto icons">
-              <NavLink to="/shopcart" className="shop-link nav-link">
+              <NavLink to="/cart" className="shop-link nav-link">
                 <img
                   src={shopCart}
                   width="32"
