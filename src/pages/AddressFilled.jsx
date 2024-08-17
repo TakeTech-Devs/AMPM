@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container, Nav } from "react-bootstrap";
 import "../styles/PaymentDetails.scss";
-function AddressNormal() {
+function AddressFilled() {
   return (
     <>
       <section className="billing-mt">
@@ -38,9 +38,18 @@ function AddressNormal() {
                   <Nav.Link href="/address">Address Book</Nav.Link>
                 </Nav.Item>
               </div>
-
+              <div className="user-info-wrapper">
+                <h2 className="text-black">Alexa Rawles</h2>
+                <div className="address">
+                  <h3>123 Tenth Avenue, Manhattan, New York, NY 10003, USA</h3>
+                </div>
+                <h3>123456789</h3>
+              </div>
               <div className="add-address-btn-wrapper">
-                <Button className="primary">Add Address</Button>
+                <Button className="primary">Change Address</Button>
+              </div>
+              <div className="add-new-address-btn-wrapper">
+                <Button className="outline-primary">+ Add a new address</Button>
               </div>
             </div>
           </div>
@@ -50,4 +59,4 @@ function AddressNormal() {
   );
 }
 
-export default AddressNormal;
+export default AddressFilled;

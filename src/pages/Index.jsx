@@ -203,7 +203,7 @@ const Index = () => {
                   </p>
                 </div>
                 <div className="buttons-wrapper">
-                  <Button className="primary">Get Started</Button>
+                  <Button href="/contactus" className="primary">Get Started</Button>
                   <Button className="outline-primary">Talk to Sales</Button>
                 </div>
               </div>

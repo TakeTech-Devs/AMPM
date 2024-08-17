@@ -35,6 +35,7 @@ textarea{resize: none;}
 
 //Section gap
 .sec-gap{padding-block: 90px 95px;}
+.sec-gap-top{padding-block: 90px 0px;}
 
 @media (max-width:575px){
   .sec-gap{padding-block: 70px 75px;}

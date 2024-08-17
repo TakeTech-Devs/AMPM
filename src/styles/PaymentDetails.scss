@@ -145,9 +145,10 @@
 
 // my profile start
 
-.my-profile-wrapper .navigations{display: flex;column-gap: 18px;padding-bottom: 40px;}
-.my-profile-wrapper .navigations h3{color: $black;}
-.my-profile-wrapper .navigations .nav-link{color: $primary;font-size: 20px;font-weight: $bold;line-height: 20px;border-bottom: 2px solid $primary;}
+.my-profile-wrapper .navigations,.address-normal-wrapper .navigations{display: flex;column-gap: 18px;padding-bottom: 40px;}
+.my-profile-wrapper .navigations h3,.address-normal-wrapper .navigations h3{color: $black;}
+.my-profile-wrapper .navigations .nav-link,.address-normal-wrapper .navigations .nav-link{color: $primary;font-size: 20px;font-weight: $bold;line-height: 20px;border-bottom: 2px solid $primary;}
+
 .my-profile-wrapper .user-profile-wrapper .user-info .user-img{width: 100px;height: 100px;}
 .my-profile-wrapper .user-profile-wrapper .user-info{display: flex;align-items: center;justify-content: space-between;}
 .my-profile-wrapper .user-profile-wrapper .user-info .user-profile{display: flex;column-gap: 24px;align-items: center;}
@@ -155,11 +156,38 @@
 .my-profile-wrapper .user-profile-wrapper .user-info .edit-btn .primary{padding: 20px 79px;font-size: 20px;font-weight: $bold;line-height: 20px;}
 .my-profile-wrapper .user-profile-wrapper .inputs-fields-wrapper{padding-top: 40px;}
 
+// my profile end
 
+//  Address normal start
 
+.address-normal-wrapper{border: 1px solid $black;border-radius: 20px;min-height: 504px;width: 1000px;padding-top: 40px;padding-left: 30px;}
+.address-normal-wrapper .add-address-btn-wrapper .primary{padding: 20px 33px;font-weight: $bold;font-size: 20px;line-height: 20px;}
 
+// Address normal end
 
+//Address Filled start
 
+.address-normal-wrapper .user-info-wrapper {margin-bottom: 40px;}
+.address-normal-wrapper .user-info-wrapper .address{width: 581px;}
+.address-normal-wrapper .user-info-wrapper .address h3,.address-normal-wrapper .user-info-wrapper h3{font-size: 24px;color: $black;line-height: 46px;font-weight: $semibold;margin-block: 10px;}
+.address-normal-wrapper .add-new-address-btn-wrapper .outline-primary{border: none;padding: 20px 0px;color: $primary;line-height: 20px;margin-block: 40px 20px;}
+
+//Address Filled end
+
+// product History start
+.product-history{max-height: 1005px;overflow-y: auto;}
+.wrapper .product-history-wrapper ul{padding-left: 0px;}
+.wrapper .heading h2{font-weight: $bold;line-height: 46px;margin-bottom: 50px;}
+.wrapper .product-history-wrapper .products{border: 1px solid $black;border-radius: 20px;min-height: 504px;width: 1000px;padding-block: 20px;padding-inline: 20px;}
+
+.wrapper .product-history-wrapper .products .product-info p{font-size: 16px;font-weight: $semibold;line-height: 24px;color: $black;margin-top: 10px;}
+.wrapper .product-history-wrapper .products .product-info{border-bottom: 1px solid $black;padding-bottom: 20px;margin-bottom: 20px;}
+.wrapper .product-history-wrapper .products .product-status{width: 100%;background-color: $primary;display: flex;column-gap: 10px;align-items: center;padding: 15px 10px;border-radius: 10px;margin-bottom: 40px;}
+.wrapper .product-history-wrapper .products .product-status-2{background-color: #367AFF;}
+.wrapper .product-history-wrapper .products .product-details-wrapper .product-img{width: 235px;height: 220px;}
+.wrapper .product-history-wrapper .products .product-details-wrapper{display: flex;column-gap: 40px;}
+.wrapper .product-history-wrapper .products .product-details-wrapper .product-details h3{padding-bottom: 10px;}
+.wrapper .product-history-wrapper .products .product-details-wrapper .product-details p{font-weight: $semibold;font-size: 16px;line-height: 24px;}
 
 
 

@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/PaymentDetails.scss";
 import { Button, Col, Container, Nav, Row } from "react-bootstrap";
 import p1 from "../assets/p1.png";
-
+import "../styles/PaymentDetails.scss";
 function OrderComplete() {
   return (
     <>
