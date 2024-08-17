@@ -40,17 +40,6 @@ function MyProfile() {
     }
   };
 
-  const handleSubmitReseller = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setErrors((prev) => ({ ...prev, passwordMismatch: true }));
-      return;
-    } else {
-      setErrors((prev) => ({ ...prev, passwordMismatch: false }));
-      window.alert("Applied successfully");
-      navigate("/login");
-    }
-  };
   return (
     <>
       <section className="billing-mt">
@@ -63,7 +52,7 @@ function MyProfile() {
               </h3>
             </Nav.Link>
             <Nav className="me-auto align-items-center">
-              <Nav.Link className="signup " href="/myprofile">
+              <Nav.Link className="signup " href="/account">
                 My Profile
               </Nav.Link>
             </Nav>
@@ -77,13 +66,13 @@ function MyProfile() {
             <div className="navigations">
               <h3>Go To :</h3>
               <Nav.Item>
-                <Nav.Link href="/home">My Cart </Nav.Link>
+                <Nav.Link href="/cart">My Cart </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/home">My Orders</Nav.Link>
+                <Nav.Link href="/orders">My Orders</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/home">Address Book</Nav.Link>
+                <Nav.Link href="/address">Address Book</Nav.Link>
               </Nav.Item>
             </div>
 
@@ -227,7 +216,7 @@ function MyProfile() {
                       <Form.Label>Post Code</Form.Label>
                       <Form.Control
                         required
-                        type="text"
+                        type="number"
                         placeholder="Enter your Post Code"
                         className="custom-outline"
                       />
