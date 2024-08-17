@@ -2,6 +2,7 @@ import { Button, Container, Nav, Col, Row, Form } from "react-bootstrap";
 import userImg from "../assets/user-img.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/PaymentDetails.scss";
 function MyProfile() {
   const [activeForm, setActiveForm] = useState("consumer");
   const [showPassword, setShowPassword] = useState(false);

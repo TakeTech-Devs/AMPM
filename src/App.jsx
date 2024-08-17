@@ -17,12 +17,15 @@ import BillingShipping from "./pages/BillingShipping";
 import Checkout from "./pages/Checkout";
 import OrderComplete from "./pages/OrderComplete";
 import MyProfile from "./pages/MyProfile";
+import AddressNormal from "./pages/AddressNormal";
+import AddressFilled from "./pages/AddressFilled";
+import ProductHistory from "./pages/ProductHistory";
 
 function App() {
   return (
     <Router>
       <Header />
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
@@ -37,7 +40,11 @@ function App() {
         <Route path="/ordercomplete" element={<OrderComplete />} />
         <Route path="/termscondition" element={<TermsCondition />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
-      </Routes>
+      </Routes> */}
+
+        {/* <AddressNormal />
+        <AddressFilled /> */}
+        <ProductHistory />
       <Footer />
     </Router>
   );
