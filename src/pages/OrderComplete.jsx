@@ -236,7 +236,7 @@ function OrderComplete() {
             </div>
             <div className="new-order-btn-wrapper">
               <p>New Order, Click button bellow</p>
-              <Button className="primary">Shop Now</Button>
+              <Button href="/products" className="primary">Shop Now</Button>
             </div>
           </div>
         </Container>
