@@ -50,7 +50,7 @@ function Footer() {
                           />
                         </Form.Group>
                       </div>
-                      <Button className="submit-btn primary" type="submit">
+                      <Button href="/contactus" className="submit-btn primary" type="submit">
                         Get Started
                       </Button>
                     </Form>
