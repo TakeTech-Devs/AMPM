@@ -9,7 +9,9 @@ import {
   Navbar,
 } from "react-bootstrap";
 import companyLogo from "../../../assets/company-logo-light.png";
+import { Link } from "react-router-dom";
 import "../../../styles/Footer.scss";
+
 
 function Footer() {
   return (
@@ -138,10 +140,11 @@ function Footer() {
           </div>
 
           <div className="copyright-social-media">
-            
+          
             <p className="sms">
               Copyright © 2024 AMPM | All Rights Reserved | <Nav.Link className="px-lg-1 px-0" href="/termscondition">Terms & Conditions |</Nav.Link> 
               <Nav.Link className="px-lg-1 px-0" href="/privacy">Privacy Policy</Nav.Link>
+
             </p>
             <div className="social-media-wrapper">
               <Nav className="social-media">
