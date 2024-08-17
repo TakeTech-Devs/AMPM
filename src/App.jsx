@@ -22,7 +22,7 @@ function App() {
   return (
     <Router>
       <Header />
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/signup" element={<SignUp />} />
@@ -36,8 +36,8 @@ function App() {
         <Route path="/cart" element={<BillingShipping />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/ordercomplete" element={<OrderComplete />} />
-      </Routes> */}
-      <MyProfile />
+      </Routes>
+      {/* <MyProfile /> */}
       <Footer />
     </Router>
   );
