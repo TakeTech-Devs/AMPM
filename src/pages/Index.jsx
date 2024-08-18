@@ -5,6 +5,7 @@ import "../styles/index.scss";
 import Slider from "../components/common/slider/Slider";
 import RatingSlider from "../components/common/slider/RatingSlider";
 import battery from "../assets/Battery.png";
+import "../styles/Global.scss";
 const Index = () => {
   return (
     <>
@@ -182,8 +183,8 @@ const Index = () => {
         <Container>
           <div className="d-flex justify-content-center">
             <div className="whatwedo-heading">
-              <h1>What we do</h1>
-              <p>
+              <h2 className="text-center">What we do</h2>
+              <p className="text-center">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
                 voluptatum repellat nesciunt quis placeat doloremque corrupti
               </p>

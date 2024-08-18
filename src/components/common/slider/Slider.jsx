@@ -26,27 +26,25 @@ const responsive = {
     items: 1,
     slidesToSlide: 1, // optional, default to 1.
   },
-
-
 };
 
 const sliderImageUrl = [
   // Array of image URLs
   {
     url: Battery, // Directly assign the imported image
-    name: "Power max"
+    name: "Power max",
   },
   {
     url: Battery, // Repeat for other images
-    name: "Power max"
+    name: "Power max",
   },
   {
     url: Battery,
-    name: "Power max"
+    name: "Power max",
   },
   {
     url: Battery,
-    name: "Power max"
+    name: "Power max",
   },
 ];
 
@@ -55,7 +53,7 @@ const Slider = () => {
     <div className="order-parent">
       <Carousel
         responsive={responsive}
-        autoPlay={true}
+        // autoPlay={true}
         swipeable={true}
         draggable={true}
         // showDots={true}
@@ -65,26 +63,8 @@ const Slider = () => {
       >
         {sliderImageUrl.map((imageUrl, index) => {
           return (
-            // <div className="slider" key={index}>
-            //   <Card className="slider-card" style={{}}>
-            //     <div className="slider-image-wrapper">
-            //       <img
-            //         className="slider-img"
-            //         src={imageUrl.url}
-            //         alt="Battery"
-            //       />
-            //     </div>
-            //     <Card.Body className="d-flex align-items-center justify-content-center">
-            //       <div className="">
-            //         <Card.Title>
-            //           <h3 className="text-center">Power max</h3>
-            //         </Card.Title>
-            //       </div>
-            //     </Card.Body>
-            //   </Card>
-            // </div>
             <div className="slider" key={index}>
-              <Card className="slider-card" style={{width:"100%"}}>
+              <Card className="slider-card" style={{ width: "100%" }}>
                 <div className="slider-image-wrapper">
                   <img
                     className="slider-img"

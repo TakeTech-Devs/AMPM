@@ -57,9 +57,11 @@
 .right-part .quantity p{padding-right: 40px;font-weight: $bold;font-family: $secondaryFamily;}
 .right-part .quantity .btn-wrapper{border: 1.5px solid $primary;padding: 0px 10px;width: 197px;display: flex;justify-content: space-between;align-items: center;border-radius: 10px;}
 .right-part .quantity .btn-wrapper button{background-color: transparent;border: none;cursor: pointer;padding:0px;}
-.right-part button{background-color: $btnColor;border: none;padding: 20px 40px;border-radius: 30px;display: flex;justify-content: space-between;align-items: center;}
-.right-part button:hover{background-color: #80b32fcb;}
-.right-part button svg{margin-left: 8px;}
+.right-part button{background-color: $btnColor;border: none;display: flex;justify-content: space-between;align-items: center;gap: 10px;}
+.right-part .addtocart .btn-svg-wrap{width: 32px;height: 32px;}
+
+// .right-part button:hover{background-color: #80b32fcb;}
+// .right-part button svg{margin-left: 8px;}
 .battery-image-wrapper{width: 500px;height: 500px;}
 .right-part{padding-right: 0px;}
 .product-nav{margin-top: 40px;}

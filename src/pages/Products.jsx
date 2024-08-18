@@ -7,7 +7,6 @@ import imageIcon from "../assets/mission-image.png";
 import "../styles/ImageInfo.scss";
 import "../styles/SignUp.scss";
 import Slider from "../components/common/slider/Slider";
-import "../styles/WhatWeDo.scss"
 function Products() {
   return (
     <>

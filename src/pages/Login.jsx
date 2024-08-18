@@ -16,10 +16,9 @@ export default function Login() {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
-    navigate("/"); 
+    e.preventDefault();
+    navigate("/");
   };
-
 
   return (
     <>
@@ -30,7 +29,7 @@ export default function Login() {
               <Col lg={6}>
                 <div className="h-100 w-100 d-flex align-items-center justify-content-center">
                   <div className="login-from">
-                  <Form onSubmit={handleSubmit}> 
+                    <Form onSubmit={handleSubmit}>
                       <h2 className="text-black">Welcome !</h2>
 
                       <Nav className="me-auto align-items-center">
@@ -156,7 +155,10 @@ export default function Login() {
                   </div>
 
                   <div className="loginImage-inside-content-wrapper">
-                    <img src={loginPageLogo} alt="" />
+                    <div className="image-wrap">
+                      <img src={loginPageLogo} alt="logo" />
+                    </div>
+
                     <h1>POWERING MACHINES</h1>
                   </div>
                 </div>

@@ -147,7 +147,7 @@ function Footer() {
 
           <div className="copyright-social-media">
           
-            <p className="sms">
+            <p className="text-center">
               Copyright © 2024 AMPM | All Rights Reserved | <Nav.Link className="px-lg-1 px-0" href="/termscondition">Terms & Conditions |</Nav.Link> 
               <Nav.Link className="px-lg-1 px-0" href="/privacy">Privacy Policy</Nav.Link>
 

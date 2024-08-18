@@ -4,8 +4,8 @@ import bgImage from "../assets/bg-image.jpeg";
 import "../styles/OurMission.scss";
 import imageIcon from "../assets/mission-image.png";
 import "../styles/Global.scss";
-// import "../styles/WhatWeDo.scss";
 import demoImage from "../assets/card-image.png";
+import "../styles/About.scss";
 export default function AboutUs() {
   return (
     <>
@@ -59,8 +59,8 @@ export default function AboutUs() {
         <Container fluid="lg">
           <div className="d-flex justify-content-center">
             <div className="whatwedo-heading">
-              <h1>What we do</h1>
-              <p>
+              <h2 className="text-center">What we do</h2>
+              <p className="text-center">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
                 voluptatum repellat nesciunt quis placeat doloremque corrupti
                 possimus. Quaerat quia perferendis incidunt cum in architecto,

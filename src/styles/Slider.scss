@@ -1,4 +1,6 @@
 @import './Variable.scss';
+
+.slider{width:280px}
 .slider-card .slider-image-wrapper img{width: 100%;}
 .slider-image-wrapper{width:200px;display: flex;justify-content: center;margin-block: 29px;}
 
@@ -8,7 +10,7 @@
 .order-parent .react-multiple-carousel__arrow--right{right: 0;background-color: transparent;}
 .order-parent .react-multiple-carousel__arrow--left{left: -7px;background-color: transparent;}
 .slider .slider-card{display: flex;align-items: center;}
-.slider{width:263px}
+
 
 @media (max-width:1200px){
   .slider .slider-image-wrapper{width:150px;}
@@ -16,13 +18,15 @@
   }
 
 @media (max-width:991px){
-  .slider .slider-image-wrapper{width:150px;}
+  .slider .slider-image-wrapper{width:120px;}
+  .slider .slider-image-wrapper{margin-block: 20px;}
   .slider{width: 205px;}
   .react-multi-carousel-track{column-gap: 30px;}
 }
 
 @media (max-width:575px){
   .slider .slider-image-wrapper{width:200px;}
+  .slider .slider-image-wrapper{margin-block: 20px;}
   .slider{width: 100vw;}
   .react-multi-carousel-track{column-gap: 0px;}
 }
