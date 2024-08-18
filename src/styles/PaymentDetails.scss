@@ -171,6 +171,7 @@
 .address-normal-wrapper .user-info-wrapper .address{width: 581px;}
 .address-normal-wrapper .user-info-wrapper .address h3,.address-normal-wrapper .user-info-wrapper h3{font-size: 24px;color: $black;line-height: 46px;font-weight: $semibold;margin-block: 10px;}
 .address-normal-wrapper .add-new-address-btn-wrapper .outline-primary{border: none;padding: 20px 0px;color: $primary;line-height: 20px;margin-block: 40px 20px;}
+.address-normal-wrapper .add-new-address-btn-wrapper .outline-primary:active{color: $black;background-color: transparent;}
 
 //Address Filled end
 
