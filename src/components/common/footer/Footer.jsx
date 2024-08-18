@@ -64,7 +64,10 @@ function Footer() {
                 <ul className="footer-menu-lists">
                   <li className="first-li">
                     <ul>
-                      <h3 className="list-head">Menu</h3>
+                      <li>
+                      <h3>Menu</h3>
+                      
+                      </li>
                       <li>
                         <Nav.Link href="/">Home</Nav.Link>
                       </li>
@@ -90,7 +93,10 @@ function Footer() {
                   </li>
                   <li className="second-li">
                     <ul>
-                      <h3 className="list-head">Company</h3>
+                      <li>
+                      <h3>Company</h3>
+                      
+                      </li>
                       <li>
                         <Nav.Link href="/about">About</Nav.Link>
                       </li>

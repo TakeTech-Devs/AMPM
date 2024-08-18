@@ -9,6 +9,8 @@ p{font-size: $base;font-weight: $regular;color: $black;line-height: 30px;margin:
 ul{list-style: none;}
 ul li .nav-link{color: $baseColor;padding: 0;}
 header,footer{width: 100%;}
+img{height: 100%; width: 100%; object-fit: contain;}
+// svg{height: 100%; width: 100%;}
 
 
 //Input box
@@ -31,7 +33,7 @@ textarea{resize: none;}
 // button
 .primary{background-color: $primary;border: none;}
 .primary:active,.primary:hover{background-color: #96c93dc8;}
-.outline-primary{background-color: transparent;border: 4px solid $primary;padding: 20px 40px;color: $black;font-weight: $bold;font-size: 20px;}
+.outline-primary{background-color: transparent;border: 4px solid $primary;padding: 16px 20px;color: $black;font-weight: $bold;font-size: 20px;text-align: center; min-width: 200px;}
 .outline-primary:active{background-color: $primary;border: 4px solid transparent;}
 .outline-primary:hover{background-color: transparent;}
 
@@ -41,8 +43,13 @@ textarea{resize: none;}
 .sec-gap{padding-block: 90px 95px;}
 .sec-gap-top{padding-block: 90px 0px;}
 
-@media (max-width:575px){
+@media (max-width:991px){
+  .outline-primary{min-width: 120px;}
+}
+
+@media (max-width:767px){
   .sec-gap{padding-block: 70px 75px;}
+  .outline-primary{min-width: 120px; padding: 10px 15px; font-size: 14px; border-width: 1px;}
 }
 
 .bg-color{background-color: $sectionColor;}

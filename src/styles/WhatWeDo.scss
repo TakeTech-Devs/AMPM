@@ -1,6 +1,6 @@
 @import './Variable.scss';
 
-.whatwedo-heading{text-align: center;width: 706.82px;margin-bottom: 129px;height: 100%;h1{color: $primary;margin-bottom: 16px;}}
+.whatwedo-heading{margin-block-end: 50px;}
 .card-image-wrapper{padding-top: 40px;display: flex;align-items: center;justify-content: center;}
 .whatwedoCard .card-body{padding: 24px 30px 40px 30px;}
 .whatwedoCard {height: 100%;}
@@ -15,5 +15,5 @@
   .whatwedoCard{width:100%}
 }
 @media (max-width:575px){
-  .whatwedo-heading{h1{font-size: 50px;};p{font-size: 16px;}}
+ 
 }

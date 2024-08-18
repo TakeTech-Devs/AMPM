@@ -1,10 +1,11 @@
 @import './Variable.scss';
-
+footer{padding-block-start: 74px;}
 // Col 1
-
+.navbar-brand{display: flex; justify-content: start; height: 180px;}
+.navbar-brand img{width: auto; height: auto;}
 .input-wrapper .submit-btn:active{background-color: #96c93db4;}
 .input-wrapper .submit-btn:hover{background-color: #96c93db4;}
-.left-top{margin-bottom: 68px;padding-top: 74px;}
+
 .left-bottom .short-info{margin-bottom: 20px;}
 .left-bottom .short-info p{color: $baseColor;}
 .left-bottom .input-wrapper .submit-btn{margin-top: 16px;padding: 20px 40px;}
@@ -14,14 +15,15 @@
 
 // Col 2 
 
-.footer-menu-lists{display: flex;justify-content: space-between;align-items: center;margin-top: 56px;}
+.footer-menu-lists{display: flex;justify-content: space-between;align-items: center;}
 .footer-menu-lists .first-li{margin-right: 114px;}
-ul li{padding-top: 18px;}
-ul .list-head{margin-bottom: 22px;}
+.first-li ul, .second-li ul{display: flex; flex-direction: column; gap: 10px;}
+.first-li ul li:first-child{margin-bottom: 22px;}
+.second-li ul li:first-child{margin-bottom: 22px;}
 
 // Col 3
 
-.map-wrapper{margin-top: 74px;padding-left: 87px;}
+.map-wrapper{padding-left: 87px;}
 .map-wrapper .map{width: 323px;height: 323px;}
 // .map-wrapper iframe{width: 323px;height: 323px;}
 .map-wrapper .map-head{padding-bottom: 33.1px;}
@@ -30,7 +32,7 @@ ul .list-head{margin-bottom: 22px;}
 .h-line{width: 1204.11px;background-color: #D4D2E3;height: 2px;}
 .copyright-social-media p{color: #9795B5;font-family: $secondaryFamily;line-height: 18px;display: flex;font-size: 16px;display: inline-block;}
 .copyright-social-media p .nav-link{color: #9795B5;font-family: $secondaryFamily;line-height: 18px;font-size: 16px;display: inline-block;}
-.copyright-social-media{display: flex;justify-content: space-around;align-items: center;margin-block: 40px 73px;}
+.copyright-social-media{display: flex;justify-content: space-around;align-items: center;margin-block: 20px;}
 .copyright-social-media .nav-link{padding-right: 0;}
 .social-media-wrapper .social-media .social-app-div{width: 36px;height: 36px;background-color: $socialMedia;border-radius: 8px;display: flex;justify-content: center;align-items: center;}
 

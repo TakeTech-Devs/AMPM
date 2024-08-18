@@ -9,13 +9,13 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 .navbar-nav .nav-link.show,.navbar-nav .nav-link.active{color: #FFFFFF;}
 .navbar-nav .nav-link.active{font-weight: $bold;}
 .navbar-expand-lg .navbar-collapse{justify-content: end;align-items: center;}
-
+#afterEffect img{height: 28px;}
 .all-navs .login{color: $primary;font-weight: $bold;}
 
 .dropdown-toggle::after{color: white;}
 
 .shop-link{position: relative;margin-left: 24px;padding-bottom: 0px;padding-top: 3px;}
-.cart-counter{background-color: $red;padding: 0;width: 19px;height: 19px;display: flex;justify-content: center;align-items: center; border-radius: 9px;position: absolute;top: 0px;right: 0px;}
+.cart-counter{background-color: $red;padding: 0;width: 19px;height: 19px;display: flex;justify-content: center;align-items: center; border-radius: 9px;position: absolute;top: 0px;right: 0px;font-size: 12px;}
 
 // Hamburger color change
 .navbar-toggler-icon{background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");border: 2px solid rgba(255, 255, 255, 0.481);}
@@ -23,6 +23,7 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 // start
 .icons{display: flex;justify-content: center;align-items: center;}
 .nav-right{display: flex;flex-direction: row-reverse;}
+
 // .nav-right{width: 100%;}
 
 //end
@@ -30,13 +31,21 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 
 // Responsive counter 
 @media (max-width: 991px){
+  header .navbar-brand{height: 120px;}
+  // .nav-right  .navbar-brand{height: 28px;}
   .all-navs{padding-left: 10px;}
   .cart-counter{top: 4px;right: -7px;}
   .shop-link{position: relative;margin-left: 0;}
   .cart-counter{background-color: $red;padding: 0;width: 19px;height: 19px;display: flex;justify-content: center;align-items: center; border-radius: 9px;position: absolute;top: 0px;left: 20px;}
   .auth-links{display: flex;padding-left: 0px;padding-bottom: 2px; align-items: center;}
   .nav-link{font-size: 14px;}
+  .nav-right{flex-direction: row;}
+  .nav-right .navbar-nav{display: flex; flex-direction: row; gap: 10px;}
 
+}
+
+@media (max-width: 767px){
+  header .navbar-brand{height: 85px;}
 }
 
 
