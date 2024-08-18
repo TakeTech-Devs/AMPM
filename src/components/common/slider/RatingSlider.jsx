@@ -47,7 +47,7 @@ const sliderImageUrl = [
 
 const Slider = () => {
   return (
-    <div className="parent">
+    <div className="ratingSlider-parent">
       <Carousel
         responsive={responsive}
         autoPlay={true}
@@ -63,7 +63,7 @@ const Slider = () => {
             <div className="rating-slider" key={index}>
               <Card className="slider-card" style={{ width: "100%", height: "100%"}}>
                 <div className="slider-image-wrapper">
-                  <div>
+                  <div className="rating-wrapper">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

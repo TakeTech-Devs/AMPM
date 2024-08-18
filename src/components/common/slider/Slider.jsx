@@ -52,7 +52,7 @@ const sliderImageUrl = [
 
 const Slider = () => {
   return (
-    <div className="parent">
+    <div className="order-parent">
       <Carousel
         responsive={responsive}
         autoPlay={true}

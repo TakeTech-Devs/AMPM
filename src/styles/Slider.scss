@@ -3,12 +3,12 @@
 .slider-image-wrapper{width:200px;display: flex;justify-content: center;margin-block: 29px;}
 
 .slider .slider-card .card-body h3{color: $purple;}
-.react-multiple-carousel__arrow{z-index: 0;}
+.order-parent .react-multiple-carousel__arrow{z-index: 0;min-width: 25px;min-height: 25px;}
+.order-parent .react-multiple-carousel__arrow::before{font-size: 20px;color: $black;}
+.order-parent .react-multiple-carousel__arrow--right{right: 0;background-color: transparent;}
+.order-parent .react-multiple-carousel__arrow--left{left: -7px;background-color: transparent;}
 .slider .slider-card{display: flex;align-items: center;}
 .slider{width:263px}
-@media (min-width:1201px){
-  
-}
 
 @media (max-width:1200px){
   .slider .slider-image-wrapper{width:150px;}
