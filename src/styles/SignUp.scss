@@ -14,7 +14,8 @@
 .login-from .nav h3{padding-right: 8px;}
 .login-from .nav .nav-link{color: $black;font-weight: $bold;font-size: $cardTitle;line-height: 20px;padding: 10px; margin-inline: 0 8px;display: flex;justify-content: center;}
 .login-from .nav .nav-link.active{color: $primary;border-bottom: 2px solid $primary;}
-.login-from .sec-nav{margin-block: 0px 16px;}
+.login-from .sec-nav .types {display: flex;justify-content: center;align-items: center;}
+.login-from .sec-nav{margin-block: 0px 16px;align-items: center;}
 
 .login-from label{font-size: 18px;font-weight: $regular;line-height: 30px;}
 .login-from input{width: 100%;}
@@ -38,6 +39,9 @@
   .navigation {display: flex;align-items: center;margin-left: 20px;}
   .sign-sec{margin-top: 80px;}
   .navigation .nav .nav-link{color: $primary;font-size: 14px;}
+  .login-from .sec-nav .nav-link{font-size: 18px;}
+  .login-from .sec-nav{flex-direction: column;align-items: start;}
+  .login-from .sec-nav .types .nav-link:first-child{padding-left: 0px;}
 
 }
 

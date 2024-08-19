@@ -46,7 +46,9 @@ function OrderComplete() {
               </div>
               <p>Shopping Cart</p>
             </div>
-            <div className="line"></div>
+            <div className="d-flex align-items-center checkout">
+              <div className="line"></div>
+            </div>
             <div className="sec-orders">
               <div className="icon-wrapper">
                 <svg
@@ -67,7 +69,9 @@ function OrderComplete() {
               </div>
               <p>Checkout</p>
             </div>
-            <div className="line"></div>
+            <div className="d-flex align-items-center checkout">
+              <div className="line"></div>
+            </div>
             <div className="third-orders">
               <div className="icon-wrapper">
                 <svg
@@ -236,7 +240,9 @@ function OrderComplete() {
             </div>
             <div className="new-order-btn-wrapper">
               <p>New Order, Click button bellow</p>
-              <Button href="/products" className="primary">Shop Now</Button>
+              <Button href="/products" className="primary">
+                Shop Now
+              </Button>
             </div>
           </div>
         </Container>

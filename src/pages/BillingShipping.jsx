@@ -123,7 +123,9 @@ function BillingShipping() {
               </div>
               <p>Shopping Cart</p>
             </div>
+            <div className="d-flex align-items-center">
             <div className="line"></div>
+            </div>
             <div className="sec-orders">
               <div className="icon-wrapper">
                 <svg
@@ -155,7 +157,10 @@ function BillingShipping() {
               </div>
               <p>Checkout</p>
             </div>
+            <div className="d-flex align-items-center">
             <div className="line"></div>
+            </div>
+            
             <div className="third-orders">
               <div className="icon-wrapper">
                 <svg

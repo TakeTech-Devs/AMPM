@@ -25,7 +25,7 @@ export default function Login() {
       <section className="login-sec sec-gap">
         <div className="user-login-wrapper">
           <Container>
-            <Row>
+            <Row className="align-items-center">
               <Col sm={12} lg={6}>
                 <div className="login-from">
                   <Form onSubmit={handleSubmit}>

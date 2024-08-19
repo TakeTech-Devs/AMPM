@@ -6,10 +6,11 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 .nav-link,.nav-link:focus{color: white;}
 .nav-link:hover{color: rgb(197, 197, 197);}
 .nav-link{font-size: 18px;}
+.nav-right .navbar-nav .shop-link.active{color: $white;font-weight: $regular;}
 .navbar-nav .nav-link.show,.navbar-nav .nav-link.active{color: #FFFFFF;}
 .navbar-nav .nav-link.active{font-weight: $bold;}
 .navbar-expand-lg .navbar-collapse{justify-content: end;align-items: center;}
-.navbar-collapse .all-navs .nav-item .dropdown-menu{background-color: transparent;border: 2px solid $primary;}
+.navbar-collapse .all-navs .nav-item .dropdown-menu{background-color: $black;border: 2px solid $primary;}
 .navbar-collapse .all-navs .nav-item .dropdown-menu .dropdown-item:hover{background-color:rgb(99, 96, 96);}  // change
 .navbar-collapse .all-navs .nav-item .dropdown-menu .dropdown-item{font-size: 14px;color: $white;}
 .navbar-collapse .all-navs .nav-item .dropdown-menu .dropdown-item .active{font-size: 14px;color: $white;}

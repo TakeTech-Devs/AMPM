@@ -1,5 +1,6 @@
 @import './Variable.scss';
 
+.bill-order-lifecycle .checkout .line{background-color: $darkGreen;}
 
 // billing start
 
@@ -17,7 +18,7 @@
 
 .bill-order-lifecycle .sec-orders .icon-wrapper,.bill-order-lifecycle .third-orders .icon-wrapper{width: 30px;height: 30px;background-color: $white;border-radius: 20px;margin-right: 8px;}
 .bill-order-lifecycle .sec-orders,.bill-order-lifecycle .third-orders{display: flex;align-items: center;}
-.bill-order-lifecycle .sec-orders p,.bill-order-lifecycle .third-orders p{font-size: 16px;font-weight: $medium;line-height: 24px;color: #717378;}
+.bill-order-lifecycle .sec-orders p,.bill-order-lifecycle .third-orders p{font-weight: $medium;line-height: 24px;color: #717378;}
 
 .all-items-sec .left-bill .cart-heading{display: flex;justify-content: space-between;border-bottom: 1px solid #C8C9CB;padding-bottom: 29px;margin-bottom: 24px;}
 .all-items-sec .left-bill .cart-heading h3{color: #060709;}
@@ -73,7 +74,7 @@
 .override-checkout .first-orders p{font-weight: $bold;font-size: 14px;line-height: 21px;color: #05422C;}
 .override-checkout .sec-orders .icon-wrapper{background-color: $darkGreen;}
 
-.override-checkout .sec-orders p{font-size: 16px;font-weight: $bold;line-height: 24px;color: $black;}
+.override-checkout .sec-orders p{font-weight: $bold;line-height: 24px;color: $black;}
 
 .left-bill .buyer-info .form-label{color: #46494F;font-weight: $semibold;line-height: 24px;font-size: 16px;}
 .left-bill .buyer-info .form-label::after{content: '*';position: absolute;font-weight: $semibold;line-height: 24px;font-size: 16px;color: #46494F;}
@@ -104,7 +105,7 @@
 
 .override-orderComplete .sec-orders .icon-wrapper{background-color: #C3D2CC;}
 .override-orderComplete .third-orders .icon-wrapper{background-color: #05422C;}
-.override-orderComplete .sec-orders p{font-weight: $bold;font-size: 14px;line-height: 21px;color: #05422C;}
+.override-orderComplete .sec-orders p{font-weight: $bold;line-height: 21px;color: #05422C;}
 .override-orderComplete .third-orders p{font-weight: $bold;line-height: 24px;color: $black;}
 
 .order-complete-wrapper{padding-top: 32px;}
@@ -172,7 +173,7 @@
 
 .address-normal-wrapper .user-info-wrapper {margin-bottom: 40px;}
 // .address-normal-wrapper .user-info-wrapper .address{width: 581px;}
-.address-normal-wrapper .user-info-wrapper .address h3,.address-normal-wrapper .user-info-wrapper h3{font-size: 24px;color: $black;line-height: 46px;font-weight: $semibold;margin-block: 10px;}
+.address-normal-wrapper .user-info-wrapper .address h3,.address-normal-wrapper .user-info-wrapper h3{color: $black;line-height: 46px;font-weight: $semibold;margin-block: 10px;}
 .address-normal-wrapper .add-new-address-btn-wrapper .outline-primary{border: none;padding: 20px 0px;color: $primary;line-height: 20px;margin-block: 40px 20px;}
 .address-normal-wrapper .add-new-address-btn-wrapper .outline-primary:active{color: $black;background-color: transparent;}
 
@@ -185,7 +186,7 @@
 .wrapper .heading h2{font-weight: $bold;line-height: 46px;margin-bottom: 50px;}
 .wrapper .product-history-wrapper .products{border: 1px solid $black;border-radius: 20px;padding-block: 20px;padding-inline: 20px;}
 
-.wrapper .product-history-wrapper .products .product-info p{font-size: 16px;font-weight: $semibold;line-height: 24px;color: $black;margin-top: 10px;}
+.wrapper .product-history-wrapper .products .product-info p{font-weight: $semibold;line-height: 24px;color: $black;margin-top: 10px;}
 .wrapper .product-history-wrapper .products .product-info{border-bottom: 1px solid $black;padding-bottom: 20px;margin-bottom: 20px;}
 .wrapper .product-history-wrapper .products .product-status{width: 100%;background-color: $primary;display: flex;column-gap: 10px;align-items: center;padding: 15px 10px;border-radius: 10px;margin-bottom: 40px;}
 .wrapper .product-history-wrapper .products .product-status-2{background-color: #367AFF;}
@@ -226,7 +227,7 @@
 
 .bill-order-lifecycle .sec-orders .icon-wrapper,.bill-order-lifecycle .third-orders .icon-wrapper{width: 30px;height: 30px;background-color: $white;border-radius: 20px;margin-right: 0px;}
 .bill-order-lifecycle .sec-orders,.bill-order-lifecycle .third-orders{display: flex;align-items: center;flex-direction: column;}
-.bill-order-lifecycle .sec-orders p,.bill-order-lifecycle .third-orders p{font-size: 12px;font-weight: $medium;line-height: 24px;color: #717378;text-align: center;}
+.bill-order-lifecycle .sec-orders p,.bill-order-lifecycle .third-orders p{font-weight: $medium;line-height: 24px;color: #717378;text-align: center;}
 // end middle section
 
 
@@ -239,16 +240,17 @@
 
 // Checkout start
 .override-checkout .sec-orders .icon-wrapper{background-color: $darkGreen;}
-.override-checkout .sec-orders p{font-size: 12px;font-weight: $bold;line-height: 24px;color: $black;}
+.override-checkout .sec-orders p{font-weight: $bold;line-height: 24px;color: $black;}
 
 //checkout end
 
 // order complete start
 .override-orderComplete .sec-orders .icon-wrapper{background-color: #C3D2CC;}
-.override-orderComplete .sec-orders p{font-weight: $bold;font-size: 12px;line-height: 21px;color: #05422C;}
+.override-orderComplete .sec-orders p{font-weight: $bold;line-height: 21px;color: #05422C;}
 .override-orderComplete .third-orders .icon-wrapper{background-color: #05422C;}
-.override-orderComplete .third-orders p{font-size: 12px;font-weight: $bold;line-height: 24px;color: $black;}
-.order-complete-wrapper .address-wrapper .left-address .address p, .order-complete-wrapper .address-wrapper .right-address .address p{font-size: 12px;}
+.override-orderComplete .third-orders p{font-weight: $bold;line-height: 24px;color: $black;}
+.order-complete-wrapper .order-items-show .items .items-details .img-title-wrapper{display: flex;column-gap: 5px;}
+.order-complete-wrapper .order-items-show .items .items-details .img-title-wrapper .img-div{width: 40px;height: 40px;}
 
 //order complete end
 
@@ -256,7 +258,7 @@
 .my-profile-wrapper .navigations .nav-link,.address-normal-wrapper .navigations .nav-link{font-size: 18px;}
 
 .my-profile-wrapper .user-profile-wrapper .user-info{flex-direction: column;align-items: start;gap: 12px;}
-.address-normal-wrapper .user-info-wrapper .address h3,.address-normal-wrapper .user-info-wrapper h3{font-size: 18px;color: $black;line-height: 46px;font-weight: $semibold;margin-block: 10px;}
+.address-normal-wrapper .user-info-wrapper .address h3,.address-normal-wrapper .user-info-wrapper h3{color: $black;line-height: 46px;font-weight: $semibold;margin-block: 10px;}
 .address-normal-wrapper{padding: 15px;}
 .address-normal-wrapper .navigations{flex-direction: column;gap: 12px;}
 
