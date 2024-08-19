@@ -215,10 +215,10 @@ const Index = () => {
                   />
                 </div>
                 <div className="buttons-wrapper">
-                  <Button href="/contactus" className="primary">
+                  <Button href="/login" className="primary">
                     Get Started
                   </Button>
-                  <Button className="outline-primary">Talk to Sales</Button>
+                  <Button href="/contactus" className="outline-primary">Talk to Sales</Button>
                 </div>
               </div>
             </Col>
