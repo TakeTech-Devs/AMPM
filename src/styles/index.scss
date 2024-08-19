@@ -20,7 +20,7 @@
 
 .extra-gap{padding-block: 268px 100px;}
 
-.home-slider-btn-wrapper .primary{padding: 20px 50px;font-size: $cardTitle;margin-top: 80px;}
+.home-slider-btn-wrapper .primary{padding: 20px 50px;margin-top: 80px;}
 .home-slider-btn-wrapper .primary:hover,.home-slider-btn-wrapper .primary:active{background-color: #96c93dc8;}
 
 
@@ -49,7 +49,7 @@
 
 @media (max-width:991px){
   .bg-video{margin-top: 120px;padding-block: 80px 200px;}
-  .index-left-part{padding: 20px;padding-left: 50px;}
+  .index-left-part{padding: 20px;padding-left: 30px;}
   .overlay{padding-inline: 50px;}
 
   .overlay .one svg{width: 100%;height: 100%;}
@@ -76,7 +76,7 @@
 .index-left-part .buttons-wrapper .outline-primary{font-size: 12px;padding: 10px  20px;}
 
 .index-left-part{padding-inline: 20px;}
-.index-left-part .sub-heading{font-size: 14px;margin-bottom: 20px;color: #565656;}
+.index-left-part .sub-heading{margin-bottom: 20px;color: #565656;}
 .index-left-part .heading{font-size: 32px;margin-bottom: 20px;color: #565656;}
 .index-left-part .buttons-wrapper{margin-top: 20px;}
 .index-left-part {background-color: $secondary;border-block:2px solid gray;}

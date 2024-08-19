@@ -57,7 +57,8 @@ export default function AboutUs() {
 
       <section className="sec-gap">
         <Container fluid="lg">
-          <div className="d-flex justify-content-center">
+          <Row className="justify-content-center">
+            <Col lg={6}>
             <div className="whatwedo-heading">
               <h2 className="text-center">What we do</h2>
               <p className="text-center">
@@ -67,7 +68,8 @@ export default function AboutUs() {
                 sunt ullam sapiente nihil esse excepturi.
               </p>
             </div>
-          </div>
+            </Col>
+          </Row>
           <Row>
             <Col md={12} lg={6} xl={4}>
               <Card className="whatwedoCard">

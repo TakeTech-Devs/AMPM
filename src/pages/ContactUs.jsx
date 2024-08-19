@@ -49,7 +49,7 @@ function ContactUs() {
             <Nav.Link className="" href="/">
               <h3>
                 Home
-                <span className="pe-2">/</span>
+                <span>/</span>
               </h3>
             </Nav.Link>
             <Nav className="me-auto align-items-center">
@@ -65,7 +65,7 @@ function ContactUs() {
         <Container>
           <div className="contactus-details-wrapper ">
             <Row>
-              <Col>
+              <Col lg={6}>
                 <div className="left-contact">
                   <div className="d-flex flex-column flex-gap">
                     <div className="type">
@@ -113,7 +113,7 @@ function ContactUs() {
                   </div>
                 </div>
               </Col>
-              <Col>
+              <Col lg={6}>
                 <div className="form-wrapper">
                   <Form onSubmit={handleSubmit}>
                     <Row>

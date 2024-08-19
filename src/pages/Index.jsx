@@ -181,7 +181,8 @@ const Index = () => {
 
       <section className="sec-gap">
         <Container>
-          <div className="d-flex justify-content-center">
+          <Row className="justify-content-center">
+            <Col lg={6}>
             <div className="whatwedo-heading">
               <h2 className="text-center">What we do</h2>
               <p className="text-center">
@@ -189,7 +190,8 @@ const Index = () => {
                 voluptatum repellat nesciunt quis placeat doloremque corrupti
               </p>
             </div>
-          </div>
+            </Col>
+          </Row>
           <RatingSlider />
         </Container>
       </section>

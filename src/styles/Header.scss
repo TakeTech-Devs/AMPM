@@ -15,7 +15,7 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 #afterEffect img{height: 28px;}
 .all-navs .login{color: $primary;font-weight: $bold;}
 
-.nav-right .navbar-nav .user-logo .dropdown-menu{position: absolute;left: -73px;background-color: transparent;border: 2px solid $primary;}
+.nav-right .navbar-nav .user-logo .dropdown-menu{position: absolute;left: -73px;background-color: $black;border: 2px solid $primary;}
 .nav-right .navbar-nav .user-logo .dropdown-menu .dropdown-item{color: $white;}
 .dropdown-toggle::after{color: white;}
 

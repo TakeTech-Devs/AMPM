@@ -64,8 +64,8 @@ export default function SignUp() {
             <Nav.Link className="signup" href="/signup">
               Sign Up
             </Nav.Link>
-            <h3 className="or">Or</h3>
-            <Nav.Link className="active" href="/login">
+            <p className="or">Or</p>
+            <Nav.Link href="/login">
               Login
             </Nav.Link>
           </Nav>

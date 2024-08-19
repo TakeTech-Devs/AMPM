@@ -22,7 +22,7 @@ export default function Login() {
 
   return (
     <>
-      <section className="login-sec">
+      <section className="login-sec sec-gap">
         <div className="user-login-wrapper">
           <Container>
             <Row>
@@ -159,7 +159,7 @@ export default function Login() {
                       <img src={loginPageLogo} alt="logo" />
                     </div>
 
-                    <h1>POWERING MACHINES</h1>
+                    <h2>POWERING MACHINES</h2>
                   </div>
                 </div>
               </Col>

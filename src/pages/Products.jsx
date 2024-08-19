@@ -172,27 +172,28 @@ function Products() {
       </section>
       <section className="sec-gap bg-color">
         <Container>
-        <div className="d-flex justify-content-center">
-            <div className="whatwedo-heading">
-              <h1>What we do</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
-                voluptatum repellat nesciunt quis placeat doloremque corrupti
-              
-              </p>
-            </div>
-          </div>
+          <Row className="d-flex justify-content-center">
+            <Col lg={6}>
+              <div className="whatwedo-heading">
+                <h2 className="text-center">What we do</h2>
+                <p className="text-center">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Magni, voluptatum repellat nesciunt quis placeat doloremque
+                  corrupti
+                </p>
+              </div>
+            </Col>
+          </Row>
           <Slider />
           <div className="d-flex justify-content-center  slider-btn-wrapper">
-          <Button
-            href="/productlist"
-            className="submit-btn primary"
-            type="submit"
-          >
-            See More
-          </Button>
+            <Button
+              href="/productlist"
+              className="submit-btn primary"
+              type="submit"
+            >
+              See More
+            </Button>
           </div>
-          
         </Container>
       </section>
     </>
