@@ -66,15 +66,17 @@ function MyProfile() {
           <div className="my-profile-wrapper">
             <div className="navigations">
               <h3>Go To :</h3>
-              <Nav.Item>
-                <Nav.Link href="/cart">My Cart </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/orders">My Orders</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/address">Address Book</Nav.Link>
-              </Nav.Item>
+              <div className="links">
+                <Nav.Item>
+                  <Nav.Link href="/cart">My Cart </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href="/orders">My Orders</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href="/address">Address Book</Nav.Link>
+                </Nav.Item>
+              </div>
             </div>
 
             <div className="user-profile-wrapper">

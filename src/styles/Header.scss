@@ -10,12 +10,14 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 .navbar-nav .nav-link.active{font-weight: $bold;}
 .navbar-expand-lg .navbar-collapse{justify-content: end;align-items: center;}
 .navbar-collapse .all-navs .nav-item .dropdown-menu{background-color: transparent;border: 2px solid $primary;}
+.navbar-collapse .all-navs .nav-item .dropdown-menu .dropdown-item:hover{background-color:rgb(99, 96, 96);}  // change
 .navbar-collapse .all-navs .nav-item .dropdown-menu .dropdown-item{font-size: 14px;color: $white;}
 .navbar-collapse .all-navs .nav-item .dropdown-menu .dropdown-item .active{font-size: 14px;color: $white;}
 #afterEffect img{height: 28px;}
 .all-navs .login{color: $primary;font-weight: $bold;}
 
 .nav-right .navbar-nav .user-logo .dropdown-menu{position: absolute;left: -73px;background-color: $black;border: 2px solid $primary;}
+.nav-right .navbar-nav .user-logo .dropdown-menu .dropdown-item:hover{background-color: rgb(99, 96, 96);}  // change
 .nav-right .navbar-nav .user-logo .dropdown-menu .dropdown-item{color: $white;}
 .dropdown-toggle::after{color: white;}
 

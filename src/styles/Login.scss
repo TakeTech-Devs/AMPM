@@ -9,10 +9,12 @@
 
 .login-from{border: 1px solid $black;border-radius: 16px;padding: 20px;}
 .user-login-wrapper .login-from .nav{margin-block: 10px 30px;}
-.user-login-wrapper .login-from .nav h3{padding-right: 8px;}
+.user-login-wrapper .login-from .nav h3{padding-right: 8px;font-size: 18px;}
 .user-login-wrapper .login-from .nav .nav-link{color: $black;font-weight: $bold;font-size: $cardTitle;line-height: 20px;padding: 10px; margin-inline: 0 8px;display: flex;justify-content: center;}
 .user-login-wrapper .login-from .nav .nav-link.active{color: $primary;border-bottom: 2px solid $primary;}
-.user-login-wrapper .login-from .sec-nav{margin-block: 0px 16px;}
+.user-login-wrapper .login-from .sec-nav{margin-block: 0px 16px;align-items: center;}
+
+.user-login-wrapper .login-from .sec-nav .types{display: flex;justify-content: center;align-items: center;}
 
 .login-from label{font-size: 18px;font-weight: $regular;line-height: 30px;}
 .login-from input{width: 100%;}
@@ -38,5 +40,7 @@
   .user-login-wrapper .login-from{padding: 10px;}
   .loginImage-inside-content-wrapper h2{font-size: 20px;}
   .loginImage-inside-content-wrapper .image-wrap{width: 100px;height: 100px;}
+  .user-login-wrapper .login-from .sec-nav{flex-direction: column;align-items: start;}
+  .user-login-wrapper .login-from .nav .nav-link:first-child{padding-left: 0px;}
 
 }

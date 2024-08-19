@@ -3,7 +3,7 @@
 
 // billing start
 
-.billing-mt{margin-top: 120px;}
+.billing-mt{margin-top: 180px;}
 .billing-mt .billing-nav{padding-top: 40px;}
 .billing-mt .navigation{margin-left: 0px;}
 .bill-order-lifecycle .first-orders .icon-wrapper{width: 30px;height: 30px;background-color: $darkGreen;border-radius: 20px;margin-right: 8px;}
@@ -60,7 +60,7 @@
 .bottom-wrapper{height: 100%;}
 .bottom-wrapper .bill-features-wrapper .sms{color: $btnColor;font-size: 16px;line-height: 24px;}
 .bottom-wrapper .bill-features-wrapper {display: flex;flex-direction: column;row-gap: 16px;height: 100%;}
-.bottom-wrapper .bill-features-wrapper .order-wrap .order-icon{background-color: #f2f2f2;border-radius: 100px;width: 48px;height: 48px;display: flex;align-items: center;justify-content: center;}
+.bottom-wrapper .bill-features-wrapper .order-wrap .order-icon{background-color: #f2f2f2;border-radius: 100px;width: 48px;height: 48px;display: flex;align-items: center;justify-content: center;padding:13px;}
 .bottom-wrapper .bill-features-wrapper .order-wrap .order-time p{font-weight: $semibold;font-size: 16px;line-height: 24px;color: #1A1E26;}
 .bottom-wrapper .bill-features-wrapper .order-wrap .order-day p{font-weight: $regular;font-size: 18px;line-height: 30px;color: #717378;}
 .bottom-wrapper .bill-features-wrapper .order-wrap{border: 1px solid #f2f2f2;border-radius: 12px;height: 100%;}
@@ -148,6 +148,7 @@
 .my-profile-wrapper .navigations,.address-normal-wrapper .navigations{display: flex;column-gap: 18px;padding-bottom: 40px;}
 .my-profile-wrapper .navigations h3,.address-normal-wrapper .navigations h3{color: $black;}
 .my-profile-wrapper .navigations .nav-link,.address-normal-wrapper .navigations .nav-link{color: $primary;font-size: 20px;font-weight: $bold;line-height: 20px;border-bottom: 2px solid $primary;}
+.my-profile-wrapper .navigations .links{display: flex;gap: 12px;}
 
 .my-profile-wrapper .user-profile-wrapper .user-info .user-img{width: 100px;height: 100px;}
 .my-profile-wrapper .user-profile-wrapper .user-info{display: flex;align-items: center;justify-content: space-between;}
@@ -162,6 +163,8 @@
 
 .address-normal-wrapper{border: 1px solid $black;border-radius: 20px;padding: 30px;}
 // .address-normal-wrapper .add-address-btn-wrapper .primary{padding: 20px 33px;font-weight: $bold;font-size: 20px;line-height: 20px;}
+.address-normal-wrapper .navigations .links{display: flex;gap: 12px;}
+
 
 // Address normal end
 
@@ -204,13 +207,17 @@
 
 @media (max-width:991px){
   .bottom-wrapper .bill-features-wrapper .sms{margin-top: 10px;}
+  .billing-mt{margin-top: 120px;}
+
 }
 
 
 
 @media (max-width:575px){
+  .billing-mt{margin-top: 88px;}
 
   // middle section
+
   .navigation h3{font-size: 14px;}
   .bill-order-lifecycle .first-orders .icon-wrapper{margin-right: 0px;}
   .bill-order-lifecycle .first-orders{display: flex;align-items: center;flex-direction: column;justify-content: center;}
@@ -247,10 +254,16 @@
 
 // address
 .my-profile-wrapper .navigations .nav-link,.address-normal-wrapper .navigations .nav-link{font-size: 18px;}
+
 .my-profile-wrapper .user-profile-wrapper .user-info{flex-direction: column;align-items: start;gap: 12px;}
 .address-normal-wrapper .user-info-wrapper .address h3,.address-normal-wrapper .user-info-wrapper h3{font-size: 18px;color: $black;line-height: 46px;font-weight: $semibold;margin-block: 10px;}
 .address-normal-wrapper{padding: 15px;}
 .address-normal-wrapper .navigations{flex-direction: column;gap: 12px;}
 
 .wrapper .product-history-wrapper .products .product-details-wrapper{display: flex;gap: 20px;flex-direction: column;}
+.my-profile-wrapper .navigations,.address-normal-wrapper .navigations{flex-direction: column;}
+.my-profile-wrapper .navigations .links{padding-top: 10px;}
+.my-profile-wrapper .navigations .links .nav-link{font-size: 14px;}
+.address-normal-wrapper .navigations .links .nav-link{font-size: 14px;}
+
 }
