@@ -2,8 +2,37 @@ import React, { useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
+import Select from 'react-select';
+import countryList from 'react-select-country-list';
+
 
 function Checkout() {
+  const [country, setCountry] = useState(null);
+  const options = countryList().getData();
+
+  const changeHandler = (value) => {
+    setCountry(value);
+  };
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: '0.6px solid #282828',
+      borderRadius: '6px',
+      width: '100%',
+      height: '59px',
+      paddingLeft: '10px',
+      boxShadow: state.isFocused ? 'none' : provided.boxShadow,
+      '&:hover': {
+        borderColor: '#282828',
+      },
+    }),
+    dropdownIndicator: (provided) => ({
+      ...provided,
+      paddingRight: '20px',
+    }),
+  };
+
   const navigate = useNavigate();
 
   const count = 2;
@@ -154,12 +183,8 @@ function Checkout() {
                           />
                         </Form.Group>
                       </Col>
-
                       <Col lg={6}>
-                        <Form.Group
-                          className="mb-3"
-                          controlId="formBasicPassword"
-                        >
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
                           <Form.Label>Last Name</Form.Label>
                           <Form.Control
                             required
@@ -174,17 +199,16 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>Country / Region </Form.Label>
-                          <Form.Select
+                          <Form.Label>Country / Region</Form.Label>
+                          <Select
                             required
-                            className="custom-select-outline"
-                            aria-label="Default select example"
-                          >
-                            <option>Singapore</option>
-                            <option value="1">Singapore</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </Form.Select>
+                            components={{ IndicatorSeparator:() => null }}
+                            styles={customStyles}
+                            options={options}
+                            value={country}
+                            onChange={changeHandler}
+                            placeholder="Select a Country"
+                          />
                         </Form.Group>
                       </Col>
                       <Col lg={12}>
