@@ -53,6 +53,9 @@
 .right-bill  .sms-show span{color:#1A1E26; }
 .right-bill  .sms-show .limit-amount{color: $red;}
 .right-bill  .checkout-btn button{color: $white;font-weight: $semibold;line-height: 24px;font-size: 16px;background-color: #C8C9CB;border: none;width: 100%;padding-block: 16px;border-radius: 100px;margin-top: 20px;}
+.right-bill  .checkout-btn .add-to-cart-btn-color{background-color: $btnColor;}
+.add-to-cart-btn-color:first-child:active{background-color: #80b32faa;}
+
 .right-bill  .checkout-btn {padding-bottom: 20px;border-bottom: 1px solid #F4F4F4;margin-bottom: 20px;}
 .right-bill  .show-payment-cards .cards{display: flex;column-gap: 12px;}
 .right-bill  .show-payment-cards p{color: #717378;font-weight: $regular;margin-bottom: 16px;}

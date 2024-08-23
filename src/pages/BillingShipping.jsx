@@ -333,7 +333,7 @@ function BillingShipping() {
                 </div>
                 <div className="checkout-btn">
                   <Button
-                    className="d-flex justify-content-center gap-2"
+                    className="d-flex justify-content-center gap-2 add-to-cart-btn-color"
                     onClick={handleCheckout}
                   >
                     {" "}

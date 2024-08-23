@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
-import Select from 'react-select';
-import countryList from 'react-select-country-list';
-
+import Select from "react-select";
+import countryList from "react-select-country-list";
 
 function Checkout() {
   const [country, setCountry] = useState(null);
@@ -17,19 +16,19 @@ function Checkout() {
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
-      border: '0.6px solid #282828',
-      borderRadius: '6px',
-      width: '100%',
-      height: '59px',
-      paddingLeft: '10px',
-      boxShadow: state.isFocused ? 'none' : provided.boxShadow,
-      '&:hover': {
-        borderColor: '#282828',
+      border: "0.6px solid #282828",
+      borderRadius: "6px",
+      width: "100%",
+      height: "59px",
+      paddingLeft: "10px",
+      boxShadow: state.isFocused ? "none" : provided.boxShadow,
+      "&:hover": {
+        borderColor: "#282828",
       },
     }),
     dropdownIndicator: (provided) => ({
       ...provided,
-      paddingRight: '20px',
+      paddingRight: "20px",
     }),
   };
 
@@ -184,7 +183,10 @@ function Checkout() {
                         </Form.Group>
                       </Col>
                       <Col lg={6}>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group
+                          className="mb-3"
+                          controlId="formBasicPassword"
+                        >
                           <Form.Label>Last Name</Form.Label>
                           <Form.Control
                             required
@@ -202,7 +204,7 @@ function Checkout() {
                           <Form.Label>Country / Region</Form.Label>
                           <Select
                             required
-                            components={{ IndicatorSeparator:() => null }}
+                            components={{ IndicatorSeparator: () => null }}
                             styles={customStyles}
                             options={options}
                             value={country}
@@ -276,6 +278,11 @@ function Checkout() {
                             type="number"
                             placeholder="Enter Postcode / ZIP"
                             className="custom-outline"
+                            onInput={(e) => {
+                              if (e.target.value.length > 6) {
+                                e.target.value = e.target.value.slice(0, 6);
+                              }
+                            }}
                           />
                         </Form.Group>
                       </Col>
@@ -475,7 +482,7 @@ function Checkout() {
                 </div>
                 <div className="checkout-btn">
                   <Button
-                    className="d-flex justify-content-center gap-2"
+                    className="d-flex justify-content-center gap-2 add-to-cart-btn-color"
                     onClick={handleCheckout}
                   >
                     {" "}
