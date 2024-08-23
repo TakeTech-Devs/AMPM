@@ -283,6 +283,7 @@ function Checkout() {
                                 e.target.value = e.target.value.slice(0, 6);
                               }
                             }}
+                            onWheel={(e) => e.target.blur()}
                           />
                         </Form.Group>
                       </Col>
