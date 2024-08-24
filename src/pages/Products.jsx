@@ -31,7 +31,7 @@ function Products() {
       <section className="sec-gap bg-color ">
         <Container fluid="lg">
           <div className="content-wrapper">
-            <Row className="g-sm-0 gy-4">
+            <Row>
               <Col md={6}>
                 <div className="left-part">
                   <div className="heading">
@@ -128,7 +128,7 @@ function Products() {
       <section className="sec-gap  ">
         <Container fluid="lg">
           <div className="product-wrapper">
-            <Row className="g-sm-0 gy-4">
+            <Row>
               <Col md={6}>
                 <div className="Mission-image-wrapper">
                   <img

@@ -9,7 +9,8 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 992 },
     items: 4,
-    slidesToSlide: 4, // optional, default to 1.
+    slidesToSlide: 1, // optional, default to 1.
+    partialVisibilityGutter: 40 
   },
   tablet: {
     breakpoint: { max: 991, min: 768 },
@@ -59,7 +60,7 @@ const Slider = () => {
         // showDots={true}
         infinite={true}
         partialVisible={false}
-        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
       >
         {sliderImageUrl.map((imageUrl, index) => {
           return (
