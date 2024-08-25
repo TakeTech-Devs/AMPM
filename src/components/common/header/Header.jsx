@@ -7,7 +7,7 @@ import userLogo from "../../../assets/user-icon.svg";
 import shopCart from "../../../assets/shop-cart.svg";
 
 function Header() {
-  const count = 5;
+  const count = 1;
 
   return (
     <header>
@@ -22,8 +22,6 @@ function Header() {
               alt="Company Logo"
             />
           </Navbar.Brand>
-
-         
 
           <Navbar.Collapse id="navbarScroll">
             <Nav className="my-2 my-lg-0 all-navs">
