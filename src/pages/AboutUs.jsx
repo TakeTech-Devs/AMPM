@@ -30,7 +30,7 @@ export default function AboutUs() {
 
       <section className="sec-gap bg-color">
         <Container fluid="lg">
-          <Row className="g-sm-0 gy-4">
+          <Row>
             <Col md={6}>
               <div className="left-part">
                 <div className="heading">

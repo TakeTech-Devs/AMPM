@@ -23,45 +23,7 @@ function Header() {
             />
           </Navbar.Brand>
 
-          <div className="nav-right">
-            <Nav className="ml-auto icons">
-              <NavLink to="/cart" className="shop-link nav-link">
-                <img
-                  src={shopCart}
-                  width="32"
-                  height="32"
-                  className="d-inline-block align-top"
-                  alt="Shop cart"
-                />
-                <div className="cart-counter">{count}</div>
-              </NavLink>
-              <NavDropdown
-                title={
-                  <img
-                    src={userLogo}
-                    width="32"
-                    height="32"
-                    className="d-inline-block align-top"
-                    alt="User logo"
-                  />
-                }
-                id="afterEffect"
-                className="user-logo"
-              >
-                <NavDropdown.Item as={NavLink} to="/account">
-                  Account
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/orders">
-                  Orders
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/logout">
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-
-            <Navbar.Toggle aria-controls="navbarScroll" />
-          </div>
+         
 
           <Navbar.Collapse id="navbarScroll">
             <Nav className="my-2 my-lg-0 all-navs">
@@ -108,6 +70,44 @@ function Header() {
               </NavLink>
             </Nav>
           </Navbar.Collapse>
+          <div className="nav-right">
+            <Nav className="ml-auto icons">
+              <NavDropdown
+                title={
+                  <img
+                    src={userLogo}
+                    width="32"
+                    height="32"
+                    className="d-inline-block align-top"
+                    alt="User logo"
+                  />
+                }
+                id="afterEffect"
+                className="user-logo"
+              >
+                <NavDropdown.Item as={NavLink} to="/account">
+                  Account
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/orders">
+                  Orders
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/logout">
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+              <NavLink to="/cart" className="shop-link nav-link">
+                <img
+                  src={shopCart}
+                  width="32"
+                  height="32"
+                  className="d-inline-block align-top"
+                  alt="Shop cart"
+                />
+                <div className="cart-counter">{count}</div>
+              </NavLink>
+            </Nav>
+            <Navbar.Toggle aria-controls="navbarScroll" />
+          </div>
         </Container>
       </Navbar>
     </header>
