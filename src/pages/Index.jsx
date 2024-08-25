@@ -198,7 +198,7 @@ const Index = () => {
 
       <section className="sec-gap  position-relative after-effect">
         <Container fluid="lg">
-          <Row className="g-sm-0 gy-4">
+          <Row>
             <Col md={6}>
               <div className="index-left-part">
                 <h2 className="text-black heading">Contact US</h2>

@@ -22,7 +22,7 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 .nav-right .navbar-nav .user-logo .dropdown-menu .dropdown-item{color: $white;}
 .dropdown-toggle::after{color: white;}
 
-.shop-link{position: relative;margin-left: 24px;padding-bottom: 0px;padding-top: 3px;}
+.shop-link{position: relative;margin-left: 12px;padding-bottom: 0px;padding-top: 3px;}
 .cart-counter{background-color: $red;padding: 0;width: 19px;height: 19px;display: flex;justify-content: center;align-items: center; border-radius: 9px;position: absolute;top: -3px;right: 0px;font-size: 12px;}
 
 // Hamburger color change
@@ -32,7 +32,7 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 .icons{display: flex;justify-content: center;align-items: center;}
 .nav-right{display: flex;flex-direction: row-reverse;}
 .nav-right .navbar-toggler{padding-inline-end: 0px;}
-.nav-right .navbar-nav{margin-inline-end: 10px;}
+
 
 // .nav-right{width: 100%;}
 
@@ -54,6 +54,7 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 
 @media (max-width: 767px){
   header .navbar-brand{height: 85px;}
+  .nav-right .navbar-nav{gap: 20px;}
 }
 
 
