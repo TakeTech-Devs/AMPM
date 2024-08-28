@@ -54,7 +54,7 @@ const Slider = () => {
     <div className="order-parent">
       <Carousel
         responsive={responsive}
-        autoPlay={true}
+        // autoPlay={true}
         swipeable={true}
         draggable={true}
         // showDots={true}
