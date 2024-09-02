@@ -70,7 +70,7 @@ export default function AboutUs() {
             </div>
             </Col>
           </Row>
-          <Row>
+          <Row className="gy-3">
             <Col md={12} lg={6} xl={4}>
               <Card className="whatwedoCard">
                 <div className="card-image-wrapper">

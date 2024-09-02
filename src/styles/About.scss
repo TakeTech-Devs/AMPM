@@ -6,4 +6,11 @@
 
 @media (max-width:991px){
   .whatwedoCard{padding: 0px;}
+  .whatwedoCard .card-image-wrapper{width: 120px;height: 120px;margin-top: 20px;}
+  .whatwedo .card-title h2{margin-bottom: 15px ;}
+
+}
+@media (max-width:575px){
+  .whatwedoCard .card-image-wrapper{width: 100px;height: 100px;margin-top: 20px;}
+
 }

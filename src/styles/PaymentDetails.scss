@@ -245,7 +245,9 @@
 .override-checkout .sec-orders .icon-wrapper{background-color: $darkGreen;}
 .override-checkout .sec-orders p{font-weight: $bold;line-height: 24px;color: $black;}
 .bill-order-lifecycle .order-wrapper{column-gap: 10px;}
-
+.bottom-wrapper .bill-features-wrapper .order-wrap .order-icon{width: 45px;height: 45px;}
+.bottom-wrapper .bill-features-wrapper .order-wrap .order-time p{font-size: 14px;}
+.bottom-wrapper .bill-features-wrapper .order-wrap .order-day p{font-size: 16px;}
 //checkout end
 
 // order complete start
@@ -254,6 +256,7 @@
 .override-orderComplete .third-orders .icon-wrapper{background-color: #05422C;}
 .override-orderComplete .third-orders p{font-weight: $bold;line-height: 24px;color: $black;}
 .order-complete-wrapper .order-items-show .items .items-details .img-title-wrapper{display: flex;column-gap: 5px;}
+.order-complete-wrapper .order-items-show .items .items-details{display: flex;justify-content: space-between;align-items: center;}
 .order-complete-wrapper .order-items-show .items .items-details .img-title-wrapper .img-div{width: 40px;height: 40px;}
 
 //order complete end
@@ -271,5 +274,6 @@
 .my-profile-wrapper .navigations .links{padding-top: 10px;}
 .my-profile-wrapper .navigations .links .nav-link{font-size: 14px;}
 .address-normal-wrapper .navigations .links .nav-link{font-size: 14px;}
+.my-profile-wrapper .user-profile-wrapper .user-info .user-img{width: 80px;height: 80px;}
 
 }
