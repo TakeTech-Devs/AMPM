@@ -32,7 +32,7 @@ export default function Login() {
                     <h2 className="text-black">Welcome !</h2>
 
                     <Nav className="me-auto align-items-center">
-                      <Nav.Link href="/signup">Sign Up</Nav.Link>
+                      <Nav.Link className="ps-0" href="/signup">Sign Up</Nav.Link>
                       <h3 className="text-black">Or</h3>
                       <Nav.Link className="active" href="/login">
                         Login

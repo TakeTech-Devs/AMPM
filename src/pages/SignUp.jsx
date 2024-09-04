@@ -61,7 +61,7 @@ export default function SignUp() {
               Home
             </Nav.Link>
             <span>/</span>
-            <Nav.Link className="signup" href="/signup">
+            <Nav.Link className="signup ps-2" href="/signup">
               Sign Up
             </Nav.Link>
             <p className="or">Or</p>

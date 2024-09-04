@@ -196,7 +196,7 @@ function OrderComplete() {
             </div>
             <div className="address-wrapper">
               <Row>
-                <Col>
+                <Col lg={6} sm={6}>
                   <div className="left-address">
                     <div className="address">
                       <p className="heading">Shipping</p>
@@ -212,7 +212,7 @@ function OrderComplete() {
                     </div>
                   </div>
                 </Col>
-                <Col>
+                <Col lg={6} sm={6} >
                   <div className="right-address">
                     <div className="address">
                       <p className="heading">Subtotal</p>

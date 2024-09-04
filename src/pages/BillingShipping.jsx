@@ -522,8 +522,8 @@ function BillingShipping() {
             </Col>
             <Col lg={4}>
               <div className="bottom-wrapper">
-                <div className="bill-features-wrapper pt-4">
-                  <div className="order-wrap mt-3 p-3">
+                <div className="bill-features-wrapper">
+                  <div className="order-wrap p-3">
                     <div className="order-icon ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

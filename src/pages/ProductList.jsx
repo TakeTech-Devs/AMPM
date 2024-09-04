@@ -83,7 +83,9 @@ function ProductList() {
                 <Col key={idx}>
                   <Card onClick={handleCardClick} className="clickable-card">
                     <div className="d-flex justify-content-center">
-                      <Card.Img variant="top" src={batteryImages} />
+                      <div className="product-image-wrapper">
+                        <Card.Img variant="top" src={batteryImages} />
+                      </div>
                     </div>
                     <Card.Body>
                       <Card.Title>Battery Name</Card.Title>

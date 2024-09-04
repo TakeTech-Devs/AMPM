@@ -199,7 +199,7 @@ function Checkout() {
                       <Col lg={12}>
                         <Form.Group
                           className="mb-3"
-                          controlId="formBasicPassword"
+                          controlId="formBasicPassword "
                         >
                           <Form.Label>Country / Region</Form.Label>
                           <Select
@@ -210,6 +210,7 @@ function Checkout() {
                             value={country}
                             onChange={changeHandler}
                             placeholder="Select a Country"
+                            
                           />
                         </Form.Group>
                       </Col>

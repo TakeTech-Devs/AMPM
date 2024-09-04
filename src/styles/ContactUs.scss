@@ -11,7 +11,7 @@
 .form-wrapper .form-label{color: $black;font-family: $secondaryFamily;font-weight: $bold;font-size: 18px;line-height: 18px;}
 
 .contact-map{width: 100%;height: 456px;}
-.primary-radius{margin-top: 32px;}
+.form-wrapper .primary{margin-top: 32px;}
 .primary-radius:hover{background-color: #96c93da2;}
 :not(.btn-check)+.btn:active{background-color: #96c93da2;}
 
@@ -21,8 +21,7 @@
 @media (max-width:991px){
   .primary-radius{font-size: 16px;padding-block: 20px;}
   .form-wrapper{padding: 20px;}
-  .left-contact{padding-bottom: 40px;}
-
+  .left-contact{padding-bottom: 40px;padding-top: 30px;}
 }
 @media (max-width:575px){
   .contact-outline::placeholder{font-size: 14px;}
@@ -30,5 +29,11 @@
   .form-wrapper{margin-top: 20px;padding: 0px;}
   .form-wrapper{padding: 20px;}
 
+  .left-contact .flex-gap{row-gap: 18px}
+  .contactus-details-wrapper .type .img-icon-wrapper{width: 50px;height: 50px;margin-right: 24px;}
+  .contactus-details-wrapper .type .contact-details-wrapper h3{padding-bottom: 10px;font-size: 18px;}
+  .form-wrapper .form-label{font-size: 14px;}
+  .form-wrapper .primary{margin-top: 10px;}
+  .contact-map{width: 100%;height: 300px;}
 
 }
