@@ -148,8 +148,6 @@
 .order-complete-wrapper .address-wrapper .right-address .total .amount{font-weight: $semibold;color: $red;}
 .order-complete-wrapper .new-order-btn-wrapper{display: flex;align-items: center;justify-content: center;flex-direction: column;row-gap: 24px;margin-top: 48px;}
 .order-complete-wrapper .new-order-btn-wrapper p{font-weight: $semibold;color: #9D9EA2}
-// .order-complete-wrapper .new-order-btn-wrapper .primary{border-radius: 40px;padding: 24px 36px;}
-
 // order complete end
 
 // my profile start
@@ -163,7 +161,6 @@
 .my-profile-wrapper .user-profile-wrapper .user-info{display: flex;align-items: center;justify-content: space-between;}
 .my-profile-wrapper .user-profile-wrapper .user-info .user-profile{display: flex;column-gap: 24px;align-items: center;}
 .my-profile-wrapper .user-profile-wrapper .user-info .user-profile .user-name .email{color: $black;opacity: 50%;line-height: 24px;margin-top: 6px;}
-// .my-profile-wrapper .user-profile-wrapper .user-info .edit-btn .primary{padding: 20px 79px;font-size: 20px;font-weight: $bold;line-height: 20px;}
 .my-profile-wrapper .user-profile-wrapper .inputs-fields-wrapper{padding-top: 40px;}
 
 // my profile end
@@ -171,7 +168,6 @@
 //  Address normal start
 
 .address-normal-wrapper{border: 1px solid $black;border-radius: 20px;padding: 30px;}
-// .address-normal-wrapper .add-address-btn-wrapper .primary{padding: 20px 33px;font-weight: $bold;font-size: 20px;line-height: 20px;}
 .address-normal-wrapper .navigations .links{display: flex;gap: 12px;}
 
 
@@ -180,7 +176,6 @@
 //Address Filled start
 
 .address-normal-wrapper .user-info-wrapper {margin-bottom: 40px;}
-// .address-normal-wrapper .user-info-wrapper .address{width: 581px;}
 .address-normal-wrapper .user-info-wrapper .address h3,.address-normal-wrapper .user-info-wrapper h3{color: $black;line-height: 46px;font-weight: $semibold;margin-block: 10px;}
 .address-normal-wrapper .add-new-address-btn-wrapper .outline-primary{border: none;padding: 20px 0px;color: $primary;line-height: 20px;margin-block: 40px 20px;}
 .address-normal-wrapper .add-new-address-btn-wrapper .outline-primary:active{color: $black;background-color: transparent;}
@@ -206,14 +201,6 @@
 
 
 
-
-
-
-
-
-
-
-
 @media (max-width:768px){
   .bottom-wrapper .bill-features-wrapper .sms{margin-top: 10px;}
   .billing-mt{margin-top: 120px;}
@@ -230,7 +217,6 @@
 
 @media (max-width:575px){
   .billing-mt{margin-top: 88px;}
-
   // middle section
 
   .navigation h3{font-size: 14px;}
@@ -299,7 +285,6 @@
 .address-normal-wrapper .navigations .links .nav-link{font-size: 14px;}
 .my-profile-wrapper .user-profile-wrapper .user-info .user-img{width: 80px;height: 80px;}
 .right-bill .checkout-btn button{font-size: 16px;}
-// .right-bill .apply-coupon-wrapper .coupon-box{padding: 19px 0 19px 20px;}
 .wrapper .product-history-wrapper .products .product-details-wrapper .product-img{width: 100%;height: 150px;}
 
 }
