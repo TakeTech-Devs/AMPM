@@ -64,7 +64,7 @@ function ContactUs() {
       <section className="bg-color sec-gap ">
         <Container>
           <div className="contactus-details-wrapper ">
-            <Row>
+            <Row className="flex-wrap-reverse">
               <Col lg={6}>
                 <div className="left-contact">
                   <div className="d-flex flex-column flex-gap">
@@ -199,10 +199,11 @@ function ContactUs() {
                         </Form.Group>
                       </Col>
                     </Row>
-
-                    <Button className="primary-radius" type="submit">
-                      Send Message
-                    </Button>
+                    <div className="d-flex justify-content-center">
+                      <Button className="primary" type="submit">
+                        Send Message
+                      </Button>
+                    </div>
                   </Form>
                 </div>
               </Col>

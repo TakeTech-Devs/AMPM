@@ -47,7 +47,7 @@ export default function AboutUs() {
               </div>
             </Col>
             <Col md={6}>
-              <div className="Mission-image-wrapper">
+              <div className="Mission-image-wrapper mt-4">
                 <img src={imageIcon} alt="Mission image" width="100%" height="100%"/>
               </div>
             </Col>

@@ -42,7 +42,7 @@ function ProductDetails() {
       <section>
         <Container>
           <div className="navigation product-nav">
-            <Nav.Link className="" href="/">
+            <Nav.Link className="pe-1" href="/">
               <h3>
                 Home
                 <span className="pe-2">/</span>
@@ -64,8 +64,8 @@ function ProductDetails() {
         <Container>
           <div className="final-product-details-wrapper">
             <Row>
-              <Col md={6}>
-                <div className="Mission-image-wrapper battery-image-wrapper">
+              <Col md={6} className="d-flex justify-content-center">
+                <div className="battery-image-wrapper p-details">
                   <img
                     src={battery}
                     alt="Mission image"
@@ -74,11 +74,11 @@ function ProductDetails() {
                   />
                 </div>
               </Col>
-              <Col md={6}>
+              <Col md={6} >
                 <div className="left-part right-part">
                   <div className="heading">
-                    <h2 className="mb-3">Battery Name</h2>
-                    <h3 className="mb-3">$1000.00</h3>
+                    <h2 className="">Battery Name</h2>
+                    <h3 className="">$1000.00</h3>
                     <h2 className="text-black mb-3">
                       $699.00 <span className="sale-info">Sale Price</span>
                     </h2>

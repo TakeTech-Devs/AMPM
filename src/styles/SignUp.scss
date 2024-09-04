@@ -3,7 +3,7 @@
 .sign-sec{margin-top: 180px;padding-block: 50px 82px;}
 .navigation {display: flex;align-items: center;margin-left: 100px;margin-bottom: 50px;}
 .navigation h3{display: flex;align-items: center;color: $black;font-weight: $medium;}
-.navigation span{font-size: 28px;font-weight: $regular;margin-inline: 2px;min-width: auto;min-height: auto;}
+.navigation span{font-size: 28px;font-weight: $regular;width: 0;padding-inline: 5px;height: auto;}
 .navigation .signup{padding-inline: 0 8px;}
 .navigation .nav .nav-link{color: $primary;font-size: 20px;}
 .navigation .nav .nav-link:last-child{color: $black;font-weight: $medium;line-height: 20px;display: flex;justify-content: center;padding-left: 8px;color: $primary;}
@@ -36,8 +36,17 @@
   .sign-sec{margin-top: 80px;}
   .navigation .nav .nav-link{color: $primary;font-size: 14px;}
   .login-from .sec-nav .nav-link{font-size: 18px;}
-  .login-from .sec-nav{flex-direction: column;align-items: start;}
-  .login-from .sec-nav .types .nav-link:first-child{padding-left: 0px;}
+  .login-from .sec-nav{flex-direction: row;align-items: center;}
+  // .login-from .sec-nav .types .nav-link:first-child{padding-left: 0px;}
+
+}
+@media (max-width:575px){
+  .navigation {margin-bottom: 20px;}
+  .login-from label{font-size: 14px;}
+  .sign-sec{margin-top: 55px;}
+  .login-from .nav .nav-link,.login-from .nav h3{font-size: 14px;}
+  .login-from .nav{margin-bottom: 10px;}
+  .login-from .login-btn{font-size: 18px;}
 
 }
 
