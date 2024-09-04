@@ -210,7 +210,7 @@ function Checkout() {
                             value={country}
                             onChange={changeHandler}
                             placeholder="Select a Country"
-                            
+                            classNamePrefix="custom-outline"
                           />
                         </Form.Group>
                       </Col>
