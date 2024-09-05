@@ -17,6 +17,7 @@ import BillingShipping from "./pages/BillingShipping";
 import Checkout from "./pages/Checkout";
 import OrderComplete from "./pages/OrderComplete";
 import MyProfile from "./pages/MyProfile";
+import ResellerProfile from "./pages/ResellerProfile";
 import AddressNormal from "./pages/AddressNormal";
 import ProductHistory from "./pages/ProductHistory";
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<MyProfile />} />
+        <Route path="/raccount" element={<ResellerProfile />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/products" element={<Products />} />
