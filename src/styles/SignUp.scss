@@ -31,18 +31,17 @@
 
 }
 
-@media (max-width:767px){
+@media (max-width:768px){
   .navigation {display: flex;align-items: center;margin-left: 20px;}
-  .sign-sec{margin-top: 80px;}
   .navigation .nav .nav-link{color: $primary;font-size: 14px;}
   .login-from .sec-nav .nav-link{font-size: 18px;}
   .login-from .sec-nav{flex-direction: row;align-items: center;}
 
 }
 @media (max-width:575px){
+  .sign-sec{margin-top: 85px;}
   .navigation {margin-bottom: 20px;}
   .login-from label{font-size: 14px;}
-  .sign-sec{margin-top: 55px;}
   .login-from .nav .nav-link,.login-from .nav h3{font-size: 14px;}
   .login-from .nav{margin-bottom: 10px;}
   .login-from .login-btn{font-size: 18px;}

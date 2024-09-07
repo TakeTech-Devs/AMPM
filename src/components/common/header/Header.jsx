@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../actions/userActions";
 
 function Header() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,8 +18,7 @@ function Header() {
     dispatch(logout());
     window.alert("Logot Successfully");
     navigate("/about");
-  }
-
+  };
 
   const count = 1;
 
@@ -28,60 +26,64 @@ function Header() {
     <header>
       <Navbar expand="lg" className="bg-nav">
         <Container fluid="lg">
-          <Navbar.Brand as={NavLink} to="/">
-            <img
-              src={companyLogo}
-              width="110"
-              height="110"
-              className="d-inline-block align-top"
-              alt="Company Logo"
-            />
-          </Navbar.Brand>
-
-          <Navbar.Collapse id="navbarScroll">
-            <Nav className="my-2 my-lg-0 all-navs">
-              <NavLink
-                exact
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-              >
-                Home
-              </NavLink>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-              >
-                About Us
-              </NavLink>
-              <NavDropdown title="Products" id="navbarScrollingDropdown">
-                <NavDropdown.Item as={NavLink} to="/products">
-                  Products
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/option">
-                  Option
-                </NavDropdown.Item>
-              </NavDropdown>
-              <NavLink
-                to="/contactus"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-              >
-                Contact Us
-              </NavLink>
-              {isAuthenticated ? '' : <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link login"
-                }
-              >
-                Login/Signup
-              </NavLink>}
-              {/* <NavLink
+          <div className="nav-wrapper">
+            <Navbar.Brand as={NavLink} to="/">
+              <img
+                src={companyLogo}
+                width="110"
+                height="110"
+                className="d-inline-block align-top"
+                alt="Company Logo"
+              />
+            </Navbar.Brand>
+            <Navbar.Collapse id="navbarScroll">
+              <Nav className="my-2 my-lg-0 all-navs">
+                <NavLink
+                  exact
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  About Us
+                </NavLink>
+                <NavDropdown title="Products" id="navbarScrollingDropdown">
+                  <NavDropdown.Item as={NavLink} to="/products">
+                    Products
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/option">
+                    Option
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <NavLink
+                  to="/contactus"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  Contact Us
+                </NavLink>
+                {isAuthenticated ? (
+                  ""
+                ) : (
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      isActive ? "nav-link active" : "nav-link login"
+                    }
+                  >
+                    Login/Signup
+                  </NavLink>
+                )}
+                {/* <NavLink
                 to="/login"
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link login"
@@ -89,36 +91,43 @@ function Header() {
               >
                 Login/Signup
               </NavLink> */}
-            </Nav>
-          </Navbar.Collapse>
-          <div className="nav-right">
-            <Nav className="ml-auto icons">
+              </Nav>
+            </Navbar.Collapse>
+            <div className="nav-right">
+              <Nav className="ml-auto icons">
+                {isAuthenticated ? (
+                  <NavDropdown
+                    title={
+                      <img
+                        src={userLogo}
+                        width="32"
+                        height="32"
+                        className="d-inline-block align-top"
+                        alt="User logo"
+                      />
+                    }
+                    id="afterEffect"
+                    className="user-logo"
+                  >
+                    <NavDropdown.Item as={NavLink} to="/account">
+                      Account
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={NavLink} to="/orders">
+                      Orders
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={NavLink}
+                      to="/"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  ""
+                )}
 
-              {isAuthenticated ? <NavDropdown
-                title={
-                  <img
-                    src={userLogo}
-                    width="32"
-                    height="32"
-                    className="d-inline-block align-top"
-                    alt="User logo"
-                  />
-                }
-                id="afterEffect"
-                className="user-logo"
-              >
-                <NavDropdown.Item as={NavLink} to="/account">
-                  Account
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/orders">
-                  Orders
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/" onClick={handleLogout}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown> : ''}
-              
-              {/* <NavDropdown
+                {/* <NavDropdown
                 title={
                   <img
                     src={userLogo}
@@ -142,19 +151,19 @@ function Header() {
                 </NavDropdown.Item>
               </NavDropdown> */}
 
-
-              <NavLink to="/cart" className="shop-link nav-link">
-                <img
-                  src={shopCart}
-                  width="32"
-                  height="32"
-                  className="d-inline-block align-top"
-                  alt="Shop cart"
-                />
-                <div className="cart-counter">{count}</div>
-              </NavLink>
-            </Nav>
-            <Navbar.Toggle aria-controls="navbarScroll" />
+                <NavLink to="/cart" className="shop-link nav-link">
+                  <img
+                    src={shopCart}
+                    width="32"
+                    height="32"
+                    className="d-inline-block align-top"
+                    alt="Shop cart"
+                  />
+                  <div className="cart-counter">{count}</div>
+                </NavLink>
+              </Nav>
+              <Navbar.Toggle aria-controls="navbarScroll" />
+            </div>
           </div>
         </Container>
       </Navbar>
