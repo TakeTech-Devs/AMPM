@@ -128,7 +128,7 @@ export default function SignUp() {
 
   };
 
-  const resellerHandleDataChange = (e) =>{
+  const resellerHandleDataChange = (e) => {
     setReseller({ ...reseller, [e.target.name]: e.target.value });
   }
 
@@ -419,10 +419,10 @@ export default function SignUp() {
                               placeholder="Confirm your Password"
                               className={`custom-outline ${errors.passwordMismatch ? "is-invalid" : ""
                                 }`}
-                            value={confirmPassword}
-                            onChange={(e) =>
-                              setConfirmPassword(e.target.value)
-                            }
+                              value={confirmPassword}
+                              onChange={(e) =>
+                                setConfirmPassword(e.target.value)
+                              }
                             />
                             <div
                               className="eye-wrapper"
@@ -649,8 +649,8 @@ export default function SignUp() {
                                 placeholder="Enter your Password"
                                 className="custom-outline"
                                 name="businessPassword"
-                              value={businessPassword}
-                              onChange={resellerHandleDataChange}
+                                value={businessPassword}
+                                onChange={resellerHandleDataChange}
                               // value={password}
                               // onChange={(e) => setPassword(e.target.value)}
                               />
@@ -712,10 +712,10 @@ export default function SignUp() {
                                 placeholder="Confirm your Password"
                                 className={`custom-outline ${errors.passwordMismatch ? "is-invalid" : ""
                                   }`}
-                              value={confirmPassword}
-                              onChange={(e) =>
-                                setConfirmPassword(e.target.value)
-                              }
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                  setConfirmPassword(e.target.value)
+                                }
                               />
                               <div
                                 className="eye-wrapper"
