@@ -22,7 +22,7 @@ export default function SignUp() {
   });
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
+    const phoneRegex = /^[0-9]{10}$/; 
     return phoneRegex.test(phone);
   };
 
