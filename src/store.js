@@ -9,8 +9,8 @@ const reducer = combineReducers({
 })
 
 
-const middlewarwe = [thunk];
+const middleware = [thunk];
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middlewarwe)));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middleware)));
 
 export default store;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/common/header/Header";
@@ -20,8 +20,20 @@ import MyProfile from "./pages/MyProfile";
 import ResellerProfile from "./pages/ResellerProfile";
 import AddressNormal from "./pages/AddressNormal";
 import ProductHistory from "./pages/ProductHistory";
+import { useDispatch, useSelector } from "react-redux";
+import { loadReseller } from "./actions/userActions";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  const { isAuthenticated } = useSelector(state => state.user);
+
+  useEffect(() =>{
+    dispatch(loadReseller());
+  },  [dispatch])
+
+
   return (
     <Router>
       <Header />

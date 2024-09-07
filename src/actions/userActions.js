@@ -12,6 +12,11 @@ import {
     REGISTER_RESELLER_REQUEST,
     REGISTER_RESELLER_SUCCESS,
     REGISTER_RESELLER_FAIL,
+    LOGOUT_SUCCESS,
+    LOGOUT_FAIL,
+    LOAD_RESELLER_REQUEST,
+    LOAD_RESELLER_FAIL,
+    LOAD_RESELLER_SUCCESS,
 } from '../constants/userConstants';
 import axios from 'axios';
 
@@ -21,9 +26,9 @@ export const consumerLogin = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: CONSUMER_LOGIN_REQUEST })
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/consumer/login`, { email, password, withCredentials: true }, config);
+        const { data } = await axios.post(`http://localhost:5000/api/v1/consumer/login`, { email, password }, config);
 
         dispatch({
             type: CONSUMER_LOGIN_SUCCESS,
@@ -62,13 +67,13 @@ export const consumarRegister = (userData) => async (dispatch) => {
 
 // Reseller Login 
 
-export const resellerLogin = (email, password) => async (dispatch) => {
+export const resellerLogin = (businessEmail, businessPassword) => async (dispatch) => {
     try {
         dispatch({ type: RESELLER_LOGIN_REQUEST })
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/reseller/login`, { email, password, withCredentials: true }, config)
+        const { data } = await axios.post(`http://localhost:5000/api/v1/reseller/login`, { businessEmail, businessPassword }, config)
 
         dispatch({
             type: RESELLER_LOGIN_SUCCESS,
@@ -82,7 +87,7 @@ export const resellerLogin = (email, password) => async (dispatch) => {
 }
 
 
-// Consumar Register
+// Reseller Register
 
 export const resellerRegister = (userData) => async (dispatch) => {
     try {
@@ -103,6 +108,33 @@ export const resellerRegister = (userData) => async (dispatch) => {
             type: REGISTER_RESELLER_FAIL,
             payload: error.response.data.message,
         });
+    }
+};
+
+// Load Reseller 
+
+export const loadReseller = () => async (dispatch) => {
+    try {
+        dispatch({ type: LOAD_RESELLER_REQUEST });
+
+        const { data } = await axios.get(`http://localhost:5000/api/v1/reseller/profile`, { withCredentials: true });
+
+        dispatch({ type: LOAD_RESELLER_SUCCESS, payload: data.reseller });
+    } catch (error) {
+        dispatch({ type: LOAD_RESELLER_FAIL, payload: error.response.data.message });
+    }
+}
+
+
+// logout
+
+export const logout = () => async (dispatch) => {
+    try {
+        await axios.get(`http://localhost:5000/api/v1/reseller/logout`, {withCredentials: true});
+
+        dispatch({ type: LOGOUT_SUCCESS });
+    } catch (error) {
+        dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
     }
 };
 

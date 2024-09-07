@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../../../styles/Header.scss";
 import companyLogo from "../../../assets/company-logo.png";
 import userLogo from "../../../assets/user-icon.svg";
 import shopCart from "../../../assets/shop-cart.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../actions/userActions";
 
 function Header() {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { isAuthenticated } = useSelector((state) => state.user);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    window.alert("Logot Successfully");
+    navigate("/about");
+  }
+
+
   const count = 1;
 
   return (
@@ -58,19 +73,28 @@ function Header() {
               >
                 Contact Us
               </NavLink>
-              <NavLink
+              {isAuthenticated ? '' : <NavLink
                 to="/login"
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link login"
                 }
               >
                 Login/Signup
-              </NavLink>
+              </NavLink>}
+              {/* <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link login"
+                }
+              >
+                Login/Signup
+              </NavLink> */}
             </Nav>
           </Navbar.Collapse>
           <div className="nav-right">
             <Nav className="ml-auto icons">
-              <NavDropdown
+
+              {isAuthenticated ? <NavDropdown
                 title={
                   <img
                     src={userLogo}
@@ -89,10 +113,36 @@ function Header() {
                 <NavDropdown.Item as={NavLink} to="/orders">
                   Orders
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/logout">
+                <NavDropdown.Item as={NavLink} to="/" onClick={handleLogout}>
                   Logout
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> : ''}
+              
+              {/* <NavDropdown
+                title={
+                  <img
+                    src={userLogo}
+                    width="32"
+                    height="32"
+                    className="d-inline-block align-top"
+                    alt="User logo"
+                  />
+                }
+                id="afterEffect"
+                className="user-logo"
+              >
+                <NavDropdown.Item as={NavLink} to="/account">
+                  Account
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/orders">
+                  Orders
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/" onClick={handleLogout}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown> */}
+
+
               <NavLink to="/cart" className="shop-link nav-link">
                 <img
                   src={shopCart}

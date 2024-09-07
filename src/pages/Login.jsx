@@ -5,7 +5,7 @@ import "../styles/Login.scss";
 import loginImage from "../assets/login-right-image.png";
 import loginPageLogo from "../assets/login-page-logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, consumerLogin } from "../actions/userActions";
+import { clearErrors, consumerLogin, resellerLogin } from "../actions/userActions";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -24,10 +24,18 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [ businessEmail, setBusinessEmail ] = useState("");
+  const [ businessPassword, setBusinessPassword ] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(consumerLogin(email, password));
   };
+
+  const handleSubmitReseller = (e) =>{
+    e.preventDefault();
+    dispatch(resellerLogin(businessEmail, businessPassword))
+  }
 
 
 
@@ -38,8 +46,8 @@ export default function Login() {
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
-      // navigate(`/${redirect}`)
-      navigate("/")
+     window.alert("Welcome Back")
+      navigate("/account")
     }
   }, [dispatch, error, isAuthenticated, navigate]);
 
@@ -205,7 +213,7 @@ export default function Login() {
                 <Row className="align-items-center">
                   <Col sm={12} lg={6}>
                     <div className="login-from">
-                      <Form onSubmit={handleSubmit}>
+                      <Form onSubmit={handleSubmitReseller}>
                         <h2 className="text-black">Welcome !</h2>
 
                         <Nav className="me-auto align-items-center">
@@ -247,8 +255,8 @@ export default function Login() {
                             type="email"
                             placeholder="Enter your Email"
                             className="custom-outline"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={businessEmail}
+                            onChange={(e) => setBusinessEmail(e.target.value)}
                           />
                         </Form.Group>
                         <Form.Group
@@ -264,8 +272,8 @@ export default function Login() {
                               maxLength={12}
                               placeholder="Enter your Password"
                               className="custom-outline"
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
+                              value={businessPassword}
+                              onChange={(e) => setBusinessPassword(e.target.value)}
                             />
                             <div
                               className="eye-wrapper"
