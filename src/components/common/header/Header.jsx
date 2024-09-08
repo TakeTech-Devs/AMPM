@@ -18,8 +18,8 @@ function Header() {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate("/");
     window.alert("Logged Out Successfully");
-    navigate("/about");
     setExpanded(false);
   };
 
@@ -122,7 +122,7 @@ function Header() {
                     </NavDropdown.Item>
                     <NavDropdown.Item
                       as={NavLink}
-                      to="/"
+                      // to="/logout"
                       onClick={handleLogout}
                     >
                       Logout
@@ -132,7 +132,7 @@ function Header() {
                   ""
                 )}
 
-                <NavDropdown
+                {/* <NavDropdown
                   title={
                     <img
                       src={userLogo}
@@ -154,7 +154,7 @@ function Header() {
                   <NavDropdown.Item as={NavLink} to="/" onClick={handleLogout}>
                     Logout
                   </NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
 
                 <NavLink to="/cart" className="shop-link nav-link ShopCart" onClick={handleNavClick}>
                   <img
