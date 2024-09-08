@@ -1,6 +1,7 @@
 @import './Variable.scss';
 
 header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
+header .navbar-brand{height: 120px;}
 .navbar{padding-block: 0;}
 .bg-nav{background-color: #010101;}
 .nav-link,.nav-link:focus{color: white;}
@@ -42,7 +43,6 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 
 // Responsive counter 
 @media (max-width: 991px){
-  header .navbar-brand{height: 120px;}
   .all-navs{padding-left: 10px;}
   .shop-link{position: relative;margin-left: 0;}
   .cart-counter{background-color: $red;padding: 0;width: 19px;height: 19px;display: flex;justify-content: center;align-items: center; border-radius: 9px;position: absolute;top: -3px;right: -8px;}
@@ -50,6 +50,7 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
   .nav-link{font-size: 14px;}
   .nav-right{flex-direction: row;}
   .nav-right .navbar-nav{display: flex; flex-direction: row; gap: 10px;}
+  .ShopCart img{height: 37px;}
 
 }
 

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import "../../../styles/Header.scss";
 import companyLogo from "../../../assets/company-logo.png";
 import userLogo from "../../../assets/user-icon.svg";
@@ -10,21 +10,30 @@ import { logout } from "../../../actions/userActions";
 
 function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
+  const [expanded, setExpanded] = useState(false);
 
   const { isAuthenticated } = useSelector((state) => state.user);
 
   const handleLogout = () => {
     dispatch(logout());
-    window.alert("Logot Successfully");
+    window.alert("Logged Out Successfully");
     navigate("/about");
+    setExpanded(false);
   };
 
   const count = 1;
 
+  const handleNavClick = () => setExpanded(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [location.pathname]);
+
   return (
     <header>
-      <Navbar expand="lg" className="bg-nav">
+      <Navbar expand="lg" className="bg-nav" expanded={expanded}>
         <Container fluid="lg">
           <div className="nav-wrapper">
             <Navbar.Brand as={NavLink} to="/">
@@ -44,6 +53,7 @@ function Header() {
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
                   }
+                  onClick={handleNavClick}
                 >
                   Home
                 </NavLink>
@@ -52,14 +62,15 @@ function Header() {
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
                   }
+                  onClick={handleNavClick}
                 >
                   About Us
                 </NavLink>
                 <NavDropdown title="Products" id="navbarScrollingDropdown">
-                  <NavDropdown.Item as={NavLink} to="/products">
+                  <NavDropdown.Item as={NavLink} to="/products" onClick={handleNavClick}>
                     Products
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/option">
+                  <NavDropdown.Item as={NavLink} to="/option" onClick={handleNavClick}>
                     Option
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -68,6 +79,7 @@ function Header() {
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
                   }
+                  onClick={handleNavClick}
                 >
                   Contact Us
                 </NavLink>
@@ -79,18 +91,11 @@ function Header() {
                     className={({ isActive }) =>
                       isActive ? "nav-link active" : "nav-link login"
                     }
+                    onClick={handleNavClick}
                   >
                     Login/Signup
                   </NavLink>
                 )}
-                {/* <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link login"
-                }
-              >
-                Login/Signup
-              </NavLink> */}
               </Nav>
             </Navbar.Collapse>
             <div className="nav-right">
@@ -109,10 +114,10 @@ function Header() {
                     id="afterEffect"
                     className="user-logo"
                   >
-                    <NavDropdown.Item as={NavLink} to="/account">
+                    <NavDropdown.Item as={NavLink} to="/account" onClick={handleNavClick}>
                       Account
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={NavLink} to="/orders">
+                    <NavDropdown.Item as={NavLink} to="/orders" onClick={handleNavClick}>
                       Orders
                     </NavDropdown.Item>
                     <NavDropdown.Item
@@ -128,30 +133,30 @@ function Header() {
                 )}
 
                 <NavDropdown
-                title={
-                  <img
-                    src={userLogo}
-                    width="32"
-                    height="32"
-                    className="d-inline-block align-top"
-                    alt="User logo"
-                  />
-                }
-                id="afterEffect"
-                className="user-logo"
-              >
-                <NavDropdown.Item as={NavLink} to="/account">
-                  Account
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/orders">
-                  Orders
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/" onClick={handleLogout}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+                  title={
+                    <img
+                      src={userLogo}
+                      width="32"
+                      height="32"
+                      className="d-inline-block align-top"
+                      alt="User logo"
+                    />
+                  }
+                  id="afterEffect"
+                  className="user-logo"
+                >
+                  <NavDropdown.Item as={NavLink} to="/account" onClick={handleNavClick}>
+                    Account
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/orders" onClick={handleNavClick}>
+                    Orders
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/" onClick={handleLogout}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
 
-                <NavLink to="/cart" className="shop-link nav-link">
+                <NavLink to="/cart" className="shop-link nav-link ShopCart" onClick={handleNavClick}>
                   <img
                     src={shopCart}
                     width="32"
@@ -162,7 +167,10 @@ function Header() {
                   <div className="cart-counter">{count}</div>
                 </NavLink>
               </Nav>
-              <Navbar.Toggle aria-controls="navbarScroll" />
+              <Navbar.Toggle
+                aria-controls="navbarScroll"
+                onClick={() => setExpanded(expanded ? false : true)}
+              />
             </div>
           </div>
         </Container>
