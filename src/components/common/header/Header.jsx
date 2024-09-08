@@ -127,7 +127,7 @@ function Header() {
                   ""
                 )}
 
-                {/* <NavDropdown
+                <NavDropdown
                 title={
                   <img
                     src={userLogo}
@@ -149,7 +149,7 @@ function Header() {
                 <NavDropdown.Item as={NavLink} to="/" onClick={handleLogout}>
                   Logout
                 </NavDropdown.Item>
-              </NavDropdown> */}
+              </NavDropdown>
 
                 <NavLink to="/cart" className="shop-link nav-link">
                   <img

@@ -48,7 +48,7 @@ header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
   .cart-counter{background-color: $red;padding: 0;width: 19px;height: 19px;display: flex;justify-content: center;align-items: center; border-radius: 9px;position: absolute;top: -3px;right: -8px;}
   .auth-links{display: flex;padding-left: 0px;padding-bottom: 2px; align-items: center;}
   .nav-link{font-size: 14px;}
-  .nav-right{flex-direction: row;padding-left: 25px;}
+  .nav-right{flex-direction: row;}
   .nav-right .navbar-nav{display: flex; flex-direction: row; gap: 10px;}
 
 }
