@@ -28,7 +28,7 @@ function Header() {
   const handleNavClick = () => setExpanded(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   return (
@@ -170,7 +170,10 @@ function Header() {
               <Navbar.Toggle
                 aria-controls="navbarScroll"
                 onClick={() => setExpanded(expanded ? false : true)}
-              />
+                className={expanded ? "" : "collapsed"} 
+              >
+                <span className="navbar-toggler-icon"></span>
+              </Navbar.Toggle>
             </div>
           </div>
         </Container>
