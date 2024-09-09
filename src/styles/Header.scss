@@ -26,7 +26,7 @@ header .navbar-brand{height: 120px;}
 .dropdown-toggle::after{color: white;}
 // .nav-right .navbar-nav .user-logo{margin-right: 12px;}
 .nav-right .navbar-nav{gap:10px}
-.shop-link{position: relative;padding-bottom: 0px;padding-top: 3px;}
+.shop-link{position: relative;padding-bottom: 0px;padding-top: 0px;}
 .cart-counter{background-color: $red;padding: 0;width: 19px;height: 19px;display: flex;justify-content: center;align-items: center; border-radius: 9px;position: absolute;top: -1px;right: 0px;font-size: 12px;}
 
 // Hamburger color change
@@ -69,7 +69,7 @@ header .navbar-brand{height: 120px;}
   .nav-wrapper{display: grid;grid-template-columns: 1fr 200px;}
   .nav-wrapper .nav-right{grid-column: 2/3;grid-row: -1/2;justify-content: end;}
   .ShopCart{width: 30px;height: 35px;}
-
+  .dropdown-item{font-size: 14px;}
 
 }
 @media (max-width:575px){
