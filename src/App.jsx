@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../src/styles/Global.scss";
 import Header from "./components/common/header/Header";
 import Footer from "./components/common/footer/Footer";
 import Login from "./pages/Login";

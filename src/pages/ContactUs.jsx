@@ -211,7 +211,7 @@ function ContactUs() {
           </div>
         </Container>
       </section>
-      <section>
+      {/* <section>
         <Container>
           <div className="contact-map-wrapper">
             <div className="contact-map">
@@ -226,7 +226,7 @@ function ContactUs() {
             </div>
           </div>
         </Container>
-      </section>
+      </section> */}
     </>
   );
 }
