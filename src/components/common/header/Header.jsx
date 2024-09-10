@@ -14,7 +14,7 @@ function Header() {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
 
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -114,7 +114,9 @@ function Header() {
                     id="afterEffect"
                     className="user-logo"
                   >
-                    <NavDropdown.Item as={NavLink} to="/account" onClick={handleNavClick}>
+                    <NavDropdown.Item as={NavLink}
+                     to = {user.type === "reseller" ? "/raccount" : "/account"} 
+                     onClick={handleNavClick}>
                       Account
                     </NavDropdown.Item>
                     <NavDropdown.Item as={NavLink} to="/orders" onClick={handleNavClick}>
@@ -122,7 +124,7 @@ function Header() {
                     </NavDropdown.Item>
                     <NavDropdown.Item
                       as={NavLink}
-                      // to="/"
+                      to="/"
                       onClick={handleLogout}
                     >
                       Logout

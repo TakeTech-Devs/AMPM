@@ -16,6 +16,8 @@ function MyProfile() {
     invalidPhone: false,
   });
 
+  const [isEditMode, setIsEditMode] = useState(false);
+
   const validatePhone = (phone) => {
     const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
     return phoneRegex.test(phone);
@@ -24,6 +26,10 @@ function MyProfile() {
   const { reseller, loading, isAuthenticated } = useSelector(state => state.user)
 
   const navigate = useNavigate();
+
+  const handleEdit = () => {
+    setIsEditMode(!isEditMode);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -112,8 +118,9 @@ function MyProfile() {
                       </div>
                     </div>
 
-                    <div className="edit-btn">
-                      <Button className="primary">Edit</Button>
+                    <div className="edit-btn" style={{ display: 'flex', gap: '10px' }}>
+                      {isEditMode ? (<Button className="primary">Update</Button>) : ''}
+                      <Button className="primary" onClick={handleEdit}>{isEditMode ? "Save" : "Edit"}</Button>
                     </div>
                   </div>
                   <div className="inputs-fields-wrapper reseller">
@@ -132,6 +139,8 @@ function MyProfile() {
                                   type="text"
                                   placeholder="Enter Full Name"
                                   className="custom-outline"
+                                  value={reseller.fullName}
+                                  readOnly={!isEditMode}
                                 />
                               </Form.Group>
                             </Col>
@@ -146,6 +155,8 @@ function MyProfile() {
                                   type="text"
                                   placeholder="Enter your Business Name"
                                   className="custom-outline"
+                                  value={reseller.businessName}
+                                  readOnly={!isEditMode}
                                 />
                               </Form.Group>
                             </Col>
@@ -158,13 +169,15 @@ function MyProfile() {
                                 <Form.Select
                                   className="custom-select-outline"
                                   aria-label="Default select example "
+                                  value={reseller.businessType}
+                                  readOnly={!isEditMode}
                                 >
                                   <option>
                                     Enter your Company/trust/ sole trader
                                   </option>
-                                  <option value="1">Company</option>
-                                  <option value="2">trust</option>
-                                  <option value="3">sole trader</option>
+                                  <option value="Company">Company</option>
+                                  <option value="Trust">Trust</option>
+                                  <option value="Sole Trader">Sole Trader</option>
                                 </Form.Select>
                               </Form.Group>
                             </Col>
@@ -179,6 +192,8 @@ function MyProfile() {
                                   type="text"
                                   placeholder="Enter your ABN"
                                   className="custom-outline"
+                                  value={reseller.abn}
+                                  readOnly={!isEditMode}
                                 />
                               </Form.Group>
                             </Col>
@@ -193,6 +208,8 @@ function MyProfile() {
                                   type="email"
                                   placeholder="Enter your email"
                                   className="custom-outline"
+                                  value={reseller.businessEmail}
+                                  readOnly={!isEditMode}
                                 />
                               </Form.Group>
                             </Col>
@@ -207,6 +224,8 @@ function MyProfile() {
                                   type="text"
                                   placeholder="Enter your Suburb"
                                   className="custom-outline"
+                                  value={reseller.businessWebsite}
+                                  readOnly={!isEditMode}
                                 />
                               </Form.Group>
                             </Col>

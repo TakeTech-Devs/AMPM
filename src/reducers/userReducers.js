@@ -43,7 +43,7 @@ export const userReducer = (state = { user: {}, reseller: {}, consumer: {} }, ac
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                // user: action.payload,
+                user: action.payload,
                 reseller: action.payload,
             }
         case LOAD_CONSUMER_SUCCESS:
@@ -51,7 +51,7 @@ export const userReducer = (state = { user: {}, reseller: {}, consumer: {} }, ac
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                // user: action.payload,
+                user: action.payload,
                 consumer: action.payload,
             }
         case REGISTER_RESELLER_SUCCESS:
