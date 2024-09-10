@@ -159,8 +159,8 @@ function Header() {
                 <NavLink to="/cart" className="shop-link nav-link ShopCart" onClick={handleNavClick}>
                   <img
                     src={shopCart}
-                    width="32"
-                    height="32"
+                    width="100%"
+                    height="100%"
                     className="d-inline-block align-top"
                     alt="Shop cart"
                   />
