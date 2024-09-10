@@ -22,16 +22,17 @@ import ResellerProfile from "./pages/ResellerProfile";
 import AddressNormal from "./pages/AddressNormal";
 import ProductHistory from "./pages/ProductHistory";
 import { useDispatch, useSelector } from "react-redux";
-import { loadReseller } from "./actions/userActions";
+import {  loadConsumer, loadReseller } from "./actions/userActions";
 
 function App() {
 
   const dispatch = useDispatch();
 
-  const { isAuthenticated } = useSelector(state => state.user);
+  const { user, isAuthenticated } = useSelector(state => state.user);
 
   useEffect(() =>{
     dispatch(loadReseller());
+    dispatch(loadConsumer());
   },  [dispatch])
 
 

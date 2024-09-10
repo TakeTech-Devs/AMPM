@@ -122,7 +122,7 @@ function Header() {
                     </NavDropdown.Item>
                     <NavDropdown.Item
                       as={NavLink}
-                      // to="/logout"
+                      // to="/"
                       onClick={handleLogout}
                     >
                       Logout

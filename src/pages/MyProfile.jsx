@@ -20,7 +20,7 @@ function MyProfile() {
   });
 
 
-  const { user, loading, isAuthenticated } = useSelector(state => state.user)
+  const { consumer, loading, isAuthenticated } = useSelector(state => state.user)
 
   const validatePhone = (phone) => {
     const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
@@ -63,9 +63,8 @@ function MyProfile() {
 
   return (
     <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      {loading ? "Loading..."
+ : (
         <>
           <section className="billing-mt">
             <Container>
@@ -115,7 +114,7 @@ function MyProfile() {
                         />
                       </div>
                       <div className="user-name">
-                        <h3 className="name text-black">{user.fullName}</h3>
+                        <h3 className="name text-black">{consumer.firstName}</h3>
                         <p className="email">alexarawles@gmail.com</p>
                       </div>
                     </div>
