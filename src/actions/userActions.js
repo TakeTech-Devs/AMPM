@@ -17,6 +17,9 @@ import {
     LOAD_RESELLER_REQUEST,
     LOAD_RESELLER_FAIL,
     LOAD_RESELLER_SUCCESS,
+    LOAD_CONSUMER_REQUEST,
+    LOAD_CONSUMER_SUCCESS,
+    LOAD_CONSUMER_FAIL,
 } from '../constants/userConstants';
 import axios from 'axios';
 
@@ -125,6 +128,19 @@ export const loadReseller = () => async (dispatch) => {
     }
 }
 
+// Load Consumer
+
+export const loadConsumer = () => async (dispatch) => {
+    try {
+        dispatch({ type: LOAD_CONSUMER_REQUEST });
+
+        const { data } = await axios.get(`http://localhost:5000/api/v1/consumer/profile`, { withCredentials: true });
+
+        dispatch({ type: LOAD_CONSUMER_SUCCESS, payload: data.consumer });
+    } catch (error) {
+        dispatch({ type: LOAD_CONSUMER_FAIL, payload: error.response.data.message });
+    }
+}
 
 // logout
 
