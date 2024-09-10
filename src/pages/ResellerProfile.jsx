@@ -113,8 +113,8 @@ function MyProfile() {
                         />
                       </div>
                       <div className="user-name">
-                        <h3 className="name text-black">{reseller.fullName} {reseller.type}</h3>
-                        <p className="email">alexarawles@gmail.com</p>
+                        <h3 className="name text-black">{reseller.fullName}</h3>
+                        <p className="email">{reseller.businessEmail}</p>
                       </div>
                     </div>
 

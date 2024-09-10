@@ -121,7 +121,7 @@ function MyProfile() {
                         </div>
                         <div className="user-name">
                           <h3 className="name text-black">{consumer.firstName}</h3>
-                          <p className="email">alexarawles@gmail.com</p>
+                          <p className="email">{consumer.email}</p>
                         </div>
                       </div>
 
