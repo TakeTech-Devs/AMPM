@@ -17,16 +17,20 @@ import {
     LOAD_RESELLER_REQUEST,
     LOAD_RESELLER_SUCCESS,
     LOAD_RESELLER_FAIL,
+    LOAD_CONSUMER_REQUEST,
+    LOAD_CONSUMER_SUCCESS,
+    LOAD_CONSUMER_FAIL,
 } from '../constants/userConstants';
 
 
-export const userReducer = (state = { user: {}, reseller: {} }, action) => {
+export const userReducer = (state = { user: {}, reseller: {}, consumer: {} }, action) => {
     switch (action.type) {
         case CONSUMER_LOGIN_REQUEST:
         case REGISTER_CONSUMER_REQUEST:
         case RESELLER_LOGIN_REQUEST:
         case REGISTER_RESELLER_REQUEST:
         case LOAD_RESELLER_REQUEST:
+        case LOAD_CONSUMER_REQUEST:
             return {
                 loading: true,
                 isAuthenticated: false,
@@ -41,6 +45,14 @@ export const userReducer = (state = { user: {}, reseller: {} }, action) => {
                 isAuthenticated: true,
                 user: action.payload,
                 reseller: action.payload,
+            }
+        case LOAD_CONSUMER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                user: action.payload,
+                consumer: action.payload,
             }
         case REGISTER_RESELLER_SUCCESS:
             return {
@@ -64,10 +76,19 @@ export const userReducer = (state = { user: {}, reseller: {} }, action) => {
             }
         case LOAD_RESELLER_FAIL:
             return {
-                loading: false,
-                isAuthenticated: false,
-                user: null,
-                error: action.payload,
+                ...state,
+                // loading: false,
+                // isAuthenticated: false,
+                reseller: null,
+                error: null,
+            };
+        case LOAD_CONSUMER_FAIL:
+            return {
+                ...state,
+                // loading: false,
+                // isAuthenticated: false,
+                consumer: null,
+                error: null,
             };
         case LOGOUT_FAIL:
             return {

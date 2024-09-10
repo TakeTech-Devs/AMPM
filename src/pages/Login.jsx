@@ -18,7 +18,7 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const { error, loading, isAuthenticated } = useSelector((state) => state.user);
+  const { user, error, loading, isAuthenticated } = useSelector((state) => state.user);
 
 
   const [email, setEmail] = useState("");
@@ -30,11 +30,17 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(consumerLogin(email, password));
+    navigate("/account");
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 250); // 1 second delay
   };
 
   const handleSubmitReseller = (e) =>{
     e.preventDefault();
-    dispatch(resellerLogin(businessEmail, businessPassword))
+    dispatch(resellerLogin(businessEmail, businessPassword));
+    navigate("/raccount")
   }
 
 
@@ -44,10 +50,6 @@ export default function Login() {
       // alert.error(error)
       window.alert(error);
       dispatch(clearErrors());
-    }
-    if (isAuthenticated) {
-     window.alert("Welcome Back")
-      navigate("/account")
     }
   }, [dispatch, error, isAuthenticated, navigate]);
 
