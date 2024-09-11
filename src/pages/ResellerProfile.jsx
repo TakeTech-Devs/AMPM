@@ -310,7 +310,7 @@ function MyProfile() {
                                 className="mb-3"
                                 controlId="exampleForm.ControlTextarea1"
                               >
-                                <Form.Label>Old password</Form.Label>
+                                <Form.Label>Old Password</Form.Label>
                                 <div className="pass-eye-wrapper">
                                   <Form.Control
                                     required
@@ -374,7 +374,7 @@ function MyProfile() {
                                 className="mb-3"
                                 controlId="exampleForm.ControlTextarea1"
                               >
-                                <Form.Label>New password</Form.Label>
+                                <Form.Label>New Password</Form.Label>
                                 <div className="pass-eye-wrapper">
                                   <Form.Control
                                     required
@@ -451,7 +451,7 @@ function MyProfile() {
                                 className="mb-3"
                                 controlId="exampleForm.ControlTextarea1"
                               >
-                                <Form.Label>Confirm password</Form.Label>
+                                <Form.Label>Confirm Password</Form.Label>
                                 <div className="pass-eye-wrapper">
                                   <Form.Control
                                     required
