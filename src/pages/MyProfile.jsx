@@ -1,9 +1,11 @@
 import { Button, Container, Nav, Col, Row, Form } from "react-bootstrap";
 import userImg from "../assets/user-img.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, updateConsumerProfile } from "../actions/userActions";
+import { UPDATE_CONSUMER_PROFILE_RESET } from "../constants/userConstants";
 function MyProfile() {
 
 
@@ -11,9 +13,9 @@ function MyProfile() {
   const [activeForm, setActiveForm] = useState("consumer");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
+  // const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState({
     passwordMismatch: false,
     invalidPhone: false,
@@ -23,13 +25,24 @@ function MyProfile() {
 
 
   const { consumer, loading, isAuthenticated } = useSelector(state => state.user)
+  const { loading: updateLoding, isUpdated, error } = useSelector((state) => state.profile);
 
-  const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
-    return phoneRegex.test(phone);
-  };
+  // const validatePhone = (phone) => {
+  //   const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
+  //   return phoneRegex.test(phone);
+  // };
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [suburb, setSuburb] = useState("");
+  const [state, setState] = useState("");
+  const [pinCode, setPinCode] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleEdit = () => {
     setIsEditMode(!isEditMode);
@@ -37,33 +50,71 @@ function MyProfile() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setErrors((prev) => ({ ...prev, passwordMismatch: true }));
-      return;
-    } else {
-      setErrors((prev) => ({ ...prev, passwordMismatch: false }));
-    }
+    // if (password !== confirmPassword) {
+    //   setErrors((prev) => ({ ...prev, passwordMismatch: true }));
+    //   return;
+    // } else {
+    //   setErrors((prev) => ({ ...prev, passwordMismatch: false }));
+    // }
 
-    if (!validatePhone(phone)) {
-      setErrors((prev) => ({ ...prev, invalidPhone: true }));
-      return;
-    } else {
-      setErrors((prev) => ({ ...prev, invalidPhone: false }));
-      window.alert("Registered successfully");
-      navigate("/login");
-    }
+    // if (!validatePhone(phone)) {
+    //   setErrors((prev) => ({ ...prev, invalidPhone: true }));
+    //   return;
+    // } else {
+    //   setErrors((prev) => ({ ...prev, invalidPhone: false }));
+    //   window.alert("Registered successfully");
+    //   navigate("/login");
+    // }
+
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("address", address);
+    formData.append("suburb", suburb);
+    formData.append("state", state);
+    formData.append("pinCode", pinCode);
+
+    dispatch(updateConsumerProfile(formData));
+
   };
   const handleSubmitReseller = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setErrors((prev) => ({ ...prev, passwordMismatch: true }));
-      return;
-    } else {
-      setErrors((prev) => ({ ...prev, passwordMismatch: false }));
-      window.alert("Applied successfully");
-      navigate("/login");
-    }
+    // if (password !== confirmPassword) {
+    //   setErrors((prev) => ({ ...prev, passwordMismatch: true }));
+    //   return;
+    // } else {
+    //   setErrors((prev) => ({ ...prev, passwordMismatch: false }));
+    //   window.alert("Applied successfully");
+    //   navigate("/login");
+    // }
   };
+
+  useEffect(() =>{
+
+    if(consumer){
+      setFirstName(consumer.firstName);
+      setLastName(consumer.lastName);
+      setEmail(consumer.email);
+      setPhone(consumer.phone);
+      setAddress(consumer.address);
+      setSuburb(consumer.suburb);
+      setState(consumer.state);
+      setPinCode(consumer.pinCode);
+    }
+
+    if(error){
+      window.alert(error);
+      dispatch(clearErrors());
+    }
+    
+    if(isUpdated){
+      window.alert("Profile Updated successfully");
+      dispatch({ type: UPDATE_CONSUMER_PROFILE_RESET });
+      window.location.reload();
+    }
+  },[dispatch, error, consumer, isUpdated])
 
 
 
@@ -126,7 +177,7 @@ function MyProfile() {
                       </div>
 
                       <div className="edit-btn" style={{ display: 'flex', gap: '10px' }}>
-                        {isEditMode ? (<Button className="primary">Update</Button>) : ''}
+                        {isEditMode ? (<Button className="primary" onClick={handleSubmit}>Update</Button>) : ''}
                         <Button className="primary" onClick={handleEdit}>{isEditMode ? "Save" : "Edit"}</Button>
                       </div>
                     </div>
@@ -143,7 +194,8 @@ function MyProfile() {
                               type="text"
                               placeholder="Enter First Name"
                               className="custom-outline"
-                              value={consumer.firstName}
+                              value={firstName}
+                              onChange={(e) => setFirstName(e.target.value)}
                               readOnly={!isEditMode}
                             />
                           </Form.Group>
@@ -159,7 +211,8 @@ function MyProfile() {
                               type="text"
                               placeholder="Enter your Last Name"
                               className="custom-outline"
-                              value={consumer.lastName}
+                              value={lastName}
+                              onChange={(e) => setLastName(e.target.value)}
                               readOnly={!isEditMode}
                             />
                           </Form.Group>
@@ -175,7 +228,8 @@ function MyProfile() {
                               type="email"
                               placeholder="Enter your email"
                               className="custom-outline"
-                              value={consumer.email}
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
                               readOnly={!isEditMode}
                             />
                           </Form.Group>
@@ -196,14 +250,15 @@ function MyProfile() {
                                 }`}
                               // value={phone}
                               // onChange={(e) => setPhone(e.target.value)}
-                              value={consumer.phone}
+                              value={phone}
+                              onChange={(e) => setPhone(e.target.value)}
                               readOnly={!isEditMode}
                             />
-                            {errors.invalidPhone && (
+                            {/* {errors.invalidPhone && (
                               <div className="invalid-feedback">
                                 Please enter a valid phone number.
                               </div>
-                            )}
+                            )} */}
                           </Form.Group>
                         </Col>
                         <Col lg={6}>
@@ -217,7 +272,8 @@ function MyProfile() {
                               type="test"
                               placeholder="Enter your Address"
                               className="custom-outline"
-                              value={consumer.address}
+                              value={address}
+                              onChange={(e) => setAddress(e.target.value)}
                               readOnly={!isEditMode}
                             />
                           </Form.Group>
@@ -233,7 +289,8 @@ function MyProfile() {
                               type="tel"
                               placeholder="Enter your Suburb"
                               className="custom-outline"
-                              value={consumer.suburb}
+                              value={suburb}
+                              onChange={(e) => setSuburb(e.target.value)}
                               readOnly={!isEditMode}
                             />
                           </Form.Group>
@@ -249,7 +306,8 @@ function MyProfile() {
                               type="text"
                               placeholder="Enter your user State"
                               className="custom-outline"
-                              value={consumer.state}
+                              value={state}
+                              onChange={(e) => setState(e.target.value)}
                               readOnly={!isEditMode}
                             />
                           </Form.Group>
@@ -265,7 +323,8 @@ function MyProfile() {
                               type="number"
                               placeholder="Enter your Post Code"
                               className="custom-outline"
-                              value={consumer.pinCode}
+                              value={pinCode}
+                              onChange={(e) => setPinCode(e.target.value)}
                               readOnly={!isEditMode}
                             />
                           </Form.Group>
@@ -284,8 +343,8 @@ function MyProfile() {
                                 maxLength={12}
                                 placeholder="Enter your Password"
                                 className="custom-outline"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                // value={password}
+                                // onChange={(e) => setPassword(e.target.value)}
                               />
                               <div
                                 className="eye-wrapper"
@@ -345,8 +404,8 @@ function MyProfile() {
                                 placeholder="Confirm your Password"
                                 className={`custom-outline ${errors.passwordMismatch ? "is-invalid" : ""
                                   }`}
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                // value={confirmPassword}
+                                // onChange={(e) => setConfirmPassword(e.target.value)}
                               />
                               <div
                                 className="eye-wrapper"
