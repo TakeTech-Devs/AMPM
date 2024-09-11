@@ -20,6 +20,12 @@ import {
     LOAD_CONSUMER_REQUEST,
     LOAD_CONSUMER_SUCCESS,
     LOAD_CONSUMER_FAIL,
+    UPDATE_RESELLER_PROFILE_REQUEST,
+    UPDATE_RESELLER_PROFILE_SUCCESS,
+    UPDATE_RESELLER_PROFILE_FAIL,
+    UPDATE_CONSUMER_PROFILE_REQUEST,
+    UPDATE_CONSUMER_PROFILE_SUCCESS,
+    UPDATE_CONSUMER_PROFILE_FAIL,
 } from '../constants/userConstants';
 import axios from 'axios';
 
@@ -153,6 +159,52 @@ export const logout = () => async (dispatch) => {
         dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
     }
 };
+
+// Update Reseller Profile
+
+export const updateResellerProfile = (userData) => async (dispatch) =>{
+    try {
+        dispatch({ type: UPDATE_RESELLER_PROFILE_REQUEST })
+
+
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
+
+        const { data } = await axios.put(`http://localhost:5000/api/v1/reseller/profile/update`, userData, config)
+
+        dispatch({ type: UPDATE_RESELLER_PROFILE_SUCCESS, payload: data.success });
+
+
+    } catch (error) {
+        dispatch({
+      type: UPDATE_RESELLER_PROFILE_FAIL,
+      payload: error.response.data.message,
+    });
+    }
+}
+
+
+// Update Consumer Profile
+
+export const updateConsumerProfile = (userData) => async (dispatch) =>{
+    try {
+        dispatch({ type: UPDATE_CONSUMER_PROFILE_REQUEST })
+
+
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
+
+        const { data } = await axios.put(`http://localhost:5000/api/v1/consumer/profile/update`, userData, config)
+
+        dispatch({ type: UPDATE_CONSUMER_PROFILE_SUCCESS, payload: data.success });
+
+
+    } catch (error) {
+        dispatch({
+      type: UPDATE_CONSUMER_PROFILE_FAIL,
+      payload: error.response.data.message,
+    });
+    }
+}
+
 
 
 // Clearing Errors
