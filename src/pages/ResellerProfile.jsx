@@ -1,16 +1,18 @@
 import { Button, Container, Nav, Col, Row, Form } from "react-bootstrap";
 import userImg from "../assets/user-img.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, updateResellerProfile } from "../actions/userActions";
+import { UPDATE_RESELLER_PROFILE_RESET } from "../constants/userConstants";
 function MyProfile() {
   const [activeForm, setActiveForm] = useState("consumer");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  // const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState({
     passwordMismatch: false,
     invalidPhone: false,
@@ -18,14 +20,24 @@ function MyProfile() {
 
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
-    return phoneRegex.test(phone);
-  };
+  // const validatePhone = (phone) => {
+  //   const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
+  //   return phoneRegex.test(phone);
+  // };
 
   const { reseller, loading, isAuthenticated } = useSelector(state => state.user)
+  const { loading: updateLoding, isUpdated, error } = useSelector((state) => state.profile);
+
+  const [fullName, setFullName] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [abn, setAbn] = useState("");
+  const [businessEmail, setBusinessEmail] = useState("");
+  const [businessWebsite, setBusinessWebsite] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const handleEdit = () => {
     setIsEditMode(!isEditMode);
@@ -33,33 +45,64 @@ function MyProfile() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setErrors((prev) => ({ ...prev, passwordMismatch: true }));
-      return;
-    } else {
-      setErrors((prev) => ({ ...prev, passwordMismatch: false }));
-    }
+    // if (password !== confirmPassword) {
+    //   setErrors((prev) => ({ ...prev, passwordMismatch: true }));
+    //   return;
+    // } else {
+    //   setErrors((prev) => ({ ...prev, passwordMismatch: false }));
+    // }
 
-    if (!validatePhone(phone)) {
-      setErrors((prev) => ({ ...prev, invalidPhone: true }));
-      return;
-    } else {
-      setErrors((prev) => ({ ...prev, invalidPhone: false }));
-      window.alert("Registered successfully");
-      navigate("/login");
-    }
+    // if (!validatePhone(phone)) {
+    //   setErrors((prev) => ({ ...prev, invalidPhone: true }));
+    //   return;
+    // } else {
+    //   setErrors((prev) => ({ ...prev, invalidPhone: false }));
+    //   window.alert("Registered successfully");
+    //   navigate("/login");
+    // }
+
+    const formData = new FormData();
+    formData.append("fullName", fullName);
+    formData.append("businessName", businessName);
+    formData.append("businessType", businessType);
+    formData.append("abn", abn);
+    formData.append("businessEmail", businessEmail);
+    formData.append("businessWebsite", businessWebsite);
+
+    dispatch(updateResellerProfile(formData))
+    
   };
   const handleSubmitReseller = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setErrors((prev) => ({ ...prev, passwordMismatch: true }));
-      return;
-    } else {
-      setErrors((prev) => ({ ...prev, passwordMismatch: false }));
-      window.alert("Applied successfully");
-      navigate("/login");
-    }
+      // if (password !== confirmPassword) {
+      //   setErrors((prev) => ({ ...prev, passwordMismatch: true }));
+      //   return;
+      // } else {
+      //   setErrors((prev) => ({ ...prev, passwordMismatch: false }));
+      //   window.alert("Applied successfully");
+      //   navigate("/login");
+      // }
   };
+
+  useEffect(() =>{
+    if(reseller){
+      setFullName(reseller.fullName);
+      setBusinessName(reseller.businessName);
+      setBusinessType(reseller.businessType);
+      setAbn(reseller.abn);
+      setBusinessEmail(reseller.businessEmail);
+      setBusinessWebsite(reseller.businessWebsite);
+    }
+    if(error){
+      window.alert(error)
+      dispatch(clearErrors());
+    }
+    if(isUpdated){
+      window.alert("Profile Updated Successfully");
+      dispatch({ type: UPDATE_RESELLER_PROFILE_RESET });
+      window.location.reload();
+    }
+  }, [dispatch, error, reseller, isUpdated])
 
   return (
     <>
@@ -119,14 +162,14 @@ function MyProfile() {
                     </div>
 
                     <div className="edit-btn" style={{ display: 'flex', gap: '10px' }}>
-                      {isEditMode ? (<Button className="primary">Update</Button>) : ''}
+                      {isEditMode ? (<Button className="primary" onClick={handleSubmit}>Update</Button>) : ''}
                       <Button className="primary" onClick={handleEdit}>{isEditMode ? "Save" : "Edit"}</Button>
                     </div>
                   </div>
                   <div className="inputs-fields-wrapper reseller">
                     <Row className="align-items-center">
                       <Col sm={12}>
-                        <Form onSubmit={handleSubmitReseller}>
+                        <Form onSubmit={handleSubmit}>
                           <Row>
                             <Col lg={6}>
                               <Form.Group
@@ -139,7 +182,8 @@ function MyProfile() {
                                   type="text"
                                   placeholder="Enter Full Name"
                                   className="custom-outline"
-                                  value={reseller.fullName}
+                                  value={fullName}
+                                  onChange={(e) => setFullName(e.target.value)}
                                   readOnly={!isEditMode}
                                 />
                               </Form.Group>
@@ -155,7 +199,8 @@ function MyProfile() {
                                   type="text"
                                   placeholder="Enter your Business Name"
                                   className="custom-outline"
-                                  value={reseller.businessName}
+                                  value={businessName}
+                                  onChange={(e) => setBusinessName(e.target.value)}
                                   readOnly={!isEditMode}
                                 />
                               </Form.Group>
@@ -169,7 +214,8 @@ function MyProfile() {
                                 <Form.Select
                                   className="custom-select-outline"
                                   aria-label="Default select example "
-                                  value={reseller.businessType}
+                                  value={businessType}
+                                  onChange={(e) => setBusinessType(e.target.value)}
                                   readOnly={!isEditMode}
                                 >
                                   <option>
@@ -192,7 +238,8 @@ function MyProfile() {
                                   type="text"
                                   placeholder="Enter your ABN"
                                   className="custom-outline"
-                                  value={reseller.abn}
+                                  value={abn}
+                                  onChange={(e) => setAbn(e.target.value)}
                                   readOnly={!isEditMode}
                                 />
                               </Form.Group>
@@ -208,7 +255,8 @@ function MyProfile() {
                                   type="email"
                                   placeholder="Enter your email"
                                   className="custom-outline"
-                                  value={reseller.businessEmail}
+                                  value={businessEmail}
+                                  onChange={(e) => setBusinessEmail(e.target.value)}
                                   readOnly={!isEditMode}
                                 />
                               </Form.Group>
@@ -224,7 +272,8 @@ function MyProfile() {
                                   type="text"
                                   placeholder="Enter your Suburb"
                                   className="custom-outline"
-                                  value={reseller.businessWebsite}
+                                  value={businessWebsite}
+                                  onChange={(e) => setBusinessWebsite(e.target.value)}
                                   readOnly={!isEditMode}
                                 />
                               </Form.Group>
