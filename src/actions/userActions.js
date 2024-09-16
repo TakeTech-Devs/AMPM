@@ -26,6 +26,9 @@ import {
     UPDATE_CONSUMER_PROFILE_REQUEST,
     UPDATE_CONSUMER_PROFILE_SUCCESS,
     UPDATE_CONSUMER_PROFILE_FAIL,
+    SUBMIT_MESSAGE_REQUEST,
+    SUBMIT_MESSAGE_SUCCESS,
+    SUBMIT_MESSAGE_FAIL,
 } from '../constants/userConstants';
 import axios from 'axios';
 
@@ -189,7 +192,6 @@ export const updateConsumerProfile = (userData) => async (dispatch) =>{
     try {
         dispatch({ type: UPDATE_CONSUMER_PROFILE_REQUEST })
 
-
         const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
         const { data } = await axios.put(`http://localhost:5000/api/v1/consumer/profile/update`, userData, config)
@@ -204,6 +206,26 @@ export const updateConsumerProfile = (userData) => async (dispatch) =>{
     });
     }
 }
+
+// ContactUs Form
+
+export const contactForm = (formData) => async(dispatch) =>{
+    try {
+        dispatch({ type: SUBMIT_MESSAGE_REQUEST });
+
+        const config = { headers: { "Content-Type": "application/json" } }
+
+        const { data } = await axios.post(`http://localhost:5000/api/v1/user/contact`, formData, config);
+
+        dispatch({ type: SUBMIT_MESSAGE_SUCCESS, payload: data.success });
+
+    } catch (error) {
+        dispatch({
+            type: SUBMIT_MESSAGE_FAIL,
+            payload: error.response.data.message,
+        })
+    }
+} 
 
 
 

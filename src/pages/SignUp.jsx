@@ -22,7 +22,7 @@ export default function SignUp() {
   });
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{10}$/; 
+    const phoneRegex = /^[0-9]{10}$/;
     return phoneRegex.test(phone);
   };
 
@@ -78,6 +78,9 @@ export default function SignUp() {
     }
 
     dispatch(consumarRegister(formData));
+
+    // window.alert("Successfully Created Account");
+    // navigate('/login')
 
   };
 

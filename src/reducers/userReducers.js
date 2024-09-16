@@ -28,6 +28,9 @@ import {
     UPDATE_CONSUMER_PROFILE_SUCCESS,
     UPDATE_CONSUMER_PROFILE_FAIL,
     UPDATE_CONSUMER_PROFILE_RESET,
+    SUBMIT_MESSAGE_REQUEST,
+    SUBMIT_MESSAGE_SUCCESS,
+    SUBMIT_MESSAGE_FAIL,
 } from '../constants/userConstants';
 
 
@@ -117,7 +120,7 @@ export const userReducer = (state = { user: {}, reseller: {}, consumer: {} }, ac
 export const profileReducer = (state = {}, action) => {
     switch (action.type) {
         case UPDATE_RESELLER_PROFILE_REQUEST:
-        case UPDATE_CONSUMER_PROFILE_REQUEST:    
+        case UPDATE_CONSUMER_PROFILE_REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -151,5 +154,36 @@ export const profileReducer = (state = {}, action) => {
         default:
             return state;
 
+    }
+}
+
+export const contactUsFormReducer = (state = {}, action) => {
+    switch (action.type) {
+        case SUBMIT_MESSAGE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case SUBMIT_MESSAGE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                data: action.payload,
+                error: null,
+            }
+        case SUBMIT_MESSAGE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error,
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
     }
 }

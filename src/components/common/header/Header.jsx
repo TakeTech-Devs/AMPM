@@ -115,7 +115,7 @@ function Header() {
                     className="user-logo"
                   >
                     <NavDropdown.Item as={NavLink}
-                     to = {user.type === "reseller" ? "/raccount" : "/account"} 
+                     to = {user?.type === "reseller" ? "/raccount" : "/account"} 
                      onClick={handleNavClick}>
                       Account
                     </NavDropdown.Item>
