@@ -23,6 +23,7 @@ import AddressNormal from "./pages/AddressNormal";
 import ProductHistory from "./pages/ProductHistory";
 import { useDispatch, useSelector } from "react-redux";
 import {  loadConsumer, loadReseller } from "./actions/userActions";
+import ProtectedRoute from "./Routes/ProtectedRoute";
 
 function App() {
 
@@ -43,8 +44,24 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/account" element={<MyProfile />} />
-        <Route path="/raccount" element={<ResellerProfile />} />
+       <Route
+          path="/account"
+          element={
+            <ProtectedRoute isConsumer={true}>
+              <MyProfile />
+            </ProtectedRoute>
+          }
+        />
+       <Route
+          path="/raccount"
+          element={
+            <ProtectedRoute isConsumer={true}>
+              <ResellerProfile />
+            </ProtectedRoute>
+          }
+        />
+      
+        {/* <Route path="/raccount" element={<ResellerProfile />} /> */}
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/products" element={<Products />} />

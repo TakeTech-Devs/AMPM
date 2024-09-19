@@ -30,7 +30,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(consumerLogin(email, password));
-    navigate("/account");
+    navigate("/");
 
     setTimeout(() => {
       window.location.reload();
@@ -40,7 +40,7 @@ export default function Login() {
   const handleSubmitReseller = (e) =>{
     e.preventDefault();
     dispatch(resellerLogin(businessEmail, businessPassword));
-    navigate("/raccount")
+    navigate("/")
   }
 
 
