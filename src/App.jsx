@@ -24,6 +24,7 @@ import ProductHistory from "./pages/ProductHistory";
 import { useDispatch, useSelector } from "react-redux";
 import {  loadConsumer, loadReseller } from "./actions/userActions";
 import ProtectedRoute from "./Routes/ProtectedRoute";
+import { getProducts } from "./actions/productActions";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
   useEffect(() =>{
     dispatch(loadReseller());
     dispatch(loadConsumer());
+    dispatch(getProducts())
   },  [dispatch])
 
 
