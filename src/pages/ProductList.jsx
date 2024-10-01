@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row, Nav, Form, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import bgImage from "../assets/bg-image.jpeg";
 import batteryImages from "../assets/Battery.png";
 import "../styles/Products.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, getProducts } from "../actions/productActions";
 
 function ProductList() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleCardClick = () => {
     navigate("/productdetails");
   };
+
+  const {Items, loading, error} = useSelector((state) => state.Item);
+
+  useEffect(() =>{
+    if(error){
+      console.log(error);
+      dispatch(clearErrors());
+    }
+    dispatch(getProducts());
+  },[dispatch, error])
+
 
   return (
     <>
@@ -79,7 +93,7 @@ function ProductList() {
           </div>
           <div className="all-cards">
             <Row className="gy-4">
-              {[...Array(6)].map((_, idx) => (
+              {/* {[...Array(6)].map((_, idx) => (
                 <Col key={idx}>
                   <Card onClick={handleCardClick} className="clickable-card">
                     <div className="d-flex justify-content-center">
@@ -94,6 +108,26 @@ function ProductList() {
                       <p>Type:</p>
                       <p>Warranty:</p>
                       <h3>Price : 1200</h3>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))} */}
+              {Items && Items.map((item) =>(
+                // <h1 style={{color: "black"}}>{item.ProductDescription}</h1>
+                <Col key={item.ProductCode}>
+                  <Card onClick={handleCardClick} className="clickable-card">
+                    <div className="d-flex justify-content-center">
+                      <div className="product-image-wrapper">
+                        <Card.Img variant="top" src={item.ImageUrl}/>
+                      </div>
+                    </div>
+                    <Card.Body>
+                      <Card.Title>{item.ProductDescription}</Card.Title>
+                      <p>Battery Version:</p>
+                      <p>Capacity:</p>
+                      <p>Type:</p>
+                      <p>Warranty:</p>
+                      <h3>Price : {item.DefaultSellPrice}</h3>
                     </Card.Body>
                   </Card>
                 </Col>
