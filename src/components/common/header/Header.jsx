@@ -122,6 +122,9 @@ function Header() {
                     <NavDropdown.Item as={NavLink} to="/orders" onClick={handleNavClick}>
                       Orders
                     </NavDropdown.Item>
+                    <NavDropdown.Item as={NavLink} to="/admin" onClick={handleNavClick}>
+                      admin
+                    </NavDropdown.Item>
                     <NavDropdown.Item
                       // as={NavLink}
                       // to="/"
