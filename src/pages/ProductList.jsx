@@ -10,7 +10,7 @@ import Loader from "../components/common/loader/Loader";
 
 function ProductList() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // const handleCardClick = () => {
   //   navigate(`/Products/${item.Guid}`);
@@ -24,12 +24,10 @@ function ProductList() {
       dispatch(clearErrors());
     }
     dispatch(getProducts());
-  }, [dispatch, error])
-
+  }, [dispatch, error]);
 
   return (
     <>
-
       <section className="bg-image">
         <div className="flex-class">
           <Container fluid="lg">
@@ -115,33 +113,33 @@ function ProductList() {
                 </Col>
               ))} */}
               {loading && <Loader />}
-              {Items && Items.map((item) => (
-                // <h1 style={{color: "black"}}>{item.ProductDescription}</h1>
-
-                <Link to={`/Products/${item.Guid}`}>
-                  <Col>
-                    <Card className="clickable-card">
-                      <div className="d-flex justify-content-center">
-                        <div className="product-image-wrapper">
-                          <Card.Img variant="top" src={item.ImageUrl} />
+              {Items &&
+                Items.map((item) => (
+                  // <h1 style={{color: "black"}}>{item.ProductDescription}</h1>
+                  <Col lg="4" md="6">
+                    <Link to={`/Products/${item.Guid}`}>
+                      <Card className="clickable-card">
+                        <div className="d-flex justify-content-center">
+                          <div className="product-image-wrapper">
+                            <Card.Img variant="top" src={item.ImageUrl} />
+                          </div>
                         </div>
-                      </div>
-                      <Card.Body>
-                        <Card.Title>{item.ProductDescription}</Card.Title>
-                        <p>Battery Version:</p>
-                        <p>Capacity:</p>
-                        <p>Type:</p>
-                        <p>Warranty:</p>
-                        <h3>Price : {item.DefaultSellPrice}</h3>
-                      </Card.Body>
-                    </Card>
+                        <Card.Body>
+                          <Card.Title>{item.ProductDescription}</Card.Title>
+                          <p>Battery Version:</p>
+                          <p>Capacity:</p>
+                          <p>Type:</p>
+                          <p>Warranty:</p>
+                          <h3>Price : {item.DefaultSellPrice}</h3>
+                        </Card.Body>
+                      </Card>
+                    </Link>
                   </Col>
-                </Link>
-              ))}
+                ))}
             </Row>
           </div>
         </Container>
-      </section >
+      </section>
     </>
   );
 }
