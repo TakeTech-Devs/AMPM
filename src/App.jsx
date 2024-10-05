@@ -25,7 +25,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadConsumer, loadReseller } from "./actions/userActions";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import { getProducts } from "./actions/productActions";
-import AdminPanel from "./pages/AdminPanel";
 
 function App() {
   const dispatch = useDispatch();
@@ -75,7 +74,6 @@ function App() {
         <Route path="/address" element={<AddressNormal />} />
         <Route path="/termscondition" element={<TermsCondition />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/admin" element={<AdminPanel />} />
       </Routes>
       <Footer />
     </Router>
