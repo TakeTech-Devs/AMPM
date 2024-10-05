@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
 import p1 from "../assets/p1.png";
 
 function BillingShipping() {
-  const [quantity, setQuantity] = useState(2); 
-  const [subtotal, setSubtotal] = useState(240.00); 
-  const [coupon, setCoupon] = useState(""); 
-  const [discount, setDiscount] = useState(0); 
-  const [shippingCost] = useState(50.00); 
-  const [total, setTotal] = useState(subtotal + shippingCost); 
-  const navigate = useNavigate(); 
+  const [quantity, setQuantity] = useState(1);
+  const [subtotal, setSubtotal] = useState(120.00);
+  const [coupon, setCoupon] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [shippingCost] = useState(50.00);
+  const [total, setTotal] = useState(subtotal + shippingCost);
+  const navigate = useNavigate();
 
   const handleIncrease = () => {
     const newQuantity = quantity + 1;
@@ -24,6 +24,10 @@ function BillingShipping() {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
       updateSubtotal(newQuantity);
+    } else {
+      alert("Please select at least one item to proceed");
+      setQuantity(0);
+      updateSubtotal(0);
     }
   };
 
@@ -50,13 +54,11 @@ function BillingShipping() {
       updateTotal(subtotal - discountAmount);
       setTimeout(() => {
         alert(`Coupon applied! You saved $${discountAmount.toFixed(2)}.`);
-      }, 100); 
+      }, 100);
     } else {
       alert("Invalid coupon code");
     }
   };
-  
-  
 
   const handleCheckout = () => {
     navigate("/checkout");
@@ -124,7 +126,7 @@ function BillingShipping() {
               <p>Shopping Cart</p>
             </div>
             <div className="d-flex align-items-center">
-            <div className="line"></div>
+              <div className="line"></div>
             </div>
             <div className="sec-orders">
               <div className="icon-wrapper">
@@ -158,9 +160,8 @@ function BillingShipping() {
               <p>Checkout</p>
             </div>
             <div className="d-flex align-items-center">
-            <div className="line"></div>
+              <div className="line"></div>
             </div>
-            
             <div className="third-orders">
               <div className="icon-wrapper">
                 <svg
@@ -199,93 +200,102 @@ function BillingShipping() {
       <section className="sec-gap all-items-sec">
         <Container>
           <Row>
+
             <Col lg={7}>
               <div className="left-bill">
                 <div className="cart-heading">
                   <h3>Your Cart</h3>
                   <p>({quantity})</p>
                 </div>
-                <div className="add-to-cart-items">
-                  <ul>
-                    <li>
-                      <div className="items">
-                        <div className="items-details">
-                          <div className="img-div">
-                            <img
-                              src={p1}
-                              alt="product 1"
-                              width="100%"
-                              height="100%"
-                            />
-                          </div>
-                          <div className="items-name">
-                            <p>1x Khalifa Kush</p>
-                            <p>(AAAA)</p>
-                          </div>
-                        </div>
-                        <div className="prices-wrapper">
-                          <div className="count-price-wrapper">
-                            <div className="counter">
-                              <Button onClick={handleDecrease}>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="16"
-                                  height="16"
-                                  viewBox="0 0 16 16"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M4 8H12"
-                                    stroke="#060709"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              </Button>
-                              <div className="amount">
-                                <p>{quantity}</p>
+                {quantity > 0 ? (
+                  <>
+                    <div className="add-to-cart-items">
+                      <ul>
+                        <li>
+                          <div className="items">
+                            <div className="items-details">
+                              <div className="img-div">
+                                <img
+                                  src={p1}
+                                  alt="product 1"
+                                  width="100%"
+                                  height="100%"
+                                />
                               </div>
-                              <Button onClick={handleIncrease}>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="16"
-                                  height="16"
-                                  viewBox="0 0 16 16"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M4 8H12"
-                                    stroke="#060709"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                  <path
-                                    d="M8 12V4"
-                                    stroke="#060709"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              </Button>
+                              <div className="items-name">
+                                <p>1x Khalifa Kush</p>
+                                <p>(AAAA)</p>
+                              </div>
                             </div>
-                            <div className="price">
-                              <p>$120.00</p>
+                            <div className="prices-wrapper">
+                              <div className="count-price-wrapper">
+                                <div className="counter">
+                                  <Button onClick={handleDecrease}>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="16"
+                                      height="16"
+                                      viewBox="0 0 16 16"
+                                      fill="none"
+                                    >
+                                      <path
+                                        d="M4 8H12"
+                                        stroke="#060709"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                    </svg>
+                                  </Button>
+                                  <div className="amount">
+                                    <p>{quantity}</p>
+                                  </div>
+                                  <Button onClick={handleIncrease}>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="16"
+                                      height="16"
+                                      viewBox="0 0 16 16"
+                                      fill="none"
+                                    >
+                                      <path
+                                        d="M4 8H12"
+                                        stroke="#060709"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                      <path
+                                        d="M8 12V4"
+                                        stroke="#060709"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                    </svg>
+                                  </Button>
+                                </div>
+                                <div className="price">
+                                  <p>$120.00</p>
+                                </div>
+                              </div>
+                              <div className="total">
+                                <p>${subtotal.toFixed(2)}</p>
+                              </div>
                             </div>
                           </div>
-                          <div className="total">
-                            <p>${subtotal.toFixed(2)}</p>
+                        </li>
+                        <li>
+                          <div className="subtotal">
+                            <p>Subtotal</p>
+                            <p className="totalamount">${subtotal.toFixed(2)}</p>
                           </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="subtotal">
-                        <p>Subtotal</p>
-                        <p className="totalamount">${subtotal.toFixed(2)}</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <Col>
+                    <p>No items in the cart.</p>
+                  </Col>
+                )}
               </div>
             </Col>
             <Col lg={5}>
@@ -332,14 +342,30 @@ function BillingShipping() {
                   <p>Continue Shopping</p>
                 </div>
                 <div className="checkout-btn">
-                  <Button
-                    className="d-flex justify-content-center gap-2"
-                    onClick={handleCheckout}
-                  >
-                    {" "}
-                    <span>Checkout</span> <span>|</span>{" "}
-                    <span>${total.toFixed(2)}</span>{" "}
-                  </Button>
+                  {quantity > 0 ? (
+                    <Button
+                      className="d-flex justify-content-center gap-2 add-to-cart-btn-color"
+                      onClick={handleCheckout}
+                    >
+                      {" "}
+                      <span>Checkout</span> <span>|</span>{" "}
+                      <span>${total.toFixed(2)}</span>{" "}
+                    </Button>
+                  ) : (
+                    <Button
+                      className="d-flex justify-content-center gap-2"
+                      disabled
+                      style={{
+                        cursor: "not-allowed",
+                        pointerEvents: "auto"
+                      }}
+                    >
+                      {" "}
+                      <span>Add Products to Proceed</span>
+                      {/* <span>|</span>{" "} */}
+                      {/* <span>${total.toFixed(2)}</span>{" "} */}
+                    </Button>
+                  )}
                 </div>
                 <div className="show-payment-cards">
                   <p>SECURE PAYMENTS PROVIDED BY</p>
@@ -448,6 +474,7 @@ function BillingShipping() {
                 </div>
               </div>
             </Col>
+
           </Row>
           <hr style={{ color: "#80B32F" }} />
           <Row>
@@ -495,8 +522,8 @@ function BillingShipping() {
             </Col>
             <Col lg={4}>
               <div className="bottom-wrapper">
-                <div className="bill-features-wrapper pt-4">
-                  <div className="order-wrap mt-3 p-3">
+                <div className="bill-features-wrapper">
+                  <div className="order-wrap p-3">
                     <div className="order-icon ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

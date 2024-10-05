@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Nav, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import bgImage from "../assets/bg-image.jpeg";
 import battery from "../assets/Battery.png";
 import "../styles/Products.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, getProductDetails } from "../actions/productActions";
 
 function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const {Items, loading, error} = useSelector((state) => state.productDetails)
 
   const handleAddToCart = () => {
     navigate("/cart");
@@ -23,6 +30,18 @@ function ProductDetails() {
     }
   };
 
+  const productId = params.id;
+
+
+
+  useEffect(()=>{
+    if (error) {
+      window.alert(error);
+      dispatch(clearErrors());
+    };
+    dispatch(getProductDetails(productId));
+  },[dispatch, error, productId])
+
   return (
     <>
       <section className="bg-image">
@@ -30,7 +49,8 @@ function ProductDetails() {
           <Container fluid="lg">
             <div className="middle">
               <div className="image-content-wrapper">
-                <h1>Battery name</h1>
+                {/* <h1>Battery name</h1> */}
+                <h1>{Items?.ProductDescription}</h1>
               </div>
             </div>
           </Container>
@@ -42,7 +62,7 @@ function ProductDetails() {
       <section>
         <Container>
           <div className="navigation product-nav">
-            <Nav.Link className="" href="/">
+            <Nav.Link className="pe-1" href="/">
               <h3>
                 Home
                 <span className="pe-2">/</span>
@@ -64,21 +84,29 @@ function ProductDetails() {
         <Container>
           <div className="final-product-details-wrapper">
             <Row>
-              <Col md={6}>
-                <div className="Mission-image-wrapper battery-image-wrapper">
-                  <img
+              <Col md={6} className="d-flex justify-content-center">
+                <div className="battery-image-wrapper p-details">
+                  {/* <img
                     src={battery}
                     alt="Mission image"
+                    width="100%"
+                    height="100%"
+                  /> */}
+                  <img
+                    src={Items?.ImageUrl}
+                    alt={Items?.ProductDescription}
                     width="100%"
                     height="100%"
                   />
                 </div>
               </Col>
-              <Col md={6}>
+              <Col md={6} >
                 <div className="left-part right-part">
                   <div className="heading">
-                    <h2 className="mb-3">Battery Name</h2>
-                    <h3 className="mb-3">$1000.00</h3>
+                    {/* <h2 className="">Battery Name</h2> */}
+                    <h2 className="">{Items?.ProductDescription}</h2>
+                    {/* <h3 className="">$1000.00</h3> */}
+                    <h3 className="">${Items?.DefaultSellPrice}</h3>
                     <h2 className="text-black mb-3">
                       $699.00 <span className="sale-info">Sale Price</span>
                     </h2>

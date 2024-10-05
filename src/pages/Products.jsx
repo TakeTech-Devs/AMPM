@@ -59,7 +59,7 @@ function Products() {
                 </div>
               </Col>
               <Col md={6}>
-                <div className="Mission-image-wrapper">
+                <div className="Mission-image-wrapper custom-mt">
                   <img
                     src={imageIcon}
                     alt="Mission image"

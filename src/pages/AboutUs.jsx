@@ -47,7 +47,7 @@ export default function AboutUs() {
               </div>
             </Col>
             <Col md={6}>
-              <div className="Mission-image-wrapper">
+              <div className="Mission-image-wrapper mt-4">
                 <img src={imageIcon} alt="Mission image" width="100%" height="100%"/>
               </div>
             </Col>
@@ -70,7 +70,7 @@ export default function AboutUs() {
             </div>
             </Col>
           </Row>
-          <Row>
+          <Row className="gy-3">
             <Col md={12} lg={6} xl={4}>
               <Card className="whatwedoCard">
                 <div className="card-image-wrapper">
