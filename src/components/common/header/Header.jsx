@@ -15,6 +15,7 @@ function Header() {
   const [expanded, setExpanded] = useState(false);
 
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -115,8 +116,8 @@ function Header() {
                     className="user-logo"
                   >
                     <NavDropdown.Item as={NavLink}
-                     to = {user?.type === "reseller" ? "/raccount" : "/account"} 
-                     onClick={handleNavClick}>
+                      to={user?.type === "reseller" ? "/raccount" : "/account"}
+                      onClick={handleNavClick}>
                       Account
                     </NavDropdown.Item>
                     <NavDropdown.Item as={NavLink} to="/orders" onClick={handleNavClick}>
@@ -166,13 +167,16 @@ function Header() {
                     className="d-inline-block align-top"
                     alt="Shop cart"
                   />
-                  <div className="cart-counter">{count}</div>
+                  {/* {cartItems.length > 0 ?
+                    <div className="cart-counter">{cartItems.length}</div> : ''
+                  } */}
+                  <div className="cart-counter">{cartItems.length}</div> 
                 </NavLink>
               </Nav>
               <Navbar.Toggle
                 aria-controls="navbarScroll"
                 onClick={() => setExpanded(expanded ? false : true)}
-                className={expanded ? "" : "collapsed"} 
+                className={expanded ? "" : "collapsed"}
               >
                 <span className="navbar-toggler-icon"></span>
               </Navbar.Toggle>

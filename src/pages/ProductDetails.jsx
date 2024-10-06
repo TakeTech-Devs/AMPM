@@ -6,6 +6,7 @@ import battery from "../assets/Battery.png";
 import "../styles/Products.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getProductDetails } from "../actions/productActions";
+import { addItemsToCart } from "../actions/cartAction";
 
 function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
@@ -17,7 +18,9 @@ function ProductDetails() {
   const {Items, loading, error} = useSelector((state) => state.productDetails)
 
   const handleAddToCart = () => {
-    navigate("/cart");
+    dispatch(addItemsToCart(productId, quantity));
+    // navigate("/cart");
+    window.alert("Item Added To Cart")
   };
 
   const handleIncrease = () => {
@@ -107,8 +110,11 @@ function ProductDetails() {
                     <h2 className="">{Items?.ProductDescription}</h2>
                     {/* <h3 className="">$1000.00</h3> */}
                     <h3 className="">${Items?.DefaultSellPrice}</h3>
-                    <h2 className="text-black mb-3">
+                    {/* <h2 className="text-black mb-3">
                       $699.00 <span className="sale-info">Sale Price</span>
+                    </h2> */}
+                    <h2 className="text-black mb-3">
+                      ${Items?.LastCost} <span className="sale-info">Sale Price</span>
                     </h2>
                     <p>Lorem ipsum dolor, sit amet consectetur </p>
                   </div>
