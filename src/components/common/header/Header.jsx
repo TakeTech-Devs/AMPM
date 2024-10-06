@@ -68,10 +68,18 @@ function Header() {
                   About Us
                 </NavLink>
                 <NavDropdown title="Products" id="navbarScrollingDropdown">
-                  <NavDropdown.Item as={NavLink} to="/products" onClick={handleNavClick}>
+                  <NavDropdown.Item
+                    as={NavLink}
+                    to="/products"
+                    onClick={handleNavClick}
+                  >
                     Products
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/option" onClick={handleNavClick}>
+                  <NavDropdown.Item
+                    as={NavLink}
+                    to="/option"
+                    onClick={handleNavClick}
+                  >
                     Option
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -115,14 +123,21 @@ function Header() {
                     id="afterEffect"
                     className="user-logo"
                   >
+                      
                     <NavDropdown.Item as={NavLink}
                       to={user?.type === "reseller" ? "/raccount" : "/account"}
                       onClick={handleNavClick}>
+
                       Account
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={NavLink} to="/orders" onClick={handleNavClick}>
+                    <NavDropdown.Item
+                      as={NavLink}
+                      to="/orders"
+                      onClick={handleNavClick}
+                    >
                       Orders
                     </NavDropdown.Item>
+
                     <NavDropdown.Item
                       // as={NavLink}
                       // to="/"
@@ -159,7 +174,11 @@ function Header() {
                   </NavDropdown.Item>
                 </NavDropdown> */}
 
-                <NavLink to="/cart" className="shop-link nav-link ShopCart" onClick={handleNavClick}>
+                <NavLink
+                  to="/cart"
+                  className="shop-link nav-link ShopCart"
+                  onClick={handleNavClick}
+                >
                   <img
                     src={shopCart}
                     width="100%"

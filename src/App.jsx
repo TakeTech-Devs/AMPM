@@ -22,22 +22,20 @@ import ResellerProfile from "./pages/ResellerProfile";
 import AddressNormal from "./pages/AddressNormal";
 import ProductHistory from "./pages/ProductHistory";
 import { useDispatch, useSelector } from "react-redux";
-import {  loadConsumer, loadReseller } from "./actions/userActions";
+import { loadConsumer, loadReseller } from "./actions/userActions";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import { getProducts } from "./actions/productActions";
 
 function App() {
-
   const dispatch = useDispatch();
 
-  const { user, isAuthenticated } = useSelector(state => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
 
-  useEffect(() =>{
+  useEffect(() => {
     dispatch(loadReseller());
     dispatch(loadConsumer());
-    dispatch(getProducts())
-  },  [dispatch])
-
+    dispatch(getProducts());
+  }, [dispatch]);
 
   return (
     <Router>
@@ -46,7 +44,7 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-       <Route
+        <Route
           path="/account"
           element={
             <ProtectedRoute isConsumer={true}>
@@ -54,7 +52,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-       <Route
+        <Route
           path="/raccount"
           element={
             <ProtectedRoute isConsumer={true}>
@@ -62,7 +60,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-      
+
         {/* <Route path="/raccount" element={<ResellerProfile />} /> */}
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
@@ -76,7 +74,7 @@ function App() {
         <Route path="/address" element={<AddressNormal />} />
         <Route path="/termscondition" element={<TermsCondition />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
-      </Routes>  
+      </Routes>
       <Footer />
     </Router>
   );
