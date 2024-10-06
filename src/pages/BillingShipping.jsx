@@ -3,6 +3,7 @@ import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
 import p1 from "../assets/p1.png";
+import { useSelector } from "react-redux";
 
 function BillingShipping() {
   const [quantity, setQuantity] = useState(1);
@@ -13,32 +14,50 @@ function BillingShipping() {
   const [total, setTotal] = useState(subtotal + shippingCost);
   const navigate = useNavigate();
 
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const calculateSubtotal = () => {
+    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+  };
+
+  const amountToPay = parseFloat(calculateSubtotal());
+
+  const calculateTotal = () => {
+    ;
+    // const subtotal = calculateSubtotal();
+    // return (amountToPay + shippingCost).toFixed(2);
+    const totalBeforeDiscount = amountToPay + shippingCost;
+    return (totalBeforeDiscount - discount).toFixed(2);
+  };
+
+
   const handleIncrease = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    updateSubtotal(newQuantity);
+    // const newQuantity = quantity + 1;
+    // setQuantity(newQuantity);
+    // updateSubtotal(newQuantity);
   };
 
   const handleDecrease = () => {
-    if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      updateSubtotal(newQuantity);
-    } else {
-      alert("Please select at least one item to proceed");
-      setQuantity(0);
-      updateSubtotal(0);
-    }
+    // if (quantity > 1) {
+    //   const newQuantity = quantity - 1;
+    //   setQuantity(newQuantity);
+    //   updateSubtotal(newQuantity);
+    // } else {
+    //   alert("Please select at least one item to proceed");
+    //   setQuantity(0);
+    //   updateSubtotal(0);
+    // }
   };
 
-  const updateSubtotal = (newQuantity) => {
-    const newSubtotal = newQuantity * 120; // Assuming each item is $120
-    setSubtotal(newSubtotal);
-    updateTotal(newSubtotal);
-  };
+  // const updateSubtotal = (newQuantity) => {
+  //   const newSubtotal = newQuantity * 120; 
+  //   setSubtotal(newSubtotal);
+  //   updateTotal(newSubtotal);
+  // };
 
-  const updateTotal = (newSubtotal) => {
-    const newTotal = newSubtotal - discount + shippingCost;
+  const updateTotal = (newTotal) => {
+    // const newTotal = newSubtotal - discount + shippingCost;
+    // setTotal(newTotal);
     setTotal(newTotal);
   };
 
@@ -46,12 +65,25 @@ function BillingShipping() {
     setCoupon(e.target.value);
   };
 
+
+
   const applyCoupon = (e) => {
     e.preventDefault();
+    // if (coupon === "DISCOUNT10") {
+    //   const discountAmount = subtotal * 0.1; // 10% discount
+    //   setDiscount(discountAmount);
+    //   updateTotal(subtotal - discountAmount);
+    //   setTimeout(() => {
+    //     alert(`Coupon applied! You saved $${discountAmount.toFixed(2)}.`);
+    //   }, 100);
+    // } else {
+    //   alert("Invalid coupon code");
+    // }
+
     if (coupon === "DISCOUNT10") {
-      const discountAmount = subtotal * 0.1; // 10% discount
+      const discountAmount = amountToPay * 0.1; // 10% discount
       setDiscount(discountAmount);
-      updateTotal(subtotal - discountAmount);
+      updateTotal(amountToPay + shippingCost - discountAmount);
       setTimeout(() => {
         alert(`Coupon applied! You saved $${discountAmount.toFixed(2)}.`);
       }, 100);
@@ -205,9 +237,9 @@ function BillingShipping() {
               <div className="left-bill">
                 <div className="cart-heading">
                   <h3>Your Cart</h3>
-                  <p>({quantity})</p>
+                  <p>({cartItems.length})</p>
                 </div>
-                {quantity > 0 ? (
+                {/* {quantity > 0 ? (
                   <>
                     <div className="add-to-cart-items">
                       <ul>
@@ -295,6 +327,114 @@ function BillingShipping() {
                   <Col>
                     <p>No items in the cart.</p>
                   </Col>
+                )} */}
+
+                {cartItems.length === 0 ? (
+                  <Col>
+                    <p>No items in the cart.</p>
+                  </Col>
+                ) : (
+                  <>
+                    {cartItems.map((item) => (
+                      <>
+                        <div className="add-to-cart-items">
+                          <ul>
+                            <li>
+                              <div className="items">
+                                <div className="items-details">
+                                  <div className="img-div">
+                                    <img
+                                      src={item.image}
+                                      alt={item.name.split(' ')[0]}
+                                      width="100%"
+                                      height="100%"
+                                    />
+                                  </div>
+                                  <div className="items-name">
+                                    {/* <p>1x Khalifa Kush</p> */}
+                                    <p>{item.name}</p>
+                                    {/* <p>(AAAA)</p> */}
+                                  </div>
+                                </div>
+                                <div className="prices-wrapper">
+                                  <div className="count-price-wrapper">
+                                    <div className="counter">
+                                      <Button onClick={handleDecrease}>
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="16"
+                                          height="16"
+                                          viewBox="0 0 16 16"
+                                          fill="none"
+                                        >
+                                          <path
+                                            d="M4 8H12"
+                                            stroke="#060709"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                        </svg>
+                                      </Button>
+                                      <div className="amount">
+                                        <p>{item.quantity}</p>
+                                      </div>
+                                      <Button onClick={handleIncrease}>
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="16"
+                                          height="16"
+                                          viewBox="0 0 16 16"
+                                          fill="none"
+                                        >
+                                          <path
+                                            d="M4 8H12"
+                                            stroke="#060709"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                          <path
+                                            d="M8 12V4"
+                                            stroke="#060709"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                        </svg>
+                                      </Button>
+                                    </div>
+                                    <div className="price">
+                                      <p>${item.price}</p>
+                                    </div>
+                                  </div>
+                                  <div className="total">
+                                    {/* <p>${subtotal.toFixed(2)}</p> */}
+                                    <p>${(item.price * item.quantity).toFixed(2)}</p>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              {/* <div className="subtotal"> */}
+                              {/* <p>Subtotal</p> */}
+                              {/* <p className="totalamount">${subtotal.toFixed(2)}</p> */}
+                              {/* <p className="totalamount">${calculateSubtotal()}</p> */}
+                              {/* </div> */}
+                            </li>
+                          </ul>
+                        </div>
+                      </>
+                    ))}
+                    <div className="add-to-cart-items">
+                      <ul>
+                        <li>
+                          <div className="subtotal">
+                            <p>Subtotal</p>
+                            <p className="totalamount">${calculateSubtotal()}</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </>
                 )}
               </div>
             </Col>
@@ -303,12 +443,20 @@ function BillingShipping() {
                 <div className="amount-display d-flex flex-column gap-3">
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Subtotal</p>
-                    <p>${subtotal.toFixed(2)}</p>
+                    {/* <p>${subtotal.toFixed(2)}</p> */}
+                    <p>${calculateSubtotal()}</p>
                   </div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p className="sms">Discount</p>
-                    <p>${discount.toFixed(2)}</p>
-                  </div>
+                  {discount > 0 ? (
+                    <div className="d-flex align-items-center justify-content-between">
+                      <p className="sms">Discount</p>
+                      <p>-${discount.toFixed(2)}</p> {/* Showing the discount as negative */}
+                    </div>
+                  ) : (
+                    <div className="d-flex align-items-center justify-content-between">
+                      <p className="sms">Discount</p>
+                      <p>${discount.toFixed(2)}</p> {/* Showing the discount as negative */}
+                    </div>
+                  )}
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
                     <p>${shippingCost.toFixed(2)}</p>
@@ -349,7 +497,8 @@ function BillingShipping() {
                     >
                       {" "}
                       <span>Checkout</span> <span>|</span>{" "}
-                      <span>${total.toFixed(2)}</span>{" "}
+                      {/* <span>${total.toFixed(2)}</span>{" "} */}
+                      <span>${calculateTotal()}</span>{" "}
                     </Button>
                   ) : (
                     <Button
