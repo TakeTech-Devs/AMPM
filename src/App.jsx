@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadConsumer, loadReseller } from "./actions/userActions";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import { getProducts } from "./actions/productActions";
+import { myOrders } from "./actions/orderAction";
 
 function App() {
   const dispatch = useDispatch();
@@ -68,7 +69,12 @@ function App() {
         <Route path="/productlist" element={<ProductList />} />
         <Route path="/Products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<BillingShipping />} />
-        <Route path="/checkout" element={<Checkout />} />
+        {/* <Route path="/checkout" element={<Checkout />} /> */}
+        <Route path="/checkout" element={
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        }/>
         <Route path="/ordercomplete" element={<OrderComplete />} />
         <Route path="/orders" element={<ProductHistory />} />
         <Route path="/address" element={<AddressNormal />} />

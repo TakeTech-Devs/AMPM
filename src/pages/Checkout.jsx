@@ -1,13 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
 import Select from "react-select";
 import countryList from "react-select-country-list";
+import { useDispatch, useSelector } from "react-redux";
+import { saveShippingInfo } from "../actions/cartAction";
+import { clearErrors, createOrder } from "../actions/orderAction";
 
 function Checkout() {
-  const [country, setCountry] = useState(null);
   const options = countryList().getData();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { total } = location.state || { total: 0 };
+  const { Discount } = location.state || { Discount: 0 };
+  console.log(total)
+
+  const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+  const { error } = useSelector((state) => state.newOrder);
+
+
+
+  const [firstName, setFirstName] = useState(shippingInfo.firstName);
+  const [lastName, setLastName] = useState(shippingInfo.lastName);
+  const [country, setCountry] = useState(shippingInfo.country);
+  const [address, setAddress] = useState(shippingInfo.address);
+  const [city, setCity] = useState(shippingInfo.city);
+  const [state, setState] = useState(shippingInfo.state);
+  const [pin, setPin] = useState(shippingInfo.pin);
+  const [phone, setPhone] = useState(shippingInfo.phone);
+  const [email, setEmail] = useState(shippingInfo.email);
+
+
 
   const changeHandler = (value) => {
     setCountry(value);
@@ -35,9 +59,45 @@ function Checkout() {
   const navigate = useNavigate();
 
   const count = 2;
-  const handleCheckout = () => {
-    navigate("/ordercomplete");
+
+  const shippingSubmit = (e) => {
+    e.preventDefault();
+    dispatch(saveShippingInfo({ firstName, lastName, country, address, city, state, pin, phone, email }))
+    console.log("Hi")
+  }
+
+
+  const totalPrice = total;
+
+  const paymentData = {
+    amount: Math.round(totalPrice * 100),
   };
+
+  const order = {
+    shippingInfo,
+    orderItems: cartItems,
+    totalPrice,
+  }
+
+
+
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    dispatch(createOrder(order));
+    // localStorage.removeItem('cartItems');
+    const Total = total;
+    const Fdiscount = Discount;
+    window.alert("Order Placed Successfully")
+    navigate("/ordercomplete" ,{ state: { Total, Fdiscount, fromCheckout: true } });
+  };
+
+  useEffect(() => {
+    if (error) {
+        dispatch(clearErrors());
+        // alert.error(error);
+        window.alert(error)
+    }
+}, [dispatch, error]);
 
   return (
     <>
@@ -169,7 +229,7 @@ function Checkout() {
                   </p>
                 </div>
                 <div className="buyer-info">
-                  <Form>
+                  <Form onSubmit={shippingSubmit}>
                     <Row>
                       <Col lg={6}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -179,6 +239,8 @@ function Checkout() {
                             type="text"
                             placeholder="Enter Your Name"
                             className="custom-outline"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -193,6 +255,8 @@ function Checkout() {
                             type="text"
                             placeholder="Enter Last Name"
                             className="custom-outline"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -202,7 +266,7 @@ function Checkout() {
                           controlId="formBasicPassword "
                         >
                           <Form.Label>Country / Region</Form.Label>
-                          <Select
+                          {/* <Select
                             required
                             components={{ IndicatorSeparator: () => null }}
                             styles={customStyles}
@@ -211,7 +275,21 @@ function Checkout() {
                             onChange={changeHandler}
                             placeholder="Select a Country"
                             classNamePrefix="custom-outline"
-                          />
+                          /> */}
+                          <Form.Control
+                            as="select" // This makes the input a dropdown
+                            required
+                            className="custom-outline"
+                            value={country} // Bind the state value to the select input
+                            onChange={(e) => setCountry(e.target.value)} // Update the state on selection
+                          >
+                            <option value="">Select a Country</option>
+                            {options.map((option, index) => (
+                              <option key={index} value={option.label}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </Form.Control>
                         </Form.Group>
                       </Col>
                       <Col lg={12}>
@@ -225,6 +303,8 @@ function Checkout() {
                             type="Text"
                             placeholder="House number and street name"
                             className="custom-outline"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -251,6 +331,8 @@ function Checkout() {
                             type="text"
                             placeholder="Enter Town / City"
                             className="custom-outline"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -265,6 +347,8 @@ function Checkout() {
                             type="text"
                             placeholder="Enter Province"
                             className="custom-outline"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -285,6 +369,8 @@ function Checkout() {
                               }
                             }}
                             onWheel={(e) => e.target.blur()}
+                            value={pin}
+                            onChange={(e) => setPin(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -300,6 +386,8 @@ function Checkout() {
                             type="number"
                             placeholder="Enter Number"
                             className="custom-outline"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -314,8 +402,11 @@ function Checkout() {
                             type="email"
                             placeholder="johndoe@example.com"
                             className="custom-outline"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </Form.Group>
+                        <Button type="submit">Submit</Button>
                       </Col>
 
                       <Col lg={12}>
@@ -391,14 +482,14 @@ function Checkout() {
                   </Form>
                 </div>
               </div>
-            </Col>
 
+            </Col>
             <Col lg={5}>
               <div className="right-bill">
                 <div className="amount-display d-flex flex-column gap-3">
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Subtotal</p>
-                    <p>$497.00</p>
+                    <p>${total}</p>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping</p>
@@ -406,7 +497,7 @@ function Checkout() {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Discount</p>
-                    <p>$0.0</p>
+                    <p>${Discount.toFixed(2)}</p>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
@@ -488,7 +579,7 @@ function Checkout() {
                     onClick={handleCheckout}
                   >
                     {" "}
-                    <span>Place Order</span> <span>|</span> <span>$547.00</span>{" "}
+                    <span>Place Order</span> <span>|</span> <span>${total}</span>{" "}
                   </Button>
                 </div>
                 <div className="show-payment-cards">
