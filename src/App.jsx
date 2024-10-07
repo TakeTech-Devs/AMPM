@@ -56,7 +56,7 @@ function App() {
         <Route
           path="/raccount"
           element={
-            <ProtectedRoute isConsumer={true}>
+            <ProtectedRoute isReseller={true}>
               <ResellerProfile />
             </ProtectedRoute>
           }
