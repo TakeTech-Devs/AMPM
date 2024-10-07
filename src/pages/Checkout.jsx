@@ -14,12 +14,10 @@ function Checkout() {
   const dispatch = useDispatch();
   const { total } = location.state || { total: 0 };
   const { Discount } = location.state || { Discount: 0 };
-  console.log(total)
+  console.log(total);
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { error } = useSelector((state) => state.newOrder);
-
-
 
   const [firstName, setFirstName] = useState(shippingInfo.firstName);
   const [lastName, setLastName] = useState(shippingInfo.lastName);
@@ -30,8 +28,6 @@ function Checkout() {
   const [pin, setPin] = useState(shippingInfo.pin);
   const [phone, setPhone] = useState(shippingInfo.phone);
   const [email, setEmail] = useState(shippingInfo.email);
-
-
 
   const changeHandler = (value) => {
     setCountry(value);
@@ -62,10 +58,21 @@ function Checkout() {
 
   const shippingSubmit = (e) => {
     e.preventDefault();
-    dispatch(saveShippingInfo({ firstName, lastName, country, address, city, state, pin, phone, email }))
-    console.log("Hi")
-  }
-
+    dispatch(
+      saveShippingInfo({
+        firstName,
+        lastName,
+        country,
+        address,
+        city,
+        state,
+        pin,
+        phone,
+        email,
+      })
+    );
+    console.log("Hi");
+  };
 
   const totalPrice = total;
 
@@ -77,9 +84,7 @@ function Checkout() {
     shippingInfo,
     orderItems: cartItems,
     totalPrice,
-  }
-
-
+  };
 
   const handleCheckout = (e) => {
     e.preventDefault();
@@ -87,17 +92,19 @@ function Checkout() {
     // localStorage.removeItem('cartItems');
     const Total = total;
     const Fdiscount = Discount;
-    window.alert("Order Placed Successfully")
-    navigate("/ordercomplete" ,{ state: { Total, Fdiscount, fromCheckout: true } });
+    window.alert("Order Placed Successfully");
+    navigate("/ordercomplete", {
+      state: { Total, Fdiscount, fromCheckout: true },
+    });
   };
 
   useEffect(() => {
     if (error) {
-        dispatch(clearErrors());
-        // alert.error(error);
-        window.alert(error)
+      dispatch(clearErrors());
+      // alert.error(error);
+      window.alert(error);
     }
-}, [dispatch, error]);
+  }, [dispatch, error]);
 
   return (
     <>
@@ -406,7 +413,11 @@ function Checkout() {
                             onChange={(e) => setEmail(e.target.value)}
                           />
                         </Form.Group>
-                        <Button type="submit">Submit</Button>
+                      </Col>
+                      <Col lg={12} className="justify-content-center d-flex">
+                        <Button type="submit" className="primary">
+                          Submit
+                        </Button>
                       </Col>
 
                       <Col lg={12}>
@@ -482,7 +493,6 @@ function Checkout() {
                   </Form>
                 </div>
               </div>
-
             </Col>
             <Col lg={5}>
               <div className="right-bill">
@@ -579,7 +589,8 @@ function Checkout() {
                     onClick={handleCheckout}
                   >
                     {" "}
-                    <span>Place Order</span> <span>|</span> <span>${total}</span>{" "}
+                    <span>Place Order</span> <span>|</span>{" "}
+                    <span>${total}</span>{" "}
                   </Button>
                 </div>
                 <div className="show-payment-cards">
