@@ -93,7 +93,10 @@ function BillingShipping() {
   };
 
   const handleCheckout = () => {
-    navigate("/checkout");
+    const total = calculateTotal();
+    const Discount = discount;
+    console.log(calculateTotal())
+    navigate("/checkout", { state: { total, Discount } });
   };
 
   return (
