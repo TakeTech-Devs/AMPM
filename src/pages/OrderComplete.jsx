@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/PaymentDetails.scss";
 import { Button, Col, Container, Nav, Row } from "react-bootstrap";
 import p1 from "../assets/p1.png";
 import "../styles/PaymentDetails.scss";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 function OrderComplete() {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  // const { Total } = location.state || { Total: 0 };
+  // const { Fdiscount } = location.state || { Fdiscount: 0 };
+  const { Total, Fdiscount, fromCheckout } = location.state || {};
+
+
+
+
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const calculateSubtotal = () => {
+    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+  };
+
+
+  const home = () =>{
+    localStorage.removeItem('cartItems');
+    navigate('/')
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    // If the user didn't come from the Checkout page, redirect them
+    if (!fromCheckout) {
+      alert("Unauthorized access. Please complete your order first.");
+      navigate('/');  // Redirect them back to the checkout page
+    }
+  }, [fromCheckout, navigate]);
+
+
+
   return (
     <>
       <section className="billing-mt">
@@ -133,64 +168,68 @@ function OrderComplete() {
             </div>
             <div className="order-items-show">
               <ul>
-                <li>
-                  <div className="items">
-                    <div className="items-details">
-                      <div className="img-title-wrapper">
-                        <div className="img-div">
-                          <img
-                            src={p1}
-                            alt="product 1"
-                            width="100%"
-                            height="100%"
-                          />
-                        </div>
-                        <div className="items-name">
-                          <p>1x Jungle Diamond</p>
-                          <p>(AA+)</p>
-                        </div>
-                      </div>
-                      <div className="price">
-                        <p className="how-many-items">1x</p>
-                        <p className="total-price">$200.00</p>
-                      </div>
-                      <div className="final-price">
-                        <p>$200.00</p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="items">
-                    <div className="items-details">
-                      <div className="img-title-wrapper">
-                        <div className="img-div">
-                          <img
-                            src={p1}
-                            alt="product 1"
-                            width="100%"
-                            height="100%"
-                          />
-                        </div>
-                        <div className="items-name">
-                          <p>1x Jungle Diamond</p>
-                          <p>(AA+)</p>
+                {cartItems.map((item) => (
+                  <>
+                    <li>
+                      <div className="items">
+                        <div className="items-details">
+                          <div className="img-title-wrapper">
+                            <div className="img-div">
+                              <img
+                                src={item.image}
+                                alt={item.name.split(' ')[0]}
+                                width="100%"
+                                height="100%"
+                              />
+                            </div>
+                            <div className="items-name">
+                              <p>{item.name}</p>
+                              {/* <p>(AA+)</p> */}
+                            </div>
+                          </div>
+                          <div className="price">
+                            <p className="how-many-items">{item.quantity}x</p>
+                            <p className="total-price">${item.price}</p>
+                          </div>
+                          <div className="final-price">
+                            <p>${(item.price * item.quantity).toFixed(2)}</p>
+                          </div>
                         </div>
                       </div>
-                      <div className="price">
-                        <p className="how-many-items">1x</p>
-                        <p className="total-price">$200.00</p>
+                    </li>
+                    {/* <li>
+                      <div className="items">
+                        <div className="items-details">
+                          <div className="img-title-wrapper">
+                            <div className="img-div">
+                              <img
+                                src={p1}
+                                alt="product 1"
+                                width="100%"
+                                height="100%"
+                              />
+                            </div>
+                            <div className="items-name">
+                              <p>1x Jungle Diamond</p>
+                              <p>(AA+)</p>
+                            </div>
+                          </div>
+                          <div className="price">
+                            <p className="how-many-items">1x</p>
+                            <p className="total-price">$200.00</p>
+                          </div>
+                          <div className="final-price">
+                            <p>$200.00</p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="final-price">
-                        <p>$200.00</p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                    </li> */}
+                  </>
+                ))}
 
                 <div className="sub-total">
                   <h3>TOTAL</h3>
-                  <h3 className="amount">$497.00</h3>
+                  <h3 className="amount">${calculateSubtotal()}</h3>
                 </div>
               </ul>
             </div>
@@ -216,11 +255,11 @@ function OrderComplete() {
                   <div className="right-address">
                     <div className="address">
                       <p className="heading">Subtotal</p>
-                      <p>$497.00</p>
+                      <p>${calculateSubtotal()}</p>
                     </div>
                     <div className="address">
                       <p className="heading">Discount</p>
-                      <p>$0.0</p>
+                      <p>${Fdiscount.toFixed(2)}</p>
                     </div>
                     <div className="address">
                       <p className="heading">Shipping Costs</p>
@@ -232,7 +271,7 @@ function OrderComplete() {
                     </div>
                     <div className="total">
                       <p>TOTAL</p>
-                      <h3 className="amount">$297.00</h3>
+                      <h3 className="amount">${Total}</h3>
                     </div>
                   </div>
                 </Col>
@@ -240,7 +279,7 @@ function OrderComplete() {
             </div>
             <div className="new-order-btn-wrapper">
               <p>New Order, Click button bellow</p>
-              <Button href="/products" className="primary">
+              <Button onClick={home} className="primary">
                 Shop Now
               </Button>
             </div>

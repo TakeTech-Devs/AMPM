@@ -35,5 +35,16 @@ export const addItemsToCart = (productGuid, quantity = 1) => async (dispatch, ge
     });
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
-    console.log('cart')
+}
+
+
+// save shipping info
+export const saveShippingInfo = (data) => async (dispatch) => {
+
+    dispatch({
+        type: SAVE_SHIPPING_INFO,
+        payload: data,
+    });
+
+    localStorage.setItem('shippingInfo', JSON.stringify(data));
 }
