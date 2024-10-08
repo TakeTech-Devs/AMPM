@@ -36,6 +36,7 @@
 
 .all-items-sec .left-bill .add-to-cart-items .items .count-price-wrapper .counter button{background-color: transparent;border: none;}
 .btn:first-child:active{background-color: #afafaf;}
+.all-items-sec .left-bill .add-to-cart-items .items .prices-wrapper .del-btn{border: none;background-color: $red;padding: 8px; border-radius: 50%;display: flex;align-items: center;justify-content: center;width: 30px;}
 .all-items-sec .left-bill .add-to-cart-items .items .count-price-wrapper .price p,.all-items-sec .left-bill .add-to-cart-items .items .total p{color: #060709;font-weight: $semibold;}
 .all-items-sec .left-bill .add-to-cart-items ul li .subtotal{display: flex;justify-content: space-between;align-items: center;}
 .all-items-sec .left-bill .add-to-cart-items ul li .subtotal p{color: #9D9EA2;}
@@ -65,6 +66,8 @@
 .bottom-wrapper{height: 100%;}
 .bottom-wrapper .bill-features-wrapper{padding-top: 24px;}
 .bottom-wrapper .bill-features-wrapper .order-wrap{margin-top: 16px;}
+.bottom-wrapper .bill-features-wrapper .gap-fix{margin-top: 56px;}
+
 
 
 .bottom-wrapper .bill-features-wrapper .sms{color: $btnColor;font-size: 16px;line-height: 24px;}
@@ -199,10 +202,16 @@
 .wrapper .product-history-wrapper .products .product-details-wrapper .product-details p{font-weight: $semibold;font-size: 16px;line-height: 24px;}
 
 
-
+@media (max-width:1399px){
+  .all-items-sec .left-bill .add-to-cart-items .items{display: grid;grid-template-columns: 1fr;align-items: center;}
+  .all-items-sec .left-bill .add-to-cart-items .items-details{margin-bottom: 10px;}
+}
 
 @media (max-width:768px){
+    .all-items-sec .left-bill .add-to-cart-items .items{display: grid;grid-template-columns: 1fr 3fr;align-items: center;}
+    .all-items-sec .left-bill .add-to-cart-items .items-details{margin-bottom: 10px;}
   .navigation h3{font-size: 14px;}
+  .bottom-wrapper .bill-features-wrapper .gap-fix{margin-top: 16px;}
 
   .bottom-wrapper .bill-features-wrapper .sms{margin-top: 10px;}
   .billing-mt{margin-top: 120px;}
@@ -288,5 +297,5 @@
 .my-profile-wrapper .user-profile-wrapper .user-info .user-img{width: 80px;height: 80px;}
 .right-bill .checkout-btn button{font-size: 16px;}
 .wrapper .product-history-wrapper .products .product-details-wrapper .product-img{width: 100%;height: 150px;}
-
+.all-items-sec .left-bill .add-to-cart-items .items .prices-wrapper .del-btn{width: 25px;padding: 6px;}
 }

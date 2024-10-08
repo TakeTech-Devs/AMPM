@@ -7,29 +7,29 @@ import { useSelector } from "react-redux";
 
 function BillingShipping() {
   const [quantity, setQuantity] = useState(1);
-  const [subtotal, setSubtotal] = useState(120.00);
+  const [subtotal, setSubtotal] = useState(120.0);
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
-  const [shippingCost] = useState(50.00);
+  const [shippingCost] = useState(50.0);
   const [total, setTotal] = useState(subtotal + shippingCost);
   const navigate = useNavigate();
 
   const { cartItems } = useSelector((state) => state.cart);
 
   const calculateSubtotal = () => {
-    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+    return cartItems
+      .reduce((acc, item) => acc + item.price * item.quantity, 0)
+      .toFixed(2);
   };
 
   const amountToPay = parseFloat(calculateSubtotal());
 
   const calculateTotal = () => {
-    ;
     // const subtotal = calculateSubtotal();
     // return (amountToPay + shippingCost).toFixed(2);
     const totalBeforeDiscount = amountToPay + shippingCost;
     return (totalBeforeDiscount - discount).toFixed(2);
   };
-
 
   const handleIncrease = () => {
     // const newQuantity = quantity + 1;
@@ -50,7 +50,7 @@ function BillingShipping() {
   };
 
   // const updateSubtotal = (newQuantity) => {
-  //   const newSubtotal = newQuantity * 120; 
+  //   const newSubtotal = newQuantity * 120;
   //   setSubtotal(newSubtotal);
   //   updateTotal(newSubtotal);
   // };
@@ -64,8 +64,6 @@ function BillingShipping() {
   const handleCouponChange = (e) => {
     setCoupon(e.target.value);
   };
-
-
 
   const applyCoupon = (e) => {
     e.preventDefault();
@@ -95,7 +93,7 @@ function BillingShipping() {
   const handleCheckout = () => {
     const total = calculateTotal();
     const Discount = discount;
-    console.log(calculateTotal())
+    console.log(calculateTotal());
     navigate("/checkout", { state: { total, Discount } });
   };
 
@@ -235,7 +233,6 @@ function BillingShipping() {
       <section className="sec-gap all-items-sec">
         <Container>
           <Row>
-
             <Col lg={7}>
               <div className="left-bill">
                 <div className="cart-heading">
@@ -348,7 +345,7 @@ function BillingShipping() {
                                   <div className="img-div">
                                     <img
                                       src={item.image}
-                                      alt={item.name.split(' ')[0]}
+                                      alt={item.name.split(" ")[0]}
                                       width="100%"
                                       height="100%"
                                     />
@@ -407,11 +404,32 @@ function BillingShipping() {
                                     <div className="price">
                                       <p>${item.price}</p>
                                     </div>
+
+                                    
                                   </div>
+                                  <button className="del-btn">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="13"
+                                        height="14"
+                                        viewBox="0 0 13 14"
+                                        fill="none"
+                                      >
+                                        <path
+                                          d="M10.9254 1.72926L8.49411 1.72517L8.49479 1.32222C8.49591 0.654582 7.90307 0.112371 7.17064 0.11114L5.4024 0.10817C4.66996 0.106939 4.07531 0.647156 4.07418 1.3148L4.07351 1.71775L1.64218 1.71366C1.03183 1.71264 0.536268 2.16283 0.535334 2.71918L0.53398 3.52509C0.533606 3.74764 0.731207 3.92837 0.975363 3.92878L11.5848 3.9466C11.829 3.94701 12.0272 3.76695 12.0275 3.5444L12.0289 2.73849C12.0298 2.18214 11.5358 1.73028 10.9254 1.72926ZM4.9583 1.31628C4.95868 1.09415 5.15736 0.913663 5.40104 0.914072L7.16928 0.917043C7.41297 0.917452 7.61104 1.09861 7.61067 1.32074L7.60999 1.72369L4.95763 1.71923L4.9583 1.31628Z"
+                                          fill="white"
+                                        />
+                                        <path
+                                          d="M1.43462 4.69516C1.35677 4.69503 1.29463 4.75619 1.29821 4.82943L1.64622 11.9433C1.67838 12.6017 2.25183 13.1182 2.95159 13.1194L9.57774 13.1305C10.2775 13.1317 10.8527 12.6171 10.8871 11.9588L11.259 4.84615C11.2628 4.77292 11.2009 4.71156 11.123 4.71143L1.43462 4.69516ZM8.0224 5.73326C8.02278 5.50628 8.21835 5.32277 8.45942 5.32318C8.70049 5.32358 8.89543 5.50775 8.89505 5.73472L8.88607 11.0753C8.88569 11.3023 8.69012 11.4858 8.44905 11.4854C8.20798 11.485 8.01304 11.3008 8.01342 11.0738L8.0224 5.73326ZM5.84077 5.7296C5.84115 5.50262 6.03672 5.31911 6.27779 5.31952C6.51886 5.31992 6.7138 5.50409 6.71342 5.73106L6.70444 11.0716C6.70406 11.2986 6.5085 11.4821 6.26743 11.4817C6.02636 11.4813 5.83141 11.2972 5.83179 11.0702L5.84077 5.7296ZM3.65914 5.72594C3.65952 5.49896 3.85509 5.31545 4.09616 5.31585C4.33723 5.31626 4.53217 5.50043 4.53179 5.7274L4.52281 11.068C4.52243 11.295 4.32687 11.4785 4.0858 11.4781C3.84473 11.4777 3.64978 11.2935 3.65016 11.0665L3.65914 5.72594Z"
+                                          fill="white"
+                                        />
+                                      </svg>
+                                    </button>
                                   <div className="total">
                                     {/* <p>${subtotal.toFixed(2)}</p> */}
-                                    <p>${(item.price * item.quantity).toFixed(2)}</p>
-
+                                    <p>
+                                      ${(item.price * item.quantity).toFixed(2)}
+                                    </p>
                                   </div>
                                 </div>
                               </div>
@@ -432,7 +450,9 @@ function BillingShipping() {
                         <li>
                           <div className="subtotal">
                             <p>Subtotal</p>
-                            <p className="totalamount">${calculateSubtotal()}</p>
+                            <p className="totalamount">
+                              ${calculateSubtotal()}
+                            </p>
                           </div>
                         </li>
                       </ul>
@@ -452,12 +472,14 @@ function BillingShipping() {
                   {discount > 0 ? (
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="sms">Discount</p>
-                      <p>-${discount.toFixed(2)}</p> {/* Showing the discount as negative */}
+                      <p>-${discount.toFixed(2)}</p>{" "}
+                      {/* Showing the discount as negative */}
                     </div>
                   ) : (
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="sms">Discount</p>
-                      <p>${discount.toFixed(2)}</p> {/* Showing the discount as negative */}
+                      <p>${discount.toFixed(2)}</p>{" "}
+                      {/* Showing the discount as negative */}
                     </div>
                   )}
                   <div className="d-flex align-items-center justify-content-between">
@@ -509,7 +531,7 @@ function BillingShipping() {
                       disabled
                       style={{
                         cursor: "not-allowed",
-                        pointerEvents: "auto"
+                        pointerEvents: "auto",
                       }}
                     >
                       {" "}
@@ -626,7 +648,6 @@ function BillingShipping() {
                 </div>
               </div>
             </Col>
-
           </Row>
           <hr style={{ color: "#80B32F" }} />
           <Row>
@@ -674,8 +695,8 @@ function BillingShipping() {
             </Col>
             <Col lg={4}>
               <div className="bottom-wrapper">
-                <div className="bill-features-wrapper">
-                  <div className="order-wrap p-3">
+                <div className="bill-features-wrapper ">
+                  <div className="order-wrap p-3 gap-fix">
                     <div className="order-icon ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
