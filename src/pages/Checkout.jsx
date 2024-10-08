@@ -414,8 +414,8 @@ function Checkout() {
                           />
                         </Form.Group>
                       </Col>
-                      <Col lg={12} className="justify-content-center d-flex">
-                        <Button type="submit" className="primary">
+                      <Col lg={12}>
+                        <Button type="submit" className="primary w-100">
                           Submit
                         </Button>
                       </Col>
