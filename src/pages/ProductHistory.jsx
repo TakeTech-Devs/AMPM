@@ -49,7 +49,7 @@ function ProductHistory() {
                   <Row className="gap-4">
                     {orders && orders.length > 0 ? (
                       [...orders].reverse().map((order) => (
-                        <div key={order._id} className="order-item d-flex justify-content-center">
+                        <div key={order._id} className="order-item d-sm-flex justify-content-sm-center">
                           <Col lg={11} md={12}>
                             <li>
                               <div className="products">
