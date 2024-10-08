@@ -98,7 +98,7 @@ function ProductHistory() {
                                   <div className="product-img">
                                   {order.orderItems.map((item) => (
                                     <img
-                                      src={item.image}
+                                      src={battery}
                                       alt={item.name}
                                       width="100%"
                                       height="100%"
