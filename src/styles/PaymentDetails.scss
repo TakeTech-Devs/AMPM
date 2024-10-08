@@ -187,7 +187,8 @@
 
 
 // product History start
-.product-history{max-height: 1005px;overflow-y: auto;overflow-x: hidden;}
+// .product-history{max-height: 1005px;overflow-y: auto;overflow-x: hidden;}
+.wrapper{width: 100%;}
 .wrapper .product-history-wrapper ul{padding-left: 0px;}
 .wrapper .heading h2{font-weight: $bold;line-height: 46px;margin-bottom: 50px;}
 .wrapper .product-history-wrapper .products{border: 1px solid $black;border-radius: 20px;padding-block: 20px;padding-inline: 20px;}
@@ -197,7 +198,8 @@
 .wrapper .product-history-wrapper .products .product-status{width: 100%;background-color: $primary;display: flex;column-gap: 10px;align-items: center;padding: 15px 10px;border-radius: 10px;margin-bottom: 40px;}
 .wrapper .product-history-wrapper .products .product-status-2{background-color: #367AFF;}
 .wrapper .product-history-wrapper .products .product-details-wrapper .product-img{width: 235px;height: 220px;}
-.wrapper .product-history-wrapper .products .product-details-wrapper{display: flex;column-gap: 40px;}
+// .wrapper .product-history-wrapper .products .product-details-wrapper{display: flex;column-gap: 40px;}
+.wrapper .product-history-wrapper .products .product-details-wrapper{display: flex;column-gap: 40px; max-width: 100%;overflow-x: auto;}
 .wrapper .product-history-wrapper .products .product-details-wrapper .product-details h3{padding-bottom: 10px;}
 .wrapper .product-history-wrapper .products .product-details-wrapper .product-details p{font-weight: $semibold;font-size: 16px;line-height: 24px;}
 
@@ -221,6 +223,8 @@
   .address-normal-wrapper .add-new-address-btn-wrapper .outline-primary{margin-block-start: 20px;}
   .address-normal-wrapper .user-info-wrapper{margin-bottom: 25px;}
   .all-items-sec .left-bill .add-to-cart-items ul li .subtotal{padding-top: 10px;}
+  .wrapper .product-history-wrapper .products .product-details-wrapper{display: flex;gap: 20px;flex-direction: column;}
+  .wrapper .product-history-wrapper .products .product-details-wrapper .product-img{width: 100%;height: 180px;}
 
 }
 
@@ -289,7 +293,7 @@
 .address-normal-wrapper{padding: 15px;}
 .address-normal-wrapper .navigations{flex-direction: column;gap: 12px;}
 
-.wrapper .product-history-wrapper .products .product-details-wrapper{display: flex;gap: 20px;flex-direction: column;}
+
 .my-profile-wrapper .navigations,.address-normal-wrapper .navigations{flex-direction: column;}
 .my-profile-wrapper .navigations .links{padding-top: 10px;}
 .my-profile-wrapper .navigations .links .nav-link{font-size: 14px;}

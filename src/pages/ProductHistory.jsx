@@ -5,19 +5,17 @@ import battery from "../assets/Battery.png";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, myOrders } from "../actions/orderAction";
 function ProductHistory() {
-
   const dispatch = useDispatch();
 
   const { orders, loading, error } = useSelector((state) => state.myOrders);
 
   useEffect(() => {
     if (error) {
-      window.alert(error)
+      window.alert(error);
       dispatch(clearErrors());
     }
     dispatch(myOrders());
-  }, [dispatch, error])
-
+  }, [dispatch, error]);
 
   return (
     <>
@@ -51,14 +49,18 @@ function ProductHistory() {
                   <Row className="gap-4">
                     {orders && orders.length > 0 ? (
                       orders.map((order) => (
-
-                        <div key={order._id} className="order-item">
-                          <Col Col lg={12}>
+                        <div key={order._id} className="order-item d-flex justify-content-center">
+                          <Col Col lg={11} md={12}>
                             <li>
                               <div className="products">
                                 <div className="product-info">
                                   {/* <h3 className="text-black">Placed Nov 27,2024</h3> */}
-                                  <h3 className="text-black">Placed: {new Date(order.createdAt).toLocaleDateString()}</h3>
+                                  <h3 className="text-black">
+                                    Placed:{" "}
+                                    {new Date(
+                                      order.createdAt
+                                    ).toLocaleDateString()}
+                                  </h3>
                                   {/* <p className="text-decoration-underline">
                                     Order #1234567890
                                   </p> */}
@@ -66,7 +68,9 @@ function ProductHistory() {
                                     Order #{order._id}
                                   </p>
                                   {/* <p>Order Total: $7.68</p> */}
-                                  <p>Order Total: ${order.totalPrice.toFixed(2)}</p>
+                                  <p>
+                                    Order Total: ${order.totalPrice.toFixed(2)}
+                                  </p>
                                 </div>
                                 <div className="product-status">
                                   <div className="svg-div">
@@ -92,33 +96,35 @@ function ProductHistory() {
                                     </svg>
                                   </div>
                                   {/* <h3 className="text-white">Order Delivered</h3> */}
-                                  <h3 className="text-white">{order.orderStatus}</h3>
+                                  <h3 className="text-white">
+                                    {order.orderStatus}
+                                  </h3>
                                 </div>
                                 <div className="product-details-wrapper">
-                                  <div className="product-img">
                                   {order.orderItems.map((item) => (
-                                    <img
-                                      src={battery}
-                                      alt={item.name}
-                                      width="100%"
-                                      height="100%"
-                                    />
+                                    
+                                    <div
+                                      key={item.product}
+                                      className="product-item"
+                                    >
+                                      <div className="product-img">
+                                        <img
+                                          src={battery}
+                                          alt={item.name}
+                                          width="100%"
+                                          height="100%"
+                                        />
+                                      </div>
+                                      <div className="product-details">
+                                        <h3 className="text-black">
+                                          Product details
+                                        </h3>
+                                        <p>{item.name}</p>
+                                        <p>Quantity: {item.quantity}</p>
+                                        <p>Price: ${item.price}</p>
+                                      </div>
+                                    </div>
                                   ))}
-                                  </div>
-                                  <div className="product-details">
-                                    <h3 className="text-black">Product details</h3>
-                                    {order.orderItems.map((item) => (
-                                      <li key={item.product}>
-                                        <div>
-                                          {/* <img src={item.image} alt={item.name} width="50" /> */}
-                                          <p>{item.name}</p>
-                                          <p>Quantity: {item.quantity}</p>
-                                          <p>Price: ${item.price}</p>
-                                        </div>
-                                      </li>
-                                    ))}
-                                    {/* <p>$ 12.00 x 3 = $ 36.00</p> */}
-                                  </div>
                                 </div>
                               </div>
                             </li>
@@ -147,9 +153,8 @@ function ProductHistory() {
                         </div>
                       ))
                     ) : (
-                      <p>No orders found</p> // Show this if there are no orders
+                      <p>Your cart is empty!</p> // Show this if there are no orders
                     )}
-
 
                     {/* <Col Col lg={12}>
                       <li>
