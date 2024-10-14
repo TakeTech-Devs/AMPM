@@ -2,6 +2,7 @@ import axios from "axios"
 import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART, SAVE_SHIPPING_INFO } from "../constants/cartConstants";
 import { APIID, hash64 } from '../api';
 
+
 export const addItemsToCart = (productGuid, quantity = 1) => async (dispatch, getState) => {
     const config = {headers: {
         "api-auth-id": `${APIID}`,

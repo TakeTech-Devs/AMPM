@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
@@ -7,11 +8,17 @@ function ProtectedRoute({ children, isConsumer, isReseller }) {
     (state) => state.user
   );
 
+  useEffect(() => {
+    console.log('Auth State:', { consumer, reseller, loading, isAuthenticated });
+  }, [consumer, reseller, loading, isAuthenticated]);
+
+
+
   if (loading) {
     return null; // or a loader component
   }
 
-  if (!isAuthenticated) {
+  if (isAuthenticated == false) {
     return <Navigate to="/login" />;
   }
 

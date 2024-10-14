@@ -31,6 +31,7 @@ import {
     SUBMIT_MESSAGE_FAIL,
 } from '../constants/userConstants';
 import axios from 'axios';
+import baseUrl from '../helper';
 
 // Consumer Login
 
@@ -40,7 +41,7 @@ export const consumerLogin = (email, password) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/consumer/login`, { email, password }, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/consumer/login`, { email, password }, config);
 
         dispatch({
             type: CONSUMER_LOGIN_SUCCESS,
@@ -61,7 +62,7 @@ export const consumarRegister = (userData) => async (dispatch) => {
         const config = { headers: { "Content-Type": "application/json" } };
 
         // const { data } = await axios.post('http://localhost:5000/api/v1/user/register', userData, { withCredentials: true } , config);
-        const { data } = await axios.post('http://localhost:5000/api/v1/consumer/register', userData, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/consumer/register`, userData, config);
         
         dispatch({
             type: REGISTER_CONSUMER_SUCCESS,
@@ -85,7 +86,7 @@ export const resellerLogin = (businessEmail, businessPassword) => async (dispatc
 
         const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/reseller/login`, { businessEmail, businessPassword }, config)
+        const { data } = await axios.post(`${baseUrl}/api/v1/reseller/login`, { businessEmail, businessPassword }, config)
 
         dispatch({
             type: RESELLER_LOGIN_SUCCESS,
@@ -108,7 +109,7 @@ export const resellerRegister = (userData) => async (dispatch) => {
         const config = { headers: { "Content-Type": "application/json" } };
 
         // const { data } = await axios.post('http://localhost:5000/api/v1/user/register', userData, { withCredentials: true } , config);
-        const { data } = await axios.post('http://localhost:5000/api/v1/reseller/register', userData, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/reseller/register`, userData, config);
         
         dispatch({
             type: REGISTER_RESELLER_SUCCESS,
@@ -129,7 +130,7 @@ export const loadReseller = () => async (dispatch) => {
     try {
         dispatch({ type: LOAD_RESELLER_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/reseller/profile`, { withCredentials: true });
+        const { data } = await axios.get(`${baseUrl}/api/v1/reseller/profile`, { withCredentials: true });
 
         dispatch({ type: LOAD_RESELLER_SUCCESS, payload: data.reseller });
     } catch (error) {
@@ -143,7 +144,7 @@ export const loadConsumer = () => async (dispatch) => {
     try {
         dispatch({ type: LOAD_CONSUMER_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/consumer/profile`, { withCredentials: true });
+        const { data } = await axios.get(`${baseUrl}/api/v1/consumer/profile`, { withCredentials: true });
 
         dispatch({ type: LOAD_CONSUMER_SUCCESS, payload: data.consumer });
     } catch (error) {
@@ -155,7 +156,7 @@ export const loadConsumer = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try {
-        await axios.get(`http://localhost:5000/api/v1/reseller/logout`, {withCredentials: true});
+        await axios.get(`${baseUrl}/api/v1/reseller/logout`, {withCredentials: true});
 
         dispatch({ type: LOGOUT_SUCCESS });
     } catch (error) {
@@ -172,7 +173,7 @@ export const updateResellerProfile = (userData) => async (dispatch) =>{
 
         const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
-        const { data } = await axios.put(`http://localhost:5000/api/v1/reseller/profile/update`, userData, config)
+        const { data } = await axios.put(`${baseUrl}/api/v1/reseller/profile/update`, userData, config)
 
         dispatch({ type: UPDATE_RESELLER_PROFILE_SUCCESS, payload: data.success });
 
@@ -194,7 +195,7 @@ export const updateConsumerProfile = (userData) => async (dispatch) =>{
 
         const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
-        const { data } = await axios.put(`http://localhost:5000/api/v1/consumer/profile/update`, userData, config)
+        const { data } = await axios.put(`${baseUrl}/api/v1/consumer/profile/update`, userData, config)
 
         dispatch({ type: UPDATE_CONSUMER_PROFILE_SUCCESS, payload: data.success });
 
@@ -215,7 +216,7 @@ export const contactForm = (formData) => async(dispatch) =>{
 
         const config = { headers: { "Content-Type": "application/json" } }
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/user/contact`, formData, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/user/contact`, formData, config);
 
         dispatch({ type: SUBMIT_MESSAGE_SUCCESS, payload: data.success });
 
