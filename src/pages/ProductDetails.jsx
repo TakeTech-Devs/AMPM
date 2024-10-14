@@ -20,7 +20,7 @@ function ProductDetails() {
   const handleAddToCart = () => {
     dispatch(addItemsToCart(productId, quantity));
     // navigate("/cart");
-    window.alert("Item Added To Cart")
+    window.alert("Product Added To Cart")
   };
 
   const handleIncrease = () => {
