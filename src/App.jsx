@@ -70,11 +70,11 @@ function App() {
         <Route path="/Products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<BillingShipping />} />
         {/* <Route path="/checkout" element={<Checkout />} /> */}
-        <Route path="/checkout" element={
-          <ProtectedRoute>
-            <Checkout />
-          </ProtectedRoute>
-        }/>
+          <Route path="/checkout" element={
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          }/>
         <Route path="/ordercomplete" element={<OrderComplete />} />
         <Route path="/orders" element={<ProductHistory />} />
         <Route path="/address" element={<AddressNormal />} />

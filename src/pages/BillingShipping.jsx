@@ -5,6 +5,7 @@ import "../styles/PaymentDetails.scss";
 import p1 from "../assets/p1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItemsFromCart } from '../actions/cartAction';
+import { addItemsToCart } from "../actions/cartAction";
 
 function BillingShipping() {
   const [quantity, setQuantity] = useState(1);
@@ -14,6 +15,7 @@ function BillingShipping() {
   const [shippingCost] = useState(50.0);
   const [total, setTotal] = useState(subtotal + shippingCost);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -32,22 +34,16 @@ function BillingShipping() {
     return (totalBeforeDiscount - discount).toFixed(2);
   };
 
-  const handleIncrease = () => {
-    // const newQuantity = quantity + 1;
-    // setQuantity(newQuantity);
-    // updateSubtotal(newQuantity);
+  const handleIncrease = (productId, quantity) => {
+    const updatedQuantity = quantity + 1;
+    dispatch(addItemsToCart(productId, updatedQuantity));
   };
 
-  const handleDecrease = () => {
-    // if (quantity > 1) {
-    //   const newQuantity = quantity - 1;
-    //   setQuantity(newQuantity);
-    //   updateSubtotal(newQuantity);
-    // } else {
-    //   alert("Please select at least one item to proceed");
-    //   setQuantity(0);
-    //   updateSubtotal(0);
-    // }
+  const handleDecrease = (productId, quantity) => {
+    if (quantity > 1) {
+      const updatedQuantity = quantity - 1;
+      dispatch(addItemsToCart(productId, updatedQuantity));
+    }
   };
 
   const dispatch = useDispatch();
@@ -366,7 +362,7 @@ function BillingShipping() {
                                 <div className="prices-wrapper">
                                   <div className="count-price-wrapper">
                                     <div className="counter">
-                                      <Button onClick={handleDecrease}>
+                                      <Button onClick={() => handleDecrease(item.product, item.quantity)}>
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
                                           width="16"
@@ -385,7 +381,7 @@ function BillingShipping() {
                                       <div className="amount">
                                         <p>{item.quantity}</p>
                                       </div>
-                                      <Button onClick={handleIncrease}>
+                                      <Button onClick={() => handleIncrease(item.product, item.quantity)}>
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
                                           width="16"
