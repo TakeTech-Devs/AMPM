@@ -13,7 +13,8 @@ function Checkout() {
   const dispatch = useDispatch();
   const { total } = location.state || { total: 0 };
   const { Discount } = location.state || { Discount: 0 };
-  console.log(total);
+  const { totalFinal } = location.state || { totalFinal: 0 };
+  // console.log(total);
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { error } = useSelector((state) => state.newOrder);
@@ -55,8 +56,6 @@ function Checkout() {
 
   const navigate = useNavigate();
 
-  // const count = 2;
-
   const shippingSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -77,27 +76,6 @@ function Checkout() {
 
   const totalPrice = total;
 
-  // const paymentData = {
-  //   amount: Math.round(totalPrice * 100),
-  // };
-
-  // const order = {
-  //   shippingInfo,
-  //   orderItems: cartItems,
-  //   totalPrice,
-  // };
-
-  // const handleCheckout = (e) => {
-  //   e.preventDefault();
-  //   dispatch(createOrder(order));
-  //   const Total = total;
-  //   const Fdiscount = Discount;
-  //   window.alert("Order Placed Successfully");
-  //   navigate("/ordercomplete", {
-  //     state: { Total, Fdiscount, fromCheckout: true },
-  //   });
-  // };
-
   const handleCheckout = (e) => {
     e.preventDefault();
     const order = {
@@ -112,16 +90,15 @@ function Checkout() {
     });
   };
 
-  const calculateShippingCost = () => {
+  const calculateShippingCost = (total) => {
     return total >= 100 ? 0 : 50;
   };
 
-  const finalTotal = total + calculateShippingCost() - Discount;
+  const finalTotal = total - Discount + calculateShippingCost(total);
 
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
-      // alert.error(error);
       window.alert(error);
     }
   }, [dispatch, error]);
@@ -530,7 +507,7 @@ function Checkout() {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
-                    <p>${calculateShippingCost().toFixed(2)}</p>
+                    <p>${calculateShippingCost(total).toFixed(2)}</p>
                   </div>
                 </div>
 

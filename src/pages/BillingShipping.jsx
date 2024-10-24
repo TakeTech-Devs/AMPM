@@ -99,10 +99,12 @@ function BillingShipping() {
   };
 
   const handleCheckout = () => {
-    const total = calculateTotal();
+    const total = calculateSubtotal();
+    const totalFinal = calculateTotal();
     const Discount = discount;
-    console.log(calculateTotal());
-    navigate("/checkout", { state: { total, Discount } });
+    // const ShippingCost = shippingCost;
+    console.log(calculateSubtotal());
+    navigate("/checkout", { state: { total, totalFinal, Discount } });
   };
 
   return (
