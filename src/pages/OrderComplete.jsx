@@ -13,15 +13,19 @@ function OrderComplete() {
   // const { Fdiscount } = location.state || { Fdiscount: 0 };
   const { Total, Fdiscount, fromCheckout } = location.state || {};
 
-
-
-
   const { cartItems } = useSelector((state) => state.cart);
 
   const calculateSubtotal = () => {
     return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
   };
 
+  const calculateShippingCost = (subtotal) => {
+    return subtotal >= 100 ? 0 : 50;
+  };
+
+  const calculateFinalTotal = (subtotal, shippingCost, discount) => {
+    return (parseFloat(subtotal) + parseFloat(shippingCost) - parseFloat(discount)).toFixed(2);
+  };
 
   const home = () =>{
     localStorage.removeItem('cartItems');
@@ -37,7 +41,9 @@ function OrderComplete() {
     }
   }, [fromCheckout, navigate]);
 
-
+  const subtotal = calculateSubtotal();
+  const shippingCost = calculateShippingCost(subtotal);
+  const finalTotal = calculateFinalTotal(subtotal, shippingCost, Fdiscount);
 
   return (
     <>
@@ -170,7 +176,7 @@ function OrderComplete() {
               <ul>
                 {cartItems.map((item) => (
                   <>
-                    <li>
+                    <li key={item.id}>
                       <div className="items">
                         <div className="items-details">
                           <div className="img-title-wrapper">
@@ -229,7 +235,7 @@ function OrderComplete() {
 
                 <div className="sub-total">
                   <h3>TOTAL</h3>
-                  <h3 className="amount">${calculateSubtotal()}</h3>
+                  <h3 className="amount">${subtotal}</h3>
                 </div>
               </ul>
             </div>
@@ -255,7 +261,7 @@ function OrderComplete() {
                   <div className="right-address">
                     <div className="address">
                       <p className="heading">Subtotal</p>
-                      <p>${calculateSubtotal()}</p>
+                      <p>${subtotal}</p>
                     </div>
                     <div className="address">
                       <p className="heading">Discount</p>
@@ -263,22 +269,22 @@ function OrderComplete() {
                     </div>
                     <div className="address">
                       <p className="heading">Shipping Costs</p>
-                      <p>$50.00</p>
+                      <p>${shippingCost.toFixed(2)}</p>
                     </div>
-                    <div className="address">
+                    {/* <div className="address">
                       <p className="heading">Point</p>
                       <p>- $250</p>
-                    </div>
+                    </div> */}
                     <div className="total">
                       <p>TOTAL</p>
-                      <h3 className="amount">${Total}</h3>
+                      <h3 className="amount">${finalTotal}</h3>
                     </div>
                   </div>
                 </Col>
               </Row>
             </div>
             <div className="new-order-btn-wrapper">
-              <p>New Order, Click button bellow</p>
+              <p>New Order, Click button below</p>
               <Button onClick={home} className="primary">
                 Shop Now
               </Button>
