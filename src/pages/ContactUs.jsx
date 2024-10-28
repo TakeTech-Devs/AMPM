@@ -5,8 +5,15 @@ import blankicon from "../assets/icon2.png";
 import "../styles/ContactUs.scss";
 import { useSelector, useDispatch } from 'react-redux';
 import { contactForm } from "../actions/userActions";
+import { useEffect } from "react";
+import { clearErrors, getContact } from "../actions/contactAction";
 
 function ContactUs() {
+
+
+
+  const { contactInfo } = useSelector(state => state.getContact);
+
   // const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState({
     invalidPhone: false,
@@ -43,6 +50,15 @@ function ContactUs() {
     window.location.reload();
   };
 
+  useEffect(() => {
+    dispatch(getContact());
+
+    if (error) {
+      alert(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
+
   return (
     <>
       <section className="bg-image">
@@ -50,7 +66,12 @@ function ContactUs() {
           <Container fluid="lg">
             <div className="middle">
               <div className="image-content-wrapper">
-                <h1>Get in touch with us</h1>
+                {/* <h1>Get in touch with us</h1> */}
+                {contactInfo && contactInfo.headerTitle ? (
+                  <h1>{contactInfo.headerTitle}</h1>
+                ) : (
+                  <h1>Get in touch with us</h1>
+                )}
               </div>
             </div>
           </Container>
@@ -95,7 +116,12 @@ function ContactUs() {
                       </div>
                       <div className="contact-details-wrapper">
                         <h3>Landline</h3>
-                        <p>0123456789</p>
+                        {/* <p>0123456789</p> */}
+                        {contactInfo && contactInfo.Landline ? (
+                          <p>{contactInfo.Landline}</p>
+                        ) : (
+                          <p>0123456789</p>
+                        )}
                       </div>
                     </div>
                     <div className="type">
@@ -109,7 +135,12 @@ function ContactUs() {
                       </div>
                       <div className="contact-details-wrapper">
                         <h3>Mobile</h3>
-                        <p>0123456789</p>
+                        {/* <p>0123456789</p> */}
+                        {contactInfo && contactInfo.Mobile ? (
+                          <p>{contactInfo.Mobile}</p>
+                        ) : (
+                          <p>0123456789</p>
+                        )}
                       </div>
                     </div>
                     <div className="type">
@@ -123,7 +154,12 @@ function ContactUs() {
                       </div>
                       <div className="contact-details-wrapper">
                         <h3>Email Support</h3>
-                        <p>xyz@email.com</p>
+                        {/* <p>xyz@email.com</p> */}
+                        {contactInfo && contactInfo.Email ? (
+                          <p>{contactInfo.Email}</p>
+                        ) : (
+                          <p>xyz@email.com</p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -144,7 +180,7 @@ function ContactUs() {
                             type="text"
                             placeholder="John Carter"
                             className="contact-outline"
-                            value={name} 
+                            value={name}
                             onChange={(e) => setName(e.target.value)}
                           />
                         </Form.Group>
@@ -160,7 +196,7 @@ function ContactUs() {
                             type="email"
                             placeholder="example@email.com"
                             className="contact-outline"
-                            value={email} 
+                            value={email}
                             onChange={(e) => setEmail(e.target.value)}
                           />
                         </Form.Group>
@@ -176,9 +212,8 @@ function ContactUs() {
                             type="tel"
                             placeholder="Enter your Phone"
                             maxLength={10}
-                            className={`contact-outline ${
-                              errors.invalidPhone ? "is-invalid" : ""
-                            }`}
+                            className={`contact-outline ${errors.invalidPhone ? "is-invalid" : ""
+                              }`}
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                           />

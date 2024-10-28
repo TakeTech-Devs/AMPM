@@ -6,18 +6,52 @@ import Slider from "../components/common/slider/Slider";
 import RatingSlider from "../components/common/slider/RatingSlider";
 import battery from "../assets/Battery.png";
 import "../styles/Global.scss";
+import { useSelector, useDispatch } from 'react-redux';
+import { clearErrors, getHome } from "../actions/homeAction";
+import { useEffect } from "react";
+import { getAbout } from "../actions/aboutAction";
 const Index = () => {
+
+  const dispatch = useDispatch();
+
+  const { home, loading, error } = useSelector(state => state.getHome)
+  const { about } = useSelector(state => state.getAbout)
+
+  useEffect(() => {
+    dispatch(getHome());
+    dispatch(getAbout());
+
+    if (error) {
+      alert(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
+
+
   return (
     <>
       <section className="bg-video">
         <Container>
           <Row className="video-content-wrapper">
             <Col xl={6}>
-              <h1>A dedicated team to grow your company</h1>
-              <p>
+              {/* <h1>A dedicated team to grow your company</h1> */}
+              {home && home.headerTitle ? (
+                <h1>{home.headerTitle}</h1>
+              ) : (
+                <h1>A dedicated team to grow your company</h1>
+              )}
+              {/* <p>
                 Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
                 phasellus mollis sit aliquam sit nullam neque ultrices. lor
-              </p>
+              </p> */}
+              {home && home.headerDescription ? (
+                <p>{home.headerDescription}</p>
+              ) : (
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
+                  phasellus mollis sit aliquam sit nullam neque ultrices. lor
+                </p>
+              )}
             </Col>
             <Col xs={12}>
               <div className="video-banner-features">
@@ -38,7 +72,12 @@ const Index = () => {
                       </svg>
                     </div>
 
-                    <h3>Best Price Guarantee</h3>
+                    {/* <h3>Best Price Guarantee</h3> */}
+                    {home && home.headerPointOne ? (
+                      <h3>{home.headerPointOne}</h3>
+                    ) : (
+                      <h3>Best Price Guarantee</h3>
+                    )}
                   </div>
                   <div className="d-flex align-items-center d-gap">
                     <div className="svg-wrap">
@@ -56,7 +95,12 @@ const Index = () => {
                       </svg>
                     </div>
 
-                    <h3>Australia Wide Delivery</h3>
+                    {/* <h3>Australia Wide Delivery</h3> */}
+                    {home && home.headerPointTwo ? (
+                      <h3>{home.headerPointTwo}</h3>
+                    ) : (
+                      <h3>Australia Wide Delivery</h3>
+                    )}
                   </div>
                   <div className="d-flex align-items-center d-gap">
                     <div className="svg-wrap">
@@ -74,7 +118,13 @@ const Index = () => {
                       </svg>
                     </div>
 
-                    <h3>Expert Advice</h3>
+                    {/* <h3>Expert Advice</h3> */}
+
+                    {home && home.headerPointThree ? (
+                      <h3>{home.headerPointThree}</h3>
+                    ) : (
+                      <h3>Expert Advice</h3>
+                    )}
                   </div>
                 </div>
               </div>
@@ -97,10 +147,18 @@ const Index = () => {
                 />
               </svg>
             </div>
-            <p className="text-center">
+            {/* <p className="text-center">
               Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
               phasellus mollis sit aliquam sit nullam neque ultrices
-            </p>
+            </p> */}
+            {home && home.highlightOne ? (
+              <p className="text-center">{home.highlightOne}</p>
+            ) : (
+              <p className="text-center">
+                Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
+                phasellus mollis sit aliquam sit nullam neque ultrices
+              </p>
+            )}
           </div>
           <div className="one">
             <div className="svg-div">
@@ -117,10 +175,18 @@ const Index = () => {
                 />
               </svg>
             </div>
-            <p className="text-center">
+            {/* <p className="text-center">
               Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
               phasellus mollis sit aliquam sit nullam neque ultrices.
-            </p>
+            </p> */}
+            {home && home.highlightTwo ? (
+              <p className="text-center">{home.highlightTwo}</p>
+            ) : (
+              <p className="text-center">
+                Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
+                phasellus mollis sit aliquam sit nullam neque ultrices
+              </p>
+            )}
           </div>
           <div className="one">
             <div className="svg-div">
@@ -137,10 +203,18 @@ const Index = () => {
                 />
               </svg>
             </div>
-            <p className="text-center">
+            {/* <p className="text-center">
               Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
               phasellus mollis sit aliquam sit nullam neque ultrices.
-            </p>
+            </p> */}
+            {home && home.highlightThree ? (
+              <p className="text-center">{home.highlightThree}</p>
+            ) : (
+              <p className="text-center">
+                Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
+                phasellus mollis sit aliquam sit nullam neque ultrices
+              </p>
+            )}
           </div>
         </div>
 
@@ -156,12 +230,26 @@ const Index = () => {
           <Row className="justify-content-center">
             <Col lg={6}>
               <div className="whatwedo-heading">
-                <h2 className="text-center">Batteries</h2>
-                <p className="text-center">
+                {/* <h2 className="text-center">Batteries</h2> */}
+                {home && home.batteriesHeading ? (
+                  <h2 className="text-center">{home.batteriesHeading}</h2>
+                ) : (
+                  <h2 className="text-center">Batteries</h2>
+                )}
+                {/* <p className="text-center">
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Magni, voluptatum repellat nesciunt quis placeat doloremque
                   corrupti
-                </p>
+                </p> */}
+                {home && home.batteriesDescription ? (
+                  <p className="text-center">{home.batteriesDescription}</p>
+                ) : (
+                  <p className="text-center">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Magni, voluptatum repellat nesciunt quis placeat doloremque
+                    corrupti
+                  </p>
+                )}
               </div>
             </Col>
           </Row>
@@ -183,13 +271,26 @@ const Index = () => {
         <Container>
           <Row className="justify-content-center">
             <Col lg={6}>
-            <div className="whatwedo-heading">
-              <h2 className="text-center">What we do</h2>
-              <p className="text-center">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
-                voluptatum repellat nesciunt quis placeat doloremque corrupti
-              </p>
-            </div>
+              <div className="whatwedo-heading">
+                {/* <h2 className="text-center">What we do</h2> */}
+                {about && about.weDoTitle ? (
+                  <h2 className="text-center">{about.weDoTitle}</h2>
+                ) : (
+                  <h2 className="text-center">What we do</h2>
+                )}
+                {/* <p className="text-center">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
+                  voluptatum repellat nesciunt quis placeat doloremque corrupti
+                </p> */}
+                {about && about.weDoDescription ? (
+                  <p className="text-center">{about.weDoDescription}</p>
+                ) : (
+                  <p className="text-center">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
+                    voluptatum repellat nesciunt quis placeat doloremque corrupti
+                  </p>
+                )}
+              </div>
             </Col>
           </Row>
           <RatingSlider />
@@ -201,11 +302,24 @@ const Index = () => {
           <Row>
             <Col md={6}>
               <div className="index-left-part">
-                <h2 className="text-black heading">Contact US</h2>
-                <p className="sub-heading">
+                {/* <h2 className="text-black heading">Contact US</h2> */}
+                {home && home.ContactUS ? (
+                  <h2 className="text-black heading">{home.ContactUS}</h2>
+                ) : (
+                  <h2 className="text-black heading">Contact US</h2>
+                )}
+                {/* <p className="sub-heading">
                   Lorem ipsum dolor sit amet consectetur adipiscing elit dolor
                   semper at ac tempus enim laoreet massa non..
-                </p>
+                </p> */}
+                {home && home.ContactUSDescription ? (
+                  <p className="sub-heading">{home.ContactUSDescription}</p>
+                ) : (
+                  <p className="sub-heading">
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit dolor
+                    semper at ac tempus enim laoreet massa non..
+                  </p>
+                )}
                 <div className="Mission-image-wrapper d-flex d-md-none">
                   <img
                     src={battery}
