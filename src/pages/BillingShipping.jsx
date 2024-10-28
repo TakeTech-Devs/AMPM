@@ -46,7 +46,6 @@ function BillingShipping() {
     }
   };
 
-  const dispatch = useDispatch();
   const removeCartItem = (id) => {
     dispatch(removeItemsFromCart(id));
     window.alert("Product Removed From Cart");
