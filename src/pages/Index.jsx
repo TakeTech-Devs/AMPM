@@ -30,7 +30,10 @@ const Index = () => {
 
   return (
     <>
-      <section className="bg-video">
+      <section>
+      <div className="bg-video">
+
+      
         <Container>
           <Row className="video-content-wrapper">
             <Col xl={6}>
@@ -131,6 +134,13 @@ const Index = () => {
             </Col>
           </Row>
         </Container>
+        
+
+        <div className="bg-video-wrapper">
+          <video autoPlay muted loop className="video-background">
+            <source src={bgvideo} type="video/mp4" />
+          </video>
+          <div className="home-banner"></div>
         <div className="overlay">
           <div className="one">
             <div className="svg-div">
@@ -217,11 +227,7 @@ const Index = () => {
             )}
           </div>
         </div>
-
-        <div className="bg-video-wrapper">
-          <video autoPlay muted loop className="video-background">
-            <source src={bgvideo} type="video/mp4" />
-          </video>
+        </div>
         </div>
       </section>
 
