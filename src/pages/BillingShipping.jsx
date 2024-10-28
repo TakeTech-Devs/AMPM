@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
-import p1 from "../assets/p1.png";
+// import p1 from "../assets/p1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItemsFromCart } from '../actions/cartAction';
 import { addItemsToCart } from "../actions/cartAction";
@@ -27,10 +27,15 @@ function BillingShipping() {
 
   const amountToPay = parseFloat(calculateSubtotal());
 
+  const calculateShippingCost = () => {
+    if (!amountToPay) return 0; // Initial stage, show 0
+    return amountToPay >= 100 ? 0 : 50.0;
+  };
+
+
   const calculateTotal = () => {
-    // const subtotal = calculateSubtotal();
-    // return (amountToPay + shippingCost).toFixed(2);
-    const totalBeforeDiscount = amountToPay + shippingCost;
+    const shipping = calculateShippingCost();
+    const totalBeforeDiscount = amountToPay + shipping;
     return (totalBeforeDiscount - discount).toFixed(2);
   };
 
@@ -45,6 +50,7 @@ function BillingShipping() {
       dispatch(addItemsToCart(productId, updatedQuantity));
     }
   };
+
 
   const removeCartItem = (id) => {
     dispatch(removeItemsFromCart(id));
@@ -93,10 +99,12 @@ function BillingShipping() {
   };
 
   const handleCheckout = () => {
-    const total = calculateTotal();
+    const total = calculateSubtotal();
+    const totalFinal = calculateTotal();
     const Discount = discount;
-    console.log(calculateTotal());
-    navigate("/checkout", { state: { total, Discount } });
+    // const ShippingCost = shippingCost;
+    console.log(calculateSubtotal());
+    navigate("/checkout", { state: { total, totalFinal, Discount } });
   };
 
   return (
@@ -486,7 +494,7 @@ function BillingShipping() {
                   )}
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
-                    <p>${shippingCost.toFixed(2)}</p>
+                    <p>${calculateShippingCost().toFixed(2)}</p>
                   </div>
                 </div>
                 <div className="apply-coupon-wrapper">
@@ -511,9 +519,24 @@ function BillingShipping() {
                 </div>
                 <div className="sms-show">
                   <p className="limit-sms">
-                    Get Free <span>Shipping</span> for orders over
-                    <span className="limit-amount"> $100.00</span>
+                    {amountToPay >= 100 ? (
+                      <>
+                        Congratulations! You get <span className="limit-amount">Free Shipping</span>.
+                      </>
+                    ) : cartItems.length > 0 ? (
+                      <>
+                        Get Free <span>Shipping</span> for orders over
+                        <span className="limit-amount"> $100.00</span>. Add $
+                        <span className="limit-amount">{(100 - amountToPay).toFixed(2)}</span> more to qualify.
+                      </>
+                    ) : (
+                      <>
+                        Get Free <span>Shipping</span> for orders over
+                        <span className="limit-amount"> $100.00</span>.
+                      </>
+                    )}
                   </p>
+
                   <p>Continue Shopping</p>
                 </div>
                 <div className="checkout-btn">

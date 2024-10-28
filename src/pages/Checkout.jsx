@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
-import Select from "react-select";
 import countryList from "react-select-country-list";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInfo } from "../actions/cartAction";
@@ -14,7 +13,8 @@ function Checkout() {
   const dispatch = useDispatch();
   const { total } = location.state || { total: 0 };
   const { Discount } = location.state || { Discount: 0 };
-  console.log(total);
+  const { totalFinal } = location.state || { totalFinal: 0 };
+  // console.log(total);
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { error } = useSelector((state) => state.newOrder);
@@ -29,32 +29,32 @@ function Checkout() {
   const [phone, setPhone] = useState(shippingInfo.phone);
   const [email, setEmail] = useState(shippingInfo.email);
 
+  const [isAddressSubmitted, setIsAddressSubmitted] = useState(false);
+
   const changeHandler = (value) => {
     setCountry(value);
   };
 
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      border: "0.6px solid #282828",
-      borderRadius: "6px",
-      width: "100%",
-      height: "59px",
-      paddingLeft: "10px",
-      boxShadow: state.isFocused ? "none" : provided.boxShadow,
-      "&:hover": {
-        borderColor: "#282828",
-      },
-    }),
-    dropdownIndicator: (provided) => ({
-      ...provided,
-      paddingRight: "20px",
-    }),
-  };
+  // const customStyles = {
+  //   control: (provided, state) => ({
+  //     ...provided,
+  //     border: "0.6px solid #282828",
+  //     borderRadius: "6px",
+  //     width: "100%",
+  //     height: "59px",
+  //     paddingLeft: "10px",
+  //     boxShadow: state.isFocused ? "none" : provided.boxShadow,
+  //     "&:hover": {
+  //       borderColor: "#282828",
+  //     },
+  //   }),
+  //   dropdownIndicator: (provided) => ({
+  //     ...provided,
+  //     paddingRight: "20px",
+  //   }),
+  // };
 
   const navigate = useNavigate();
-
-  const count = 2;
 
   const shippingSubmit = (e) => {
     e.preventDefault();
@@ -71,37 +71,34 @@ function Checkout() {
         email,
       })
     );
-    console.log("Hi");
+    setIsAddressSubmitted(true);
   };
 
   const totalPrice = total;
 
-  const paymentData = {
-    amount: Math.round(totalPrice * 100),
-  };
-
-  const order = {
-    shippingInfo,
-    orderItems: cartItems,
-    totalPrice,
-  };
-
   const handleCheckout = (e) => {
     e.preventDefault();
+    const order = {
+      shippingInfo,
+      orderItems: cartItems,
+      totalPrice: total,
+    };
     dispatch(createOrder(order));
-    // localStorage.removeItem('cartItems');
-    const Total = total;
-    const Fdiscount = Discount;
     window.alert("Order Placed Successfully");
     navigate("/ordercomplete", {
-      state: { Total, Fdiscount, fromCheckout: true },
+      state: { Total: total, Fdiscount: Discount, fromCheckout: true },
     });
   };
+
+  const calculateShippingCost = (total) => {
+    return total >= 100 ? 0 : 50;
+  };
+
+  const finalTotal = total - Discount + calculateShippingCost(total);
 
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
-      // alert.error(error);
       window.alert(error);
     }
   }, [dispatch, error]);
@@ -229,10 +226,7 @@ function Checkout() {
               <div className="left-bill">
                 <div className="cart-heading">
                   <h3>Shipping</h3>
-                  <p>
-                    {"("}
-                    {count}
-                    {")"}
+                  <p>({cartItems.length})
                   </p>
                 </div>
                 <div className="buyer-info">
@@ -503,7 +497,9 @@ function Checkout() {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping</p>
-                    <p>New York, US</p>
+                    <p>{isAddressSubmitted
+                      ? `${country}`
+                      : "New York, US"}</p>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Discount</p>
@@ -511,7 +507,7 @@ function Checkout() {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
-                    <p>$50.00</p>
+                    <p>${calculateShippingCost(total).toFixed(2)}</p>
                   </div>
                 </div>
 
@@ -545,7 +541,7 @@ function Checkout() {
                   </div>
                 </div>
 
-                <div className="apply-coupon-wrapper checkout-apply-coupon-wrapper">
+                {/* <div className="apply-coupon-wrapper checkout-apply-coupon-wrapper">
                   <Form>
                     <div className="d-flex gap-3 coupon-wrapper">
                       <Form.Control
@@ -562,7 +558,7 @@ function Checkout() {
                       </Button>
                     </div>
                   </Form>
-                </div>
+                </div> */}
                 <div className="checkboxes-wrapper">
                   <Form>
                     <div className="final-sms">
@@ -590,7 +586,7 @@ function Checkout() {
                   >
                     {" "}
                     <span>Place Order</span> <span>|</span>{" "}
-                    <span>${total}</span>{" "}
+                    <span>${finalTotal.toFixed(2)}</span>{" "}
                   </Button>
                 </div>
                 <div className="show-payment-cards">
