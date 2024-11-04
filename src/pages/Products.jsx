@@ -7,7 +7,35 @@ import imageIcon from "../assets/mission-image.png";
 import "../styles/ImageInfo.scss";
 import "../styles/SignUp.scss";
 import Slider from "../components/common/slider/Slider";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { clearErrors, getProdcutData } from "../actions/productActions";
+import { getAbout } from "../actions/aboutAction";
+
+
 function Products() {
+
+
+  const dispatch = useDispatch();
+
+  const { productData, loading, error } = useSelector((state) => state.productData);
+  const { about, loading: aboutLoading, error: aboutError } = useSelector(state => state.getAbout)
+
+  useEffect(() => {
+    dispatch(getProdcutData());
+    dispatch(getAbout());
+
+    if (error) {
+      window.alert(error);
+      dispatch(clearErrors());
+    }
+
+    if (aboutError) {
+      alert(aboutError);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, aboutError]);
+
   return (
     <>
       <section className="bg-image">
@@ -15,11 +43,24 @@ function Products() {
           <Container fluid="lg">
             <div className="middle">
               <div className="image-content-wrapper">
-                <h1>Products</h1>
-                <p>
+                {/* <h1>Products</h1> */}
+                {productData && productData[0]?.headerTitle ? (
+                  <h1>{productData[0]?.headerTitle}</h1>
+                ) : (
+                  <h1>Products</h1>
+                )}
+                {/* <p>
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Labore dignissimos vitae harum? Possimus atque voluptas.
-                </p>
+                </p> */}
+                {productData && productData[0]?.headerDescription ? (
+                  <p>{productData[0]?.headerDescription}</p>
+                ) : (
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Labore dignissimos vitae harum? Possimus atque voluptas.
+                  </p>
+                )}
               </div>
             </div>
           </Container>
@@ -35,10 +76,15 @@ function Products() {
               <Col md={6}>
                 <div className="left-part">
                   <div className="heading">
-                    <h2>Amaron Batteries</h2>
+                    {/* <h2>Amaron Batteries</h2> */}
+                    {productData && productData[0]?.batteryTitle ? (
+                      <h2>{productData[0]?.batteryTitle}</h2>
+                    ) : (
+                      <h2>Amaron Batteries</h2>
+                    )}
                   </div>
                   <div className="sub-heading">
-                    <p>
+                    {/* <p>
                       Powering your inverters should be hassle-free and
                       reliable. Okaya presents our advanced SMF/VRLA (Sealed
                       Maintenance Free Valve Regulated Lead Acid) batteries. No
@@ -54,7 +100,28 @@ function Products() {
                       power solutions that go beyond your expectations. Discover
                       peace of mind with Okaya SMF/VRLA Batteries and empower
                       your world today
-                    </p>
+                    </p> */}
+                    {productData && productData[0]?.batteryDescription ? (
+                      <p>{productData[0]?.batteryDescription}</p>
+                    ) : (
+                      <p>
+                        Powering your inverters should be hassle-free and
+                        reliable. Okaya presents our advanced SMF/VRLA (Sealed
+                        Maintenance Free Valve Regulated Lead Acid) batteries. No
+                        more worries about maintenance with our fully sealed
+                        batteries. Enjoy a hassle-free experience with our
+                        SMF/VRLA batteries, designed for use in inverters. Whether
+                        it's for your home, office, or industrial needs, our
+                        batteries deliver exceptional reliability and a long
+                        lifespan, ensuring a continuous power supply for your
+                        inverters. Backed by cutting-edge technology and stringent
+                        quality control measures, Okaya SMF/VRLA batteries excel
+                        in any environment. Rely on us for efficient and durable
+                        power solutions that go beyond your expectations. Discover
+                        peace of mind with Okaya SMF/VRLA Batteries and empower
+                        your world today
+                      </p>
+                    )}
                   </div>
                 </div>
               </Col>
@@ -85,7 +152,12 @@ function Products() {
                     />
                   </svg>
                 </div>
-                <p>Completely sealed</p>
+                {/* <p>Completely sealed</p> */}
+                {productData && productData[0]?.batteryCardOne ? (
+                  <p>{productData[0]?.batteryCardOne}</p>
+                ) : (
+                  <p>Completely sealed</p>
+                )}
               </div>
               <div className="one">
                 <div className="svg-div">
@@ -102,7 +174,12 @@ function Products() {
                     />
                   </svg>
                 </div>
-                <p>ABS Container</p>
+                {/* <p>ABS Container</p> */}
+                {productData && productData[0]?.batteryCardTwo ? (
+                  <p>{productData[0]?.batteryCardTwo}</p>
+                ) : (
+                  <p>ABS Container</p>
+                )}
               </div>
               <div className="one">
                 <div className="svg-div">
@@ -119,7 +196,12 @@ function Products() {
                     />
                   </svg>
                 </div>
-                <p>Maintenance free</p>
+                {/* <p>Maintenance free</p> */}
+                {productData && productData[0]?.batteryCardThree ? (
+                  <p>{productData[0]?.batteryCardThree}</p>
+                ) : (
+                  <p>Maintenance free</p>
+                )}
               </div>
             </div>
           </div>
@@ -146,16 +228,28 @@ function Products() {
                     <h2>Exclusive Features</h2>
                   </div>
                   <div className="sub-heading">
-                    <p>
+                    {/* <p>
                       Lorem ipsum dolor sit amet consectetur adipiscing elit
                       dolor semper at ac tempus enim laoreet massa non. Lorem
                       ipsum dolor sit amet consectetur adipiscing elit dolor
                       semper at ac tempus enim laoreet massa non.Lorem ipsum
                       dolor sit amet consectetur adipiscing elit dolor semper at
                       ac tempus enim laoreet massa non.
-                    </p>
+                    </p> */}
+                    {productData && productData[0]?.featureProduct ? (
+                      <p>{productData[0]?.featureProduct}</p>
+                    ) : (
+                      <p>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit
+                        dolor semper at ac tempus enim laoreet massa non. Lorem
+                        ipsum dolor sit amet consectetur adipiscing elit dolor
+                        semper at ac tempus enim laoreet massa non.Lorem ipsum
+                        dolor sit amet consectetur adipiscing elit dolor semper at
+                        ac tempus enim laoreet massa non.
+                      </p>
+                    )}
                   </div>
-                  <div className="check-list-wrapper">
+                  {/* <div className="check-list-wrapper">
                     <ul>
                       <li>All analytics features</li>
                       <li>Up to 250,000 tracked visits</li>
@@ -163,6 +257,21 @@ function Products() {
                       <li>Mobile app</li>
                       <li>Up to 3 team members</li>
                     </ul>
+                  </div> */}
+                  <div className="check-list-wrapper">
+                    {Array.isArray(productData) && productData.length > 0 && (
+                      <ul>
+                        {productData.map((item, index) => (
+                          <span key={index}>
+                            {item.featureProductPoints.map((point, pointIndex) => (
+                              <li key={`${index}-${pointIndex}`}>
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </span>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </Col>
@@ -175,12 +284,25 @@ function Products() {
           <Row className="d-flex justify-content-center">
             <Col lg={6}>
               <div className="whatwedo-heading">
-                <h2 className="text-center">What we do</h2>
-                <p className="text-center">
+                {/* <h2 className="text-center">What we do</h2> */}
+                {about && about.weDoTitle ? (
+                  <h2 className="text-center">{about.weDoTitle}</h2>
+                ) : (
+                  <h2 className="text-center">What we do</h2>
+                )}
+                {/* <p className="text-center">
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Magni, voluptatum repellat nesciunt quis placeat doloremque
                   corrupti
-                </p>
+                </p> */}
+                {about && about.weDoDescription ? (
+                  <p className="text-center">{about.weDoDescription}</p>
+                ) : (
+                  <p className="text-center">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
+                    voluptatum repellat nesciunt quis placeat doloremque corrupti
+                  </p>
+                )}
               </div>
             </Col>
           </Row>

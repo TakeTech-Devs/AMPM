@@ -6,6 +6,9 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
+    GET_PRODUCT_REQUEST,
+    GET_PRODUCT_SUCCESS,
+    GET_PRODUCT_FAIL,
 } from '../constants/productConstants';
 import axios from 'axios';
 import { APIID, hash64 } from '../api';
@@ -64,6 +67,18 @@ export const getProductDetails = (productGuid) => async(dispatch) =>{
             
         });
         console.log("Error", error.response?.data?.message);
+    }
+}
+
+export const getProdcutData = () => async (dispatch) => {
+    try {
+        dispatch({ type: GET_PRODUCT_REQUEST });
+
+        const { data } = await axios.get(`http://localhost:5000/api/v1/admin/get-productData`);
+
+        dispatch({ type: GET_PRODUCT_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: GET_PRODUCT_FAIL, payload: error.response.data.message });
     }
 }
 

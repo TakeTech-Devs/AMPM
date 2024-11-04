@@ -7,6 +7,9 @@ import {
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
     REMOVE_PRODUCT_DETAILS,
+    GET_PRODUCT_REQUEST,
+    GET_PRODUCT_SUCCESS,
+    GET_PRODUCT_FAIL,
 } from '../constants/productConstants';
 
 
@@ -98,3 +101,32 @@ export const productDetailsReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+export const productDataReducer = (state = { productData: [] }, action) => {
+    switch (action.type) {
+        case GET_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case GET_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                productData: Array.isArray(action.payload.productData) ? action.payload.productData : [action.payload.productData],
+            }
+        case GET_PRODUCT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
+    }
+}
