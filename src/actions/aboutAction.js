@@ -5,12 +5,13 @@ import {
     CLEAR_ERRORS
 } from '../constants/aboutConstants';
 import axios from 'axios';
+import baseUrl from '../helper';
 
 export const getAbout = () => async (dispatch) => {
     try {
         dispatch({ type: GET_ABOUT_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/get-about`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/get-about`);
 
         dispatch({ type: GET_ABOUT_SUCCESS, payload: data });
     } catch (error) {

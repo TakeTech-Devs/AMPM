@@ -5,12 +5,13 @@ import {
     CLEAR_ERRORS,
 } from '../constants/contactConstants';
 import axios from 'axios';
+import baseUrl from '../helper';
 
 export const getContact = () => async (dispatch) => {
     try {
         dispatch({ type: GET_CONTACT_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/get-contactInfo`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/get-contactInfo`);
 
         dispatch({ type: GET_CONTACT_SUCCESS, payload: data });
     } catch (error) {

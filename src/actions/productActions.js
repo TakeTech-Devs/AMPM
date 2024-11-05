@@ -12,6 +12,7 @@ import {
 } from '../constants/productConstants';
 import axios from 'axios';
 import { APIID, hash64 } from '../api';
+import baseUrl from '../helper';
 
 // Get All Products 
 
@@ -74,7 +75,7 @@ export const getProdcutData = () => async (dispatch) => {
     try {
         dispatch({ type: GET_PRODUCT_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/admin/get-productData`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/get-productData`);
 
         dispatch({ type: GET_PRODUCT_SUCCESS, payload: data });
     } catch (error) {
