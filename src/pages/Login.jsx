@@ -30,17 +30,17 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(consumerLogin(email, password));
-    navigate("/");
+    // navigate("/");
 
     setTimeout(() => {
       window.location.reload();
-    }, 250); // 1 second delay
+    }, 250);
   };
 
   const handleSubmitReseller = (e) =>{
     e.preventDefault();
     dispatch(resellerLogin(businessEmail, businessPassword));
-    navigate("/")
+    // navigate("/")
   }
 
 
@@ -50,6 +50,10 @@ export default function Login() {
       // alert.error(error)
       window.alert(error);
       dispatch(clearErrors());
+    }
+
+    if (isAuthenticated) {
+      navigate("/")
     }
   }, [dispatch, error, isAuthenticated, navigate]);
 

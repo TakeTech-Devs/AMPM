@@ -79,6 +79,7 @@ function MyProfile() {
     formData.append("pinCode", pinCode);
 
     dispatch(updateConsumerProfile(formData));
+
   };
   const handleSubmitReseller = (e) => {
     e.preventDefault();
@@ -112,7 +113,7 @@ function MyProfile() {
     if (isUpdated) {
       window.alert("Profile Updated successfully");
       dispatch({ type: UPDATE_CONSUMER_PROFILE_RESET });
-      window.location.reload();
+      // window.location.reload();
     }
   }, [dispatch, error, consumer, isUpdated]);
 
@@ -171,7 +172,7 @@ function MyProfile() {
                       </div>
                       <div className="user-name">
                         <h3 className="name text-black">
-                          {consumer.firstName}
+                          {consumer.firstName} {consumer.lastName}
                         </h3>
                         <p className="email">{consumer.email}</p>
                       </div>
@@ -189,7 +190,7 @@ function MyProfile() {
                         ""
                       )}
                       <Button className="primary" onClick={handleEdit}>
-                        {isEditMode ? "Save" : "Edit"}
+                        {isEditMode ? "Cancel" : "Edit"}
                       </Button>
                     </div>
                   </div>
