@@ -5,8 +5,10 @@ import p1 from "../assets/p1.png";
 import "../styles/PaymentDetails.scss";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-function OrderComplete() {
+import imageIcon from "../assets/mission-image.png";
 
+
+function OrderComplete() {
   const location = useLocation();
   const navigate = useNavigate();
   // const { Total } = location.state || { Total: 0 };
@@ -179,17 +181,20 @@ function OrderComplete() {
                     <li key={item.id}>
                       <div className="items">
                         <div className="items-details">
-                          <div className="img-title-wrapper">
+                          <div className="img-title-wrapper" style={{paddingTop:"5px"}}>
                             <div className="img-div">
                               <img
-                                src={item.image}
+                                // src={item.image}
+                                src={imageIcon}
                                 alt={item.name.split(' ')[0]}
                                 width="100%"
                                 height="100%"
+                                
                               />
                             </div>
-                            <div className="items-name">
+                            <div className="items-name" style={{paddingTop:"10px"}}>
                               <p>{item.name}</p>
+                              
                               {/* <p>(AA+)</p> */}
                             </div>
                           </div>
