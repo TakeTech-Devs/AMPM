@@ -31,8 +31,8 @@ const Index = () => {
   return (
     <>
       <section className="bg-video">
-      <div className="home-banner"></div>
-      <div className="overlay">
+        <div className="home-banner"></div>
+        <div className="overlay">
           <div className="one">
             <div className="svg-div">
               <svg
@@ -118,7 +118,7 @@ const Index = () => {
             )}
           </div>
         </div>
-      
+
         <Container>
           <Row className="video-content-wrapper">
             <Col xl={6}>
@@ -219,34 +219,34 @@ const Index = () => {
             </Col>
           </Row>
         </Container>
-        
+
 
         <div className="bg-video-wrapper">
           <video autoPlay muted loop className="video-background">
             <source src={bgvideo} type="video/mp4" />
           </video>
-         
-        
+
+
         </div>
-       
+
       </section>
 
-      <section className="extra-gap bg-color">
+      {/* <section className="extra-gap bg-color">
         <Container>
           <Row className="justify-content-center">
             <Col lg={6}>
               <div className="whatwedo-heading">
-                {/* <h2 className="text-center">Batteries</h2> */}
+                <h2 className="text-center">Batteries</h2>
                 {home && home.batteriesHeading ? (
                   <h2 className="text-center">{home.batteriesHeading}</h2>
                 ) : (
                   <h2 className="text-center">Batteries</h2>
                 )}
-                {/* <p className="text-center">
+                <p className="text-center">
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Magni, voluptatum repellat nesciunt quis placeat doloremque
                   corrupti
-                </p> */}
+                </p>
                 {home && home.batteriesDescription ? (
                   <p className="text-center">{home.batteriesDescription}</p>
                 ) : (
@@ -271,8 +271,8 @@ const Index = () => {
             </Button>
           </div>
         </Container>
-      </section>
-
+      </section> */}
+      <section className="sec-gap"></section>
       <section className="sec-gap">
         <Container>
           <Row className="justify-content-center">

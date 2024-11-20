@@ -67,7 +67,16 @@ function Header() {
                 >
                   About Us
                 </NavLink>
-                <NavDropdown title="Products" id="navbarScrollingDropdown">
+                <NavLink
+                  to="/productlist"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                  onClick={handleNavClick}
+                >
+                  Products
+                </NavLink>
+                {/* <NavDropdown title="Products" id="navbarScrollingDropdown">
                   <NavDropdown.Item
                     as={NavLink}
                     to="/products"
@@ -82,7 +91,7 @@ function Header() {
                   >
                     Option
                   </NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
                 <NavLink
                   to="/contactus"
                   className={({ isActive }) =>

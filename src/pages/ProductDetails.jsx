@@ -7,6 +7,7 @@ import "../styles/Products.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getProductDetails } from "../actions/productActions";
 import { addItemsToCart } from "../actions/cartAction";
+import Slider from "../components/common/slider/Slider";
 
 function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
@@ -231,6 +232,18 @@ function ProductDetails() {
                 </div>
               </Col>
             </Row>
+          </div>
+          <div className="final-product-details-wrapper-2">
+          <Slider/>
+          <div className="d-flex justify-content-center  home-slider-btn-wrapper">
+            <Button
+              href="/productlist"
+              className="submit-btn primary"
+              type="submit"
+            >
+              See More
+            </Button>
+          </div>
           </div>
         </Container>
       </section>
