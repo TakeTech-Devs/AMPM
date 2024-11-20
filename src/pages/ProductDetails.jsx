@@ -235,7 +235,7 @@ function ProductDetails() {
           </div>
           <div className="final-product-details-wrapper-2">
           <Slider/>
-          <div className="d-flex justify-content-center  home-slider-btn-wrapper">
+          {/* <div className="d-flex justify-content-center  home-slider-btn-wrapper">
             <Button
               href="/productlist"
               className="submit-btn primary"
@@ -243,7 +243,7 @@ function ProductDetails() {
             >
               See More
             </Button>
-          </div>
+          </div> */}
           </div>
         </Container>
       </section>
