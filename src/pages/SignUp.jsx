@@ -126,7 +126,7 @@ export default function SignUp() {
 
     dispatch(resellerRegister(formData));
 
-    window.alert("Applied successfully");
+    window.alert("Applied successfully, Wait for 48 hours for approval");
     navigate("/");
 
   };

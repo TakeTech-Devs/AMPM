@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getProductDetails } from "../actions/productActions";
 import { addItemsToCart } from "../actions/cartAction";
 import Slider from "../components/common/slider/Slider";
+import imageIcon from "../assets/mission-image.png";
+
 
 function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
@@ -97,7 +99,9 @@ function ProductDetails() {
                     height="100%"
                   /> */}
                   <img
-                    src={Items?.ImageUrl}
+                    // src={battery}
+                    // src={Items?.ImageUrl}
+                    src={imageIcon}
                     alt={Items?.ProductDescription}
                     width="100%"
                     height="100%"

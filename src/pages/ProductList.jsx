@@ -7,6 +7,7 @@ import "../styles/Products.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getProducts } from "../actions/productActions";
 import Loader from "../components/common/loader/Loader";
+import imageIcon from "../assets/mission-image.png";
 
 function ProductList() {
   const navigate = useNavigate();
@@ -121,7 +122,10 @@ function ProductList() {
                       <Card className="clickable-card">
                         <div className="d-flex justify-content-center">
                           <div className="product-image-wrapper">
-                            <Card.Img variant="top" src={item.ImageUrl} />
+                            <Card.Img variant="top" 
+                            // src={item.ImageUrl}
+                            src={imageIcon} 
+                            />
                           </div>
                         </div>
                         <Card.Body>

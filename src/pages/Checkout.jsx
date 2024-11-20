@@ -103,6 +103,11 @@ function Checkout() {
     }
   }, [dispatch, error]);
 
+  const [shipToDifferentAddress, setShipToDifferentAddress] = useState(false);
+  const toggleShippingAddress = () => {
+    setShipToDifferentAddress(!shipToDifferentAddress);
+  };
+
   return (
     <>
       <section className="billing-mt">
@@ -408,11 +413,11 @@ function Checkout() {
                           />
                         </Form.Group>
                       </Col>
-                      <Col lg={12}>
+                      {/* <Col lg={12}>
                         <Button type="submit" className="primary w-100">
                           Submit
                         </Button>
-                      </Col>
+                      </Col> */}
 
                       <Col lg={12}>
                         <div className="bottom-info">
@@ -421,8 +426,180 @@ function Checkout() {
                               className="label-effect"
                               type="checkbox"
                               label="Ship to a different Address?"
+                              onChange={toggleShippingAddress}
+                              checked={shipToDifferentAddress}
                             />
                           </Form.Group>
+                          {shipToDifferentAddress && (
+                        <>
+                          <Col lg={6}>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                              <Form.Label>First Name</Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                placeholder="Enter Your Name"
+                                className="custom-outline"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={6}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword"
+                            >
+                              <Form.Label>Last Name</Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                placeholder="Enter Last Name"
+                                className="custom-outline"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={12}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword "
+                            >
+                              <Form.Label>Country / Region</Form.Label>
+                              <Form.Control
+                                as="select" // This makes the input a dropdown
+                                required
+                                className="custom-outline"
+                                value={country} // Bind the state value to the select input
+                                onChange={(e) => setCountry(e.target.value)} // Update the state on selection
+                              >
+                                <option value="">Select a Country</option>
+                                {options.map((option, index) => (
+                                  <option key={index} value={option.label}>
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </Form.Control>
+                            </Form.Group>
+                          </Col>
+                          <Col lg={12}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword"
+                            >
+                              <Form.Label>Country / Region </Form.Label>
+                              <Form.Control
+                                required
+                                type="Text"
+                                placeholder="House number and street name"
+                                className="custom-outline"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={12}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword"
+                            >
+                              <Form.Control
+                                type="Text"
+                                placeholder="Apartment, suite, unit, etc. (optional)"
+                                className="custom-outline"
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={4}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword"
+                            >
+                              <Form.Label>Town / City</Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                placeholder="Enter Town / City"
+                                className="custom-outline"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={4}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword"
+                            >
+                              <Form.Label>Province</Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                placeholder="Enter Province"
+                                className="custom-outline"
+                                value={state}
+                                onChange={(e) => setState(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={4}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword"
+                            >
+                              <Form.Label>Postcode / ZIP </Form.Label>
+                              <Form.Control
+                                required
+                                type="number"
+                                placeholder="Enter Postcode / ZIP"
+                                className="custom-outline"
+                                onInput={(e) => {
+                                  if (e.target.value.length > 6) {
+                                    e.target.value = e.target.value.slice(0, 6);
+                                  }
+                                }}
+                                onWheel={(e) => e.target.blur()}
+                                value={pin}
+                                onChange={(e) => setPin(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={6}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword"
+                            >
+                              <Form.Label className="optional">
+                                Phone (optional){" "}
+                              </Form.Label>
+                              <Form.Control
+                                type="number"
+                                placeholder="Enter Number"
+                                className="custom-outline"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={6}>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="formBasicPassword"
+                            >
+                              <Form.Label>Email address </Form.Label>
+                              <Form.Control
+                                required
+                                type="email"
+                                placeholder="johndoe@example.com"
+                                className="custom-outline"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Col>
+                        </>
+                        )}
 
                           <div>
                             <Form.Group
@@ -442,6 +619,7 @@ function Checkout() {
                           </div>
                         </div>
                       </Col>
+                      
                       <Col lg={12}>
                         <div className="bottom-info">
                           <p className="label-effect">
@@ -482,6 +660,11 @@ function Checkout() {
                             </Form.Group>
                           </div>
                         </div>
+                      </Col>
+                      <Col lg={12}>
+                        <Button type="submit" className="primary w-100">
+                          Submit
+                        </Button>
                       </Col>
                     </Row>
                   </Form>
