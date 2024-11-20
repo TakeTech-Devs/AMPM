@@ -153,14 +153,14 @@ function MyProfile() {
                 <div className="user-profile-wrapper">
                   <div className="user-info">
                     <div className="user-profile">
-                      <div className="user-img">
+                      {/* <div className="user-img">
                         <img
                           src={userImg}
                           alt="user img"
                           width="100%"
                           height="100%"
                         />
-                      </div>
+                      </div> */}
                       <div className="user-name">
                         <h3 className="name text-black">{reseller.fullName}</h3>
                         <p className="email">{reseller.businessEmail}</p>
@@ -179,7 +179,7 @@ function MyProfile() {
                         ""
                       )}
                       <Button className="primary" onClick={handleEdit}>
-                        {isEditMode ? "Save" : "Edit"}
+                        {isEditMode ? "Cancel" : "Edit"}
                       </Button>
                     </div>
                   </div>

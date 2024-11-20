@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
@@ -18,6 +18,10 @@ function BillingShipping() {
   const dispatch = useDispatch();
 
   const { cartItems } = useSelector((state) => state.cart);
+
+  const { isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const calculateSubtotal = () => {
     return cartItems
@@ -106,6 +110,15 @@ function BillingShipping() {
     console.log(calculateSubtotal());
     navigate("/checkout", { state: { total, totalFinal, Discount } });
   };
+
+  useEffect(()=>{
+    const totalQuantity = cartItems.reduce((acc,item)=>acc+item.quantity,0);
+    setQuantity(totalQuantity);
+  })
+
+  const handleLogin =() => {
+    navigate("/login");
+  }
 
   return (
     <>
@@ -540,31 +553,51 @@ function BillingShipping() {
                   <p>Continue Shopping</p>
                 </div>
                 <div className="checkout-btn">
-                  {quantity > 0 ? (
-                    <Button
-                      className="d-flex justify-content-center gap-2 add-to-cart-btn-color"
-                      onClick={handleCheckout}
-                    >
-                      {" "}
-                      <span>Checkout</span> <span>|</span>{" "}
-                      {/* <span>${total.toFixed(2)}</span>{" "} */}
-                      <span>${calculateTotal()}</span>{" "}
-                    </Button>
+                  {isAuthenticated ? (
+                    <>
+                      {quantity > 0 ? (
+                        <Button
+                          className="d-flex justify-content-center gap-2 add-to-cart-btn-color"
+                          onClick={handleCheckout}
+                        >
+                          {" "}
+                          <span>Checkout</span> <span>|</span>{" "}
+                          {/* <span>${total.toFixed(2)}</span>{" "} */}
+                          <span>${calculateTotal()}</span>{" "}
+                        </Button>
+                      ) : (
+                        <Button
+                          className="d-flex justify-content-center gap-2"
+                          disabled
+                          style={{
+                            cursor: "not-allowed",
+                            pointerEvents: "auto",
+                          }}
+                        >
+                          {" "}
+                          <span>Add Products to Proceed</span>
+                          {/* <span>|</span>{" "} */}
+                          {/* <span>${total.toFixed(2)}</span>{" "} */}
+                        </Button>
+                      )}
+                    </>
                   ) : (
                     <Button
                       className="d-flex justify-content-center gap-2"
-                      disabled
-                      style={{
-                        cursor: "not-allowed",
-                        pointerEvents: "auto",
-                      }}
+                      // disabled
+                      // style={{
+                      //   cursor: "not-allowed",
+                      //   pointerEvents: "auto",
+                      // }}
+                      onClick={handleLogin}
                     >
                       {" "}
-                      <span>Add Products to Proceed</span>
+                      <span>Login to Proceed</span>
                       {/* <span>|</span>{" "} */}
                       {/* <span>${total.toFixed(2)}</span>{" "} */}
                     </Button>
-                  )}
+                  )
+                  }
                 </div>
                 <div className="show-payment-cards">
                   <p>SECURE PAYMENTS PROVIDED BY</p>
