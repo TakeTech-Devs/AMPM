@@ -79,8 +79,9 @@ export default function SignUp() {
 
     dispatch(consumarRegister(formData));
 
-    // window.alert("Successfully Created Account");
-    // navigate('/login')
+    window.alert("Successfully Created Account");
+    navigate('/login')
+    window.location.reload()
 
   };
 
@@ -140,11 +141,11 @@ export default function SignUp() {
       window.alert(error)
       dispatch(clearErrors());
     }
-    if (isAuthenticated) {
-      window.alert("Successfully Created Account");
-      navigate('/login')
-    }
-  }, [dispatch, error, isAuthenticated, navigate]);
+    // if (isAuthenticated) {
+    //   window.alert("Successfully Created Account");
+    //   navigate('/login')
+    // }
+  }, [dispatch, error]);
 
   return (
     <>
