@@ -34,7 +34,7 @@ function Footer() {
 
     dispatch(subscribeForm(myForm));
 
-    window.alert("Thank You For Subscribe Us")
+    window.alert("Thanks For Subscribing Us")
 
     window.location.reload();
   }

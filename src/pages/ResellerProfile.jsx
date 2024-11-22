@@ -188,7 +188,7 @@ function MyProfile() {
                       className="edit-btn"
                       style={{ display: "flex", gap: "10px" }}
                     >
-                      {isEditMode ? (
+                      {/* {isEditMode ? (
                         <Button className="primary" onClick={handleSubmit}>
                           Update
                         </Button>
@@ -197,7 +197,34 @@ function MyProfile() {
                       )}
                       <Button className="primary" onClick={handleEdit}>
                         {isEditMode ? "Cancel" : "Edit"}
-                      </Button>
+                      </Button> */}
+                      {isEditMode ? (
+                        <>
+                          <Button className="primary" onClick={handleSubmit}>
+                            Update
+                          </Button>
+                          <Button className="danger"
+                            style={{
+                              backgroundColor: "rgb(210 68 44)",
+                              border: "none",
+                              fontWeight: "700",
+                              padding: "20px 20px",
+                              minWidth: "200px",
+                              fontSize: "1.25rem",
+                              lineHeight: "1",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center"
+                            }}
+                            onClick={handleEdit}>
+                            Cancel
+                          </Button>
+                        </>
+                      ) : (
+                        <Button className="primary" style={{ backgroundColor: "#95C93D" }} onClick={handleEdit}>
+                          Edit
+                        </Button>
+                      )}
                     </div>
                   </div>
                   <div className="inputs-fields-wrapper reseller">
@@ -477,8 +504,8 @@ function MyProfile() {
                                       ? "is-invalid"
                                       : ""
                                       }`}
-                                      value={confirmPassword}
-                                      onChange={(e) => setConfirmPassword(e.target.value)}
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
                                   />
                                   <div
                                     className="eye-wrapper"
