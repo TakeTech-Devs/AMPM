@@ -31,6 +31,17 @@ import {
     SUBMIT_MESSAGE_REQUEST,
     SUBMIT_MESSAGE_SUCCESS,
     SUBMIT_MESSAGE_FAIL,
+    UPDATE_CONSUMER_PASSWORD_REQUEST,
+    UPDATE_CONSUMER_PASSWORD_SUCCESS,
+    UPDATE_CONSUMER_PASSWORD_FAIL,
+    UPDATE_CONSUMER_PASSWORD_RESET,
+    UPDATE_RESEllER_PASSWORD_REQUEST,
+    UPDATE_RESEllER_PASSWORD_SUCCESS,
+    UPDATE_RESEllER_PASSWORD_FAIL,
+    UPDATE_RESEllER_PASSWORD_RESET,
+    SUBSCRIBE_REQUEST,
+    SUBSCRIBE_SUCCESS,
+    SUBSCRIBE_FAIL,
 } from '../constants/userConstants';
 
 
@@ -121,12 +132,16 @@ export const profileReducer = (state = {}, action) => {
     switch (action.type) {
         case UPDATE_RESELLER_PROFILE_REQUEST:
         case UPDATE_CONSUMER_PROFILE_REQUEST:
+        case UPDATE_CONSUMER_PASSWORD_REQUEST:
+        case UPDATE_RESEllER_PASSWORD_REQUEST:
             return {
                 ...state,
                 loading: true,
             };
         case UPDATE_RESELLER_PROFILE_SUCCESS:
         case UPDATE_CONSUMER_PROFILE_SUCCESS:
+        case UPDATE_CONSUMER_PASSWORD_SUCCESS:
+        case UPDATE_RESEllER_PASSWORD_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -134,6 +149,8 @@ export const profileReducer = (state = {}, action) => {
             };
         case UPDATE_RESELLER_PROFILE_FAIL:
         case UPDATE_CONSUMER_PROFILE_FAIL:
+        case UPDATE_CONSUMER_PASSWORD_FAIL:
+        case UPDATE_RESEllER_PASSWORD_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -141,6 +158,8 @@ export const profileReducer = (state = {}, action) => {
             };
         case UPDATE_RESELLER_PROFILE_RESET:
         case UPDATE_CONSUMER_PROFILE_RESET:
+        case UPDATE_CONSUMER_PASSWORD_RESET:
+        case UPDATE_RESEllER_PASSWORD_RESET:
             return {
                 ...state,
                 isUpdated: false,
@@ -160,12 +179,14 @@ export const profileReducer = (state = {}, action) => {
 export const contactUsFormReducer = (state = {}, action) => {
     switch (action.type) {
         case SUBMIT_MESSAGE_REQUEST:
+        case SUBSCRIBE_REQUEST:
             return {
                 ...state,
                 loading: true,
                 error: null
             }
         case SUBMIT_MESSAGE_SUCCESS:
+        case SUBSCRIBE_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -173,6 +194,7 @@ export const contactUsFormReducer = (state = {}, action) => {
                 error: null,
             }
         case SUBMIT_MESSAGE_FAIL:
+        case SUBSCRIBE_FAIL:
             return {
                 ...state,
                 loading: false,

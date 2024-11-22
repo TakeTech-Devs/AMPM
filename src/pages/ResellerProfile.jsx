@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, updateResellerProfile } from "../actions/userActions";
-import { UPDATE_RESELLER_PROFILE_RESET } from "../constants/userConstants";
+import { clearErrors, updateResellerPassword, updateResellerProfile } from "../actions/userActions";
+import { UPDATE_RESEllER_PASSWORD_RESET, UPDATE_RESELLER_PROFILE_RESET } from "../constants/userConstants";
 function MyProfile() {
   const [activeForm, setActiveForm] = useState("consumer");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   // const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState({
     passwordMismatch: false,
@@ -88,6 +88,22 @@ function MyProfile() {
     // }
   };
 
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const updatePasswordSubmit = (e) => {
+    e.preventDefault();
+
+    const myForm = new FormData();
+
+    myForm.set("oldPassword", oldPassword);
+    myForm.set("newPassword", newPassword);
+    myForm.set("confirmPassword", confirmPassword);
+
+    dispatch(updateResellerPassword(myForm));
+  };
+
   useEffect(() => {
     if (reseller) {
       setFullName(reseller.fullName);
@@ -104,6 +120,7 @@ function MyProfile() {
     if (isUpdated) {
       window.alert("Profile Updated Successfully");
       dispatch({ type: UPDATE_RESELLER_PROFILE_RESET });
+      dispatch({ type: UPDATE_RESEllER_PASSWORD_RESET });
       window.location.reload();
     }
   }, [dispatch, error, reseller, isUpdated]);
@@ -319,10 +336,8 @@ function MyProfile() {
                                     maxLength={12}
                                     placeholder="Enter your Password"
                                     className="custom-outline"
-                                    value={password}
-                                    onChange={(e) =>
-                                      setPassword(e.target.value)
-                                    }
+                                    value={oldPassword}
+                                    onChange={(e) => setOldPassword(e.target.value)}
                                   />
                                   <div
                                     className="eye-wrapper"
@@ -384,15 +399,12 @@ function MyProfile() {
                                     minLength={6}
                                     maxLength={12}
                                     placeholder="Confirm your Password"
-                                    className={`custom-outline ${
-                                      errors.passwordMismatch
-                                        ? "is-invalid"
-                                        : ""
-                                    }`}
-                                    value={confirmPassword}
-                                    onChange={(e) =>
-                                      setConfirmPassword(e.target.value)
-                                    }
+                                    className={`custom-outline ${errors.passwordMismatch
+                                      ? "is-invalid"
+                                      : ""
+                                      }`}
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
                                   />
                                   <div
                                     className="eye-wrapper"
@@ -461,15 +473,12 @@ function MyProfile() {
                                     minLength={6}
                                     maxLength={12}
                                     placeholder="Confirm your Password"
-                                    className={`custom-outline ${
-                                      errors.passwordMismatch
-                                        ? "is-invalid"
-                                        : ""
-                                    }`}
-                                    value={confirmPassword}
-                                    onChange={(e) =>
-                                      setConfirmPassword(e.target.value)
-                                    }
+                                    className={`custom-outline ${errors.passwordMismatch
+                                      ? "is-invalid"
+                                      : ""
+                                      }`}
+                                      value={confirmPassword}
+                                      onChange={(e) => setConfirmPassword(e.target.value)}
                                   />
                                   <div
                                     className="eye-wrapper"
@@ -527,6 +536,7 @@ function MyProfile() {
                               <Button
                                 className="primary login-btn w-100 mt-3"
                                 type="submit"
+                                onClick={updatePasswordSubmit}
                               >
                                 Update Password
                               </Button>

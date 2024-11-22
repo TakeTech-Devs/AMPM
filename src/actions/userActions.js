@@ -29,6 +29,15 @@ import {
     SUBMIT_MESSAGE_REQUEST,
     SUBMIT_MESSAGE_SUCCESS,
     SUBMIT_MESSAGE_FAIL,
+    UPDATE_CONSUMER_PASSWORD_REQUEST,
+    UPDATE_CONSUMER_PASSWORD_SUCCESS,
+    UPDATE_CONSUMER_PASSWORD_FAIL,
+    UPDATE_RESEllER_PASSWORD_REQUEST,
+    UPDATE_RESEllER_PASSWORD_FAIL,
+    UPDATE_RESEllER_PASSWORD_SUCCESS,
+    SUBSCRIBE_REQUEST,
+    SUBSCRIBE_SUCCESS,
+    SUBSCRIBE_FAIL,
 } from '../constants/userConstants';
 import axios from 'axios';
 import baseUrl from '../helper';
@@ -224,6 +233,72 @@ export const contactForm = (formData) => async(dispatch) =>{
         dispatch({
             type: SUBMIT_MESSAGE_FAIL,
             payload: error.response.data.message,
+        })
+    }
+} 
+
+// Update Consumer  Password
+export const updateConsumerPassword = (passwords) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_CONSUMER_PASSWORD_REQUEST });
+  
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
+  
+      const { data } = await axios.put(
+        `${baseUrl}/api/v1/consumer/password/update`,
+        passwords,
+        config
+      );
+  
+      dispatch({ type: UPDATE_CONSUMER_PASSWORD_SUCCESS, payload: data.success });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_CONSUMER_PASSWORD_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+
+  // Update Reseller Password
+export const updateResellerPassword = (passwords) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_RESEllER_PASSWORD_REQUEST });
+  
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
+  
+      const { data } = await axios.put(
+        `${baseUrl}/api/v1/reseller/password/update`,
+        passwords,
+        config
+      );
+  
+      dispatch({ type: UPDATE_RESEllER_PASSWORD_SUCCESS, payload: data.success });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_RESEllER_PASSWORD_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+
+  // Subscribe Form
+
+export const subscribeForm = (email) => async(dispatch) =>{
+    try {
+        dispatch({ type: SUBSCRIBE_REQUEST });
+
+        const config = { headers: { "Content-Type": "application/json" } }
+
+        const { data } = await axios.post(`${baseUrl}/api/v1/user/subscribe`, email, config);
+
+        dispatch({ type: SUBSCRIBE_SUCCESS, payload: data.success });
+
+    } catch (error) {
+        dispatch({
+            type: SUBSCRIBE_FAIL,
+            payload: error.response?.data?.message,
         })
     }
 } 
