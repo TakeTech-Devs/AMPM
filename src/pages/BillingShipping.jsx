@@ -6,6 +6,7 @@ import "../styles/PaymentDetails.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItemsFromCart } from '../actions/cartAction';
 import { addItemsToCart } from "../actions/cartAction";
+import imageIcon from "../assets/mission-image.png";
 
 function BillingShipping() {
   const [quantity, setQuantity] = useState(1);
@@ -367,7 +368,8 @@ function BillingShipping() {
                                 <div className="items-details">
                                   <div className="img-div">
                                     <img
-                                      src={item.image}
+                                      // src={item.image}
+                                      src={imageIcon}
                                       alt={item.name.split(" ")[0]}
                                       width="100%"
                                       height="100%"
