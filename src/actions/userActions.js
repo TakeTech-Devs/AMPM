@@ -41,6 +41,9 @@ import {
     APPLY_COUPON_REQUEST,
     APPLY_COUPON_SUCCESS,
     APPLY_COUPON_FAIL,
+    GET_TESTIMONIAL_REQUEST,
+    GET_TESTIMONIAL_SUCCESS,
+    GET_TESTIMONIAL_FAIL,
 } from '../constants/userConstants';
 import axios from 'axios';
 import baseUrl from '../helper';
@@ -328,6 +331,20 @@ export const applyCouponCode = (couponCode, subtotal) => async (dispatch) => {
         dispatch({
             type: APPLY_COUPON_FAIL,
             payload: error.response.data.message,
+        });
+    }
+};
+
+export const getTestimonial = () => async (dispatch) => {
+    try {
+        dispatch({ type: GET_TESTIMONIAL_REQUEST });
+
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/get-testimonial`)
+        dispatch({ type: GET_TESTIMONIAL_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({
+            type: GET_TESTIMONIAL_FAIL,
+            payload: error.response?.data?.message || "Something went wrong",
         });
     }
 };

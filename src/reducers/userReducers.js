@@ -45,6 +45,9 @@ import {
     APPLY_COUPON_REQUEST,
     APPLY_COUPON_SUCCESS,
     APPLY_COUPON_FAIL,
+    GET_TESTIMONIAL_REQUEST,
+    GET_TESTIMONIAL_SUCCESS,
+    GET_TESTIMONIAL_FAIL,
 } from '../constants/userConstants';
 
 
@@ -244,3 +247,32 @@ export const couponReducer = (state = { discount: null, totalAfterDiscount: null
             return state;
     }
 };
+
+export const testimonialReducer = (state = { testimonialList: [] }, action) => {
+    switch (action.type) {
+        case GET_TESTIMONIAL_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case GET_TESTIMONIAL_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                testimonialList: action.payload.testimonialList,
+            };
+        case GET_TESTIMONIAL_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
+    }
+}
