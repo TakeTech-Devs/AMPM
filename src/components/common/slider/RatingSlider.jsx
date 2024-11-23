@@ -93,7 +93,7 @@ const Slider = () => {
                     />
                   {/* </div> */}
                 </div>
-                <Card.Body className="d-flex align-items-center justify-content-center">
+                <Card.Body className="d-flex  justify-content-center">
                   <Card.Title>
                     <p>{imageUrl.testimonial}</p>
                     <h3 >{imageUrl.name}</h3>
