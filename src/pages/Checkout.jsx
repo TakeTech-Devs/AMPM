@@ -14,7 +14,7 @@ function Checkout() {
   const { total } = location.state || { total: 0 };
   const { Discount } = location.state || { Discount: 0 };
   const { totalFinal } = location.state || { totalFinal: 0 };
-  // console.log(total);
+  // console.log(totalFinal);
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { error } = useSelector((state) => state.newOrder);
@@ -83,10 +83,11 @@ function Checkout() {
       orderItems: cartItems,
       totalPrice: total,
     };
+    const finalAmount = totalFinal;
     dispatch(createOrder(order));
     window.alert("Order Placed Successfully");
     navigate("/ordercomplete", {
-      state: { Total: total, Fdiscount: Discount, fromCheckout: true },
+      state: { Total: total, Fdiscount: Discount, totalFinalAmount: finalAmount, fromCheckout: true },
     });
   };
 
@@ -94,7 +95,7 @@ function Checkout() {
     return total >= 100 ? 0 : 50;
   };
 
-  const finalTotal = total - Discount + calculateShippingCost(total);
+  // const finalTotal = total - Discount + calculateShippingCost(total);
 
   useEffect(() => {
     if (error) {
@@ -686,7 +687,12 @@ function Checkout() {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Discount</p>
-                    <p>${Discount.toFixed(2)}</p>
+                    {/* {Discount !== null && Discount !== undefined ? (
+                      <p>${Discount.toFixed(2)}</p>
+                    ) : (
+                      <p>$0.00</p>
+                    )} */}
+                    <p>${(Discount ?? 0).toFixed(2)}</p>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
@@ -769,7 +775,7 @@ function Checkout() {
                   >
                     {" "}
                     <span>Place Order</span> <span>|</span>{" "}
-                    <span>${finalTotal.toFixed(2)}</span>{" "}
+                    <span>${parseFloat(totalFinal || 0).toFixed(2)}</span>{" "}
                   </Button>
                 </div>
                 <div className="show-payment-cards">

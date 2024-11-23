@@ -82,16 +82,16 @@ const Slider = () => {
             <div className="rating-slider" key={index}>
               <Card className="slider-card" style={{ width: "100%", height: "100%" }}>
                 <div className="slider-image-wrapper">
-                  <div>
+                  {/* <div> */}
                     <ReactStars
                       count={5}
                       value={imageUrl.rating}
-                      size={20}
+                      size={30}
                       isHalf={true}
                       edit={false}
-                      activeColor="#ffd700"
+                      activeColor="#95c93d"
                     />
-                  </div>
+                  {/* </div> */}
                 </div>
                 <Card.Body className="d-flex align-items-center justify-content-center">
                   <Card.Title>

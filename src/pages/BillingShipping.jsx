@@ -400,13 +400,13 @@ function BillingShipping() {
                     </div>
                   )}
                   <div className="d-flex align-items-center justify-content-between">
-                    <p className="sms">Subtotal after Discount</p>
-                    {/* <p>${subtotal.toFixed(2)}</p> */} 
-                    <p>${parseFloat(calculateTotal()).toFixed(2)}</p>
-                  </div>
-                  <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
                     <p>${calculateShippingCost().toFixed(2)}</p>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p className="sms">Order Total</p>
+                    {/* <p>${subtotal.toFixed(2)}</p> */} 
+                    <p>${parseFloat(calculateTotal()).toFixed(2)}</p>
                   </div>
                 </div>
                 <div className="apply-coupon-wrapper">
