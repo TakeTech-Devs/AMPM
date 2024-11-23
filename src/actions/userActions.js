@@ -38,6 +38,9 @@ import {
     SUBSCRIBE_REQUEST,
     SUBSCRIBE_SUCCESS,
     SUBSCRIBE_FAIL,
+    APPLY_COUPON_REQUEST,
+    APPLY_COUPON_SUCCESS,
+    APPLY_COUPON_FAIL,
 } from '../constants/userConstants';
 import axios from 'axios';
 import baseUrl from '../helper';
@@ -302,6 +305,32 @@ export const subscribeForm = (email) => async(dispatch) =>{
         })
     }
 } 
+
+
+// Apply Coupon Action
+export const applyCouponCode = (couponCode, subtotal) => async (dispatch) => {
+    try {
+        dispatch({ type: APPLY_COUPON_REQUEST });
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const { data } = await axios.post(`${baseUrl}/api/v1/user/apply-coupon`, { couponCode, subtotal }, config);
+
+        dispatch({
+            type: APPLY_COUPON_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: APPLY_COUPON_FAIL,
+            payload: error.response.data.message,
+        });
+    }
+};
 
 
 

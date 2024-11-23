@@ -42,6 +42,9 @@ import {
     SUBSCRIBE_REQUEST,
     SUBSCRIBE_SUCCESS,
     SUBSCRIBE_FAIL,
+    APPLY_COUPON_REQUEST,
+    APPLY_COUPON_SUCCESS,
+    APPLY_COUPON_FAIL,
 } from '../constants/userConstants';
 
 
@@ -209,3 +212,35 @@ export const contactUsFormReducer = (state = {}, action) => {
             return state;
     }
 }
+
+
+export const couponReducer = (state = { discount: null, totalAfterDiscount: null }, action) => {
+    switch (action.type) {
+        case APPLY_COUPON_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case APPLY_COUPON_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                discount: action.payload.discount,
+                totalAfterDiscount: action.payload.totalAfterDiscount,
+                message: action.payload.message,
+            };
+        case APPLY_COUPON_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
+    }
+};

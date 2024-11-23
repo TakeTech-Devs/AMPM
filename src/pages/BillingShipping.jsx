@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeItemsFromCart } from '../actions/cartAction';
 import { addItemsToCart } from "../actions/cartAction";
 import imageIcon from "../assets/mission-image.png";
+import { applyCouponCode, clearErrors } from "../actions/userActions";
 
 function BillingShipping() {
   const [quantity, setQuantity] = useState(1);
   const [subtotal, setSubtotal] = useState(120.0);
   const [coupon, setCoupon] = useState("");
-  const [discount, setDiscount] = useState(0);
+  // const [discount, setDiscount] = useState(0);
   const [shippingCost] = useState(50.0);
   const [total, setTotal] = useState(subtotal + shippingCost);
   const navigate = useNavigate();
@@ -22,6 +23,10 @@ function BillingShipping() {
 
   const { isAuthenticated } = useSelector(
     (state) => state.user
+  );
+
+  const { discount, totalAfterDiscount, message, error, loading } = useSelector(
+    (state) => state.coupon
   );
 
   const calculateSubtotal = () => {
@@ -41,7 +46,7 @@ function BillingShipping() {
   const calculateTotal = () => {
     const shipping = calculateShippingCost();
     const totalBeforeDiscount = amountToPay + shipping;
-    return (totalBeforeDiscount - discount).toFixed(2);
+    return discount !== null ? totalAfterDiscount : totalBeforeDiscount.toFixed(2);
   };
 
   const handleIncrease = (productId, quantity) => {
@@ -62,62 +67,39 @@ function BillingShipping() {
     window.alert("Product Removed From Cart");
   }
 
-  // const updateSubtotal = (newQuantity) => {
-  //   const newSubtotal = newQuantity * 120;
-  //   setSubtotal(newSubtotal);
-  //   updateTotal(newSubtotal);
-  // };
-
-  const updateTotal = (newTotal) => {
-    // const newTotal = newSubtotal - discount + shippingCost;
-    // setTotal(newTotal);
-    setTotal(newTotal);
-  };
 
   const handleCouponChange = (e) => {
     setCoupon(e.target.value);
   };
 
-  const applyCoupon = (e) => {
+  const applyCouponHandler = (e) => {
     e.preventDefault();
-    // if (coupon === "DISCOUNT10") {
-    //   const discountAmount = subtotal * 0.1; // 10% discount
-    //   setDiscount(discountAmount);
-    //   updateTotal(subtotal - discountAmount);
-    //   setTimeout(() => {
-    //     alert(`Coupon applied! You saved $${discountAmount.toFixed(2)}.`);
-    //   }, 100);
-    // } else {
-    //   alert("Invalid coupon code");
-    // }
-
-    if (coupon === "DISCOUNT10") {
-      const discountAmount = amountToPay * 0.1; // 10% discount
-      setDiscount(discountAmount);
-      updateTotal(amountToPay + shippingCost - discountAmount);
-      setTimeout(() => {
-        alert(`Coupon applied! You saved $${discountAmount.toFixed(2)}.`);
-      }, 100);
-    } else {
-      alert("Invalid coupon code");
+    if (!coupon.trim()) {
+      alert("Please enter a valid coupon code.");
+      return;
     }
+    dispatch(applyCouponCode(coupon, amountToPay));
   };
+
 
   const handleCheckout = () => {
     const total = calculateSubtotal();
     const totalFinal = calculateTotal();
     const Discount = discount;
-    // const ShippingCost = shippingCost;
-    console.log(calculateSubtotal());
+    console.log({ total, totalFinal, Discount });
     navigate("/checkout", { state: { total, totalFinal, Discount } });
   };
 
-  useEffect(()=>{
-    const totalQuantity = cartItems.reduce((acc,item)=>acc+item.quantity,0);
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      dispatch(clearErrors());
+    }
+    const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
     setQuantity(totalQuantity);
   })
 
-  const handleLogin =() => {
+  const handleLogin = () => {
     navigate("/login");
   }
 
@@ -263,95 +245,6 @@ function BillingShipping() {
                   <h3>Your Cart</h3>
                   <p>({cartItems.length})</p>
                 </div>
-                {/* {quantity > 0 ? (
-                  <>
-                    <div className="add-to-cart-items">
-                      <ul>
-                        <li>
-                          <div className="items">
-                            <div className="items-details">
-                              <div className="img-div">
-                                <img
-                                  src={p1}
-                                  alt="product 1"
-                                  width="100%"
-                                  height="100%"
-                                />
-                              </div>
-                              <div className="items-name">
-                                <p>1x Khalifa Kush</p>
-                                <p>(AAAA)</p>
-                              </div>
-                            </div>
-                            <div className="prices-wrapper">
-                              <div className="count-price-wrapper">
-                                <div className="counter">
-                                  <Button onClick={handleDecrease}>
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="16"
-                                      height="16"
-                                      viewBox="0 0 16 16"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M4 8H12"
-                                        stroke="#060709"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
-                                  </Button>
-                                  <div className="amount">
-                                    <p>{quantity}</p>
-                                  </div>
-                                  <Button onClick={handleIncrease}>
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="16"
-                                      height="16"
-                                      viewBox="0 0 16 16"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M4 8H12"
-                                        stroke="#060709"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                      <path
-                                        d="M8 12V4"
-                                        stroke="#060709"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
-                                  </Button>
-                                </div>
-                                <div className="price">
-                                  <p>$120.00</p>
-                                </div>
-                              </div>
-                              <div className="total">
-                                <p>${subtotal.toFixed(2)}</p>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="subtotal">
-                            <p>Subtotal</p>
-                            <p className="totalamount">${subtotal.toFixed(2)}</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </>
-                ) : (
-                  <Col>
-                    <p>No items in the cart.</p>
-                  </Col>
-                )} */}
 
                 {cartItems.length === 0 ? (
                   <Col>
@@ -451,7 +344,6 @@ function BillingShipping() {
                                     </svg>
                                   </button>
                                   <div className="total">
-                                    {/* <p>${subtotal.toFixed(2)}</p> */}
                                     <p>
                                       ${(item.price * item.quantity).toFixed(2)}
                                     </p>
@@ -460,11 +352,6 @@ function BillingShipping() {
                               </div>
                             </li>
                             <li>
-                              {/* <div className="subtotal"> */}
-                              {/* <p>Subtotal</p> */}
-                              {/* <p className="totalamount">${subtotal.toFixed(2)}</p> */}
-                              {/* <p className="totalamount">${calculateSubtotal()}</p> */}
-                              {/* </div> */}
                             </li>
                           </ul>
                         </div>
@@ -491,29 +378,39 @@ function BillingShipping() {
                 <div className="amount-display d-flex flex-column gap-3">
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Subtotal</p>
-                    {/* <p>${subtotal.toFixed(2)}</p> */}
                     <p>${calculateSubtotal()}</p>
                   </div>
-                  {discount > 0 ? (
+                  {/* {discount > 0 ? (
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="sms">Discount</p>
                       <p>-${discount.toFixed(2)}</p>{" "}
-                      {/* Showing the discount as negative */}
+                     
                     </div>
                   ) : (
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="sms">Discount</p>
                       <p>${discount.toFixed(2)}</p>{" "}
-                      {/* Showing the discount as negative */}
+                      
+                    </div>
+                  )} */}
+                  {discount !== null && (
+                    <div className="d-flex align-items-center justify-content-between">
+                      <p className="sms">Discount</p>
+                      <p>-${discount.toFixed(2)}</p>
                     </div>
                   )}
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p className="sms">Subtotal after Discount</p>
+                    {/* <p>${subtotal.toFixed(2)}</p> */} 
+                    <p>${parseFloat(calculateTotal()).toFixed(2)}</p>
+                  </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
                     <p>${calculateShippingCost().toFixed(2)}</p>
                   </div>
                 </div>
                 <div className="apply-coupon-wrapper">
-                  <Form onSubmit={applyCoupon}>
+                  <Form onSubmit={applyCouponHandler}>
                     <div className="d-flex gap-3 coupon-wrapper">
                       <Form.Control
                         className="custom-outline coupon-box"
@@ -526,11 +423,14 @@ function BillingShipping() {
                         className="apply-btn"
                         variant="primary"
                         type="submit"
+                        disabled={loading}
                       >
-                        Apply Coupon
+                        {/* Apply Coupon */}
+                        {loading ? "Applying..." : "Apply Coupon"}
                       </Button>
                     </div>
                   </Form>
+                  {message && <p className="text-success">{message}</p>}
                 </div>
                 <div className="sms-show">
                   <p className="limit-sms">
@@ -565,7 +465,7 @@ function BillingShipping() {
                           {" "}
                           <span>Checkout</span> <span>|</span>{" "}
                           {/* <span>${total.toFixed(2)}</span>{" "} */}
-                          <span>${calculateTotal()}</span>{" "}
+                          <span>${parseFloat(calculateTotal()).toFixed(2)}</span>{" "}
                         </Button>
                       ) : (
                         <Button
