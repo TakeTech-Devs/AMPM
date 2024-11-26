@@ -132,76 +132,76 @@ export default function AboutUs() {
               </div>
             </Col>
           </Row>
-          <Row className="gy-3">
-            <Col md={12} lg={6} xl={4}>
-              <Card className="whatwedoCard">
-                <div className="card-image-wrapper">
-                  <img src={demoImage} alt="Card image" />
-                </div>
-
-                <Card.Body>
-                  <div className="whatwedo">
-                    <Card.Title>
-                      <h2>Lorem Ipsum</h2>
-                    </Card.Title>
-                    <Card.Text className="text-center">
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Temporibus hic porro autem, ducimus pariatur
-                        architecto accusantium? Perspiciatis non,
-                      </p>
-                    </Card.Text>
+            {/* <Row className="gy-3">
+              <Col md={12} lg={6} xl={4}>
+                <Card className="whatwedoCard">
+                  <div className="card-image-wrapper">
+                    <img src={demoImage} alt="Card image" />
                   </div>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={12} lg={6} xl={4}>
-              <Card className="whatwedoCard">
-                <div className="card-image-wrapper">
-                  <img src={demoImage} alt="Card image" />
-                </div>
 
-                <Card.Body>
-                  <div className="whatwedo">
-                    <Card.Title>
-                      <h2>Lorem Ipsum</h2>
-                    </Card.Title>
-                    <Card.Text className="text-center">
-                      <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Impedit nihil quod sunt numquam unde, enim,
-                        officiis temporibus quis error deleniti soluta
-                        blanditiis est cum ab molestiae consequatur sit
-                        necessitatibus aliquam.
-                      </p>
-                    </Card.Text>
+                  <Card.Body>
+                    <div className="whatwedo">
+                      <Card.Title>
+                        <h2>Lorem Ipsum</h2>
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <p>
+                          Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Temporibus hic porro autem, ducimus pariatur
+                          architecto accusantium? Perspiciatis non,
+                        </p>
+                      </Card.Text>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={12} lg={6} xl={4}>
+                <Card className="whatwedoCard">
+                  <div className="card-image-wrapper">
+                    <img src={demoImage} alt="Card image" />
                   </div>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={12} lg={12} xl={4}>
-              <Card className="whatwedoCard">
-                <div className="card-image-wrapper">
-                  <img src={demoImage} alt="Card image" />
-                </div>
 
-                <Card.Body>
-                  <div className="whatwedo">
-                    <Card.Title>
-                      <h2>Lorem Ipsum</h2>
-                    </Card.Title>
-                    <Card.Text className="text-center">
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Temporibus hic porro autem, ducimus pariatur
-                        architecto accusantium? Perspiciatis non,
-                      </p>
-                    </Card.Text>
+                  <Card.Body>
+                    <div className="whatwedo">
+                      <Card.Title>
+                        <h2>Lorem Ipsum</h2>
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <p>
+                          Lorem ipsum dolor sit, amet consectetur adipisicing
+                          elit. Impedit nihil quod sunt numquam unde, enim,
+                          officiis temporibus quis error deleniti soluta
+                          blanditiis est cum ab molestiae consequatur sit
+                          necessitatibus aliquam.
+                        </p>
+                      </Card.Text>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={12} lg={12} xl={4}>
+                <Card className="whatwedoCard">
+                  <div className="card-image-wrapper">
+                    <img src={demoImage} alt="Card image" />
                   </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+
+                  <Card.Body>
+                    <div className="whatwedo">
+                      <Card.Title>
+                        <h2>Lorem Ipsum</h2>
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <p>
+                          Lorem ipsum dolor, sit amet consectetur adipisicing
+                          elit. Temporibus hic porro autem, ducimus pariatur
+                          architecto accusantium? Perspiciatis non,
+                        </p>
+                      </Card.Text>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row> */}
 
           {/* <input type="text" className="custom-outline" placeholder="Enter the name"/> */}
 

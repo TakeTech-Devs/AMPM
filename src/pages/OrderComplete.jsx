@@ -13,7 +13,7 @@ function OrderComplete() {
   const navigate = useNavigate();
   // const { Total } = location.state || { Total: 0 };
   // const { Fdiscount } = location.state || { Fdiscount: 0 };
-  const { Total, Fdiscount, fromCheckout } = location.state || {};
+  const { Total, Fdiscount, totalFinalAmount, fromCheckout } = location.state || {};
 
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -270,7 +270,7 @@ function OrderComplete() {
                     </div>
                     <div className="address">
                       <p className="heading">Discount</p>
-                      <p>${Fdiscount.toFixed(2)}</p>
+                      <p>${(Fdiscount ?? 0).toFixed(2)}</p>
                     </div>
                     <div className="address">
                       <p className="heading">Shipping Costs</p>
@@ -282,7 +282,7 @@ function OrderComplete() {
                     </div> */}
                     <div className="total">
                       <p>TOTAL</p>
-                      <h3 className="amount">${finalTotal}</h3>
+                      <h3 className="amount">${totalFinalAmount.toFixed(2)}</h3>
                     </div>
                   </div>
                 </Col>

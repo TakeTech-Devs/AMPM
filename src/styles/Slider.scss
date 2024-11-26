@@ -1,6 +1,6 @@
 @import './Variable.scss';
 .slider-card .slider-image-wrapper img{width: 100%;}
-.slider-image-wrapper{width:200px;display: flex;justify-content: center;margin-block: 29px;}
+.slider-image-wrapper{width:200px;display: flex;margin-block: 29px;padding-inline-start: 12px;}
 
 .slider .slider-card .card-body h3{color: $purple;}
 .order-parent .react-multiple-carousel__arrow{z-index: 0;min-width: 25px;min-height: 25px;}

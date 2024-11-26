@@ -1,5 +1,5 @@
 @import './Variable.scss';
-.slider-image-wrapper{width:200px;display: flex;justify-content: center;}
+.slider-image-wrapper{width:200px;display: flex;padding-left: 12px;}
 .slider-image-wrapper .rating-wrapper{width: 178px;height: 26px;display: flex;padding-left: 0px;margin-bottom: 0;gap: 8px;}
 
 .rating-slider{margin-inline:20px;height: 100%;}
@@ -8,7 +8,7 @@
 .rating-slider .slider-card .card-body .types{color: #BADE78;}
 .rating-slider .slider-card{display: flex;align-items: start;border-radius: 24px;}
 
-span{width: 20px;height: 20px;}
+span{width: 30px;height: 32px;}
 .ratingSlider-parent .react-multi-carousel-list{padding-bottom: 5px;}
 
 
