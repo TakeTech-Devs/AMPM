@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Battery from "../../../assets/Battery.png"; // Importing the image correctly
@@ -54,6 +54,8 @@ const Slider = () => {
 
   const { testimonialList, error, loading: testimonialListLoading } = useSelector((state) => state.testimonials);
 
+  const [expandedStates, setExpandedStates] = useState({});
+
 
   useEffect(() => {
     if (error) {
@@ -64,39 +66,84 @@ const Slider = () => {
     dispatch(getTestimonial())
   }, [dispatch, error])
 
+  const toggleExpand = (index) => {
+    setExpandedStates((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
+  const isOverflowing = (el) => {
+    return el.scrollHeight > el.clientHeight;
+  };
+
 
   return (
     <div className="ratingSlider-parent">
       <Carousel
         responsive={responsive}
-        // autoPlay={true}
         swipeable={true}
         draggable={true}
-        // showDots={true}
         infinite={true}
         partialVisible={false}
         dotListClass="custom-dot-list-style"
       >
         {testimonialList.map((imageUrl, index) => {
+          const ref = useRef(null);
+          const [overflow, setOverflow] = useState(false);
+
+          useEffect(() => {
+            if (ref.current) {
+              setOverflow(isOverflowing(ref.current));
+            }
+          }, [ref.current]);
+
           return (
             <div className="rating-slider" key={index}>
               <Card className="slider-card" style={{ width: "100%", height: "100%" }}>
                 <div className="slider-image-wrapper">
-                  {/* <div> */}
-                    <ReactStars
-                      count={5}
-                      value={imageUrl.rating}
-                      size={30}
-                      isHalf={true}
-                      edit={false}
-                      activeColor="#95c93d"
-                    />
-                  {/* </div> */}
+                  <ReactStars
+                    count={5}
+                    value={imageUrl.rating}
+                    size={30}
+                    isHalf={true}
+                    edit={false}
+                    activeColor="#95c93d"
+                  />
                 </div>
-                <Card.Body className="d-flex  justify-content-center">
+                <Card.Body className="d-flex justify-content-center">
                   <Card.Title>
-                    <p>{imageUrl.testimonial}</p>
-                    <h3 >{imageUrl.name}</h3>
+                    <p
+                      ref={ref}
+                      style={{
+                        maxHeight: expandedStates[index] ? "15em" : "15em", // Keep the height fixed
+                        overflow: expandedStates[index] ? "auto" : "hidden", // Add scroll bar when expanded
+                        textOverflow: "ellipsis",
+                        display: "-webkit-box",
+                        WebkitLineClamp: expandedStates[index] ? "unset" : 7, // Remove line clamping when expanded
+                        WebkitBoxOrient: "vertical",
+                        paddingRight: expandedStates[index] ? "8px" : "0", // Add space for scrollbar
+                      }}
+                    >
+                      {imageUrl.testimonial}
+                    </p>
+                    {overflow && (
+                      <button
+                        className="see-more-btn"
+                        onClick={() => toggleExpand(index)}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          color: "#007bff",
+                          cursor: "pointer",
+                          padding: 0,
+                          marginTop: "10px",
+                        }}
+                      >
+                        {expandedStates[index] ? "See Less" : "See More"}
+                      </button>
+                    )}
+                    <h3>{imageUrl.name}</h3>
                     <p className="types">{imageUrl.role}</p>
                   </Card.Title>
                 </Card.Body>
@@ -105,7 +152,6 @@ const Slider = () => {
           );
         })}
       </Carousel>
-
     </div>
   );
 };
