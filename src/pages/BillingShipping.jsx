@@ -46,7 +46,12 @@ function BillingShipping() {
   const calculateTotal = () => {
     const shipping = calculateShippingCost();
     const totalBeforeDiscount = amountToPay + shipping;
-    return discount !== null ? totalAfterDiscount : totalBeforeDiscount.toFixed(2);
+
+    if (discount !== null && discount > 0) {
+      return (totalBeforeDiscount - discount).toFixed(2);
+    }
+
+    return totalBeforeDiscount.toFixed(2);
   };
 
   const handleIncrease = (productId, quantity) => {
@@ -405,8 +410,9 @@ function BillingShipping() {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Order Total</p>
-                    {/* <p>${subtotal.toFixed(2)}</p> */} 
-                    <p>${parseFloat(calculateTotal()).toFixed(2)}</p>
+                    {/* <p>${subtotal.toFixed(2)}</p> */}
+                    {/* <p>${parseFloat(calculateTotal()).toFixed(2)}</p> */}
+                    <p>${calculateTotal()}</p>
                   </div>
                 </div>
                 <div className="apply-coupon-wrapper">
@@ -465,7 +471,8 @@ function BillingShipping() {
                           {" "}
                           <span>Checkout</span> <span>|</span>{" "}
                           {/* <span>${total.toFixed(2)}</span>{" "} */}
-                          <span>${parseFloat(calculateTotal()).toFixed(2)}</span>{" "}
+                          {/* <span>${parseFloat(calculateTotal()).toFixed(2)}</span>{" "} */}
+                          <span>${calculateTotal()}</span>{" "}
                         </Button>
                       ) : (
                         <Button

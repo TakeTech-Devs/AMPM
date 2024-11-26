@@ -282,7 +282,7 @@ function OrderComplete() {
                     </div> */}
                     <div className="total">
                       <p>TOTAL</p>
-                      <h3 className="amount">${totalFinalAmount.toFixed(2)}</h3>
+                      <h3 className="amount">${totalFinalAmount}</h3>
                     </div>
                   </div>
                 </Col>
