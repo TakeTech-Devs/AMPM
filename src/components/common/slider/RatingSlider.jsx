@@ -109,10 +109,11 @@ const Slider = () => {
                       style={{
                         background: "none",
                         border: "none",
-                        color: "#007bff",
+                        color: "#95C93D",
                         cursor: "pointer",
                         padding: 0,
                         marginTop: "10px",
+                        // fontSize: "20px"
                       }}
                     >
                       {expandedStates[index] ? "See Less" : "See More"}

@@ -17,6 +17,7 @@ span{width: 30px;height: 32px;}
 .ratingSlider-parent .react-multiple-carousel__arrow::before{font-size: 20px;color: $black;}
 .ratingSlider-parent .react-multiple-carousel__arrow--right{right: -8px; background-color: transparent;}
 .ratingSlider-parent .react-multiple-carousel__arrow--left{left: -8px; background-color: transparent;}
+.rating-slider .card-body .card-title .see-more-btn{font-size: 18px;}
 
 
 
@@ -26,6 +27,7 @@ span{width: 30px;height: 32px;}
   .slider-image-wrapper{margin-block: 0 0px;}
   .slider-image-wrapper .rating-wrapper{width: 170px;height: 26px;display: flex;margin-top: 20px;margin-bottom: 0;gap: 12px;}
   .ratingSlider-parent .react-multi-carousel-list ul li .rating-slider{width: 320px;}
+  .rating-slider .card-body .card-title .see-more-btn{font-size: 16px;}
 }
 
 
@@ -37,6 +39,7 @@ span{width: 30px;height: 32px;}
   .ratingSlider-parent .react-multiple-carousel__arrow--left{display: none;}
   .ratingSlider-parent .react-multi-carousel-list ul li {width: 100vw;display: flex;height: 100%;}
   .ratingSlider-parent .react-multi-carousel-list ul li .rating-slider{width: 100vw}
+  .rating-slider .card-body .card-title .see-more-btn{font-size: 14px;}
 
 }
 
