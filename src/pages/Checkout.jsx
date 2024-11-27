@@ -28,6 +28,8 @@ function Checkout() {
   const [pin, setPin] = useState(shippingInfo.pin);
   const [phone, setPhone] = useState(shippingInfo.phone);
   const [email, setEmail] = useState(shippingInfo.email);
+  const [savedAddresses, setSavedAddresses] = useState([]);
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
 
   const [isAddressSubmitted, setIsAddressSubmitted] = useState(false);
 
@@ -56,28 +58,78 @@ function Checkout() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
+    setSavedAddresses(addresses);
+  }, []);
+
   const shippingSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      saveShippingInfo({
-        firstName,
-        lastName,
-        country,
-        address,
-        city,
-        state,
-        pin,
-        phone,
-        email,
-      })
-    );
-    setIsAddressSubmitted(true);
+
+    const newAddress = {
+      firstName,
+      lastName,
+      country,
+      address,
+      city,
+      state,
+      pin,
+      phone,
+      email,
+    };
+
+    // Dispatch the action
+    dispatch(saveShippingInfo(newAddress));
+
+    // Optional: Update local state if you need to display saved addresses dynamically
+    setSavedAddresses((prev) => [...prev, newAddress]);
+
+  };
+
+  const handleAddressSelect = (index) => {
+    setSelectedAddressIndex(index);
+    // dispatch(saveShippingInfo(savedAddresses[index]));
+  };
+
+  const handleDeleteAddress = (index) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this address?");
+    if (!confirmDelete) return;
+
+    // Remove the address from savedAddresses
+    const updatedAddresses = savedAddresses.filter((_, i) => i !== index);
+
+    // Update the state
+    setSavedAddresses(updatedAddresses);
+
+    // Remove the shippingAddresses key from localStorage
+    window.localStorage.removeItem("shippingInfo");
+
+    // Update localStorage with the new array
+    localStorage.setItem("shippingInfo", JSON.stringify(updatedAddresses));
+
+    console.log('Updated Addresses:', updatedAddresses);
+    console.log('LocalStorage after deletion:', localStorage.getItem('shippingInfo'));
+
+    // Reset selected address if needed
+    if (selectedAddressIndex === index) {
+      setSelectedAddressIndex(null);
+    }
   };
 
   const totalPrice = total;
 
   const handleCheckout = (e) => {
     e.preventDefault();
+
+    if (selectedAddressIndex === null) {
+      window.alert("Please select a shipping address.");
+      return;
+    }
+
+    const shippingInfo = savedAddresses[selectedAddressIndex];
+
+    console.log("Address", shippingInfo)
+
     const order = {
       shippingInfo,
       orderItems: cartItems,
@@ -98,6 +150,8 @@ function Checkout() {
   // const finalTotal = total - Discount + calculateShippingCost(total);
 
   useEffect(() => {
+    const addressesFromStorage = JSON.parse(localStorage.getItem("shippingInfo")) || [];
+    setSavedAddresses(addressesFromStorage);
     if (error) {
       dispatch(clearErrors());
       window.alert(error);
@@ -419,8 +473,35 @@ function Checkout() {
                           Submit
                         </Button>
                       </Col> */}
-
                       <Col lg={12}>
+                        <Button type="submit" className="primary w-100">
+                          Add Address
+                        </Button>
+                      </Col>
+                      {savedAddresses.length > 0 && (
+                        <div className="saved-addresses">
+                          <h4>Saved Addresses</h4>
+                          {savedAddresses.map((address, index) => (
+                            <div key={index} className="address-card">
+                              <Form.Check
+                                type="radio"
+                                label={`${address.firstName} ${address.lastName}, ${address.address}, ${address.city}, ${address.state}, ${address.pin}`}
+                                checked={selectedAddressIndex === index}
+                                onChange={() => handleAddressSelect(index)}
+                              />
+                              <button
+                                className="btn btn-danger"
+                                onClick={() => handleDeleteAddress(index)}
+                              >
+                                Delete Address
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+
+                      {/* <Col lg={12}>
                         <div className="bottom-info">
                           <Form.Group className="mb-3" id="formGridCheckbox">
                             <Form.Check
@@ -619,7 +700,7 @@ function Checkout() {
                             </Form.Group>
                           </div>
                         </div>
-                      </Col>
+                      </Col> */}
 
                       <Col lg={12}>
                         <div className="bottom-info">
@@ -681,9 +762,12 @@ function Checkout() {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping</p>
-                    <p>{isAddressSubmitted
-                      ? `${country}`
-                      : "New York, US"}</p>
+                    {/* <p>New York, US</p> */}
+                    {selectedAddressIndex !== null && savedAddresses[selectedAddressIndex] && (
+                      <p>
+                        {savedAddresses[selectedAddressIndex].address}, {savedAddresses[selectedAddressIndex].city}, {savedAddresses[selectedAddressIndex].state}, {savedAddresses[selectedAddressIndex].pin}, {savedAddresses[selectedAddressIndex].country}
+                      </p>
+                    )}
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Discount</p>
