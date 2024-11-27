@@ -249,8 +249,8 @@ function OrderComplete() {
                 <Col lg={6} sm={6}>
                   <div className="left-address">
                     <div className="address">
-                      <p className="heading">Shipping</p>
-                      <p>{address.address},{address.city},{address.state},{address.pin},{address.country}</p>
+                      <p className="heading" >Shipping</p>
+                      <p style={{width: "250px", textAlign: "end"}}>{address.address},{address.city},{address.state},{address.pin},{address.country}</p>
                     </div>
                     {/* <div className="address">
                       <p className="heading">Shipping Options</p>
@@ -273,7 +273,7 @@ function OrderComplete() {
                       <p>${(Fdiscount ?? 0).toFixed(2)}</p>
                     </div>
                     <div className="address">
-                      <p className="heading">Shipping Costs</p>
+                      <p className="heading" >Shipping Costs</p>
                       <p>${shippingCost.toFixed(2)}</p>
                     </div>
                     {/* <div className="address">
