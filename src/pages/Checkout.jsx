@@ -83,7 +83,7 @@ function Checkout() {
 
     // Optional: Update local state if you need to display saved addresses dynamically
     setSavedAddresses((prev) => [...prev, newAddress]);
-
+    window.location.reload();
   };
 
   const handleAddressSelect = (index) => {
@@ -139,7 +139,7 @@ function Checkout() {
     dispatch(createOrder(order));
     window.alert("Order Placed Successfully");
     navigate("/ordercomplete", {
-      state: { Total: total, Fdiscount: Discount, totalFinalAmount: finalAmount, fromCheckout: true },
+      state: { Total: total, Fdiscount: Discount, totalFinalAmount: finalAmount, address: shippingInfo, fromCheckout: true },
     });
   };
 
@@ -358,7 +358,7 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>Country / Region </Form.Label>
+                          <Form.Label>Address </Form.Label>
                           <Form.Control
                             required
                             type="Text"
@@ -402,7 +402,7 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>Province</Form.Label>
+                          <Form.Label>State / Province</Form.Label>
                           <Form.Control
                             required
                             type="text"
@@ -440,10 +440,11 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label className="optional">
-                            Phone (optional){" "}
+                          <Form.Label>
+                            Phone 
                           </Form.Label>
                           <Form.Control
+                            required
                             type="number"
                             placeholder="Enter Number"
                             className="custom-outline"
@@ -457,7 +458,7 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>Email address </Form.Label>
+                          <Form.Label>Email address</Form.Label>
                           <Form.Control
                             required
                             type="email"
@@ -485,7 +486,7 @@ function Checkout() {
                             <div key={index} className="address-card">
                               <Form.Check
                                 type="radio"
-                                label={`${address.firstName} ${address.lastName}, ${address.address}, ${address.city}, ${address.state}, ${address.pin}`}
+                                label={`${address.firstName} ${address.lastName}, ${address.address}, ${address.city}, ${address.state}, ${address.pin}, ${address.phone}, ${address.email}`}
                                 checked={selectedAddressIndex === index}
                                 onChange={() => handleAddressSelect(index)}
                               />
@@ -702,7 +703,7 @@ function Checkout() {
                         </div>
                       </Col> */}
 
-                      <Col lg={12}>
+                      {/* <Col lg={12}>
                         <div className="bottom-info">
                           <p className="label-effect">
                             What would you like us to do if an Item is out of
@@ -747,7 +748,7 @@ function Checkout() {
                         <Button type="submit" className="primary w-100">
                           Submit
                         </Button>
-                      </Col>
+                      </Col> */}
                     </Row>
                   </Form>
                 </div>
@@ -784,7 +785,7 @@ function Checkout() {
                   </div>
                 </div>
 
-                <div className="money-trans">
+                {/* <div className="money-trans">
                   <p>Email Money Transfer</p>
                   <div className="svg-icon">
                     <svg
@@ -812,7 +813,7 @@ function Checkout() {
                       />
                     </svg>
                   </div>
-                </div>
+                </div> */}
 
                 {/* <div className="apply-coupon-wrapper checkout-apply-coupon-wrapper">
                   <Form>
@@ -832,7 +833,7 @@ function Checkout() {
                     </div>
                   </Form>
                 </div> */}
-                <div className="checkboxes-wrapper">
+                {/* <div className="checkboxes-wrapper">
                   <Form>
                     <div className="final-sms">
                       <Form.Group className="mb-3" id="formGridCheckbox">
@@ -851,7 +852,7 @@ function Checkout() {
                       </Form.Group>
                     </div>
                   </Form>
-                </div>
+                </div> */}
                 <div className="checkout-btn">
                   <Button
                     className="d-flex justify-content-center gap-2 add-to-cart-btn-color"
