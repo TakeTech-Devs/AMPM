@@ -13,7 +13,7 @@ function OrderComplete() {
   const navigate = useNavigate();
   // const { Total } = location.state || { Total: 0 };
   // const { Fdiscount } = location.state || { Fdiscount: 0 };
-  const { Total, Fdiscount, totalFinalAmount, fromCheckout } = location.state || {};
+  const { Total, Fdiscount, totalFinalAmount, fromCheckout, address } = location.state || {};
 
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -250,16 +250,16 @@ function OrderComplete() {
                   <div className="left-address">
                     <div className="address">
                       <p className="heading">Shipping</p>
-                      <p>New York, US</p>
+                      <p>{address.address},{address.city},{address.state},{address.pin},{address.country}</p>
                     </div>
-                    <div className="address">
+                    {/* <div className="address">
                       <p className="heading">Shipping Options</p>
                       <p>Same-Day Dispatching</p>
-                    </div>
-                    <div className="address">
+                    </div> */}
+                    {/* <div className="address">
                       <p className="heading">Email Money Transfer</p>
                       <p>Interac</p>
-                    </div>
+                    </div> */}
                   </div>
                 </Col>
                 <Col lg={6} sm={6} >
