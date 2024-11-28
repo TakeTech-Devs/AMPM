@@ -92,7 +92,9 @@ function Checkout() {
   };
 
   const handleDeleteAddress = (index) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this address?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this address?"
+    );
     if (!confirmDelete) return;
 
     // Remove the address from savedAddresses
@@ -107,8 +109,11 @@ function Checkout() {
     // Update localStorage with the new array
     localStorage.setItem("shippingInfo", JSON.stringify(updatedAddresses));
 
-    console.log('Updated Addresses:', updatedAddresses);
-    console.log('LocalStorage after deletion:', localStorage.getItem('shippingInfo'));
+    console.log("Updated Addresses:", updatedAddresses);
+    console.log(
+      "LocalStorage after deletion:",
+      localStorage.getItem("shippingInfo")
+    );
 
     // Reset selected address if needed
     if (selectedAddressIndex === index) {
@@ -128,7 +133,7 @@ function Checkout() {
 
     const shippingInfo = savedAddresses[selectedAddressIndex];
 
-    console.log("Address", shippingInfo)
+    console.log("Address", shippingInfo);
 
     const order = {
       shippingInfo,
@@ -139,7 +144,13 @@ function Checkout() {
     dispatch(createOrder(order));
     window.alert("Order Placed Successfully");
     navigate("/ordercomplete", {
-      state: { Total: total, Fdiscount: Discount, totalFinalAmount: finalAmount, address: shippingInfo, fromCheckout: true },
+      state: {
+        Total: total,
+        Fdiscount: Discount,
+        totalFinalAmount: finalAmount,
+        address: shippingInfo,
+        fromCheckout: true,
+      },
     });
   };
 
@@ -150,7 +161,8 @@ function Checkout() {
   // const finalTotal = total - Discount + calculateShippingCost(total);
 
   useEffect(() => {
-    const addressesFromStorage = JSON.parse(localStorage.getItem("shippingInfo")) || [];
+    const addressesFromStorage =
+      JSON.parse(localStorage.getItem("shippingInfo")) || [];
     setSavedAddresses(addressesFromStorage);
     if (error) {
       dispatch(clearErrors());
@@ -286,8 +298,7 @@ function Checkout() {
               <div className="left-bill">
                 <div className="cart-heading">
                   <h3>Shipping</h3>
-                  <p>({cartItems.length})
-                  </p>
+                  <p>({cartItems.length})</p>
                 </div>
                 <div className="buyer-info">
                   <Form onSubmit={shippingSubmit}>
@@ -358,17 +369,25 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>Address </Form.Label>
+                          <Form.Label>Address</Form.Label>
                           <Form.Control
                             required
-                            type="Text"
+                            type="text"
                             placeholder="House number and street name"
                             className="custom-outline"
                             value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                            onChange={(e) => {
+                              // Automatically add space after comma
+                              const updatedAddress = e.target.value.replace(
+                                /,([^ ])/g,
+                                ", $1"
+                              );
+                              setAddress(updatedAddress);
+                            }}
                           />
                         </Form.Group>
                       </Col>
+
                       <Col lg={12}>
                         <Form.Group
                           className="mb-3"
@@ -440,9 +459,7 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>
-                            Phone 
-                          </Form.Label>
+                          <Form.Label>Phone</Form.Label>
                           <Form.Control
                             required
                             type="number"
@@ -496,212 +513,11 @@ function Checkout() {
                               >
                                 Delete Address
                               </button>
+                              
                             </div>
                           ))}
                         </div>
                       )}
-
-
-                      {/* <Col lg={12}>
-                        <div className="bottom-info">
-                          <Form.Group className="mb-3" id="formGridCheckbox">
-                            <Form.Check
-                              className="label-effect"
-                              type="checkbox"
-                              label="Ship to a different Address?"
-                              onChange={toggleShippingAddress}
-                              checked={shipToDifferentAddress}
-                            />
-                          </Form.Group>
-                          {shipToDifferentAddress && (
-                            <Row>
-                              <Col lg={6}>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                  <Form.Label>First Name</Form.Label>
-                                  <Form.Control
-                                    required
-                                    type="text"
-                                    placeholder="Enter Your Name"
-                                    className="custom-outline"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                              <Col lg={6}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword"
-                                >
-                                  <Form.Label>Last Name</Form.Label>
-                                  <Form.Control
-                                    required
-                                    type="text"
-                                    placeholder="Enter Last Name"
-                                    className="custom-outline"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                              <Col lg={12}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword "
-                                >
-                                  <Form.Label>Country / Region</Form.Label>
-                                  <Form.Control
-                                    as="select" // This makes the input a dropdown
-                                    required
-                                    className="custom-outline"
-                                    value={country} // Bind the state value to the select input
-                                    onChange={(e) => setCountry(e.target.value)} // Update the state on selection
-                                  >
-                                    <option value="">Select a Country</option>
-                                    {options.map((option, index) => (
-                                      <option key={index} value={option.label}>
-                                        {option.label}
-                                      </option>
-                                    ))}
-                                  </Form.Control>
-                                </Form.Group>
-                              </Col>
-                              <Col lg={12}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword"
-                                >
-                                  <Form.Label>Country / Region </Form.Label>
-                                  <Form.Control
-                                    required
-                                    type="Text"
-                                    placeholder="House number and street name"
-                                    className="custom-outline"
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                              <Col lg={12}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword"
-                                >
-                                  <Form.Control
-                                    type="Text"
-                                    placeholder="Apartment, suite, unit, etc. (optional)"
-                                    className="custom-outline"
-                                  />
-                                </Form.Group>
-                              </Col>
-                              <Col lg={4}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword"
-                                >
-                                  <Form.Label>Town / City</Form.Label>
-                                  <Form.Control
-                                    required
-                                    type="text"
-                                    placeholder="Enter Town / City"
-                                    className="custom-outline"
-                                    value={city}
-                                    onChange={(e) => setCity(e.target.value)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                              <Col lg={4}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword"
-                                >
-                                  <Form.Label>Province</Form.Label>
-                                  <Form.Control
-                                    required
-                                    type="text"
-                                    placeholder="Enter Province"
-                                    className="custom-outline"
-                                    value={state}
-                                    onChange={(e) => setState(e.target.value)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                              <Col lg={4}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword"
-                                >
-                                  <Form.Label>Postcode / ZIP </Form.Label>
-                                  <Form.Control
-                                    required
-                                    type="number"
-                                    placeholder="Enter Postcode / ZIP"
-                                    className="custom-outline"
-                                    onInput={(e) => {
-                                      if (e.target.value.length > 6) {
-                                        e.target.value = e.target.value.slice(0, 6);
-                                      }
-                                    }}
-                                    onWheel={(e) => e.target.blur()}
-                                    value={pin}
-                                    onChange={(e) => setPin(e.target.value)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                              <Col lg={6}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword"
-                                >
-                                  <Form.Label className="optional">
-                                    Phone (optional){" "}
-                                  </Form.Label>
-                                  <Form.Control
-                                    type="number"
-                                    placeholder="Enter Number"
-                                    className="custom-outline"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                              <Col lg={6}>
-                                <Form.Group
-                                  className="mb-3"
-                                  controlId="formBasicPassword"
-                                >
-                                  <Form.Label>Email address </Form.Label>
-                                  <Form.Control
-                                    required
-                                    type="email"
-                                    placeholder="johndoe@example.com"
-                                    className="custom-outline"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                  />
-                                </Form.Group>
-                              </Col>
-                            </Row>
-                          )}
-
-                          <div>
-                            <Form.Group
-                              className="mb-3"
-                              controlId="exampleForm.ControlTextarea1"
-                            >
-                              <Form.Label className="optional additional">
-                                Order Notes (optional)
-                              </Form.Label>
-                              <Form.Control
-                                className="contact-outline-textarea if-outline additional"
-                                as="textarea"
-                                rows={3}
-                                placeholder="Notes about your order, e.g. special notes for delivery."
-                              />
-                            </Form.Group>
-                          </div>
-                        </div>
-                      </Col> */}
 
                       {/* <Col lg={12}>
                         <div className="bottom-info">
@@ -763,13 +579,23 @@ function Checkout() {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping</p>
-                    {/* <p>New York, US</p> */}
-                    {selectedAddressIndex !== null && savedAddresses[selectedAddressIndex] && (
-                      <p>
-                        {savedAddresses[selectedAddressIndex].address}, {savedAddresses[selectedAddressIndex].city}, {savedAddresses[selectedAddressIndex].state}, {savedAddresses[selectedAddressIndex].pin}, {savedAddresses[selectedAddressIndex].country}
-                      </p>
-                    )}
+                    {selectedAddressIndex !== null &&
+                      savedAddresses[selectedAddressIndex] && (
+                        <p style={{ width: "250px", textAlign: "end" }}>
+                          {[
+                            savedAddresses[selectedAddressIndex].address,
+                            savedAddresses[selectedAddressIndex].city,
+                            savedAddresses[selectedAddressIndex].state,
+                            savedAddresses[selectedAddressIndex].pin,
+                            savedAddresses[selectedAddressIndex].country,
+                          ]
+                            .filter((item) => item) // Filter out any empty or undefined fields
+                            .join(", ")}{" "}
+                          {/* Join with a comma and space */}
+                        </p>
+                      )}
                   </div>
+
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Discount</p>
                     {/* {Discount !== null && Discount !== undefined ? (

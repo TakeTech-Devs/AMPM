@@ -37,8 +37,8 @@ span{width: 30px;height: 32px;}
   .ratingSlider-parent .react-multiple-carousel__arrow{min-width: 25px;min-height: 25px;display: flex;justify-content: center;align-items: center;}
   .ratingSlider-parent .react-multiple-carousel__arrow::before{font-size: 16px;}
   .ratingSlider-parent .react-multiple-carousel__arrow--left{display: none;}
-  .ratingSlider-parent .react-multi-carousel-list ul li {width: 100vw;display: flex;height: 100%;}
-  .ratingSlider-parent .react-multi-carousel-list ul li .rating-slider{width: 100vw}
+  .ratingSlider-parent .react-multi-carousel-list ul li {width: 100vw;display: flex;height: 100%;height: 306px;}
+  .ratingSlider-parent .react-multi-carousel-list ul li .rating-slider{width: 100vw;min-width: 306px;}
   .rating-slider .card-body .card-title .see-more-btn{font-size: 14px;}
 
 }

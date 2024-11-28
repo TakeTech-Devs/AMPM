@@ -91,7 +91,7 @@ const Slider = () => {
                   <p
                     ref={(el) => (refs.current[index] = el)}
                     style={{
-                      maxHeight: expandedStates[index] ? "15em" : "15em", // Adjust height when expanded
+                      maxHeight: expandedStates[index] ? "10em" : "15em", // Adjust height when expanded
                       overflow: expandedStates[index] ? "auto" : "hidden",
                       textOverflow: "ellipsis",
                       display: "-webkit-box",
