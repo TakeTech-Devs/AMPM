@@ -86,23 +86,15 @@ function ProductHistory() {
                                   </p>
                                   <Dropdown>
                                     <Dropdown.Toggle style={{
-                                      backgroundColor: "#95C93D",
-                                      border: "none",
-                                      fontWeight: "700",
-                                      marginTop:"10px",
-                                      padding: "20px 20px",
-                                      minWidth: "196px",
-                                      fontSize: "1.25rem",
-                                      lineHeight: "1",
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "center"
+                                      
                                     }}
                                       id="dropdown-basic">
                                       Invoice
                                     </Dropdown.Toggle>
 
-                                    <Dropdown.Menu>
+                                    <Dropdown.Menu style={{
+                                      
+                                    }}>
                                       {order.orderStatus === "Delivered" ? (
                                         <Dropdown.Item
                                           onClick={() => download(order._id)}
