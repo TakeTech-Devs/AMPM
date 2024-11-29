@@ -509,6 +509,7 @@ function Checkout() {
                               />
                               <button
                                 className="btn btn-danger"
+                                style={{marginLeft: "22px",marginTop: "5px"}}
                                 onClick={() => handleDeleteAddress(index)}
                               >
                                 Delete Address
