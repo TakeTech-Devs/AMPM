@@ -1,4 +1,4 @@
-import { CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS } from "../constants/orderConstants";
+import { CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, ORDERS_INVOICE_FAIL, ORDERS_INVOICE_REQUEST, ORDERS_INVOICE_RESET, ORDERS_INVOICE_SUCCESS } from "../constants/orderConstants";
 
 export const newOrderReducer = (state = {}, action) => {
     switch (action.type) {
@@ -58,3 +58,37 @@ export const myOrdersReducer = (state = { orders: [] }, action) => {
             return state;
     }
 };
+
+export const downloadInvoiceReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ORDERS_INVOICE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case ORDERS_INVOICE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDownload: action.payload.success,
+            }
+        case ORDERS_INVOICE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        case ORDERS_INVOICE_RESET:
+            return {
+                ...state,
+                isDownload: false,
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
+    }
+}

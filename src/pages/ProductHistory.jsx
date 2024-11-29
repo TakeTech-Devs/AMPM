@@ -1,21 +1,37 @@
 import React, { useEffect } from "react";
-import { Button, Col, Container, Nav, Row } from "react-bootstrap";
+import { Button, Col, Container, Nav, Row, Dropdown } from "react-bootstrap";
+import Spinner from 'react-bootstrap/Spinner';
 import "../styles/PaymentDetails.scss";
 import battery from "../assets/Battery.png";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, myOrders } from "../actions/orderAction";
+import { clearErrors, downloadInvoice, myOrders } from "../actions/orderAction";
+import { UPDATE_ADMIN_ORDER_RESET } from "../../../admin/src/Constants/OrderConstants";
+
 function ProductHistory() {
   const dispatch = useDispatch();
 
   const { orders, loading, error } = useSelector((state) => state.myOrders);
+  const { error: downloadError, isDownload, loading: downloadLoading } = useSelector((state) => state.invoice);
 
   useEffect(() => {
     if (error) {
       window.alert(error);
       dispatch(clearErrors());
     }
+    if (downloadError) {
+      window.alert(downloadError);
+      dispatch(clearErrors());
+    }
+    if (isDownload) {
+      dispatch({ type: UPDATE_ADMIN_ORDER_RESET });
+  }
     dispatch(myOrders());
-  }, [dispatch, error]);
+
+  }, [dispatch, error, isDownload]);
+
+  const download = (id) => {
+    dispatch(downloadInvoice(id));
+  }
 
   return (
     <>
@@ -68,6 +84,27 @@ function ProductHistory() {
                                   <p>
                                     Order Total: ${order.totalPrice.toFixed(2)}
                                   </p>
+                                    <Dropdown>
+                                      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                        Invoice
+                                      </Dropdown.Toggle>
+
+                                      <Dropdown.Menu>
+                                        {order.orderStatus === "Delivered" ? (
+                                          <Dropdown.Item
+                                            onClick={() => download(order._id)}
+                                          >
+                                            Download Invoice 
+                                          </Dropdown.Item>
+                                        ) :(
+                                          <Dropdown.Item>
+                                            Invoice Is Not Ready
+                                          </Dropdown.Item>
+                                        )}
+
+                                      </Dropdown.Menu>
+                                    </Dropdown>
+
                                 </div>
                                 <div className="product-status">
                                   <div className="svg-div">
@@ -232,6 +269,7 @@ function ProductHistory() {
           </div>
         </Container>
       </section>
+
     </>
   );
 }
