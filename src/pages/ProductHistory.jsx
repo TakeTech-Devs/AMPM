@@ -24,7 +24,7 @@ function ProductHistory() {
     }
     if (isDownload) {
       dispatch({ type: UPDATE_ADMIN_ORDER_RESET });
-  }
+    }
     dispatch(myOrders());
 
   }, [dispatch, error, isDownload]);
@@ -84,26 +84,31 @@ function ProductHistory() {
                                   <p>
                                     Order Total: ${order.totalPrice.toFixed(2)}
                                   </p>
-                                    <Dropdown>
-                                      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                        Invoice
-                                      </Dropdown.Toggle>
+                                  <Dropdown>
+                                    <Dropdown.Toggle style={{
+                                      
+                                    }}
+                                      id="dropdown-basic">
+                                      Invoice
+                                    </Dropdown.Toggle>
 
-                                      <Dropdown.Menu>
-                                        {order.orderStatus === "Delivered" ? (
-                                          <Dropdown.Item
-                                            onClick={() => download(order._id)}
-                                          >
-                                            Download Invoice 
-                                          </Dropdown.Item>
-                                        ) :(
-                                          <Dropdown.Item>
-                                            Invoice Is Not Ready
-                                          </Dropdown.Item>
-                                        )}
+                                    <Dropdown.Menu style={{
+                                      
+                                    }}>
+                                      {order.orderStatus === "Delivered" ? (
+                                        <Dropdown.Item
+                                          onClick={() => download(order._id)}
+                                        >
+                                          Download Your Invoice
+                                        </Dropdown.Item>
+                                      ) : (
+                                        <Dropdown.Item>
+                                          Invoice Is Not Available
+                                        </Dropdown.Item>
+                                      )}
 
-                                      </Dropdown.Menu>
-                                    </Dropdown>
+                                    </Dropdown.Menu>
+                                  </Dropdown>
 
                                 </div>
                                 <div className="product-status">
@@ -268,7 +273,7 @@ function ProductHistory() {
             </div>
           </div>
         </Container>
-      </section>
+      </section >
 
     </>
   );
