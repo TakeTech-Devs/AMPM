@@ -16,7 +16,7 @@
     align-items: center;
     width: 140px; /* Adjust size as needed */
     height: 140px; /* Adjust size as needed */
-    background-color: #ffffff; /* White square background */
+    background-color: #2e2e2ed0; /* White square background */
     border-radius: 8px; /* Slightly rounded corners */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
 }
