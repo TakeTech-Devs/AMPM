@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { contactForm } from "../actions/userActions";
 import { useEffect } from "react";
 import { clearErrors, getContact } from "../actions/contactAction";
+import Loader from "../components/common/loader/Loader";
 
 function ContactUs() {
 
@@ -61,6 +62,7 @@ function ContactUs() {
 
   return (
     <>
+    {loading && <Loader/>}
       <section className="bg-image">
         <div className="flex-class">
           <Container fluid="lg">

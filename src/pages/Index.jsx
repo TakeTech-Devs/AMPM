@@ -10,6 +10,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearErrors, getHome } from "../actions/homeAction";
 import { useEffect } from "react";
 import { getAbout } from "../actions/aboutAction";
+import Loader from "../components/common/loader/Loader";
+
+
 const Index = () => {
 
   const dispatch = useDispatch();
@@ -30,6 +33,7 @@ const Index = () => {
 
   return (
     <>
+    {loading && <Loader/>}
       <section className="bg-video">
         <div className="home-banner"></div>
         <div className="overlay">

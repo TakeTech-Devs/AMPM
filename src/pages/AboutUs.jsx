@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { getAbout } from "../actions/aboutAction";
 import { clearErrors } from "../actions/userActions";
+import Loader from "../components/common/loader/Loader";
 
 
 export default function AboutUs() {
@@ -29,6 +30,7 @@ export default function AboutUs() {
 
   return (
     <>
+    {loading && <Loader/>}
       <section className="bg-image">
         <div className="flex-class">
           <Container fluid="lg">
