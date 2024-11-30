@@ -9,6 +9,7 @@ import { clearErrors, getProductDetails } from "../actions/productActions";
 import { addItemsToCart } from "../actions/cartAction";
 import Slider from "../components/common/slider/Slider";
 import imageIcon from "../assets/mission-image.png";
+import Loader from "../components/common/loader/Loader";
 
 
 function ProductDetails() {
@@ -18,7 +19,7 @@ function ProductDetails() {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const {Items, loading, error} = useSelector((state) => state.productDetails)
+  const { Items, loading, error } = useSelector((state) => state.productDetails)
 
   const handleAddToCart = () => {
     dispatch(addItemsToCart(productId, quantity));
@@ -40,16 +41,17 @@ function ProductDetails() {
 
 
 
-  useEffect(()=>{
+  useEffect(() => {
     if (error) {
       window.alert(error);
       dispatch(clearErrors());
     };
     dispatch(getProductDetails(productId));
-  },[dispatch, error, productId])
+  }, [dispatch, error, productId])
 
   return (
     <>
+      {loading && <Loader />}
       <section className="bg-image">
         <div className="flex-class">
           <Container fluid="lg">
@@ -238,8 +240,8 @@ function ProductDetails() {
             </Row>
           </div>
           <div className="final-product-details-wrapper-2">
-          <Slider/>
-          {/* <div className="d-flex justify-content-center  home-slider-btn-wrapper">
+            <Slider />
+            {/* <div className="d-flex justify-content-center  home-slider-btn-wrapper">
             <Button
               href="/productlist"
               className="submit-btn primary"
