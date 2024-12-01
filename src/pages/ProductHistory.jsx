@@ -85,16 +85,11 @@ function ProductHistory() {
                                     Order Total: ${order.totalPrice.toFixed(2)}
                                   </p>
                                   <Dropdown>
-                                    <Dropdown.Toggle style={{
-                                      
-                                    }}
-                                      id="dropdown-basic">
+                                    <Dropdown.Toggle id="dropdown-basic">
                                       Invoice
                                     </Dropdown.Toggle>
 
-                                    <Dropdown.Menu style={{
-                                      
-                                    }}>
+                                    <Dropdown.Menu>
                                       {order.orderStatus === "Delivered" ? (
                                         <Dropdown.Item
                                           onClick={() => download(order._id)}

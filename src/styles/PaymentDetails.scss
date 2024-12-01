@@ -203,6 +203,7 @@
 .wrapper .product-history-wrapper .products .product-info p{font-weight: $semibold;line-height: 24px;color: $black;margin-top: 10px;}
 .wrapper .product-history-wrapper .products .product-info .dropdown .btn-primary{background-color: #95C93D;border: none;font-size: 1rem;width: 100px;padding-block: 10px;margin-top: 12px;}
 .wrapper .product-history-wrapper .products .product-info .dropdown .dropdown-menu .dropdown-item{font-weight: 500;font-size: 12px;}
+.wrapper .product-history-wrapper .products .product-info .dropdown .dropdown-menu .dropdown-item:active{background-color: #fff;color: #060709;}
 .wrapper .product-history-wrapper .products .product-info{border-bottom: 1px solid $black;padding-bottom: 20px;margin-bottom: 20px;}
 .wrapper .product-history-wrapper .products .product-status{width: 100%;background-color: $primary;display: flex;column-gap: 10px;align-items: center;padding: 15px 10px;border-radius: 10px;margin-bottom: 40px;}
 .wrapper .product-history-wrapper .products .product-status-2{background-color: #367AFF;}
