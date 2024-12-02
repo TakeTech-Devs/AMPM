@@ -186,10 +186,10 @@ function ProductHistory() {
 
 
                                 <div className="progress-stepper">
-                                  {/* Order Confirmed Step */}
-                                  <div className={`step ${order.orderStatus === "Placed" ? "active" : ""}`}>
-                                    <p className="status">Order Confirmed</p>
-                                    <div className={`circle ${order.orderStatus === "Placed" ? "active" : ""}`}></div>
+                                  {/* Order Placed Step */}
+                                  <div className={`step ${["Placed", "Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}>
+                                    <p className="status">Ordered</p>
+                                    <div className="circle" style={{backgroundColor: "green"}}></div>
                                     <p className="date">
                                       {new Date(order.createdAt).toLocaleDateString("en-GB", {
                                         day: "2-digit",
@@ -199,13 +199,13 @@ function ProductHistory() {
                                     </p>
                                   </div>
 
-                                  {/* Line from Order Confirmed to Shipped */}
-                                  <div className={`line ${order.orderStatus === "Shipped" || order.orderStatus === "Delivered" ? "active" : ""}`} />
+                                  {/* Line from Placed to Shipped */}
+                                  <div className={`line ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`} />
 
-                                  {/* Shipped Step */}
-                                  <div className={`step ${order.orderStatus === "Shipped" ? "active" : ""}`}>
+                                  {/* Order Shipped Step */}
+                                  <div className={`step ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}>
                                     <p className="status">Shipped</p>
-                                    <div className={`circle ${order.orderStatus === "Shipped" ? "active" : ""}`}></div>
+                                    <div className={`circle ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}></div>
                                     <p className="date">
                                       {order.shippedAt
                                         ? new Date(order.shippedAt).toLocaleDateString("en-GB", {
@@ -213,14 +213,18 @@ function ProductHistory() {
                                           month: "short",
                                           year: "numeric",
                                         })
-                                        : ""}
+                                        : new Date(new Date(order.createdAt).getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-GB", {
+                                          day: "2-digit",
+                                          month: "short",
+                                          year: "numeric",
+                                        })}
                                     </p>
                                   </div>
 
                                   {/* Line from Shipped to Delivered */}
                                   <div className={`line ${order.orderStatus === "Delivered" ? "active" : ""}`} />
 
-                                  {/* Delivered Step */}
+                                  {/* Order Delivered Step */}
                                   <div className={`step ${order.orderStatus === "Delivered" ? "active" : ""}`}>
                                     <p className="status">Delivered</p>
                                     <div className={`circle ${order.orderStatus === "Delivered" ? "active" : ""}`}></div>
@@ -231,10 +235,16 @@ function ProductHistory() {
                                           month: "short",
                                           year: "numeric",
                                         })
-                                        : ""}
+                                        : new Date(new Date(order.createdAt).getTime() + 10 * 24 * 60 * 60 * 1000).toLocaleDateString("en-GB", {
+                                          day: "2-digit",
+                                          month: "short",
+                                          year: "numeric",
+                                        })}
                                     </p>
                                   </div>
                                 </div>
+
+
 
 
                                 <div className="product-details-wrapper">

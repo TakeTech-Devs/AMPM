@@ -281,7 +281,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 20px 0;
+  // margin: 20px 0;
   position: relative;
 
   .step {
@@ -289,6 +289,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
 
     .status {
       font-size: 14px;
@@ -301,15 +302,17 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: lightgray;
+      background-color: lightgray; /* Default color */
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background-color 0.3s ease;
+      position: relative;
+      z-index: 2; /* Ensures circle is above the line */
     }
 
-    .active .circle {
-      background-color: green; /* Circle becomes green */
+    .circle.active {
+      background-color: green; /* Green for active */
     }
 
     .date {
@@ -323,14 +326,21 @@
     flex-grow: 1;
     height: 2px;
     background-color: lightgray;
-    margin: 0 10px;
+    margin: 0 -44px; /* Ensure it touches the circles */
+    position: relative;
+    top: 0px; /* Align with the center of the circles */
+    z-index: 1; /* Ensures the line is behind the circles */
     transition: background-color 0.3s ease;
   }
 
   .line.active {
-    background-color: green; /* Line becomes green only when the status is Shipped or Delivered */
+    background-color: green; /* Green for active */
   }
 }
+
+
+
+
 
 
 @media (max-width:1399px){
