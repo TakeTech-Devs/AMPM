@@ -142,54 +142,11 @@ function ProductHistory() {
                                   </h3>
                                 </div> */}
                                 {/* Progress Bar */}
-                                {/* <div className="progress-stepper">
-                                  <div className="step">
-                                    <p className="status">Ordered</p>
-                                    <div className="circle"></div>
-                                    <p className="date">
-                                      {new Date(order.createdAt).toLocaleDateString("en-GB", {
-                                        day: "2-digit",
-                                        month: "short",
-                                        year: "numeric",
-                                      })}
-                                    </p>
-                                  </div>
-
-                                  <div className="step">
-                                    <p className="status">Shipped</p>
-                                    <div className="circle"></div>
-                                    <p className="date">
-                                      {order.deliveredAt
-                                        ? new Date(order.deliveredAt).toLocaleDateString("en-GB", {
-                                          day: "2-digit",
-                                          month: "short",
-                                          year: "numeric",
-                                        })
-                                        : ""}
-                                    </p>
-                                  </div>
-
-                                  <div className="step">
-                                    <p className="status">Delivered</p>
-                                    <div className="circle"></div>
-                                    <p className="date">
-                                      {order.deliveredAt
-                                        ? new Date(order.deliveredAt).toLocaleDateString("en-GB", {
-                                          day: "2-digit",
-                                          month: "short",
-                                          year: "numeric",
-                                        })
-                                        : ""}
-                                    </p>
-                                  </div>
-                                </div> */}
-
-
                                 <div className="progress-stepper">
                                   {/* Order Placed Step */}
                                   <div className={`step ${["Placed", "Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}>
                                     <p className="status">Ordered</p>
-                                    <div className="circle" style={{backgroundColor: "green"}}></div>
+                                    <div className="circle" style={{ backgroundColor: "green" }}></div>
                                     <p className="date">
                                       {new Date(order.createdAt).toLocaleDateString("en-GB", {
                                         day: "2-digit",
@@ -264,6 +221,7 @@ function ProductHistory() {
                                         <p>Quantity: {item.quantity}</p>
                                         <p>Price: ${item.price}</p>
                                       </div>
+                                      <button className="btn btn-danger">Cancel Order</button>
                                     </div>
                                   ))}
                                 </div>
