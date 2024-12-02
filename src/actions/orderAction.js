@@ -19,7 +19,7 @@ export const createOrder = (order) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CREATE_ORDER_FAIL,
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };
@@ -35,7 +35,7 @@ export const myOrders = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: MY_ORDERS_FAIL,
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };

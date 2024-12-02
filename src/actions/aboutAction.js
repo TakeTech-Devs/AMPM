@@ -15,7 +15,7 @@ export const getAbout = () => async (dispatch) => {
 
         dispatch({ type: GET_ABOUT_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_ABOUT_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_ABOUT_FAIL, payload: error.response?.data?.message });
     }
 }
 

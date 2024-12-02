@@ -63,7 +63,7 @@ export const consumerLogin = (email, password) => async (dispatch) => {
             payload: data.user
         })
     } catch (error) {
-        dispatch({ type: CONSUMER_LOGIN_FAIL, payload: error.response.data.message });
+        dispatch({ type: CONSUMER_LOGIN_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -87,7 +87,7 @@ export const consumarRegister = (userData) => async (dispatch) => {
     } catch (error) {
         dispatch({          
             type: REGISTER_CONSUMER_FAIL,
-            payload: error.response.data.message,
+            payload: error.response?.data?.message,
         });
     }
 };
@@ -109,7 +109,7 @@ export const resellerLogin = (businessEmail, businessPassword) => async (dispatc
         })
 
     } catch (error) {
-        dispatch({ type: RESELLER_LOGIN_FAIL, payload: error.response.data.message })
+        dispatch({ type: RESELLER_LOGIN_FAIL, payload: error.response?.data?.message })
 
     }
 }
@@ -134,7 +134,7 @@ export const resellerRegister = (userData) => async (dispatch) => {
     } catch (error) {
         dispatch({          
             type: REGISTER_RESELLER_FAIL,
-            payload: error.response.data.message,
+            payload: error.response?.data?.message,
         });
     }
 };
@@ -149,7 +149,7 @@ export const loadReseller = () => async (dispatch) => {
 
         dispatch({ type: LOAD_RESELLER_SUCCESS, payload: data.reseller });
     } catch (error) {
-        dispatch({ type: LOAD_RESELLER_FAIL, payload: error.response.data.message });
+        dispatch({ type: LOAD_RESELLER_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -163,7 +163,7 @@ export const loadConsumer = () => async (dispatch) => {
 
         dispatch({ type: LOAD_CONSUMER_SUCCESS, payload: data.consumer });
     } catch (error) {
-        dispatch({ type: LOAD_CONSUMER_FAIL, payload: error.response.data.message });
+        dispatch({ type: LOAD_CONSUMER_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -175,7 +175,7 @@ export const logout = () => async (dispatch) => {
 
         dispatch({ type: LOGOUT_SUCCESS });
     } catch (error) {
-        dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+        dispatch({ type: LOGOUT_FAIL, payload: error.response?.data?.message });
     }
 };
 
@@ -196,7 +196,7 @@ export const updateResellerProfile = (userData) => async (dispatch) =>{
     } catch (error) {
         dispatch({
       type: UPDATE_RESELLER_PROFILE_FAIL,
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
     }
 }
@@ -218,7 +218,7 @@ export const updateConsumerProfile = (userData) => async (dispatch) =>{
     } catch (error) {
         dispatch({
       type: UPDATE_CONSUMER_PROFILE_FAIL,
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
     }
 }
@@ -238,7 +238,7 @@ export const contactForm = (formData) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: SUBMIT_MESSAGE_FAIL,
-            payload: error.response.data.message,
+            payload: error.response?.data?.message,
         })
     }
 } 
@@ -260,7 +260,7 @@ export const updateConsumerPassword = (passwords) => async (dispatch) => {
     } catch (error) {
       dispatch({
         type: UPDATE_CONSUMER_PASSWORD_FAIL,
-        payload: error.response.data.message,
+        payload: error.response?.data?.message,
       });
     }
   };
@@ -283,7 +283,7 @@ export const updateResellerPassword = (passwords) => async (dispatch) => {
     } catch (error) {
       dispatch({
         type: UPDATE_RESEllER_PASSWORD_FAIL,
-        payload: error.response.data.message,
+        payload: error.response?.data?.message,
       });
     }
   };
@@ -330,7 +330,7 @@ export const applyCouponCode = (couponCode, subtotal) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: APPLY_COUPON_FAIL,
-            payload: error.response.data.message,
+            payload: error.response?.data?.message,
         });
     }
 };

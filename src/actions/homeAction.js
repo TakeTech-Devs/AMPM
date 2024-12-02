@@ -16,7 +16,7 @@ export const getHome = () => async (dispatch) => {
         dispatch({ type: GET_HOME_SUCCESS, payload: data });
 
     } catch (error) {
-        dispatch({ type: GET_HOME_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_HOME_FAIL, payload: error.response?.data?.message });
     }
 }
 

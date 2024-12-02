@@ -130,8 +130,13 @@ function ProductHistory() {
                                     </svg>
                                   </div>
                                   <h3 className="text-white">
-                                    {order.orderStatus}
-                                    {/* {order.deliveredAt != null ? deliveredAt : ""} */}
+                                    {order.orderStatus} {order.deliveredAt != null ?
+                                      new Date(order.deliveredAt).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric",
+                                      })
+                                     : ""}
                                   </h3>
                                 </div>
                                 <div className="product-details-wrapper">

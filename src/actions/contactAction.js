@@ -15,7 +15,7 @@ export const getContact = () => async (dispatch) => {
 
         dispatch({ type: GET_CONTACT_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_CONTACT_FAIL, payload: error.response.data.message });   
+        dispatch({ type: GET_CONTACT_FAIL, payload: error.response?.data?.message });   
     }
 }
 

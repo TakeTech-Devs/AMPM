@@ -37,7 +37,7 @@ export const getProducts = () => async (dispatch) =>{
     } catch (error) {
         dispatch({
             type: ALL_PRODUCTS_FAIL,
-            payload: error.response.data,
+            payload: error.response?.data?.message,
         })
     }
 }
@@ -79,7 +79,7 @@ export const getProdcutData = () => async (dispatch) => {
 
         dispatch({ type: GET_PRODUCT_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_PRODUCT_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_PRODUCT_FAIL, payload: error.response?.data?.message });
     }
 }
 
