@@ -33,6 +33,14 @@ function ProductHistory() {
     dispatch(downloadInvoice(id));
   }
 
+  const getStageClass = (status, stage) => {
+    const stages = ["Placed", "Shipped", "Delivered"];
+    const currentStageIndex = stages.indexOf(status);
+    const thisStageIndex = stages.indexOf(stage);
+
+    return currentStageIndex >= thisStageIndex ? "active" : "inactive";
+  };
+
   return (
     <>
       <section className="billing-mt">
@@ -106,7 +114,7 @@ function ProductHistory() {
                                   </Dropdown>
 
                                 </div>
-                                <div className="product-status">
+                                {/* <div className="product-status">
                                   <div className="svg-div">
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
@@ -130,15 +138,105 @@ function ProductHistory() {
                                     </svg>
                                   </div>
                                   <h3 className="text-white">
-                                    {order.orderStatus} {order.deliveredAt != null ?
-                                      new Date(order.deliveredAt).toLocaleDateString("en-GB", {
+                                    {order.orderStatus}
+                                  </h3>
+                                </div> */}
+                                {/* Progress Bar */}
+                                {/* <div className="progress-stepper">
+                                  <div className="step">
+                                    <p className="status">Ordered</p>
+                                    <div className="circle"></div>
+                                    <p className="date">
+                                      {new Date(order.createdAt).toLocaleDateString("en-GB", {
                                         day: "2-digit",
                                         month: "short",
                                         year: "numeric",
-                                      })
-                                     : ""}
-                                  </h3>
+                                      })}
+                                    </p>
+                                  </div>
+
+                                  <div className="step">
+                                    <p className="status">Shipped</p>
+                                    <div className="circle"></div>
+                                    <p className="date">
+                                      {order.deliveredAt
+                                        ? new Date(order.deliveredAt).toLocaleDateString("en-GB", {
+                                          day: "2-digit",
+                                          month: "short",
+                                          year: "numeric",
+                                        })
+                                        : ""}
+                                    </p>
+                                  </div>
+
+                                  <div className="step">
+                                    <p className="status">Delivered</p>
+                                    <div className="circle"></div>
+                                    <p className="date">
+                                      {order.deliveredAt
+                                        ? new Date(order.deliveredAt).toLocaleDateString("en-GB", {
+                                          day: "2-digit",
+                                          month: "short",
+                                          year: "numeric",
+                                        })
+                                        : ""}
+                                    </p>
+                                  </div>
+                                </div> */}
+
+
+                                <div className="progress-stepper">
+                                  {/* Order Confirmed Step */}
+                                  <div className={`step ${order.orderStatus === "Placed" ? "active" : ""}`}>
+                                    <p className="status">Order Confirmed</p>
+                                    <div className={`circle ${order.orderStatus === "Placed" ? "active" : ""}`}></div>
+                                    <p className="date">
+                                      {new Date(order.createdAt).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric",
+                                      })}
+                                    </p>
+                                  </div>
+
+                                  {/* Line from Order Confirmed to Shipped */}
+                                  <div className={`line ${order.orderStatus === "Shipped" || order.orderStatus === "Delivered" ? "active" : ""}`} />
+
+                                  {/* Shipped Step */}
+                                  <div className={`step ${order.orderStatus === "Shipped" ? "active" : ""}`}>
+                                    <p className="status">Shipped</p>
+                                    <div className={`circle ${order.orderStatus === "Shipped" ? "active" : ""}`}></div>
+                                    <p className="date">
+                                      {order.shippedAt
+                                        ? new Date(order.shippedAt).toLocaleDateString("en-GB", {
+                                          day: "2-digit",
+                                          month: "short",
+                                          year: "numeric",
+                                        })
+                                        : ""}
+                                    </p>
+                                  </div>
+
+                                  {/* Line from Shipped to Delivered */}
+                                  <div className={`line ${order.orderStatus === "Delivered" ? "active" : ""}`} />
+
+                                  {/* Delivered Step */}
+                                  <div className={`step ${order.orderStatus === "Delivered" ? "active" : ""}`}>
+                                    <p className="status">Delivered</p>
+                                    <div className={`circle ${order.orderStatus === "Delivered" ? "active" : ""}`}></div>
+                                    <p className="date">
+                                      {order.deliveredAt
+                                        ? new Date(order.deliveredAt).toLocaleDateString("en-GB", {
+                                          day: "2-digit",
+                                          month: "short",
+                                          year: "numeric",
+                                        })
+                                        : ""}
+                                    </p>
+                                  </div>
                                 </div>
+
+
                                 <div className="product-details-wrapper">
                                   {order.orderItems.map((item) => (
                                     <div key={item.product} className="product-item">
