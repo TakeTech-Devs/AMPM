@@ -283,6 +283,10 @@
   justify-content: space-between;
   // margin: 20px 0;
   position: relative;
+  margin-bottom: 15px;
+  .active{
+    .status{color: green;}
+}
 
   .step {
     display: flex;
@@ -291,10 +295,12 @@
     text-align: center;
     position: relative;
 
+  
+
     .status {
       font-size: 14px;
       font-weight: bold;
-      color: green;
+      
       margin-bottom: 5px;
     }
 
@@ -339,9 +345,11 @@
 }
 
 
+.progress-stepper p{color: gray;}
 
-
-
+// .product-details-wrapper .product-item {display: flex;flex-direction: column;justify-content: space-between;}
+.product-details-wrapper .product-item .btn{margin-top: 10px;}
+.product-details-wrapper .product-item .btn:active{border: none;background-color: #dc3546ac;}
 
 @media (max-width:1399px){
   .all-items-sec .left-bill .add-to-cart-items .items{display: grid;grid-template-columns: 1fr;align-items: center;}
@@ -376,7 +384,16 @@
 @media (max-width:575px){
   .billing-mt{margin-top: 88px;}
   // middle section
-
+  .progress-stepper{
+    .line{margin: 0px -30px;}
+    .step{
+      .status{font-size: 12px;}
+      .date{font-size: 10px;}
+      .circle{width: 15px;height: 15px;}
+    }
+    
+  } 
+  .product-details-wrapper .product-item .btn{width: 100px;font-size: 12px;}
   .navigation h3{font-size: 14px;}
   .bill-order-lifecycle .first-orders .icon-wrapper{margin-right: 0px;}
   .bill-order-lifecycle .first-orders{display: flex;align-items: center;flex-direction: column;justify-content: center;}
