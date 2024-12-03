@@ -1,6 +1,7 @@
 import axios from "axios";
 import { CLEAR_ERRORS, CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, ORDERS_INVOICE_FAIL, ORDERS_INVOICE_REQUEST, ORDERS_INVOICE_SUCCESS } from "../constants/orderConstants";
 import baseUrl from '../helper';
+import { ORDER_CANCEL_FAIL, ORDER_CANCEL_REQUEST, ORDER_CANCEL_SUCCESS } from "../constants/userConstants";
 
 // Create Order
 export const createOrder = (order) => async (dispatch) => {
@@ -73,6 +74,25 @@ export const downloadInvoice = (id) => async (dispatch) => {
     });
   }
 };
+
+export const cancelOrder = (id) => async (dispatch) => {
+  try {
+      dispatch({ type: ORDER_CANCEL_REQUEST });
+
+      const { data } = await axios.put(`${baseUrl}/api/v1/user/cancel/order/${id}`, { withCredentials: true });
+
+      dispatch({
+          type: ORDER_CANCEL_SUCCESS,
+          payload: data.success,
+      });
+
+  } catch (error) {
+      dispatch({
+          type: ORDER_CANCEL_FAIL,
+          payload: error.response?.data?.message,
+      })
+  }
+}
 
 
 // Clearing Errors

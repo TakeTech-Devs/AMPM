@@ -43,11 +43,12 @@ function ContactUs() {
       return;
     } else {
       setErrors((prev) => ({ ...prev, invalidPhone: false }));
-      window.alert("Form submitted successfully");
-      window.location.reload();
+      // window.alert("Form submitted successfully");
+      // window.location.reload();
     }
     const formData = { name, email, phone, company, message };
     dispatch(contactForm(formData));
+    window.alert("Form submitted successfully");
     window.location.reload();
   };
 

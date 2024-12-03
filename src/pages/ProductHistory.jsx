@@ -4,14 +4,21 @@ import Spinner from 'react-bootstrap/Spinner';
 import "../styles/PaymentDetails.scss";
 import battery from "../assets/Battery.png";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, downloadInvoice, myOrders } from "../actions/orderAction";
+import { cancelOrder, clearErrors, downloadInvoice, myOrders } from "../actions/orderAction";
 import { UPDATE_ADMIN_ORDER_RESET } from "../../../admin/src/Constants/OrderConstants";
+import Swal from 'sweetalert2';
+import { ORDER_CANCEL_RESET } from "../constants/userConstants";
 
 function ProductHistory() {
   const dispatch = useDispatch();
 
   const { orders, loading, error } = useSelector((state) => state.myOrders);
   const { error: downloadError, isDownload, loading: downloadLoading } = useSelector((state) => state.invoice);
+  const { error: cancelError, isCancel, loading: cancelLoading } = useSelector((state) => state.orderCancel);
+
+  const cancelOrderHandler = (id) => {
+    dispatch(cancelOrder(id))
+  }
 
   useEffect(() => {
     if (error) {
@@ -25,9 +32,25 @@ function ProductHistory() {
     if (isDownload) {
       dispatch({ type: UPDATE_ADMIN_ORDER_RESET });
     }
+    if (isCancel) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Order Cancelled Successfully!',
+      });
+      dispatch({ type: ORDER_CANCEL_RESET });
+    }
+    if (cancelError) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: cancelError,
+      });
+      dispatch(clearErrors());
+    }
     dispatch(myOrders());
 
-  }, [dispatch, error, isDownload]);
+  }, [dispatch, error, isDownload, isCancel, cancelError, downloadError]);
 
   const download = (id) => {
     dispatch(downloadInvoice(id));
@@ -40,6 +63,28 @@ function ProductHistory() {
 
     return currentStageIndex >= thisStageIndex ? "active" : "inactive";
   };
+
+  const cancelOrderbtn = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to cancel this order?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, cancel it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        cancelOrderHandler(id);
+        Swal.fire(
+          'Cancel!',
+          'The order has been cancel successfully.',
+          'success'
+        )
+        dispatch(myOrders());
+      }
+    });
+  }
 
   return (
     <>
@@ -144,9 +189,9 @@ function ProductHistory() {
                                 {/* Progress Bar */}
                                 <div className="progress-stepper">
                                   {/* Order Placed Step */}
-                                  <div className={`step ${["Placed", "Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}>
+                                  <div className={`step ${["Placed", "Shipped", "Delivered", "Canceled"].includes(order.orderStatus) ? "active" : ""}`}>
                                     <p className="status">Ordered</p>
-                                    <div className="circle" style={{ backgroundColor: "green" }}></div>
+                                    <div className="circle" style={{ backgroundColor: order.orderStatus === "Canceled" ? "red" : "green" }}></div>
                                     <p className="date">
                                       {new Date(order.createdAt).toLocaleDateString("en-GB", {
                                         day: "2-digit",
@@ -156,49 +201,74 @@ function ProductHistory() {
                                     </p>
                                   </div>
 
-                                  {/* Line from Placed to Shipped */}
-                                  <div className={`line ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`} />
+                                  {/* Conditional Rendering for Active States */}
+                                  {order.orderStatus === "Cancel" ? (
+                                    <>
+                                      {/* Line from Placed to Canceled */}
+                                      <div className="line active" />
 
-                                  {/* Order Shipped Step */}
-                                  <div className={`step ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}>
-                                    <p className="status">Shipped</p>
-                                    <div className={`circle ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}></div>
-                                    <p className="date">
-                                      {order.shippedAt
-                                        ? new Date(order.shippedAt).toLocaleDateString("en-GB", {
-                                          day: "2-digit",
-                                          month: "short",
-                                          year: "numeric",
-                                        })
-                                        : new Date(new Date(order.createdAt).getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-GB", {
-                                          day: "2-digit",
-                                          month: "short",
-                                          year: "numeric",
-                                        })}
-                                    </p>
-                                  </div>
+                                      {/* Order Canceled Step */}
+                                      <div className="step active">
+                                        <p className="status" style={{ color: "red" }}>Canceled</p>
+                                        <div className="circle active" style={{ backgroundColor: "red" }}></div>
+                                        <p className="date">
+                                          {order.cancelAt
+                                            ? new Date(order.cancelAt).toLocaleDateString("en-GB", {
+                                              day: "2-digit",
+                                              month: "short",
+                                              year: "numeric",
+                                            })
+                                            : ""}
+                                        </p>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <>
+                                      {/* Line from Placed to Shipped */}
+                                      <div className={`line ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`} />
 
-                                  {/* Line from Shipped to Delivered */}
-                                  <div className={`line ${order.orderStatus === "Delivered" ? "active" : ""}`} />
+                                      {/* Order Shipped Step */}
+                                      <div className={`step ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}>
+                                        <p className="status">Shipped</p>
+                                        <div className={`circle ${["Shipped", "Delivered"].includes(order.orderStatus) ? "active" : ""}`}></div>
+                                        <p className="date">
+                                          {order.shippedAt
+                                            ? new Date(order.shippedAt).toLocaleDateString("en-GB", {
+                                              day: "2-digit",
+                                              month: "short",
+                                              year: "numeric",
+                                            })
+                                            : new Date(new Date(order.createdAt).getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-GB", {
+                                              day: "2-digit",
+                                              month: "short",
+                                              year: "numeric",
+                                            })}
+                                        </p>
+                                      </div>
 
-                                  {/* Order Delivered Step */}
-                                  <div className={`step ${order.orderStatus === "Delivered" ? "active" : ""}`}>
-                                    <p className="status">Delivered</p>
-                                    <div className={`circle ${order.orderStatus === "Delivered" ? "active" : ""}`}></div>
-                                    <p className="date">
-                                      {order.deliveredAt
-                                        ? new Date(order.deliveredAt).toLocaleDateString("en-GB", {
-                                          day: "2-digit",
-                                          month: "short",
-                                          year: "numeric",
-                                        })
-                                        : new Date(new Date(order.createdAt).getTime() + 10 * 24 * 60 * 60 * 1000).toLocaleDateString("en-GB", {
-                                          day: "2-digit",
-                                          month: "short",
-                                          year: "numeric",
-                                        })}
-                                    </p>
-                                  </div>
+                                      {/* Line from Shipped to Delivered */}
+                                      <div className={`line ${order.orderStatus === "Delivered" ? "active" : ""}`} />
+
+                                      {/* Order Delivered Step */}
+                                      <div className={`step ${order.orderStatus === "Delivered" ? "active" : ""}`}>
+                                        <p className="status">Delivered</p>
+                                        <div className={`circle ${order.orderStatus === "Delivered" ? "active" : ""}`}></div>
+                                        <p className="date">
+                                          {order.deliveredAt
+                                            ? new Date(order.deliveredAt).toLocaleDateString("en-GB", {
+                                              day: "2-digit",
+                                              month: "short",
+                                              year: "numeric",
+                                            })
+                                            : new Date(new Date(order.createdAt).getTime() + 10 * 24 * 60 * 60 * 1000).toLocaleDateString("en-GB", {
+                                              day: "2-digit",
+                                              month: "short",
+                                              year: "numeric",
+                                            })}
+                                        </p>
+                                      </div>
+                                    </>
+                                  )}
                                 </div>
 
 
@@ -221,10 +291,11 @@ function ProductHistory() {
                                         <p>Quantity: {item.quantity}</p>
                                         <p>Price: ${item.price}</p>
                                       </div>
-                                      <button className="btn btn-danger">Cancel Order</button>
+
                                     </div>
                                   ))}
                                 </div>
+                                <button className="btn btn-danger" onClick={() => cancelOrderbtn(order._id)}>Cancel Order</button>
                               </div>
                             </li>
                           </Col>
