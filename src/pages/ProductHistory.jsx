@@ -137,6 +137,14 @@ function ProductHistory() {
                                   <p>
                                     Order Total: ${order.totalPrice.toFixed(2)}
                                   </p>
+                                  {/* <button className="btn btn-danger"
+                                      style={{
+                                        border: "none",
+                                        fontSize: "1rem",
+                                        marginTop: "12px",
+                                        height: "44px"
+                                      }}
+                                      onClick={() => cancelOrderbtn(order._id)}>Cancel Order</button> */}
                                   <Dropdown>
                                     <Dropdown.Toggle id="dropdown-basic">
                                       Invoice
@@ -155,10 +163,18 @@ function ProductHistory() {
                                         </Dropdown.Item>
                                       )}
 
-                                    </Dropdown.Menu>
+                                    </Dropdown.Menu>{" "}
+                                    <button className="btn btn-danger"
+                                      style={{
+                                        border: "none",
+                                        fontSize: "1rem",
+                                        marginTop: "12px",
+                                        height: "44px"
+                                      }}
+                                      onClick={() => cancelOrderbtn(order._id)}>Cancel Order</button>
                                   </Dropdown>
-
                                 </div>
+
                                 {/* <div className="product-status">
                                   <div className="svg-div">
                                     <svg
@@ -186,12 +202,13 @@ function ProductHistory() {
                                     {order.orderStatus}
                                   </h3>
                                 </div> */}
+                                
                                 {/* Progress Bar */}
                                 <div className="progress-stepper">
                                   {/* Order Placed Step */}
                                   <div className={`step ${["Placed", "Shipped", "Delivered", "Canceled"].includes(order.orderStatus) ? "active" : ""}`}>
                                     <p className="status">Ordered</p>
-                                    <div className="circle" style={{ backgroundColor: order.orderStatus === "Canceled" ? "red" : "green" }}></div>
+                                    <div className="circle" style={{ backgroundColor: order.orderStatus === "Canceled" ? "#dc3545" : "green" }}></div>
                                     <p className="date">
                                       {new Date(order.createdAt).toLocaleDateString("en-GB", {
                                         day: "2-digit",
@@ -209,8 +226,8 @@ function ProductHistory() {
 
                                       {/* Order Canceled Step */}
                                       <div className="step active">
-                                        <p className="status" style={{ color: "red" }}>Canceled</p>
-                                        <div className="circle active" style={{ backgroundColor: "red" }}></div>
+                                        <p className="status" style={{ color: "#dc3545" }}>Canceled</p>
+                                        <div className="circle active" style={{ backgroundColor: "rgb(228 49 20)" }}></div>
                                         <p className="date">
                                           {order.cancelAt
                                             ? new Date(order.cancelAt).toLocaleDateString("en-GB", {
@@ -295,7 +312,6 @@ function ProductHistory() {
                                     </div>
                                   ))}
                                 </div>
-                                <button className="btn btn-danger" onClick={() => cancelOrderbtn(order._id)}>Cancel Order</button>
                               </div>
                             </li>
                           </Col>
