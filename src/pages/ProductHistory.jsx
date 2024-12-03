@@ -164,12 +164,9 @@ function ProductHistory() {
                                       )}
 
                                     </Dropdown.Menu>{" "}
-                                    <button className="btn btn-danger"
+                                    <button className="btn btn-danger cancel-btn"
                                       style={{
-                                        border: "none",
-                                        fontSize: "1rem",
-                                        marginTop: "12px",
-                                        height: "44px"
+                                        
                                       }}
                                       onClick={() => cancelOrderbtn(order._id)}>Cancel Order</button>
                                   </Dropdown>
