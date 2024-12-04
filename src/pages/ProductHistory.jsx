@@ -65,6 +65,7 @@ function ProductHistory() {
   };
 
   const cancelOrderbtn = (id) => {
+    console.log("Cancel button clicked for order id:", id); // Log to ensure this is being triggered
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to cancel this order?',
@@ -72,19 +73,20 @@ function ProductHistory() {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, cancel it!'
+      confirmButtonText: 'Yes, cancel it!',
     }).then((result) => {
       if (result.isConfirmed) {
         cancelOrderHandler(id);
         Swal.fire(
           'Cancel!',
-          'The order has been cancel successfully.',
+          'The order has been canceled successfully.',
           'success'
-        )
+        );
         dispatch(myOrders());
       }
     });
-  }
+  };
+  
 
   return (
     <>
@@ -155,10 +157,15 @@ function ProductHistory() {
                                         </Dropdown.Item>
                                       )}
 
-                                    </Dropdown.Menu>
+                                    </Dropdown.Menu>{" "}
+                                    {(order.orderStatus === "Placed" || order.orderStatus === "Shipped") && (
+                                      <button className="btn btn-danger cancel-btn" onClick={() => cancelOrderbtn(order._id)}>
+                                        Cancel Order
+                                      </button>
+                                    )}
                                   </Dropdown>
-
                                 </div>
+
                                 {/* <div className="product-status">
                                   <div className="svg-div">
                                     <svg
@@ -186,12 +193,13 @@ function ProductHistory() {
                                     {order.orderStatus}
                                   </h3>
                                 </div> */}
+
                                 {/* Progress Bar */}
                                 <div className="progress-stepper">
                                   {/* Order Placed Step */}
                                   <div className={`step ${["Placed", "Shipped", "Delivered", "Canceled"].includes(order.orderStatus) ? "active" : ""}`}>
-                                    <p className="status">Ordered</p>
-                                    <div className="circle" style={{ backgroundColor: order.orderStatus === "Canceled" ? "red" : "green" }}></div>
+                                    <p className="status" style={{ color: order.orderStatus !== "Canceled" ? "green" : "" }}>Ordered</p>
+                                    <div className="circle" style={{ backgroundColor: order.orderStatus === "Canceled" ? "#dc3545" : "green" }}></div>
                                     <p className="date">
                                       {new Date(order.createdAt).toLocaleDateString("en-GB", {
                                         day: "2-digit",
@@ -209,8 +217,8 @@ function ProductHistory() {
 
                                       {/* Order Canceled Step */}
                                       <div className="step active">
-                                        <p className="status" style={{ color: "red" }}>Canceled</p>
-                                        <div className="circle active" style={{ backgroundColor: "red" }}></div>
+                                        <p className="status" style={{ color: "#dc3545" }}>Canceled</p>
+                                        <div className="circle active" style={{ backgroundColor: "rgb(228 49 20)" }}></div>
                                         <p className="date">
                                           {order.cancelAt
                                             ? new Date(order.cancelAt).toLocaleDateString("en-GB", {
@@ -272,8 +280,6 @@ function ProductHistory() {
                                 </div>
 
 
-
-
                                 <div className="product-details-wrapper">
                                   {order.orderItems.map((item) => (
                                     <div key={item.product} className="product-item">
@@ -295,7 +301,6 @@ function ProductHistory() {
                                     </div>
                                   ))}
                                 </div>
-                                <button className="btn btn-danger" onClick={() => cancelOrderbtn(order._id)}>Cancel Order</button>
                               </div>
                             </li>
                           </Col>

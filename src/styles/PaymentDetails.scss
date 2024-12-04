@@ -343,6 +343,8 @@
     background-color: green; /* Green for active */
   }
 }
+.wrapper .product-history-wrapper .products .product-info .dropdown .cancel-btn{border: none;font-size: 1rem;margin-top: 12px;height: 44px}
+.wrapper .product-history-wrapper .products .product-info .dropdown .cancel-btn:active{border: none;background-color: #dc3546ac;}
 
 
 .progress-stepper p{color: gray;}
@@ -375,6 +377,7 @@
   .wrapper .product-history-wrapper .products .product-details-wrapper .product-img{width: 100%;height: 150px;border: none;}
   .order-complete-wrapper .order-items-show .items .items-details .img-title-wrapper .items-name{width: 400px;}
   .wrapper .product-history-wrapper .products .product-info .dropdown .btn-primary{font-size: 1rem;width: 85px;padding-block: 5px;}
+  .wrapper .product-history-wrapper .products .product-info .dropdown .cancel-btn{font-size: 14px;width: 100px;height: 34px; padding-block: 2px;padding-inline: 2px;}
 .wrapper .product-history-wrapper .products .product-info .dropdown .dropdown-menu {min-width: 140px;}
 .wrapper .product-history-wrapper .products .product-info .dropdown .dropdown-menu .dropdown-item{font-weight: 500;font-size: 10px;padding-inline-end: 0px;}
 }
@@ -465,4 +468,5 @@
 .all-items-sec .left-bill .add-to-cart-items .items .prices-wrapper .del-btn{width: 25px;padding: 6px;}
 .order-complete-wrapper .order-items-show .items .items-details .img-title-wrapper .items-name{display: grid;grid-template-columns: 1fr;}
 .wrapper .product-history-wrapper .products .product-info .dropdown .btn-primary{font-size: 0.8rem;width: 75px;padding-block: 5px;}
+.wrapper .product-history-wrapper .products .product-info .dropdown .cancel-btn{font-size: 12px;width: 85px;height: 28px; padding-block: 2px;padding-inline: 2px;}
 }
