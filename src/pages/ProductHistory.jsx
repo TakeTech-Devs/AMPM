@@ -158,7 +158,7 @@ function ProductHistory() {
                                       )}
 
                                     </Dropdown.Menu>{" "}
-                                    {(order.orderStatus === "Placed" || order.orderStatus === "Shipped") && (
+                                    {(order.orderStatus === "Processing" || order.orderStatus === "Shipped") && (
                                       <button className="btn btn-danger cancel-btn" onClick={() => cancelOrderbtn(order._id)}>
                                         Cancel Order
                                       </button>
