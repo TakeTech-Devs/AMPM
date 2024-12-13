@@ -14,6 +14,7 @@ function Checkout() {
   const { total } = location.state || { total: 0 };
   const { Discount } = location.state || { Discount: 0 };
   const { totalFinal } = location.state || { totalFinal: 0 };
+  const { couponCode } = location.state || { couponCode: "null" }
   // console.log(totalFinal);
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
@@ -139,8 +140,10 @@ function Checkout() {
       shippingInfo,
       orderItems: cartItems,
       totalPrice: total,
+      couponCode
     };
     const finalAmount = totalFinal;
+    console.log("Order:", order);
     dispatch(createOrder(order));
     window.alert("Order Placed Successfully");
     navigate("/ordercomplete", {
@@ -150,6 +153,7 @@ function Checkout() {
         totalFinalAmount: finalAmount,
         address: shippingInfo,
         fromCheckout: true,
+        
       },
     });
   };
@@ -605,6 +609,10 @@ function Checkout() {
                       <p>$0.00</p>
                     )} */}
                     <p>${(Discount ?? 0).toFixed(2)}</p>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p className="sms">Coupon</p>
+                    <p>{couponCode}</p>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>

@@ -91,8 +91,9 @@ function BillingShipping() {
     const total = calculateSubtotal();
     const totalFinal = calculateTotal();
     const Discount = discount;
-    console.log({ total, totalFinal, Discount });
-    navigate("/checkout", { state: { total, totalFinal, Discount } });
+    const couponCode = coupon;
+    console.log({ total, totalFinal, Discount, couponCode });
+    navigate("/checkout", { state: { total, totalFinal, Discount, couponCode } });
   };
 
   useEffect(() => {
