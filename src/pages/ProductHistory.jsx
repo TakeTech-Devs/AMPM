@@ -308,7 +308,7 @@ function ProductHistory() {
                         </div>
                       ))
                     ) : (
-                      <p>Your cart is empty!</p>
+                      <p>You haven't made a purchase!</p>
                     )}
 
                   </Row>
