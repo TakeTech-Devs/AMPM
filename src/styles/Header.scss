@@ -3,6 +3,7 @@
 header{position: fixed;z-index: 3;top: 0;left: 0;right: 0;}
 .navbar-toggler-icon{background: url("../assets/menu.png");background-size: contain;background-repeat: no-repeat;width: 32px;height: 32px;}
 header .navbar-brand{height: 120px;}
+.navbar-expand-lg .navbar-nav{gap: 10px;}
 .ShopCart{width: 48px;height: 25px;}
 .navbar{padding-block: 0;}
 .bg-nav{background-color: #010101;}
@@ -26,7 +27,7 @@ header .navbar-brand{height: 120px;}
 .nav-right .navbar-nav .user-logo .dropdown-menu .dropdown-item{color: $white;}
 .nav-right .dropdown-toggle::after{color: white;position: absolute;top: 20px;}
 // .nav-right .navbar-nav .user-logo{margin-right: 12px;}
-.nav-right .navbar-nav{gap:10px}
+.nav-right .navbar-nav{gap:20px;margin-left: 10px;}
 .shop-link{position: relative;padding-bottom: 0px;padding-top: 0px;}
 .cart-counter{background-color: $red;padding: 0;width: 19px;height: 19px;display: flex;justify-content: center;align-items: center; border-radius: 9px;position: absolute;top: -5px;right: 1px;font-size: 12px;}
 
