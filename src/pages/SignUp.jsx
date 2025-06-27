@@ -1,25 +1,48 @@
 import { Col, Container, Row, Form, Nav, Button } from "react-bootstrap";
 import "../styles/SignUp.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors, consumarRegister, resellerRegister } from "../actions/userActions";
+
+
+
 export default function SignUp() {
+
+  const dispatch = useDispatch();
   const [activeForm, setActiveForm] = useState("consumer");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  // const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState({
     passwordMismatch: false,
     invalidPhone: false,
   });
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
+    const phoneRegex = /^[0-9]{10}$/;
     return phoneRegex.test(phone);
   };
 
   const navigate = useNavigate();
+
+  const { error, loading, isAuthenticated } = useSelector((state) => state.user);
+
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    suburb: "",
+    state: "",
+    pinCode: "",
+    password: "",
+  })
+
+  const { firstName, lastName, email, phone, address, suburb, state, pinCode, password } = user;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,22 +58,94 @@ export default function SignUp() {
       return;
     } else {
       setErrors((prev) => ({ ...prev, invalidPhone: false }));
-      window.alert("Registered successfully");
-      navigate("/login");
+      // window.alert("Registered successfully");
+      // navigate("/login");
     }
+
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("address", address);
+    formData.append("suburb", suburb);
+    formData.append("state", state);
+    formData.append("pinCode", pinCode);
+    formData.append("password", password);
+
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    dispatch(consumarRegister(formData));
+
+    window.alert("Successfully Created Account");
+    navigate('/login')
+    window.location.reload()
+
   };
+
+  const handleDataChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  }
+
+
+  const [reseller, setReseller] = useState({
+    fullName: "",
+    businessName: "",
+    businessType: "",
+    abn: "",
+    businessEmail: "",
+    businessWebsite: "",
+    businessPassword: "",
+  })
+
+  const { fullName, businessName, businessType, abn, businessEmail, businessWebsite, businessPassword } = reseller;
+
 
   const handleSubmitReseller = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (businessPassword !== confirmPassword) {
       setErrors((prev) => ({ ...prev, passwordMismatch: true }));
       return;
     } else {
       setErrors((prev) => ({ ...prev, passwordMismatch: false }));
-      window.alert("Applied successfully");
-      navigate("/login");
     }
+
+    const formData = new FormData();
+    formData.append("fullName", fullName);
+    formData.append("businessName", businessName);
+    formData.append("businessType", businessType);
+    formData.append("abn", abn);
+    formData.append("businessEmail", businessEmail);
+    formData.append("businessWebsite", businessWebsite);
+    formData.append("businessPassword", businessPassword);
+
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    dispatch(resellerRegister(formData));
+
+    window.alert("Applied successfully, Wait for 48 hours for approval");
+    navigate("/");
+
   };
+
+  const resellerHandleDataChange = (e) => {
+    setReseller({ ...reseller, [e.target.name]: e.target.value });
+  }
+
+  useEffect(() => {
+    if (error) {
+      window.alert(error)
+      dispatch(clearErrors());
+    }
+    // if (isAuthenticated) {
+    //   window.alert("Successfully Created Account");
+    //   navigate('/login')
+    // }
+  }, [dispatch, error]);
 
   return (
     <>
@@ -61,7 +156,7 @@ export default function SignUp() {
               Home
             </Nav.Link>
             <span>/</span>
-            <Nav.Link className="signup" href="/signup">
+            <Nav.Link className="signup ps-2" href="/signup">
               Sign Up
             </Nav.Link>
             <p className="or">Or</p>
@@ -115,6 +210,9 @@ export default function SignUp() {
                             type="text"
                             placeholder="Enter First Name"
                             className="custom-outline"
+                            name="firstName"
+                            value={firstName}
+                            onChange={handleDataChange}
                           />
                         </Form.Group>
                       </Col>
@@ -129,6 +227,9 @@ export default function SignUp() {
                             type="text"
                             placeholder="Enter your Last Name"
                             className="custom-outline"
+                            name="lastName"
+                            value={lastName}
+                            onChange={handleDataChange}
                           />
                         </Form.Group>
                       </Col>
@@ -143,6 +244,9 @@ export default function SignUp() {
                             type="email"
                             placeholder="Enter your email"
                             className="custom-outline"
+                            name="email"
+                            value={email}
+                            onChange={handleDataChange}
                           />
                         </Form.Group>
                       </Col>
@@ -155,14 +259,16 @@ export default function SignUp() {
                           <Form.Label>Phone</Form.Label>
                           <Form.Control
                             required
-                            type="tel"
+                            type="text"
                             placeholder="Enter your Phone"
                             maxLength={10}
-                            className={`custom-outline ${
-                              errors.invalidPhone ? "is-invalid" : ""
-                            }`}
+                            className={`custom-outline ${errors.invalidPhone ? "is-invalid" : ""
+                              }`}
+                            // value={phone}
+                            // onChange={(e) => setPhone(e.target.value)}
+                            name="phone"
                             value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            onChange={handleDataChange}
                           />
                           {errors.invalidPhone && (
                             <div className="invalid-feedback">
@@ -179,9 +285,12 @@ export default function SignUp() {
                           <Form.Label>Address</Form.Label>
                           <Form.Control
                             required
-                            type="test"
+                            type="text"
                             placeholder="Enter your Address"
                             className="custom-outline"
+                            name="address"
+                            value={address}
+                            onChange={handleDataChange}
                           />
                         </Form.Group>
                       </Col>
@@ -193,9 +302,12 @@ export default function SignUp() {
                           <Form.Label>Suburb</Form.Label>
                           <Form.Control
                             required
-                            type="tel"
+                            type="text"
                             placeholder="Enter your Suburb"
                             className="custom-outline"
+                            name="suburb"
+                            value={suburb}
+                            onChange={handleDataChange}
                           />
                         </Form.Group>
                       </Col>
@@ -210,6 +322,9 @@ export default function SignUp() {
                             type="text"
                             placeholder="Enter your user State"
                             className="custom-outline"
+                            name="state"
+                            value={state}
+                            onChange={handleDataChange}
                           />
                         </Form.Group>
                       </Col>
@@ -224,6 +339,9 @@ export default function SignUp() {
                             type="text"
                             placeholder="Enter your Post Code"
                             className="custom-outline"
+                            name="pinCode"
+                            value={pinCode}
+                            onChange={handleDataChange}
                           />
                         </Form.Group>
                       </Col>
@@ -241,8 +359,11 @@ export default function SignUp() {
                               maxLength={12}
                               placeholder="Enter your Password"
                               className="custom-outline"
+                              name="password"
                               value={password}
-                              onChange={(e) => setPassword(e.target.value)}
+                              onChange={handleDataChange}
+                            // value={password}
+                            // onChange={(e) => setPassword(e.target.value)}
                             />
                             <div
                               className="eye-wrapper"
@@ -300,9 +421,8 @@ export default function SignUp() {
                               minLength={6}
                               maxLength={12}
                               placeholder="Confirm your Password"
-                              className={`custom-outline ${
-                                errors.passwordMismatch ? "is-invalid" : ""
-                              }`}
+                              className={`custom-outline ${errors.passwordMismatch ? "is-invalid" : ""
+                                }`}
                               value={confirmPassword}
                               onChange={(e) =>
                                 setConfirmPassword(e.target.value)
@@ -422,6 +542,9 @@ export default function SignUp() {
                               type="text"
                               placeholder="Enter Full Name"
                               className="custom-outline"
+                              name="fullName"
+                              value={fullName}
+                              onChange={resellerHandleDataChange}
                             />
                           </Form.Group>
                         </Col>
@@ -436,6 +559,9 @@ export default function SignUp() {
                               type="text"
                               placeholder="Enter your Business Name"
                               className="custom-outline"
+                              name="businessName"
+                              value={businessName}
+                              onChange={resellerHandleDataChange}
                             />
                           </Form.Group>
                         </Col>
@@ -448,13 +574,16 @@ export default function SignUp() {
                             <Form.Select
                               className="custom-select-outline"
                               aria-label="Default select example "
+                              name="businessType"
+                              value={businessType}
+                              onChange={resellerHandleDataChange}
                             >
                               <option>
                                 Enter your Company/trust/ sole trader
                               </option>
-                              <option value="1">Company</option>
-                              <option value="2">trust</option>
-                              <option value="3">sole trader</option>
+                              <option value="Company">Company</option>
+                              <option value="Trust">Trust</option>
+                              <option value="Sole Trader">Sole Trader</option>
                             </Form.Select>
                           </Form.Group>
                         </Col>
@@ -469,6 +598,9 @@ export default function SignUp() {
                               type="text"
                               placeholder="Enter your ABN"
                               className="custom-outline"
+                              name="abn"
+                              value={abn}
+                              onChange={resellerHandleDataChange}
                             />
                           </Form.Group>
                         </Col>
@@ -483,6 +615,9 @@ export default function SignUp() {
                               type="email"
                               placeholder="Enter your email"
                               className="custom-outline"
+                              name="businessEmail"
+                              value={businessEmail}
+                              onChange={resellerHandleDataChange}
                             />
                           </Form.Group>
                         </Col>
@@ -497,6 +632,9 @@ export default function SignUp() {
                               type="text"
                               placeholder="Enter your Suburb"
                               className="custom-outline"
+                              name="businessWebsite"
+                              value={businessWebsite}
+                              onChange={resellerHandleDataChange}
                             />
                           </Form.Group>
                         </Col>
@@ -514,8 +652,11 @@ export default function SignUp() {
                                 maxLength={12}
                                 placeholder="Enter your Password"
                                 className="custom-outline"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                name="businessPassword"
+                                value={businessPassword}
+                                onChange={resellerHandleDataChange}
+                              // value={password}
+                              // onChange={(e) => setPassword(e.target.value)}
                               />
                               <div
                                 className="eye-wrapper"
@@ -573,9 +714,8 @@ export default function SignUp() {
                                 minLength={6}
                                 maxLength={12}
                                 placeholder="Confirm your Password"
-                                className={`custom-outline ${
-                                  errors.passwordMismatch ? "is-invalid" : ""
-                                }`}
+                                className={`custom-outline ${errors.passwordMismatch ? "is-invalid" : ""
+                                  }`}
                                 value={confirmPassword}
                                 onChange={(e) =>
                                   setConfirmPassword(e.target.value)

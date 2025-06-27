@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row, Nav, Form, Card } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgImage from "../assets/bg-image.jpeg";
 import batteryImages from "../assets/Battery.png";
 import "../styles/Products.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, getProducts } from "../actions/productActions";
+import Loader from "../components/common/loader/Loader";
+import imageIcon from "../assets/mission-image.png";
 
 function ProductList() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleCardClick = () => {
-    navigate("/productdetails");
-  };
+  // const handleCardClick = () => {
+  //   navigate(`/Products/${item.Guid}`);
+  // };
+
+  const { Items, loading, error } = useSelector((state) => state.Item);
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      dispatch(clearErrors());
+    }
+    dispatch(getProducts());
+  }, [dispatch, error]);
 
   return (
     <>
@@ -79,11 +94,13 @@ function ProductList() {
           </div>
           <div className="all-cards">
             <Row className="gy-4">
-              {[...Array(6)].map((_, idx) => (
+              {/* {[...Array(6)].map((_, idx) => (
                 <Col key={idx}>
                   <Card onClick={handleCardClick} className="clickable-card">
                     <div className="d-flex justify-content-center">
-                      <Card.Img variant="top" src={batteryImages} />
+                      <div className="product-image-wrapper">
+                        <Card.Img variant="top" src={batteryImages} />
+                      </div>
                     </div>
                     <Card.Body>
                       <Card.Title>Battery Name</Card.Title>
@@ -95,7 +112,34 @@ function ProductList() {
                     </Card.Body>
                   </Card>
                 </Col>
-              ))}
+              ))} */}
+              {loading && <Loader />}
+              {Items &&
+                Items.map((item) => (
+                  // <h1 style={{color: "black"}}>{item.ProductDescription}</h1>
+                  <Col lg="4" md="6">
+                    <Link to={`/Products/${item.Guid}`}>
+                      <Card className="clickable-card">
+                        <div className="d-flex justify-content-center">
+                          <div className="product-image-wrapper">
+                            <Card.Img variant="top" 
+                            // src={item.ImageUrl}
+                            src={imageIcon} 
+                            />
+                          </div>
+                        </div>
+                        <Card.Body>
+                          <Card.Title>{item.ProductDescription}</Card.Title>
+                          <p>Battery Version:</p>
+                          <p>Capacity:</p>
+                          <p>Type:</p>
+                          <p>Warranty:</p>
+                          <h3>Price : {item.DefaultSellPrice}</h3>
+                        </Card.Body>
+                      </Card>
+                    </Link>
+                  </Col>
+                ))}
             </Row>
           </div>
         </Container>

@@ -1,8 +1,6 @@
 @import './Variable.scss';
-
-.slider{margin-inline: 20px;}
 .slider-card .slider-image-wrapper img{width: 100%;}
-.slider-image-wrapper{width:200px;display: flex;justify-content: center;margin-block: 29px;}
+.slider-image-wrapper{width:200px;display: flex;margin-block: 29px;padding-inline-start: 12px;}
 
 .slider .slider-card .card-body h3{color: $purple;}
 .order-parent .react-multiple-carousel__arrow{z-index: 0;min-width: 25px;min-height: 25px;}
@@ -10,17 +8,21 @@
 .order-parent .react-multiple-carousel__arrow--right{right: -8px;background-color: transparent;}
 .order-parent .react-multiple-carousel__arrow--left{left: -8px;background-color: transparent;}
 .slider .slider-card{display: flex;align-items: center;}
+.order-parent .react-multi-carousel-list ul li .slider{width: 263px;}
+.order-parent .react-multi-carousel-list ul li{display: flex; justify-content: center;align-items: center;padding-block-end: 1px;}
 
 
 @media (max-width:1200px){
   .slider .slider-image-wrapper{width:150px;}
+  .order-parent .react-multi-carousel-list ul li .slider{width: 210px;}
 
   }
 
 @media (max-width:991px){
   .slider .slider-image-wrapper{width:120px;}
   .slider .slider-image-wrapper{margin-block: 20px;}
-
+  .order-parent .react-multi-carousel-list ul li .slider{width: 220px;}
+  .order-parent .react-multi-carousel-list ul{gap: 12px;}
   
 }
 
@@ -29,6 +31,10 @@
   .slider .slider-image-wrapper{margin-block: 20px;}
 
   .react-multi-carousel-track{column-gap: 0px;}
+  .order-parent .react-multi-carousel-list ul{gap: 0px;}
+  .order-parent .react-multi-carousel-list ul li{width: 100vw;display: flex;}
+  .order-parent .react-multi-carousel-list ul li .slider{width: 100vw;}
+
 }
 
 

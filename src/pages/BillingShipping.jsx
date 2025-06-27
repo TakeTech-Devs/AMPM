@@ -1,66 +1,113 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
-import p1 from "../assets/p1.png";
+// import p1 from "../assets/p1.png";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItemsFromCart } from '../actions/cartAction';
+import { addItemsToCart } from "../actions/cartAction";
+import imageIcon from "../assets/mission-image.png";
+import { applyCouponCode, clearErrors } from "../actions/userActions";
 
 function BillingShipping() {
-  const [quantity, setQuantity] = useState(2); 
-  const [subtotal, setSubtotal] = useState(240.00); 
-  const [coupon, setCoupon] = useState(""); 
-  const [discount, setDiscount] = useState(0); 
-  const [shippingCost] = useState(50.00); 
-  const [total, setTotal] = useState(subtotal + shippingCost); 
-  const navigate = useNavigate(); 
+  const [quantity, setQuantity] = useState(1);
+  const [subtotal, setSubtotal] = useState(120.0);
+  const [coupon, setCoupon] = useState("");
+  // const [discount, setDiscount] = useState(0);
+  const [shippingCost] = useState(50.0);
+  const [total, setTotal] = useState(subtotal + shippingCost);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleIncrease = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    updateSubtotal(newQuantity);
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const { isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+
+  const { discount, totalAfterDiscount, message, error, loading } = useSelector(
+    (state) => state.coupon
+  );
+
+  const calculateSubtotal = () => {
+    return cartItems
+      .reduce((acc, item) => acc + item.price * item.quantity, 0)
+      .toFixed(2);
   };
 
-  const handleDecrease = () => {
+  const amountToPay = parseFloat(calculateSubtotal());
+
+  const calculateShippingCost = () => {
+    if (!amountToPay) return 0; // Initial stage, show 0
+    return amountToPay >= 100 ? 0 : 50.0;
+  };
+
+
+  const calculateTotal = () => {
+    const shipping = calculateShippingCost();
+    const totalBeforeDiscount = amountToPay + shipping;
+
+    if (discount !== null && discount > 0) {
+      return (totalBeforeDiscount - discount).toFixed(2);
+    }
+
+    return totalBeforeDiscount.toFixed(2);
+  };
+
+  const handleIncrease = (productId, quantity) => {
+    const updatedQuantity = quantity + 1;
+    dispatch(addItemsToCart(productId, updatedQuantity));
+  };
+
+  const handleDecrease = (productId, quantity) => {
     if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      updateSubtotal(newQuantity);
+      const updatedQuantity = quantity - 1;
+      dispatch(addItemsToCart(productId, updatedQuantity));
     }
   };
 
-  const updateSubtotal = (newQuantity) => {
-    const newSubtotal = newQuantity * 120; // Assuming each item is $120
-    setSubtotal(newSubtotal);
-    updateTotal(newSubtotal);
-  };
 
-  const updateTotal = (newSubtotal) => {
-    const newTotal = newSubtotal - discount + shippingCost;
-    setTotal(newTotal);
-  };
+  const removeCartItem = (id) => {
+    dispatch(removeItemsFromCart(id));
+    window.alert("Product Removed From Cart");
+  }
+
 
   const handleCouponChange = (e) => {
     setCoupon(e.target.value);
   };
 
-  const applyCoupon = (e) => {
+  const applyCouponHandler = (e) => {
     e.preventDefault();
-    if (coupon === "DISCOUNT10") {
-      const discountAmount = subtotal * 0.1; // 10% discount
-      setDiscount(discountAmount);
-      updateTotal(subtotal - discountAmount);
-      setTimeout(() => {
-        alert(`Coupon applied! You saved $${discountAmount.toFixed(2)}.`);
-      }, 100); 
-    } else {
-      alert("Invalid coupon code");
+    if (!coupon.trim()) {
+      alert("Please enter a valid coupon code.");
+      return;
     }
+    dispatch(applyCouponCode(coupon, amountToPay));
   };
-  
-  
+
 
   const handleCheckout = () => {
-    navigate("/checkout");
+    const total = calculateSubtotal();
+    const totalFinal = calculateTotal();
+    const Discount = discount;
+    const couponCode = coupon;
+    console.log({ total, totalFinal, Discount, couponCode });
+    navigate("/checkout", { state: { total, totalFinal, Discount, couponCode } });
   };
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      dispatch(clearErrors());
+    }
+    const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    setQuantity(totalQuantity);
+  })
+
+  const handleLogin = () => {
+    navigate("/login");
+  }
 
   return (
     <>
@@ -124,7 +171,7 @@ function BillingShipping() {
               <p>Shopping Cart</p>
             </div>
             <div className="d-flex align-items-center">
-            <div className="line"></div>
+              <div className="line"></div>
             </div>
             <div className="sec-orders">
               <div className="icon-wrapper">
@@ -158,9 +205,8 @@ function BillingShipping() {
               <p>Checkout</p>
             </div>
             <div className="d-flex align-items-center">
-            <div className="line"></div>
+              <div className="line"></div>
             </div>
-            
             <div className="third-orders">
               <div className="icon-wrapper">
                 <svg
@@ -203,89 +249,134 @@ function BillingShipping() {
               <div className="left-bill">
                 <div className="cart-heading">
                   <h3>Your Cart</h3>
-                  <p>({quantity})</p>
+                  <p>({cartItems.length})</p>
                 </div>
-                <div className="add-to-cart-items">
-                  <ul>
-                    <li>
-                      <div className="items">
-                        <div className="items-details">
-                          <div className="img-div">
-                            <img
-                              src={p1}
-                              alt="product 1"
-                              width="100%"
-                              height="100%"
-                            />
-                          </div>
-                          <div className="items-name">
-                            <p>1x Khalifa Kush</p>
-                            <p>(AAAA)</p>
-                          </div>
-                        </div>
-                        <div className="prices-wrapper">
-                          <div className="count-price-wrapper">
-                            <div className="counter">
-                              <Button onClick={handleDecrease}>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="16"
-                                  height="16"
-                                  viewBox="0 0 16 16"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M4 8H12"
-                                    stroke="#060709"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              </Button>
-                              <div className="amount">
-                                <p>{quantity}</p>
+
+                {cartItems.length === 0 ? (
+                  <Col>
+                    <p>No items in the cart.</p>
+                  </Col>
+                ) : (
+                  <>
+                    {cartItems.map((item) => (
+                      <>
+                        <div className="add-to-cart-items">
+                          <ul>
+                            <li>
+                              <div className="items">
+                                <div className="items-details">
+                                  <div className="img-div">
+                                    <img
+                                      // src={item.image}
+                                      src={imageIcon}
+                                      alt={item.name.split(" ")[0]}
+                                      width="100%"
+                                      height="100%"
+                                    />
+                                  </div>
+                                  <div className="items-name">
+                                    {/* <p>1x Khalifa Kush</p> */}
+                                    <p>{item.name}</p>
+                                    {/* <p>(AAAA)</p> */}
+                                  </div>
+                                </div>
+                                <div className="prices-wrapper">
+                                  <div className="count-price-wrapper">
+                                    <div className="counter">
+                                      <Button onClick={() => handleDecrease(item.product, item.quantity)}>
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="16"
+                                          height="16"
+                                          viewBox="0 0 16 16"
+                                          fill="none"
+                                        >
+                                          <path
+                                            d="M4 8H12"
+                                            stroke="#060709"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                        </svg>
+                                      </Button>
+                                      <div className="amount">
+                                        <p>{item.quantity}</p>
+                                      </div>
+                                      <Button onClick={() => handleIncrease(item.product, item.quantity)}>
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="16"
+                                          height="16"
+                                          viewBox="0 0 16 16"
+                                          fill="none"
+                                        >
+                                          <path
+                                            d="M4 8H12"
+                                            stroke="#060709"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                          <path
+                                            d="M8 12V4"
+                                            stroke="#060709"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                        </svg>
+                                      </Button>
+                                    </div>
+                                    <div className="price">
+                                      <p>${item.price}</p>
+                                    </div>
+
+
+                                  </div>
+                                  <button className="del-btn" onClick={() => removeCartItem(item.product)}>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="13"
+                                      height="14"
+                                      viewBox="0 0 13 14"
+                                      fill="none"
+                                    >
+                                      <path
+                                        d="M10.9254 1.72926L8.49411 1.72517L8.49479 1.32222C8.49591 0.654582 7.90307 0.112371 7.17064 0.11114L5.4024 0.10817C4.66996 0.106939 4.07531 0.647156 4.07418 1.3148L4.07351 1.71775L1.64218 1.71366C1.03183 1.71264 0.536268 2.16283 0.535334 2.71918L0.53398 3.52509C0.533606 3.74764 0.731207 3.92837 0.975363 3.92878L11.5848 3.9466C11.829 3.94701 12.0272 3.76695 12.0275 3.5444L12.0289 2.73849C12.0298 2.18214 11.5358 1.73028 10.9254 1.72926ZM4.9583 1.31628C4.95868 1.09415 5.15736 0.913663 5.40104 0.914072L7.16928 0.917043C7.41297 0.917452 7.61104 1.09861 7.61067 1.32074L7.60999 1.72369L4.95763 1.71923L4.9583 1.31628Z"
+                                        fill="white"
+                                      />
+                                      <path
+                                        d="M1.43462 4.69516C1.35677 4.69503 1.29463 4.75619 1.29821 4.82943L1.64622 11.9433C1.67838 12.6017 2.25183 13.1182 2.95159 13.1194L9.57774 13.1305C10.2775 13.1317 10.8527 12.6171 10.8871 11.9588L11.259 4.84615C11.2628 4.77292 11.2009 4.71156 11.123 4.71143L1.43462 4.69516ZM8.0224 5.73326C8.02278 5.50628 8.21835 5.32277 8.45942 5.32318C8.70049 5.32358 8.89543 5.50775 8.89505 5.73472L8.88607 11.0753C8.88569 11.3023 8.69012 11.4858 8.44905 11.4854C8.20798 11.485 8.01304 11.3008 8.01342 11.0738L8.0224 5.73326ZM5.84077 5.7296C5.84115 5.50262 6.03672 5.31911 6.27779 5.31952C6.51886 5.31992 6.7138 5.50409 6.71342 5.73106L6.70444 11.0716C6.70406 11.2986 6.5085 11.4821 6.26743 11.4817C6.02636 11.4813 5.83141 11.2972 5.83179 11.0702L5.84077 5.7296ZM3.65914 5.72594C3.65952 5.49896 3.85509 5.31545 4.09616 5.31585C4.33723 5.31626 4.53217 5.50043 4.53179 5.7274L4.52281 11.068C4.52243 11.295 4.32687 11.4785 4.0858 11.4781C3.84473 11.4777 3.64978 11.2935 3.65016 11.0665L3.65914 5.72594Z"
+                                        fill="white"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <div className="total">
+                                    <p>
+                                      ${(item.price * item.quantity).toFixed(2)}
+                                    </p>
+                                  </div>
+                                </div>
                               </div>
-                              <Button onClick={handleIncrease}>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="16"
-                                  height="16"
-                                  viewBox="0 0 16 16"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M4 8H12"
-                                    stroke="#060709"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                  <path
-                                    d="M8 12V4"
-                                    stroke="#060709"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              </Button>
-                            </div>
-                            <div className="price">
-                              <p>$120.00</p>
-                            </div>
-                          </div>
-                          <div className="total">
-                            <p>${subtotal.toFixed(2)}</p>
-                          </div>
+                            </li>
+                            <li>
+                            </li>
+                          </ul>
                         </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="subtotal">
-                        <p>Subtotal</p>
-                        <p className="totalamount">${subtotal.toFixed(2)}</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                      </>
+                    ))}
+                    <div className="add-to-cart-items">
+                      <ul>
+                        <li>
+                          <div className="subtotal">
+                            <p>Subtotal</p>
+                            <p className="totalamount">
+                              ${calculateSubtotal()}
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </>
+                )}
               </div>
             </Col>
             <Col lg={5}>
@@ -293,19 +384,40 @@ function BillingShipping() {
                 <div className="amount-display d-flex flex-column gap-3">
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Subtotal</p>
-                    <p>${subtotal.toFixed(2)}</p>
+                    <p>${calculateSubtotal()}</p>
                   </div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p className="sms">Discount</p>
-                    <p>${discount.toFixed(2)}</p>
-                  </div>
+                  {/* {discount > 0 ? (
+                    <div className="d-flex align-items-center justify-content-between">
+                      <p className="sms">Discount</p>
+                      <p>-${discount.toFixed(2)}</p>{" "}
+                     
+                    </div>
+                  ) : (
+                    <div className="d-flex align-items-center justify-content-between">
+                      <p className="sms">Discount</p>
+                      <p>${discount.toFixed(2)}</p>{" "}
+                      
+                    </div>
+                  )} */}
+                  {discount !== null && (
+                    <div className="d-flex align-items-center justify-content-between">
+                      <p className="sms">Discount</p>
+                      <p>-${discount.toFixed(2)}</p>
+                    </div>
+                  )}
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
-                    <p>${shippingCost.toFixed(2)}</p>
+                    <p>${calculateShippingCost().toFixed(2)}</p>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p className="sms">Order Total</p>
+                    {/* <p>${subtotal.toFixed(2)}</p> */}
+                    {/* <p>${parseFloat(calculateTotal()).toFixed(2)}</p> */}
+                    <p>${calculateTotal()}</p>
                   </div>
                 </div>
                 <div className="apply-coupon-wrapper">
-                  <Form onSubmit={applyCoupon}>
+                  <Form onSubmit={applyCouponHandler}>
                     <div className="d-flex gap-3 coupon-wrapper">
                       <Form.Control
                         className="custom-outline coupon-box"
@@ -318,28 +430,84 @@ function BillingShipping() {
                         className="apply-btn"
                         variant="primary"
                         type="submit"
+                        disabled={loading}
                       >
-                        Apply Coupon
+                        {/* Apply Coupon */}
+                        {loading ? "Applying..." : "Apply Coupon"}
                       </Button>
                     </div>
                   </Form>
+                  {message && <p className="text-success">{message}</p>}
                 </div>
                 <div className="sms-show">
                   <p className="limit-sms">
-                    Get Free <span>Shipping</span> for orders over
-                    <span className="limit-amount"> $100.00</span>
+                    {amountToPay >= 100 ? (
+                      <>
+                        Congratulations! You get <span className="limit-amount">Free Shipping</span>.
+                      </>
+                    ) : cartItems.length > 0 ? (
+                      <>
+                        Get Free <span>Shipping</span> for orders over
+                        <span className="limit-amount"> $100.00</span>. Add $
+                        <span className="limit-amount">{(100 - amountToPay).toFixed(2)}</span> more to qualify.
+                      </>
+                    ) : (
+                      <>
+                        Get Free <span>Shipping</span> for orders over
+                        <span className="limit-amount"> $100.00</span>.
+                      </>
+                    )}
                   </p>
+
                   <p>Continue Shopping</p>
                 </div>
                 <div className="checkout-btn">
-                  <Button
-                    className="d-flex justify-content-center gap-2"
-                    onClick={handleCheckout}
-                  >
-                    {" "}
-                    <span>Checkout</span> <span>|</span>{" "}
-                    <span>${total.toFixed(2)}</span>{" "}
-                  </Button>
+                  {isAuthenticated ? (
+                    <>
+                      {quantity > 0 ? (
+                        <Button
+                          className="d-flex justify-content-center gap-2 add-to-cart-btn-color"
+                          onClick={handleCheckout}
+                        >
+                          {" "}
+                          <span>Checkout</span> <span>|</span>{" "}
+                          {/* <span>${total.toFixed(2)}</span>{" "} */}
+                          {/* <span>${parseFloat(calculateTotal()).toFixed(2)}</span>{" "} */}
+                          <span>${calculateTotal()}</span>{" "}
+                        </Button>
+                      ) : (
+                        <Button
+                          className="d-flex justify-content-center gap-2"
+                          disabled
+                          style={{
+                            cursor: "not-allowed",
+                            pointerEvents: "auto",
+                          }}
+                        >
+                          {" "}
+                          <span>Add Products to Proceed</span>
+                          {/* <span>|</span>{" "} */}
+                          {/* <span>${total.toFixed(2)}</span>{" "} */}
+                        </Button>
+                      )}
+                    </>
+                  ) : (
+                    <Button
+                      className="d-flex justify-content-center gap-2"
+                      // disabled
+                      // style={{
+                      //   cursor: "not-allowed",
+                      //   pointerEvents: "auto",
+                      // }}
+                      onClick={handleLogin}
+                    >
+                      {" "}
+                      <span>Login to Proceed</span>
+                      {/* <span>|</span>{" "} */}
+                      {/* <span>${total.toFixed(2)}</span>{" "} */}
+                    </Button>
+                  )
+                  }
                 </div>
                 <div className="show-payment-cards">
                   <p>SECURE PAYMENTS PROVIDED BY</p>
@@ -495,8 +663,8 @@ function BillingShipping() {
             </Col>
             <Col lg={4}>
               <div className="bottom-wrapper">
-                <div className="bill-features-wrapper pt-4">
-                  <div className="order-wrap mt-3 p-3">
+                <div className="bill-features-wrapper ">
+                  <div className="order-wrap p-3 gap-fix">
                     <div className="order-icon ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

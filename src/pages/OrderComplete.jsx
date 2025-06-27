@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/PaymentDetails.scss";
 import { Button, Col, Container, Nav, Row } from "react-bootstrap";
 import p1 from "../assets/p1.png";
 import "../styles/PaymentDetails.scss";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import imageIcon from "../assets/mission-image.png";
+
+
 function OrderComplete() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  // const { Total } = location.state || { Total: 0 };
+  // const { Fdiscount } = location.state || { Fdiscount: 0 };
+  const { Total, Fdiscount, totalFinalAmount, fromCheckout, address } = location.state || {};
+
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const calculateSubtotal = () => {
+    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+  };
+
+  const calculateShippingCost = (subtotal) => {
+    return subtotal >= 100 ? 0 : 50;
+  };
+
+  const calculateFinalTotal = (subtotal, shippingCost, discount) => {
+    return (parseFloat(subtotal) + parseFloat(shippingCost) - parseFloat(discount)).toFixed(2);
+  };
+
+  const home = () =>{
+    localStorage.removeItem('cartItems');
+    navigate('/')
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    // If the user didn't come from the Checkout page, redirect them
+    if (!fromCheckout) {
+      alert("Unauthorized access. Please complete your order first.");
+      navigate('/');  // Redirect them back to the checkout page
+    }
+  }, [fromCheckout, navigate]);
+
+  const subtotal = calculateSubtotal();
+  const shippingCost = calculateShippingCost(subtotal);
+  const finalTotal = calculateFinalTotal(subtotal, shippingCost, Fdiscount);
+
   return (
     <>
       <section className="billing-mt">
@@ -133,114 +176,121 @@ function OrderComplete() {
             </div>
             <div className="order-items-show">
               <ul>
-                <li>
-                  <div className="items">
-                    <div className="items-details">
-                      <div className="img-title-wrapper">
-                        <div className="img-div">
-                          <img
-                            src={p1}
-                            alt="product 1"
-                            width="100%"
-                            height="100%"
-                          />
-                        </div>
-                        <div className="items-name">
-                          <p>1x Jungle Diamond</p>
-                          <p>(AA+)</p>
-                        </div>
-                      </div>
-                      <div className="price">
-                        <p className="how-many-items">1x</p>
-                        <p className="total-price">$200.00</p>
-                      </div>
-                      <div className="final-price">
-                        <p>$200.00</p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="items">
-                    <div className="items-details">
-                      <div className="img-title-wrapper">
-                        <div className="img-div">
-                          <img
-                            src={p1}
-                            alt="product 1"
-                            width="100%"
-                            height="100%"
-                          />
-                        </div>
-                        <div className="items-name">
-                          <p>1x Jungle Diamond</p>
-                          <p>(AA+)</p>
+                {cartItems.map((item) => (
+                  <>
+                    <li key={item.id}>
+                      <div className="items">
+                        <div className="items-details">
+                          <div className="img-title-wrapper" style={{paddingTop:"5px"}}>
+                            <div className="img-div">
+                              <img
+                                // src={item.image}
+                                src={imageIcon}
+                                alt={item.name.split(' ')[0]}
+                                width="100%"
+                                height="100%"
+                                
+                              />
+                            </div>
+                            <div className="items-name" style={{paddingTop:"10px"}}>
+                              <p>{item.name}</p>
+                              
+                              {/* <p>(AA+)</p> */}
+                            </div>
+                          </div>
+                          <div className="price">
+                            <p className="how-many-items">{item.quantity}x</p>
+                            <p className="total-price">${item.price}</p>
+                          </div>
+                          <div className="final-price">
+                            <p>${(item.price * item.quantity).toFixed(2)}</p>
+                          </div>
                         </div>
                       </div>
-                      <div className="price">
-                        <p className="how-many-items">1x</p>
-                        <p className="total-price">$200.00</p>
+                    </li>
+                    {/* <li>
+                      <div className="items">
+                        <div className="items-details">
+                          <div className="img-title-wrapper">
+                            <div className="img-div">
+                              <img
+                                src={p1}
+                                alt="product 1"
+                                width="100%"
+                                height="100%"
+                              />
+                            </div>
+                            <div className="items-name">
+                              <p>1x Jungle Diamond</p>
+                              <p>(AA+)</p>
+                            </div>
+                          </div>
+                          <div className="price">
+                            <p className="how-many-items">1x</p>
+                            <p className="total-price">$200.00</p>
+                          </div>
+                          <div className="final-price">
+                            <p>$200.00</p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="final-price">
-                        <p>$200.00</p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                    </li> */}
+                  </>
+                ))}
 
                 <div className="sub-total">
                   <h3>TOTAL</h3>
-                  <h3 className="amount">$497.00</h3>
+                  <h3 className="amount">${subtotal}</h3>
                 </div>
               </ul>
             </div>
             <div className="address-wrapper">
               <Row>
-                <Col>
+                <Col lg={6} sm={6}>
                   <div className="left-address">
                     <div className="address">
-                      <p className="heading">Shipping</p>
-                      <p>New York, US</p>
+                      <p className="heading" >Shipping</p>
+                      <p style={{width: "250px", textAlign: "end"}}>{address.address},{address.city},{address.state},{address.pin},{address.country}</p>
                     </div>
-                    <div className="address">
+                    {/* <div className="address">
                       <p className="heading">Shipping Options</p>
                       <p>Same-Day Dispatching</p>
-                    </div>
-                    <div className="address">
+                    </div> */}
+                    {/* <div className="address">
                       <p className="heading">Email Money Transfer</p>
                       <p>Interac</p>
-                    </div>
+                    </div> */}
                   </div>
                 </Col>
-                <Col>
+                <Col lg={6} sm={6} >
                   <div className="right-address">
                     <div className="address">
                       <p className="heading">Subtotal</p>
-                      <p>$497.00</p>
+                      <p>${subtotal}</p>
                     </div>
                     <div className="address">
                       <p className="heading">Discount</p>
-                      <p>$0.0</p>
+                      <p>${(Fdiscount ?? 0).toFixed(2)}</p>
                     </div>
                     <div className="address">
-                      <p className="heading">Shipping Costs</p>
-                      <p>$50.00</p>
+                      <p className="heading" >Shipping Costs</p>
+                      <p>${shippingCost.toFixed(2)}</p>
                     </div>
-                    <div className="address">
+                    {/* <div className="address">
                       <p className="heading">Point</p>
                       <p>- $250</p>
-                    </div>
+                    </div> */}
                     <div className="total">
                       <p>TOTAL</p>
-                      <h3 className="amount">$297.00</h3>
+                      <h3 className="amount">${totalFinalAmount}</h3>
                     </div>
                   </div>
                 </Col>
               </Row>
             </div>
             <div className="new-order-btn-wrapper">
-              <p>New Order, Click button bellow</p>
-              <Button href="/products" className="primary">
+              <p>New Order, Click button below</p>
+              <Button onClick={home} className="primary">
                 Shop Now
               </Button>
             </div>

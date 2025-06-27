@@ -3,12 +3,33 @@ import { Button, Col, Container, Form, Nav, Row } from "react-bootstrap";
 import bgImage from "../assets/bg-image.jpeg";
 import blankicon from "../assets/icon2.png";
 import "../styles/ContactUs.scss";
+import { useSelector, useDispatch } from 'react-redux';
+import { contactForm } from "../actions/userActions";
+import { useEffect } from "react";
+import { clearErrors, getContact } from "../actions/contactAction";
+import Loader from "../components/common/loader/Loader";
 
 function ContactUs() {
-  const [phone, setPhone] = useState("");
+
+
+
+  const { contactInfo } = useSelector(state => state.getContact);
+
+  // const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState({
     invalidPhone: false,
   });
+
+
+  const dispatch = useDispatch();
+
+  const { loading, error } = useSelector(state => state.contact)
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
+  const [message, setMessage] = useState("");
 
   const validatePhone = (phone) => {
     const phoneRegex = /^[0-9]{10}$/; // Example: 10-digit phone number
@@ -22,19 +43,38 @@ function ContactUs() {
       return;
     } else {
       setErrors((prev) => ({ ...prev, invalidPhone: false }));
-      window.alert("Form submitted successfully");
-      window.location.reload();
+      // window.alert("Form submitted successfully");
+      // window.location.reload();
     }
+    const formData = { name, email, phone, company, message };
+    dispatch(contactForm(formData));
+    window.alert("Form submitted successfully");
+    window.location.reload();
   };
+
+  useEffect(() => {
+    dispatch(getContact());
+
+    if (error) {
+      alert(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <>
+    {loading && <Loader/>}
       <section className="bg-image">
         <div className="flex-class">
           <Container fluid="lg">
             <div className="middle">
               <div className="image-content-wrapper">
-                <h1>Get in touch with us</h1>
+                {/* <h1>Get in touch with us</h1> */}
+                {contactInfo && contactInfo.headerTitle ? (
+                  <h1>{contactInfo.headerTitle}</h1>
+                ) : (
+                  <h1>Get in touch with us</h1>
+                )}
               </div>
             </div>
           </Container>
@@ -64,7 +104,7 @@ function ContactUs() {
       <section className="bg-color sec-gap ">
         <Container>
           <div className="contactus-details-wrapper ">
-            <Row>
+            <Row className="flex-wrap-reverse">
               <Col lg={6}>
                 <div className="left-contact">
                   <div className="d-flex flex-column flex-gap">
@@ -79,7 +119,12 @@ function ContactUs() {
                       </div>
                       <div className="contact-details-wrapper">
                         <h3>Landline</h3>
-                        <p>0123456789</p>
+                        {/* <p>0123456789</p> */}
+                        {contactInfo && contactInfo.Landline ? (
+                          <p>{contactInfo.Landline}</p>
+                        ) : (
+                          <p>0123456789</p>
+                        )}
                       </div>
                     </div>
                     <div className="type">
@@ -93,7 +138,12 @@ function ContactUs() {
                       </div>
                       <div className="contact-details-wrapper">
                         <h3>Mobile</h3>
-                        <p>0123456789</p>
+                        {/* <p>0123456789</p> */}
+                        {contactInfo && contactInfo.Mobile ? (
+                          <p>{contactInfo.Mobile}</p>
+                        ) : (
+                          <p>0123456789</p>
+                        )}
                       </div>
                     </div>
                     <div className="type">
@@ -107,7 +157,12 @@ function ContactUs() {
                       </div>
                       <div className="contact-details-wrapper">
                         <h3>Email Support</h3>
-                        <p>xyz@email.com</p>
+                        {/* <p>xyz@email.com</p> */}
+                        {contactInfo && contactInfo.Email ? (
+                          <p>{contactInfo.Email}</p>
+                        ) : (
+                          <p>xyz@email.com</p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -128,6 +183,8 @@ function ContactUs() {
                             type="text"
                             placeholder="John Carter"
                             className="contact-outline"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -142,6 +199,8 @@ function ContactUs() {
                             type="email"
                             placeholder="example@email.com"
                             className="contact-outline"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -156,9 +215,8 @@ function ContactUs() {
                             type="tel"
                             placeholder="Enter your Phone"
                             maxLength={10}
-                            className={`contact-outline ${
-                              errors.invalidPhone ? "is-invalid" : ""
-                            }`}
+                            className={`contact-outline ${errors.invalidPhone ? "is-invalid" : ""
+                              }`}
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                           />
@@ -180,6 +238,8 @@ function ContactUs() {
                             type="text"
                             placeholder="Facebook"
                             className="contact-outline"
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -195,14 +255,17 @@ function ContactUs() {
                             placeholder="Please type your message here..."
                             as="textarea"
                             rows={3}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
                     </Row>
-
-                    <Button className="primary-radius" type="submit">
-                      Send Message
-                    </Button>
+                    <div className="d-flex justify-content-center">
+                      <Button className="primary" type="submit">
+                        Send Message
+                      </Button>
+                    </div>
                   </Form>
                 </div>
               </Col>
@@ -210,7 +273,7 @@ function ContactUs() {
           </div>
         </Container>
       </section>
-      <section>
+      {/* <section>
         <Container>
           <div className="contact-map-wrapper">
             <div className="contact-map">
@@ -225,7 +288,7 @@ function ContactUs() {
             </div>
           </div>
         </Container>
-      </section>
+      </section> */}
     </>
   );
 }

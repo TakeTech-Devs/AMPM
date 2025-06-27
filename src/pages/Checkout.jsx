@@ -1,43 +1,182 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Nav, Row, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/PaymentDetails.scss";
-import Select from 'react-select';
-import countryList from 'react-select-country-list';
-
+import countryList from "react-select-country-list";
+import { useDispatch, useSelector } from "react-redux";
+import { saveShippingInfo } from "../actions/cartAction";
+import { clearErrors, createOrder } from "../actions/orderAction";
 
 function Checkout() {
-  const [country, setCountry] = useState(null);
   const options = countryList().getData();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { total } = location.state || { total: 0 };
+  const { Discount } = location.state || { Discount: 0 };
+  const { totalFinal } = location.state || { totalFinal: 0 };
+  const { couponCode } = location.state || { couponCode: "null" }
+  // console.log(totalFinal);
+
+  const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+  const { error } = useSelector((state) => state.newOrder);
+
+  const [firstName, setFirstName] = useState(shippingInfo.firstName);
+  const [lastName, setLastName] = useState(shippingInfo.lastName);
+  const [country, setCountry] = useState(shippingInfo.country);
+  const [address, setAddress] = useState(shippingInfo.address);
+  const [city, setCity] = useState(shippingInfo.city);
+  const [state, setState] = useState(shippingInfo.state);
+  const [pin, setPin] = useState(shippingInfo.pin);
+  const [phone, setPhone] = useState(shippingInfo.phone);
+  const [email, setEmail] = useState(shippingInfo.email);
+  const [savedAddresses, setSavedAddresses] = useState([]);
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
+
+  const [isAddressSubmitted, setIsAddressSubmitted] = useState(false);
 
   const changeHandler = (value) => {
     setCountry(value);
   };
 
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      border: '0.6px solid #282828',
-      borderRadius: '6px',
-      width: '100%',
-      height: '59px',
-      paddingLeft: '10px',
-      boxShadow: state.isFocused ? 'none' : provided.boxShadow,
-      '&:hover': {
-        borderColor: '#282828',
-      },
-    }),
-    dropdownIndicator: (provided) => ({
-      ...provided,
-      paddingRight: '20px',
-    }),
-  };
+  // const customStyles = {
+  //   control: (provided, state) => ({
+  //     ...provided,
+  //     border: "0.6px solid #282828",
+  //     borderRadius: "6px",
+  //     width: "100%",
+  //     height: "59px",
+  //     paddingLeft: "10px",
+  //     boxShadow: state.isFocused ? "none" : provided.boxShadow,
+  //     "&:hover": {
+  //       borderColor: "#282828",
+  //     },
+  //   }),
+  //   dropdownIndicator: (provided) => ({
+  //     ...provided,
+  //     paddingRight: "20px",
+  //   }),
+  // };
 
   const navigate = useNavigate();
 
-  const count = 2;
-  const handleCheckout = () => {
-    navigate("/ordercomplete");
+  useEffect(() => {
+    const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
+    setSavedAddresses(addresses);
+  }, []);
+
+  const shippingSubmit = (e) => {
+    e.preventDefault();
+
+    const newAddress = {
+      firstName,
+      lastName,
+      country,
+      address,
+      city,
+      state,
+      pin,
+      phone,
+      email,
+    };
+
+    // Dispatch the action
+    dispatch(saveShippingInfo(newAddress));
+
+    // Optional: Update local state if you need to display saved addresses dynamically
+    setSavedAddresses((prev) => [...prev, newAddress]);
+    window.location.reload();
+  };
+
+  const handleAddressSelect = (index) => {
+    setSelectedAddressIndex(index);
+    // dispatch(saveShippingInfo(savedAddresses[index]));
+  };
+
+  const handleDeleteAddress = (index) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this address?"
+    );
+    if (!confirmDelete) return;
+
+    // Remove the address from savedAddresses
+    const updatedAddresses = savedAddresses.filter((_, i) => i !== index);
+
+    // Update the state
+    setSavedAddresses(updatedAddresses);
+
+    // Remove the shippingAddresses key from localStorage
+    window.localStorage.removeItem("shippingInfo");
+
+    // Update localStorage with the new array
+    localStorage.setItem("shippingInfo", JSON.stringify(updatedAddresses));
+
+    console.log("Updated Addresses:", updatedAddresses);
+    console.log(
+      "LocalStorage after deletion:",
+      localStorage.getItem("shippingInfo")
+    );
+
+    // Reset selected address if needed
+    if (selectedAddressIndex === index) {
+      setSelectedAddressIndex(null);
+    }
+  };
+
+  const totalPrice = total;
+
+  const handleCheckout = (e) => {
+    e.preventDefault();
+
+    if (selectedAddressIndex === null) {
+      window.alert("Please select a shipping address.");
+      return;
+    }
+
+    const shippingInfo = savedAddresses[selectedAddressIndex];
+
+    console.log("Address", shippingInfo);
+
+    const order = {
+      shippingInfo,
+      orderItems: cartItems,
+      totalPrice: total,
+      couponCode
+    };
+    const finalAmount = totalFinal;
+    console.log("Order:", order);
+    dispatch(createOrder(order));
+    window.alert("Order Placed Successfully");
+    navigate("/ordercomplete", {
+      state: {
+        Total: total,
+        Fdiscount: Discount,
+        totalFinalAmount: finalAmount,
+        address: shippingInfo,
+        fromCheckout: true,
+        
+      },
+    });
+  };
+
+  const calculateShippingCost = (total) => {
+    return total >= 100 ? 0 : 50;
+  };
+
+  // const finalTotal = total - Discount + calculateShippingCost(total);
+
+  useEffect(() => {
+    const addressesFromStorage =
+      JSON.parse(localStorage.getItem("shippingInfo")) || [];
+    setSavedAddresses(addressesFromStorage);
+    if (error) {
+      dispatch(clearErrors());
+      window.alert(error);
+    }
+  }, [dispatch, error]);
+
+  const [shipToDifferentAddress, setShipToDifferentAddress] = useState(false);
+  const toggleShippingAddress = () => {
+    setShipToDifferentAddress(!shipToDifferentAddress);
   };
 
   return (
@@ -163,14 +302,10 @@ function Checkout() {
               <div className="left-bill">
                 <div className="cart-heading">
                   <h3>Shipping</h3>
-                  <p>
-                    {"("}
-                    {count}
-                    {")"}
-                  </p>
+                  <p>({cartItems.length})</p>
                 </div>
                 <div className="buyer-info">
-                  <Form>
+                  <Form onSubmit={shippingSubmit}>
                     <Row>
                       <Col lg={6}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -180,35 +315,57 @@ function Checkout() {
                             type="text"
                             placeholder="Enter Your Name"
                             className="custom-outline"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
                       <Col lg={6}>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group
+                          className="mb-3"
+                          controlId="formBasicPassword"
+                        >
                           <Form.Label>Last Name</Form.Label>
                           <Form.Control
                             required
                             type="text"
                             placeholder="Enter Last Name"
                             className="custom-outline"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
                       <Col lg={12}>
                         <Form.Group
                           className="mb-3"
-                          controlId="formBasicPassword"
+                          controlId="formBasicPassword "
                         >
                           <Form.Label>Country / Region</Form.Label>
-                          <Select
+                          {/* <Select
                             required
-                            components={{ IndicatorSeparator:() => null }}
+                            components={{ IndicatorSeparator: () => null }}
                             styles={customStyles}
                             options={options}
                             value={country}
                             onChange={changeHandler}
                             placeholder="Select a Country"
-                          />
+                            classNamePrefix="custom-outline"
+                          /> */}
+                          <Form.Control
+                            as="select" // This makes the input a dropdown
+                            required
+                            className="custom-outline"
+                            value={country} // Bind the state value to the select input
+                            onChange={(e) => setCountry(e.target.value)} // Update the state on selection
+                          >
+                            <option value="">Select a Country</option>
+                            {options.map((option, index) => (
+                              <option key={index} value={option.label}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </Form.Control>
                         </Form.Group>
                       </Col>
                       <Col lg={12}>
@@ -216,15 +373,25 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>Country / Region </Form.Label>
+                          <Form.Label>Address</Form.Label>
                           <Form.Control
                             required
-                            type="Text"
+                            type="text"
                             placeholder="House number and street name"
                             className="custom-outline"
+                            value={address}
+                            onChange={(e) => {
+                              // Automatically add space after comma
+                              const updatedAddress = e.target.value.replace(
+                                /,([^ ])/g,
+                                ", $1"
+                              );
+                              setAddress(updatedAddress);
+                            }}
                           />
                         </Form.Group>
                       </Col>
+
                       <Col lg={12}>
                         <Form.Group
                           className="mb-3"
@@ -248,6 +415,8 @@ function Checkout() {
                             type="text"
                             placeholder="Enter Town / City"
                             className="custom-outline"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -256,12 +425,14 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>Province</Form.Label>
+                          <Form.Label>State / Province</Form.Label>
                           <Form.Control
                             required
                             type="text"
                             placeholder="Enter Province"
                             className="custom-outline"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -276,6 +447,14 @@ function Checkout() {
                             type="number"
                             placeholder="Enter Postcode / ZIP"
                             className="custom-outline"
+                            onInput={(e) => {
+                              if (e.target.value.length > 6) {
+                                e.target.value = e.target.value.slice(0, 6);
+                              }
+                            }}
+                            onWheel={(e) => e.target.blur()}
+                            value={pin}
+                            onChange={(e) => setPin(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -284,13 +463,14 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label className="optional">
-                            Phone (optional){" "}
-                          </Form.Label>
+                          <Form.Label>Phone</Form.Label>
                           <Form.Control
+                            required
                             type="number"
                             placeholder="Enter Number"
                             className="custom-outline"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
@@ -299,45 +479,52 @@ function Checkout() {
                           className="mb-3"
                           controlId="formBasicPassword"
                         >
-                          <Form.Label>Email address </Form.Label>
+                          <Form.Label>Email address</Form.Label>
                           <Form.Control
                             required
                             type="email"
                             placeholder="johndoe@example.com"
                             className="custom-outline"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </Form.Group>
                       </Col>
-
+                      {/* <Col lg={12}>
+                        <Button type="submit" className="primary w-100">
+                          Submit
+                        </Button>
+                      </Col> */}
                       <Col lg={12}>
-                        <div className="bottom-info">
-                          <Form.Group className="mb-3" id="formGridCheckbox">
-                            <Form.Check
-                              className="label-effect"
-                              type="checkbox"
-                              label="Ship to a different Address?"
-                            />
-                          </Form.Group>
-
-                          <div>
-                            <Form.Group
-                              className="mb-3"
-                              controlId="exampleForm.ControlTextarea1"
-                            >
-                              <Form.Label className="optional additional">
-                                Order Notes (optional)
-                              </Form.Label>
-                              <Form.Control
-                                className="contact-outline-textarea if-outline additional"
-                                as="textarea"
-                                rows={3}
-                                placeholder="Notes about your order, e.g. special notes for delivery."
-                              />
-                            </Form.Group>
-                          </div>
-                        </div>
+                        <Button type="submit" className="primary w-100">
+                          Add Address
+                        </Button>
                       </Col>
-                      <Col lg={12}>
+                      {savedAddresses.length > 0 && (
+                        <div className="saved-addresses">
+                          <h4>Saved Addresses</h4>
+                          {savedAddresses.map((address, index) => (
+                            <div key={index} className="address-card">
+                              <Form.Check
+                                type="radio"
+                                label={`${address.firstName} ${address.lastName}, ${address.address}, ${address.city}, ${address.state}, ${address.pin}, ${address.phone}, ${address.email}`}
+                                checked={selectedAddressIndex === index}
+                                onChange={() => handleAddressSelect(index)}
+                              />
+                              <button
+                                className="btn btn-danger"
+                                style={{marginLeft: "22px",marginTop: "5px"}}
+                                onClick={() => handleDeleteAddress(index)}
+                              >
+                                Delete Address
+                              </button>
+                              
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* <Col lg={12}>
                         <div className="bottom-info">
                           <p className="label-effect">
                             What would you like us to do if an Item is out of
@@ -378,34 +565,62 @@ function Checkout() {
                           </div>
                         </div>
                       </Col>
+                      <Col lg={12}>
+                        <Button type="submit" className="primary w-100">
+                          Submit
+                        </Button>
+                      </Col> */}
                     </Row>
                   </Form>
                 </div>
               </div>
             </Col>
-
             <Col lg={5}>
               <div className="right-bill">
                 <div className="amount-display d-flex flex-column gap-3">
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Subtotal</p>
-                    <p>$497.00</p>
+                    <p>${total}</p>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping</p>
-                    <p>New York, US</p>
+                    {selectedAddressIndex !== null &&
+                      savedAddresses[selectedAddressIndex] && (
+                        <p style={{ width: "250px", textAlign: "end" }}>
+                          {[
+                            savedAddresses[selectedAddressIndex].address,
+                            savedAddresses[selectedAddressIndex].city,
+                            savedAddresses[selectedAddressIndex].state,
+                            savedAddresses[selectedAddressIndex].pin,
+                            savedAddresses[selectedAddressIndex].country,
+                          ]
+                            .filter((item) => item) // Filter out any empty or undefined fields
+                            .join(", ")}{" "}
+                          {/* Join with a comma and space */}
+                        </p>
+                      )}
                   </div>
+
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Discount</p>
-                    <p>$0.0</p>
+                    {/* {Discount !== null && Discount !== undefined ? (
+                      <p>${Discount.toFixed(2)}</p>
+                    ) : (
+                      <p>$0.00</p>
+                    )} */}
+                    <p>${(Discount ?? 0).toFixed(2)}</p>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p className="sms">Coupon</p>
+                    <p>{couponCode}</p>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="sms">Shipping Costs</p>
-                    <p>$50.00</p>
+                    <p>${calculateShippingCost(total).toFixed(2)}</p>
                   </div>
                 </div>
 
-                <div className="money-trans">
+                {/* <div className="money-trans">
                   <p>Email Money Transfer</p>
                   <div className="svg-icon">
                     <svg
@@ -433,9 +648,9 @@ function Checkout() {
                       />
                     </svg>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="apply-coupon-wrapper checkout-apply-coupon-wrapper">
+                {/* <div className="apply-coupon-wrapper checkout-apply-coupon-wrapper">
                   <Form>
                     <div className="d-flex gap-3 coupon-wrapper">
                       <Form.Control
@@ -452,8 +667,8 @@ function Checkout() {
                       </Button>
                     </div>
                   </Form>
-                </div>
-                <div className="checkboxes-wrapper">
+                </div> */}
+                {/* <div className="checkboxes-wrapper">
                   <Form>
                     <div className="final-sms">
                       <Form.Group className="mb-3" id="formGridCheckbox">
@@ -472,14 +687,15 @@ function Checkout() {
                       </Form.Group>
                     </div>
                   </Form>
-                </div>
+                </div> */}
                 <div className="checkout-btn">
                   <Button
-                    className="d-flex justify-content-center gap-2"
+                    className="d-flex justify-content-center gap-2 add-to-cart-btn-color"
                     onClick={handleCheckout}
                   >
                     {" "}
-                    <span>Place Order</span> <span>|</span> <span>$547.00</span>{" "}
+                    <span>Place Order</span> <span>|</span>{" "}
+                    <span>${parseFloat(totalFinal || 0).toFixed(2)}</span>{" "}
                   </Button>
                 </div>
                 <div className="show-payment-cards">

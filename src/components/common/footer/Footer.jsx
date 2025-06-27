@@ -11,9 +11,45 @@ import {
 import companyLogo from "../../../assets/company-logo-light.png";
 import { Link } from "react-router-dom";
 import "../../../styles/Footer.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { clearErrors, subscribeForm } from "../../../actions/userActions";
+
 
 
 function Footer() {
+
+  const dispatch = useDispatch();
+
+  const { loading, error } = useSelector(state => state.contact)
+
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const myForm = new FormData();
+
+    myForm.set("email", email);
+
+    dispatch(subscribeForm(myForm));
+
+    window.alert("Thanks For Subscribing Us")
+
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    if (error) {
+      window.alert(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
+
+
+
+
+
   return (
     <>
       <footer>
@@ -40,17 +76,19 @@ function Footer() {
                   </div>
 
                   <div className="input-wrapper">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                       <div className="input-box">
                         <Form.Group controlId="formEmail">
                           <Form.Control
                             className="input-from d-flex"
                             type="email"
                             placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </Form.Group>
                       </div>
-                      <Button href="/login" className="submit-btn primary" type="submit">
+                      <Button className="submit-btn primary" type="submit">
                         Get Started
                       </Button>
                     </Form>

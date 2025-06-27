@@ -11,11 +11,11 @@ ul li .nav-link{color: $baseColor;padding: 0;}
 header,footer{width: 100%;}
 img{height: 100%; width: 100%; object-fit: contain;}
 svg{height: 100%; width: 100%;}
-
+a{text-decoration: none;}
 
 //Input box
 .custom-outline{border: 0.6px solid #282828;border-radius: 6px;padding: 19px 0 19px 20px;}
-.custom-outline::placeholder{font-size: 14px;line-height: 21px;font-weight: 300;font-family:$inputBoxFamily;color: #ABABAB;}
+.custom-outline::placeholder{font-size: $regular;line-height: 21px;font-weight: 500;font-family:$secondaryFamily;color: #ABABAB;}
 .dropdown-item.active, .dropdown-item:active{background-color: $primary;}
 //Dropdown
 .custom-select-outline{border: 0.6px solid #282828;border-radius: 6px;width: 100%;height: 59px;padding: 16px 0 16px 27px;}
@@ -23,12 +23,14 @@ svg{height: 100%; width: 100%;}
 
 //Contact us input box
 
-.contact-outline-textarea{border: none;border-radius: 6px;background-color: $white;padding-block: 27px;padding-inline-start: 24px;}
+.contact-outline-textarea{border: none;border-radius: 6px;background-color: $white;padding-block: 27px;padding-inline-start: 20px;}
 .if-outline{border: 1px solid #F4F4F4;}
 .contact-outline-textarea::placeholder{font-weight: $regular;font-family: $secondaryFamily;font-size: 18px;line-height: 18px;color: #A3A3A3;}
 textarea{resize: none;}
-.contact-outline{width: 256px;height: 72px;border: none;border-radius: 6px;background-color: $white;padding-block: 27px;padding-inline-start: 24px;}
-.contact-outline::placeholder{font-weight: $regular;font-family: $secondaryFamily;font-size: 18px;line-height: 18px;color: #A3A3A3;}
+.contact-outline{width: 256px;border: none;border-radius: 6px;background-color: $white;padding: 19px 0 19px 20px;}
+.contact-outline::placeholder{font-weight: 300;font-family: $secondaryFamily;font-size: $regular;line-height: 18px;color: #A3A3A3;}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {-webkit-appearance: none;margin: 0;}
 
 // button
 .primary{background-color: $primary;border: none;font-weight: $bold;padding: 20px 20px;min-width: 200px;font-size: $cardTitle;line-height: 1;display: flex;align-items: center;justify-content: center;}
@@ -44,6 +46,8 @@ textarea{resize: none;}
 //Section gap
 .sec-gap{padding-block: 80px;}
 .sec-gap-top{padding-block: 90px 0px;}
+// .extra-gap{padding-top: 150px;}
+.extra-gap{padding-block: 250px 100px;}
 
 @media (max-width:991px){
   .outline-primary{min-width: 120px;padding:15px; border-width: 2px;font-size: 14px;}
@@ -53,14 +57,24 @@ textarea{resize: none;}
   p{font-size: 14px;}
 }
 
-@media (max-width:767px){
+@media (max-width:768px){
   .sec-gap{padding-block: 50px}
-  .outline-primary{min-width: 120px; padding: 13px 15px; font-size: 12px; border-width: 1px;}
-  .primary{min-width: 120px; padding: 13px 15px;font-size: 12px;border-width: 1px;}
+  .outline-primary{min-width: 120px; padding: 13px 15px; font-size: 16px; border-width: 1px;}
+  .primary{min-width: 120px; padding: 13px 15px;font-size: 16px;border-width: 1px;}
   h1{font-weight: $bold;line-height: 40px;color: #FFFFFF;font-size: $subHead;margin: 0;padding: 0;}
   p{font-size: 14px; line-height: 1.4;}
   h2{font-size: 28px;}
   h3{font-size: 20px;}
+  .extra-gap{padding-block:  200px 50px;}
+  .sec-gap-top{padding-block: 50px 0px;}
+
+}
+@media (max-width:575px){
+  .extra-gap{padding-block-start:  150px;}
+  .sec-gap{padding-block: 20px}
+  .contact-outline,.custom-outline{padding-block: 10px;font-size: 14px;}
+  .eye-wrapper{top: 10px;right: 20px;}
+  .custom-outline__control{height: 42px;}
 }
 
 .bg-color{background-color: $sectionColor;}
